@@ -1,21 +1,23 @@
 # Grok Build Knowledge Base & Skills Capture
-**Date:** 2026-08-05  
-**Author identity:** Timothy H Norman (born July 1956)  
-**Handles:** @Timothy01775634 · @Tnorman01775634  
-**Subscription:** SuperGrok ($30/month) — includes Grok 4.5  
-**GitHub (connected):** GitTim2Day  
+**Date:** 2026-08-05 (session close seal)
+**Author:** Timothy H Norman | @Timothy01775634 · @Tnorman01775634
+**GitHub:** GitTim2Day/Grok-Build-Core
 
----
+Version Clean. Finite. Musical. No infinity. No Zero's.
 
-## Dual Store
-- **Drive (appendable):** https://drive.google.com/drive/folders/1Q-MCJwaATYmV5rGDa1Ci_ALG589Tm5P4
-- **GitHub (sealed tree):** https://github.com/GitTim2Day/Grok-Build-Core
+## Five Pillars
+content · context · data · time · validation
 
-## Core Discipline Held
-- Finite. Musical. No Strings. No singularities. No infinity. No Zero’s.
-- Version Clean.
-- Earned vs Asserted: only state what tools have confirmed.
-- Every claim audited and validated before output.
+## Multilingual GOSUB chain (ACTIVE)
+1. GOSUB_EXACT_DECIDE — exact Fraction decision gate
+2. GOSUB_SELECT_ADAPTER — Whisper.cpp / Vosk / Piper / Bergamot / Apertium finite tables
+3. GOSUB_CALL_ADAPTER — detect, budget, Tim base-12 address, sealed refuse if absent
 
-## Failure Pattern Logged
-Asserted-seal-without-bytes — recorded and closed 2026-08-05.
+## Tim base ranking
+Preferred 12; invariant 8; bridge 72^2/12^2=36
+
+## Stores
+Drive appendable + GitHub sealed tree + Notion page + local artifacts
+
+## Next
+Install offline binaries on edge hardware; measure latency under sealed budgets.
