@@ -1,0 +1,9 @@
+Spoke_ID,Fraction,Degrees,Radians (e-15),Exact_Decimal,Notes (Nuance in 2 Poles)
+1,1/8,45,0.785398163397448,0.125,Base-8 seed. Free to bloom. Original timestamp anchor in Pole 1.
+2,1/6,60,1.047197551196598,1/6 ≈ 0.1666667,Sexagesimal / clock / 60° sector. Free to bloom.
+3,1/4,90,1.570796326794897,0.25,Right angle. Free to bloom.
+4,1/3,120,2.094395102393195,1/3 ≈ 0.3333333,120° sector. Free to bloom.
+5,1/2,180,3.141592653589793,0.5,Diameter / antipode. Free to bloom.
+6,2/3,240,4.188790204786391,2/3 ≈ 0.6666667,240° sector. Free to bloom.
+7,3/4,270,4.712388980384690,0.75,3/4 turn. Free to bloom.
+8,1,360,6.283185307179586,1.0,Full cycle. Closes the ring.
