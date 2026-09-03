@@ -13,6 +13,13 @@ Status: **sketch, not spec.** Seed planted on X @Timothy01775634. No blueprint d
 - **Crewed ships:** gentle, sustained ~1G acceleration to Mars and matching deceleration. Solves bone/muscle loss; roughly doubles propellant vs a coasting trajectory.
 - **Unmanned ships:** brachistochrone — maximum burn, momentum carries them.
 
+## Healthcare mitigation — gravity
+The depot's primary medical purpose: eliminate microgravity deconditioning on crewed transits.
+- Sustained ~1G acceleration outbound and matching deceleration inbound keeps bone density, muscle mass, and cardiovascular function intact — no exercise countermeasures, no post-arrival rehab window.
+- Unmanned cargo skips the gentle profile entirely: brachistochrone burn, momentum carries it. Only crew ships pay the propellant premium.
+- Rim spin supplies continuous artificial gravity for living quarters and maintenance robots between burns — the wheel never goes idle.
+- Net effect: crew arrives at Mars in the same physiological condition they left Earth, which is the difference between a landing party and a rescue party.
+
 ## Water-wheel refinement
 Park tankers at the midpoint so arrival and departure stay simple; centrifugal force fills the hub.
 
