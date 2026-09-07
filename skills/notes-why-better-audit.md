@@ -1,18 +1,27 @@
 # notes-why-better-audit
 
 **Date:** 2026-09-07
-**Tags:** notes, rationale, audit, process
+**Tags:** notes, rationale, audit, process, gosub
+**Status:** Active — GOSUB member (bidirectional)
+**GOSUB ID:** NOTES_AUDIT
 
 ## Purpose
-Audit the rationale column ("Notes / Why Better"): confirm each note is an engineering reason, not marketing, and that it matches the upgrade trigger and alternative.
+Audit the rationale column ("Notes / Why Better"): confirm each note is an engineering reason, not marketing, and that it matches the upgrade trigger and alternative. Callable forward (audit notes) or reverse (given a rationale theme, find the rows that use it).
 
 ## When to use
 - A matrix has a notes or rationale column per row.
 - You need to check whether the stated reason actually supports the recommended primary over the alternative.
+- Reverse: you want every row justified by "distal mass" or "shock absorption".
 
 ## Required inputs
 - The notes column.
 - The recommended primary, alternative, and upgrade trigger columns.
+
+## GOSUB contract
+- **Forward call:** NOTES_AUDIT(sheet) → rationale list, engineering-vs-marketing split, trigger connection, gaps.
+- **Reverse call:** NOTES_AUDIT(theme) → rows whose rationale matches the theme.
+- **Shared state:** reads the notes column; writes only to the audit log.
+- **Direction tag:** forward | reverse.
 
 ## Steps
 1. **List the rationale per row.** One line: reason → supports which choice.
@@ -24,10 +33,13 @@ Audit the rationale column ("Notes / Why Better"): confirm each note is an engin
 ## Rules
 - Rationale must be falsifiable (a testable claim), not a slogan.
 - A note that doesn't reference the trigger or alternative is weak.
+- Bidirectional: reverse returns the same rows the forward pass flagged.
 
 ## Anti-patterns
 - Accepting marketing language as engineering reason.
 - Skipping the trigger-connection check.
+- One-directional only.
 
 ## Example
 Hip: "Adds load sharing & terrain adaptation" → supports diff under rough terrain. Knee: "Better shock absorption & longevity" → supports roller-screw + damper under high impact. Wrist: "Lower distal mass better force control" → supports proximal actuators, always-on trigger.
+Reverse: "distal mass" → Wrist, Fingers/Hand.
