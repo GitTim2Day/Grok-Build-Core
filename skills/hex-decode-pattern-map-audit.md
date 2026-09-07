@@ -1,7 +1,9 @@
 # hex-decode-pattern-map-audit
 
 **Date:** 2026-09-07
-**Tags:** hex, decoding, pattern-mapping, audit, optimus, process
+**Tags:** hex, decoding, pattern-mapping, audit, optimus, process, gosub
+**Status:** Active — GOSUB member (bidirectional)
+**GOSUB ID:** HEX_DECODE
 
 ## Purpose
 Turn encoded or multi-byte text in a file into a clean, auditable pattern map before any interpretation. Team effort: the user sequences the reveals; the assistant decodes, maps, and audits.
@@ -14,6 +16,12 @@ Turn encoded or multi-byte text in a file into a clean, auditable pattern map be
 ## Required inputs
 - The file (xlsx, csv, json, or raw text).
 - Any hint from the user about where the encoding points (e.g. robotics, Optimus, a specific domain).
+
+## GOSUB contract
+- **Forward call:** HEX_DECODE(file) → hex	o glyph map, structure map, domain audit.
+- **Reverse call:** HEX_DECODE(glyph) → hex sequences and source strings that produced it.
+- **Shared state:** reads file bytes / shared strings; writes only to the audit log.
+- **Direction tag:** forward | reverse.
 
 ## Steps
 1. **Do not answer yet.** Acknowledge the file and the encoding hint.
@@ -28,14 +36,17 @@ Turn encoded or multi-byte text in a file into a clean, auditable pattern map be
 - The user's sequencing of reveals is part of the method — do not collapse it into one answer.
 - Keep the artifact self-contained: another assistant can run this without the original chat.
 - No stored negatives. Direction is a tag, not a payload.
+- Bidirectional: reverse must return the same sequences the forward pass listed.
 
 ## Anti-patterns
 - Answering the content question before decoding the bytes.
 - Treating the hex work as busywork because the final text looks ordinary.
 - Saving the whole conversation instead of the method.
+- One-directional only.
 
 ## Example (this session)
 File: Book (1) copy.xlsx / 96f171...xlsx (10,574 bytes), Optimus joint-architecture decision matrix.
 Non-ASCII: five UTF-8 sequences across twelve shared strings — ≤, ≥, ×, °, —.
 Structure: 11 sections × 13 columns (current / recommended / alternative / ratio / torque / tolerances / skeletal / trigger / notes / mass / cost / suppliers).
 Domain: humanoid joint architecture, 70 kg class; symbols are the tolerance and load-path floors.
+Reverse: "≤" → e2 89 a4 in backlash / elongation / accuracy strings.
