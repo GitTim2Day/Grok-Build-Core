@@ -18,8 +18,8 @@ Five dated maps in Timothy Skills & KB flagged is_skill = true. No content rewri
 
 A map marked is_skill is a claim. The retest is whether a new person following it stalls. If they stall, the flag is wrong or the method has a gap — remediate, don't remove the flag.
 
-This is the portable pointer the 3B ledger row (claiming done before verified) will cite. Row 3B still pending.
+This is the portable pointer cited by ledger row 3B (claiming done before verified), written 2026-09-08 ~18:36 EDT. Row 3B is open — first retest pending next session.
 
 ## Retest
 
-Next session, a new person following any of these five reaches the method without a stall. Record result in the ledger.
+Next session, a new person following any of these five reaches the method without a stall. Record result in the ledger. Do not close 3B until the retest passes nearly flawless.
