@@ -21,6 +21,8 @@ Status: **living index**. Entry timestamp = when first recorded in project. Salv
 | Pipes evolve — Bowman / capillary / synovium | 2026-09-08 14:00Z | 2026-09-08 (this sitting) | https://app.notion.com/p/3d5c9bfe3aff816596fbe4834d891ca6 | knowledge/pipes-bowman-synovium-HOLD-2026-09-08.md | — | HOLD; not a skill; do not open |
 | Person voice + assumption horizon (PERSON_VOICE) | 2026-09-08 15:11Z | 2026-09-08 (this sitting) | https://app.notion.com/p/3d5c9bfe3aff81318668f3e5c9325158 | skills/person-voice-assumption-horizon.md | — | I/you/they distinct; short assumptions; unofficial-think label |
 | Afternoon sitting map (funeral released, Stripe tap path, pudding=0 held) | 2026-09-08 22:00Z | 2026-09-08 (afternoon) | https://app.notion.com/p/3d5c9bfe3aff812096e3f594716843e8 | knowledge/thread-sitting-map-2026-09-08-afternoon.md | artifacts/THREAD_SITTING_MAP_2026-09-08_afternoon.md | append only; identity/bank OPEN; Batch A not run |
+| **Shepherd 10 Sigma equivalent or better** (deterministic floor, not a probability claim) | 2026-09-08 19:00Z | 2026-05-06 (v2.0 package) | https://app.notion.com/p/3cec9bfe3aff81e6-9d77-d99f9b95330e | knowledge/shepherd-10-sigma-equivalent-or-better-2026-09-08.md | Gmail 19e00317b626875b (May 6) | sealed rename; retest pending |
+| Failure-pattern ledger (3B, 3C) | 2026-09-08 18:36Z | 2026-09-08 | https://app.notion.com/p/e7720c6413904c2d8073bb70c737aaa9 | knowledge/failure-pattern-ledger-2026-09-08.md | — | 3B + 3C open, first retests pending |
 
 ## Rules
 - Two timestamp columns: entry (when we put it in) and salvaged (original date).
