@@ -15,6 +15,7 @@ Walk Stripe identity + payout-bank as two pipes with visible failure points, so 
 - Someone is about to photograph a license, passport, or debit card into Grok, Notion, mail, or Drive.
 - Someone wants to reuse a passport-studio original as the selfie.
 - Routing is not on the debit card and they need a crib.
+- Someone is hunting a “green check” inside Developers / Workbench.
 
 ## When not to use
 - Do not treat Connect-approved, profile-unhide, Tax/Radar, or “what’s next” mail as this pipe or as pudding.
@@ -35,9 +36,29 @@ Walk Stripe identity + payout-bank as two pipes with visible failure points, so 
 6. **Masking.** Mask numbers only if a photo would leave Stripe (finger or tape over number and MRZ). Never mask the page you upload to Stripe. Never send the page to Grok, Notion, Drive, GitHub, or email.
 7. **Report.** ID chosen. Selfie live yes/no. Bank path (instant vs micro-deposit vs crib). What stayed out of the project. Pudding unchanged unless a separate sweep says otherwise.
 
+## Tap path (afternoon 2026-09-08)
+Use **Safari** → dashboard.stripe.com. The Stripe **app cannot add the bank** (Stripe: link external accounts on the web Dashboard only).
+
+1. Confirm header **The Shepherd**.
+2. Top of Home: red/orange banner → tap View account status / Review details. **No banner** = Stripe’s tell that nothing is currently due.
+3. Settings (gear) → **Business** → **Account details** (or Account status). That is identity.
+4. Same Business → **Bank accounts and currencies** (or Payouts) → Add bank account. Instant BoA checking if offered. Else ACH from VOID-check MICR.
+5. If already in the Stripe **app**: Home banner, or top-left account icon → Settings → Business. **Stop.** Do not open Developers / Workbench / API keys.
+
+## Failure points added 2026-09-08 afternoon
+- Passkey already registered ≠ identity verified.
+- Camera permission + Face ID / key to sign in ≠ identity verified.
+- Developers page is settings. Nothing to paste. Wrong wing for the green check.
+- ID-verified or bank-added is still not PUDDING ROSE.
+
+## Status 2026-09-08 ~18:00 EDT
+Identity: OPEN (not independently confirmed on Account details).
+Bank: OPEN.
+Pudding: pudding=0 morning; no afternoon sweep; do not append go-live.
+
 ## Rules
 - Offer an idea; weigh it; keep it if it saves a field failure. The crib sheet is that class.
-- Failure points first: liveness vs studio file, DL vs passport, card vs checking, routing not on the card, mask vs full page, chat vs Stripe window.
+- Failure points first: liveness vs studio file, DL vs passport, card vs checking, routing not on the card, mask vs full page, chat vs Stripe window, Developers vs Business.
 - Slow on the points. Fast in the Dashboard.
 - Append only. Do not rewrite the-shepherd-stripe-go-live or the pudding protocol.
 - If Dashboard rejects: send the error *text*, not the ID or check photo.
@@ -48,6 +69,7 @@ Walk Stripe identity + payout-bank as two pipes with visible failure points, so 
 - Photographing the billfold or a check into Grok “for coaching.”
 - Calling bank-added or ID-verified “PUDDING ROSE.”
 - Saving this sitting’s ID/card/check images into skills or KB.
+- Hunting the identity check inside Developers.
 
 ## Example (this sitting)
 DL chosen (most people). Passport put away. BoA checking for payouts. Live selfie to be cropped and uploaded in Stripe only. Instant bank-link preferred. Old check offered as crib — keep as read-the-MICR, not as an upload. Project received the method, not the documents.
