@@ -39,3 +39,10 @@ A row is not closed until step 6 holds. "Mitigated" alone is not done.
 **Remediate:** none required.
 **Closed:** yes — retest passed nearly flawless. Row 3B fully closed.
 **Open:** none on this row.
+
+## 2026-09-08 ~19:50 EDT — Batch A item (21): do-no-harm GitHub copy
+**Identify:** root principle lived only in Notion; GitHub had no sealed copy.
+**Characterize:** the floor was unportable — anyone cloning the repo couldn't see the non-negotiable layer above the logic.
+**Mitigation:** straight port of `do-no-harm-root-principle-2026-09-03` into `knowledge/do-no-harm-root-principle-2026-09-03.md`. No new thinking.
+**Retest:** Notion page now carries a GitHub-mirror section; file exists on main at the expected path.
+**Closed:** yes — port verified, no residual gap.
