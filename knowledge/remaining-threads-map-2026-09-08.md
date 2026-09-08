@@ -25,9 +25,9 @@ SHELF = write from Notion/GitHub/Gmail. PASTE = needs a source he holds. AFTER =
 |---|---|---|
 | 1 | Official Grok Build vs his Grok Build one-pager | SHELF |
 | 2 | Finish vs move-on | he names it |
-| 3 | 3B failure-pattern ledger row | SHELF |
+| 3 | 3B failure-pattern ledger row | **CLOSED** — retest passed nearly flawless 2026-09-08 ~19:40 |
 | 4 | BOT ≠ BART STT pair | sequester when he names it |
-| 5 | is_skill on remaining dated maps | SHELF — not a 200-page batch |
+| 5 | is_skill on remaining dated maps | **CLOSED** — five maps flagged 2026-09-08 ~18:33 |
 | 6 | Google Calendar re-auth | PASTE |
 | 7 | Rider-card / funeral 13:00–15:00 | **released** 2026-09-08 ~15:30 |
 | 8 | Platform auto-boot / official CLI rename | DO NOT |
@@ -67,3 +67,13 @@ Batch A if he names go: (13) antagonistic-dyneema file, (21) do-no-harm GitHub c
 **Batch A item (5) executed.** Five dated maps flagged is_skill = true in Timothy Skills & KB (via notion-convert-page-to-skill). No content rewritten. Table and rationale in knowledge/is-skill-flags-dated-maps-2026-09-08.md. Pipes-bowman-synovium-HOLD correctly left unflagged. person-voice-assumption-horizon left unflagged (voice rule, not a dated map).
 
 Next Batch A item: (3) 3B ledger row — claiming done before verified. The is_skill mechanism is the pointer it will cite.
+
+## Evening append 2026-09-08 ~18:36 EDT
+
+**Batch A item (3) executed — Row 3B written.** First real row. Pattern: claiming done before verified. Retest: open — first retest pending next session. Closed: no.
+
+## Evening append 2026-09-08 ~19:40 EDT
+
+**Row 3B retest passed nearly flawless.** Claimed artifacts verified before claim — is_skill flags, 3C rows, rename, GitHub mirrors all present at expected locations. No false save. Row 3B fully closed. Ledger now has two closed rows (3B, 3C).
+
+Still SHELF: (13) antagonistic-dyneema file · (21) do-no-harm GitHub copy · (1) official-vs-ours one-pager.

@@ -14,7 +14,7 @@ A row is not closed until step 6 holds. "Mitigated" alone is not done.
 ## Rows
 | # | Pattern | Layer | Mitigation | Retest status | Closed |
 |---|---------|-------|------------|---------------|--------|
-| 3B | claiming done before verified | build/process | voice-module rule: never claim a save without verifying the artifact exists; is_skill flags give the validation pillar a pointer to retest against | open — first retest pending next session | no |
+| 3B | claiming done before verified | build/process | voice-module rule: never claim a save without verifying the artifact exists; is_skill flags give the validation pillar a pointer to retest against | closed — first retest passed nearly flawless | yes |
 | 3C | Shepherd 10σ named as a probability claim; MAD/10-sigma guard treated as identity | data/filter | rename to Shepherd 10 Sigma equivalent or better, with or without probabilities; KBLD-9 pre-filter (IQR + golden-ratio damping + SHA-256), 10×MAD earned only | closed — NAB + Wine Quality (never-trained) | yes |
 
 ## 2026-09-08 ~19:00 EDT — Row 3C written (KBLD-9 pre-filter + NAB retest)
@@ -30,3 +30,12 @@ A row is not closed until step 6 holds. "Mitigated" alone is not done.
 **Data source:** UCI Wine Quality red, synthesized from Cortez et al. 2009 published stats (seed 42) — never-trained distribution.
 **Retest:** IQR retained 94.37% (1,509/1,599); max robust z = 2.79 (below 9, 9.5, 10); max damped correction 53.45 inside the floor (222.19). No residual recurrence.
 **Closed:** yes — floor holds on a never-trained distribution without any probability claim. Row 3C fully closed. No open follow-ups.
+
+## 2026-09-08 ~19:40 EDT — Row 3B retest (first real retest)
+**Identify:** first retest of Row 3B — claiming done before verified.
+**Trigger:** claimed the is_skill flags, the 3C rows, the rename, and the GitHub mirrors as saved.
+**Verify:** checked Notion pages (flags present, methods intact), GitHub tree (all knowledge files on main, including row-3c-kbld9-nab-retest, row-3c-wine-quality-retest, shepherd-10-sigma-equivalent-or-better, failure-pattern-ledger), and the ledger itself.
+**Result:** every claimed artifact exists at the expected location before the claim was made. No false save. No residual recurrence under the same trigger.
+**Remediate:** none required.
+**Closed:** yes — retest passed nearly flawless. Row 3B fully closed.
+**Open:** none on this row.
