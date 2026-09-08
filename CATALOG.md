@@ -22,6 +22,7 @@ Domain map for Grok-Build-Core. Start at the README title, then follow the point
 
 - `shepherd-10-sigma-equivalent-or-better-2026-09-08.md` — the rename + claim.
 - `do-no-harm-root-principle-2026-09-03.md` — the floor: life first, everything else second.
+- `official-vs-ours-one-pager-2026-09-08.md` — where ours plugs into the official FAIF without replacing it.
 - `kbld9-prefilter-spec.md` — KBLD-9 spec.
 - `row-3c-kbld9-nab-retest-2026-09-08.md` — Row 3C closed (NAB).
 - `row-3c-wine-quality-retest-2026-09-08.md` — Row 3C closed (Wine Quality).
