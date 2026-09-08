@@ -1,75 +1,43 @@
-# stripe-identity-payout-pipe
+# Stripe identity + payout pipe (GOSUB: STRIPE_ID_BANK)
 
-**Date:** 2026-09-08
-**Tags:** stripe, payments, shepherd, validation
-**Status:** Active method — pipe, not pudding
-**GOSUB ID:** STRIPE_ID_BANK
-**Siblings:** the-shepherd-stripe-go-live, no-photo-card-intake-stripe-tokenize
-**Do not store:** government-ID pages, card fronts, routing, account numbers, selfies, check photos
+Method saved. No ID pages, no card faces, no routing stored.
 
-## Purpose
-Walk Stripe identity + payout-bank as two pipes with visible failure points, so the Dashboard sitting is one pass. Pudding (money movement) is a different tell. This skill does not move money and does not replace the pudding watch.
+## Three jobs stay split
+1. Identity — ID + live selfie.
+2. Bank — checking destination for payouts.
+3. Pudding — money movement (separate tell).
 
-## When to use
-- Stripe asks for ID + selfie, or Add a bank account to pay out funds.
-- Someone is about to photograph a license, passport, or debit card into Grok, Notion, mail, or Drive.
-- Someone wants to reuse a passport-studio original as the selfie.
-- Routing is not on the debit card and they need a crib.
-- Someone is hunting a “green check” inside Developers / Workbench.
-
-## When not to use
-- Do not treat Connect-approved, profile-unhide, Tax/Radar, or “what’s next” mail as this pipe or as pudding.
-- Do not paste routing, account, PAN, DL number, or passport number into chat.
-- Do not save ID, card, or check photos to the project.
-
-## Required inputs
-- Which ID they will use (one). Default for most people: driver’s license.
-- Which checking account sits behind the debit they intend (not the Visa PAN).
-- Whether Stripe opened a live camera or a file picker.
-
-## Steps
-1. **Split three jobs.** Identity (ID + selfie). Bank (checking destination). Pudding (inbound or payout mail). Never collapse them.
-2. **Pick one ID.** Driver’s license is the common path. Passport photo page also works. Cover is not an ID page. Stripe gets the page unmasked in Stripe’s camera/upload only.
-3. **Selfie is a second capture.** Live person in front of the phone camera. Do not crop the passport-studio original or the ID portrait and call it the selfie. Stripe blocks **selfie liveness** (photograph or screen presentation attack). Recrop a live shot if needed (less ceiling, chin not tilted up). Same person as the ID; two sittings.
-4. **Bank is checking, not the card.** For a BoA Visa debit, add the Bank of America checking account. Instant bank-link if the bank appears. Else routing + account typed in Dashboard. X/Cross River debit-flex is a card, not the ACH payout bank.
-5. **Crib sheet if routing is not handy.** Debit and credit cards do not print ACH routing. Read the MICR line at the bottom of a check: left = 9-digit ACH routing, middle = account, right = check number. Best crib: unused check marked **VOID**. Old unused: void it. Canceled/already-paid: readable as a crib if the account is still open; do not reuse the paper. Type the digits in Stripe. Do not upload the check. Use ACH from the check, not wire routing from a webpage.
-6. **Masking.** Mask numbers only if a photo would leave Stripe (finger or tape over number and MRZ). Never mask the page you upload to Stripe. Never send the page to Grok, Notion, Drive, GitHub, or email.
-7. **Report.** ID chosen. Selfie live yes/no. Bank path (instant vs micro-deposit vs crib). What stayed out of the project. Pudding unchanged unless a separate sweep says otherwise.
-
-## Tap path (afternoon 2026-09-08)
-Use **Safari** → dashboard.stripe.com. The Stripe **app cannot add the bank** (Stripe: link external accounts on the web Dashboard only).
-
-1. Confirm header **The Shepherd**.
-2. Top of Home: red/orange banner → tap View account status / Review details. **No banner** = Stripe’s tell that nothing is currently due.
-3. Settings (gear) → **Business** → **Account details** (or Account status). That is identity.
-4. Same Business → **Bank accounts and currencies** (or Payouts) → Add bank account. Instant BoA checking if offered. Else ACH from VOID-check MICR.
-5. If already in the Stripe **app**: Home banner, or top-left account icon → Settings → Business. **Stop.** Do not open Developers / Workbench / API keys.
-
-## Failure points added 2026-09-08 afternoon
+## Identity
+- Most people: driver's license. One ID. Unmasked in Stripe only.
+- Selfie must be live. Passport-studio original or ID portrait as selfie fails liveness.
 - Passkey already registered ≠ identity verified.
-- Camera permission + Face ID / key to sign in ≠ identity verified.
-- Developers page is settings. Nothing to paste. Wrong wing for the green check.
-- ID-verified or bank-added is still not PUDDING ROSE.
+- Camera permission + Face ID / key sign-in ≠ identity verified.
+
+## Bank
+- Payout bank = checking behind the debit (BoA), not X/Cross River card PAN.
+- Instant bank-link first; micro-deposits fallback. Numbers stay in Dashboard.
+- Native Stripe app cannot add a bank. Use Safari → dashboard.stripe.com only.
+
+## Tap path (Safari)
+1. Header: The Shepherd.
+2. Top banner: View account status. No banner = nothing currently due.
+3. Settings (gear) → Business → Account details = identity.
+4. Business → Bank accounts and currencies → Add bank account.
+5. In the app: Home banner or top-left account icon → Settings → Business. Stop. Do not open Developers.
+
+## Developers trap
+Developers page is settings. Nothing to paste. Wrong wing for the green check.
+
+## Chat rule
+Chat is for error text, not documents. Never send ID, card, or check photos to Grok, Notion, Drive, GitHub, or email.
+
+## Crib sheet (routing not on card)
+- MICR line on an unused check: left = 9-digit ACH routing, middle = account, right = check number.
+- Best: unused check with VOID written on it.
+- Use ACH routing, not wire routing from a bank webpage.
 
 ## Status 2026-09-08 ~18:00 EDT
-Identity: OPEN (not independently confirmed on Account details).
-Bank: OPEN.
-Pudding: pudding=0 morning; no afternoon sweep; do not append go-live.
+Identity: OPEN. Bank: OPEN. Pudding: pudding=0 morning.
 
-## Rules
-- Offer an idea; weigh it; keep it if it saves a field failure. The crib sheet is that class.
-- Failure points first: liveness vs studio file, DL vs passport, card vs checking, routing not on the card, mask vs full page, chat vs Stripe window, Developers vs Business.
-- Slow on the points. Fast in the Dashboard.
-- Append only. Do not rewrite the-shepherd-stripe-go-live or the pudding protocol.
-- If Dashboard rejects: send the error *text*, not the ID or check photo.
-
-## Anti-patterns
-- Gallery-picking the passport original as the selfie.
-- Entering a Visa PAN as a bank account.
-- Photographing the billfold or a check into Grok “for coaching.”
-- Calling bank-added or ID-verified “PUDDING ROSE.”
-- Saving this sitting’s ID/card/check images into skills or KB.
-- Hunting the identity check inside Developers.
-
-## Example (this sitting)
-DL chosen (most people). Passport put away. BoA checking for payouts. Live selfie to be cropped and uploaded in Stripe only. Instant bank-link preferred. Old check offered as crib — keep as read-the-MICR, not as an upload. Project received the method, not the documents.
+## Navigation iteration (appended 2026-09-08 ~18:08)
+Hamburger/sidebar and settings sub-pages still imperfect — see knowledge/navigation-iteration-log-2026-09-08.md. Append corrections as they surface.
