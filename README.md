@@ -24,6 +24,8 @@ Start here: `knowledge/shepherd-10-sigma-equivalent-or-better-2026-09-08.md`
 
 **The floor above the logic:** `knowledge/do-no-harm-root-principle-2026-09-03.md` — life first, everything else second. If a system can harm life, it does not ship until mitigated.
 
+**Where it plugs into the official framework:** `knowledge/official-vs-ours-one-pager-2026-09-08.md` — their framework finds the failure; ours makes sure it doesn't come back, and records the proof.
+
 ---
 
 ## Dual Store Discipline
@@ -49,6 +51,7 @@ Grok-Build-Core/
 ├── knowledge/
 │   ├── shepherd-10-sigma-equivalent-or-better-2026-09-08.md   ← start here
 │   ├── do-no-harm-root-principle-2026-09-03.md              ← the floor
+│   ├── official-vs-ours-one-pager-2026-09-08.md            ← the plug-in
 │   ├── row-3c-kbld9-nab-retest-2026-09-08.md
 │   ├── row-3c-wine-quality-retest-2026-09-08.md
 │   ├── kbld9-prefilter-spec.md
