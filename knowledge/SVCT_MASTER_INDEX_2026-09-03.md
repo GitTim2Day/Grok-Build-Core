@@ -15,6 +15,7 @@ Status: **living index**. Entry timestamp = when first recorded in project. Salv
 | Prospecting-while-digging (TBM sensor array) | pending | pending | pending | pending | pending | concept only |
 | Personal agent hub / combination-lock vault | pending | pending | pending | pending | pending | architecture only |
 | Dyneema termination methods (TERM_DYN, two-station map) | 2026-09-08 12:45Z | 2026-09-08 (explore) | https://app.notion.com/p/3d5c9bfe3aff810598cbedadae112bd3 | skills/dyneema-termination-methods.md + knowledge/dyneema-termination-explore-2026-09-08.md | Gmail matrix 19ffde30b33198f0 | explore, not a pick; denier OPEN |
+| Remaining threads map (SHELF/PASTE/AFTER/DO NOT) | 2026-09-08 12:50Z | 2026-09-08 (this sitting) | https://app.notion.com/p/3d5c9bfe3aff81518f33c9236b2dee9f | knowledge/remaining-threads-map-2026-09-08.md | — | map only; funeral holds 13:00 |
 
 ## Rules
 - Two timestamp columns: entry (when we put it in) and salvaged (original date).
