@@ -17,6 +17,7 @@ A row is not closed until step 6 holds. "Mitigated" alone is not done.
 | # | Pattern | Layer | Mitigation | Retest status | Closed |
 |---|---------|-------|------------|---------------|--------|
 | 3B | claiming done before verified | build/process | voice-module rule: never claim a save without verifying the artifact exists; is_skill flags give the validation pillar a pointer to retest against | open — first retest pending next session | no |
+| 3C | naming a deterministic floor as a probability claim | architecture/naming | rename to "Shepherd 10 Sigma equivalent or better, with or without probabilities"; sigma becomes an optional tool, not the identity | open — retest: run Staff on unseen distribution, confirm floor holds without invoking probability | no |
 
 ## Seeded angles (not yet rows)
 - Infra reliability: backup cooling/power gaps, uptime below target.
@@ -35,4 +36,12 @@ Batch A item (5) executed: five dated maps flagged is_skill = true. This is the 
 **Mitigation:** voice-module-map-match-audit-pattern-map rule — never claim a save without verifying the artifact exists. is_skill flags only on dated maps with a real method, completion check, and GitHub sibling.
 **Retest:** next session, run the same trigger (claim a save) under the mitigation and confirm the artifact check happens before the claim. Record result here. Do not close until the retest passes nearly flawless.
 **Remediate:** if the retest fails, strengthen the guardrail and retest. Repeat until no residual recurrence under the same conditions.
+**Closed:** no — first retest pending.
+
+## 2026-09-08 ~19:00 EDT — Row 3C written
+**Identify:** the Staff's floor was named "10-Sigma," which reads as a probability claim (assumes a distribution, reports tail odds). That assumption is the crack — the floor must hold by construction, not by the odds of a Gaussian tail.
+**Characterize:** original May 6 v2.0 package shipped as "10-SIGMA SHEPHERD'S STAFF"; MAD/10-sigma guard in kbl_svct_stacks.py is a real earned component but was carrying the identity. Cost: anyone reading the name assumes a statistical guarantee the system never claimed to deliver; the floor looks probabilistic when it is deterministic.
+**Mitigation:** rename to **Shepherd 10 Sigma equivalent or better, with or without probabilities.** Sigma stays as an optional tool (the MAD guard, the sigma-free path: EV2, harmonic resonance, shell snap, data-driven anomaly mask). The name no longer implies a distribution.
+**Retest:** run the Staff on a distribution it was never trained on. If the floor holds without invoking any probability, the rename is earned. If it silently falls back to a sigma assumption, remediate.
+**Remediate:** if the retest fails, strengthen the deterministic path and retest. Repeat until no residual recurrence under the same conditions.
 **Closed:** no — first retest pending.
