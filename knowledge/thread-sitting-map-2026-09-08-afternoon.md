@@ -51,5 +51,8 @@ Misses: identity not independently verified; bank OPEN; Stripe connector still r
 2. Add BoA checking.
 3. Batch A still available if he names it. ≤5 then stop.
 
+## Evening append 2026-09-08 ~18:33 EDT
+Batch A item (5) done: is_skill flags set on five dated maps carrying a method. See knowledge/is-skill-flags-dated-maps-2026-09-08.md. Next Batch A item: (3) 3B ledger row.
+
 ## Do not supersede
 Sealed skills stay. This map appends.
