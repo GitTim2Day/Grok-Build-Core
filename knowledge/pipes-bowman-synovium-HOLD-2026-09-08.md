@@ -22,6 +22,15 @@ How different pipes **evolve** and stay **braided** (not fused):
 
 Motif: wall with changing permeability, a filtrate, a return path. Two circuits. Intertwined like a braid — one organ, several pipes, none collapsed into one.
 
+## Common feature (still HOLD)
+Fluid interfacing with **protein and lipids**. That interface is what changes permeability — not a valve you screw shut.
+
+Follow the flow: fluid, nutrients, electrolytes, minerals. The pauses are not bottlenecks. They are **advance points** where evolution already decided keep / pass / recycle.
+
+Mimic later, everywhere, still biological: **no waste that is not recycled**. Urine is a dump after reclaim. FILLER is the same rule on a hop.
+
+Do not open a membrane model this sitting.
+
 ## Later morph (not now)
 Once the process is in hand, features already earned can shortcut:
 
@@ -31,11 +40,12 @@ Once the process is in hand, features already earned can shortcut:
 - Edge vs hop = kidney vs vein
 - Dyneema braid = pipes that stay distinct under load
 - TERM_DYN two-station = proximal keep vs distal dump
+- Follow-the-flow to the advance point (not a bottleneck hunt)
 
 Do not start that morph this sitting.
 
 ## Do not
-- Open nephron model, synovial model, or mammalian anatomy as a project.
+- Open nephron model, synovial model, membrane stack, or mammalian anatomy as a project.
 - Treat this as pudding, Stripe, or a skill.
 - Photograph joints or IDs into the project “for the analogy.”
 
