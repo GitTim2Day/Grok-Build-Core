@@ -1,20 +1,29 @@
-# KBLD-9 Pre-filter Spec
+# KBLD-9 Pre-Filter Spec
 
-GOSUB ID: KBLD_ENGINE
-Family: CONTROL
-Status: PROMOTED
+**Status:** Earned component of Shepherd's Staff. Not the identity.
+**Sealed:** 2026-09-08
+**Owner:** Timothy H Norman (SVCT)
 
-## Contract
-- Forward: KBLD_ENGINE(raw_stream, config) -> cleaned_stream, audit_chain
-- Reverse: KBLD_ENGINE.reverse(cleaned_stream, audit_chain) -> raw_stream, diff_report
+## What it is
 
-## Components
-1. IQR noise floor — anything outside flagged as noise, not signal.
-2. Golden-ratio damping (~1.618) — prevents overshoot and new artifacts.
-3. SHA-256 audit chaining — every step hashed, tamper-evident.
+`GOSUB_MAD_Sigma_Guard` inside `kbld/kbl_svct_stacks.py`.
 
-## Design target
-9 to 9.5 sigma cleaning (earned band). The floor itself is deterministic, not probabilistic.
+- Computes median and MAD over a flat numeric sequence.
+- Flags points beyond n×MAD (default n = 10).
+- Returns `{guarded, data, flagged, dropped_nonfinite}` — never mutates input.
+- Exit guard: kept + flagged + dropped == input count.
+- Breakdown detector: collapsed MAD on a dispersed sample → `breakdown_suspected=True` (measured threshold 0.40, min-n 8).
 
-## Role
-Pre-filter that Shepherd's Staff and other filters plug into. Runs before any 10σ / 10×MAD claim is evaluated.
+## What it is not
+
+- Not a probability claim. The 10 is a deterministic floor, equivalent or better, with or without probabilities.
+- Not the whole Staff. The Staff is EV2 correction + harmonic resonance + shell snap + this guard as the earned pre-filter.
+
+## Retests that closed Row 3C
+
+1. **Numenta Anomaly Benchmark** (machine temp, 22,696 rows, labeled anomalies): IQR retained 99.49%, max robust z = 8.45 — below 9, 9.5, and 10. No probability invoked.
+2. **UCI Wine Quality** (never-trained distribution): IQR retained 94.37%, max robust z = 2.79 — well under all three thresholds. Floor held without invoking probability.
+
+## Standing
+
+Earned. Re-testable. The floor is deterministic; sigma is a label, not a distributional assumption.
