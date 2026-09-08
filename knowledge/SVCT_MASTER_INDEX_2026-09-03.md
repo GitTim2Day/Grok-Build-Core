@@ -14,6 +14,7 @@ Status: **living index**. Entry timestamp = when first recorded in project. Salv
 | BRIC spectrometer-LiDAR (soft-tissue, MRI/PET replacement) | pending | pending | pending | pending | pending | needs source recovery |
 | Prospecting-while-digging (TBM sensor array) | pending | pending | pending | pending | pending | concept only |
 | Personal agent hub / combination-lock vault | pending | pending | pending | pending | pending | architecture only |
+| Dyneema termination methods (TERM_DYN, two-station map) | 2026-09-08 12:45Z | 2026-09-08 (explore) | https://app.notion.com/p/3d5c9bfe3aff810598cbedadae112bd3 | skills/dyneema-termination-methods.md + knowledge/dyneema-termination-explore-2026-09-08.md | Gmail matrix 19ffde30b33198f0 | explore, not a pick; denier OPEN |
 
 ## Rules
 - Two timestamp columns: entry (when we put it in) and salvaged (original date).
