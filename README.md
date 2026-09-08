@@ -22,6 +22,8 @@ The problem everyone keeps trying to solve with statistics — anomaly detection
 
 Start here: `knowledge/shepherd-10-sigma-equivalent-or-better-2026-09-08.md`
 
+**The floor above the logic:** `knowledge/do-no-harm-root-principle-2026-09-03.md` — life first, everything else second. If a system can harm life, it does not ship until mitigated.
+
 ---
 
 ## Dual Store Discipline
@@ -46,6 +48,7 @@ Grok-Build-Core/
 ├── CATALOG.md
 ├── knowledge/
 │   ├── shepherd-10-sigma-equivalent-or-better-2026-09-08.md   ← start here
+│   ├── do-no-harm-root-principle-2026-09-03.md              ← the floor
 │   ├── row-3c-kbld9-nab-retest-2026-09-08.md
 │   ├── row-3c-wine-quality-retest-2026-09-08.md
 │   ├── kbld9-prefilter-spec.md
