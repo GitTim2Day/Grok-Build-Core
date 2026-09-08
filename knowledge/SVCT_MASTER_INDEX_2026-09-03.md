@@ -17,6 +17,7 @@ Status: **living index**. Entry timestamp = when first recorded in project. Salv
 | Dyneema termination methods (TERM_DYN, two-station map) | 2026-09-08 12:45Z | 2026-09-08 (explore) | https://app.notion.com/p/3d5c9bfe3aff810598cbedadae112bd3 | skills/dyneema-termination-methods.md + knowledge/dyneema-termination-explore-2026-09-08.md | Gmail matrix 19ffde30b33198f0 | explore, not a pick; denier OPEN |
 | Remaining threads map (SHELF/PASTE/AFTER/DO NOT) | 2026-09-08 12:50Z | 2026-09-08 (this sitting) | https://app.notion.com/p/3d5c9bfe3aff81518f33c9236b2dee9f | knowledge/remaining-threads-map-2026-09-08.md | — | map only; funeral holds 13:00 |
 | Stripe identity + payout pipe (STRIPE_ID_BANK) | 2026-09-08 13:40Z | 2026-09-08 (this sitting) | https://app.notion.com/p/3d5c9bfe3aff81878b27dee2a9545cf7 | skills/stripe-identity-payout-pipe.md + knowledge/stripe-identity-payout-pipe-2026-09-08.md | Drive 1PpvbIxjWnupG188TdpNiiZ8n-L5u9RKX | method only; no ID/card images |
+| Stripe onboard copybook (ONBOARD_COPYBOOK, COBOL one-pass) | 2026-09-08 13:49Z | 2026-09-08 (this sitting) | https://app.notion.com/p/3d5c9bfe3aff81409086eb044ce54f9a | skills/stripe-onboard-copybook.md | Drive 1rEgoKXikXave9CSVcHMsLGKNgakUvYo_ | local read; FILLER secrets; ACCEPT address-current + phone |
 
 ## Rules
 - Two timestamp columns: entry (when we put it in) and salvaged (original date).
