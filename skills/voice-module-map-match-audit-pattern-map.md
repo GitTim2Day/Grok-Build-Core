@@ -24,9 +24,11 @@ After every voice-module interaction, re-run the map + match + audit + pattern-m
 - If a location cannot take the write (e.g. Drive has no create-file tool), say so immediately — do not simulate success.
 - The user's correction is the source of truth; fold it into a skill, not just an apology.
 - Direction is a tag, not a payload. No stored negatives.
+- Any failure mode that reaches the ledger runs the full loop: identify → characterize → mitigate → **retest** → **remediate** → repeat until **nearly flawless**. "Mitigated" alone does not close the row.
 
 ## Anti-patterns
 - Saving the conversation instead of the method.
 - Creating pages under the wrong parent and calling it done.
 - Fabricating URLs or IDs to make a report look complete.
 - Skipping the pattern-match pass because "nothing changed."
+- Closing a ledger row at "mitigated" without a passing retest.
