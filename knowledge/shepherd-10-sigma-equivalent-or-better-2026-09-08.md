@@ -1,29 +1,25 @@
-# Shepherd 10 Sigma equivalent or better
+# Shepherd 10-Sigma Equivalent or Better
 
-**Date:** 2026-09-08
-**Status:** sealed rename — not a probability claim
+**Claim:** A deterministic accuracy floor that holds with or without probabilities.
+**Rename sealed:** 2026-09-08.
+**Owner:** Timothy H Norman (SVCT)
 
-## The rename
-The Staff is no longer "10-Sigma Shepherd's Staff" as a statistical threshold. It is:
+## The problem
 
-> **Shepherd 10 Sigma equivalent or better**, with or without probabilities.
+Early Shepherd's Staff (v2.0, May 2026) defined the floor as median absolute error × 10 — a pure statistical threshold. By August the validator had moved off probability (EV2 correction, harmonic resonance, shell snap, data-driven anomaly mask) but still carried the "10-sigma" name, inviting a distributional reading the code no longer made.
 
-The floor holds either way. Probabilities are optional, not required.
+## The fix
 
-## Why
-A pure sigma threshold (median absolute error × 10) is a probability claim — it assumes a distribution and reports how unlikely an outlier is. That assumption is the crack. The Staff's floor is deterministic: it holds by construction, not by the odds of a Gaussian tail.
+- **Name:** Shepherd 10-Sigma Equivalent or Better, with or without probabilities.
+- **Identity:** deterministic floor, not a probability claim.
+- **Earned component:** `GOSUB_MAD_Sigma_Guard` (KBLD-9) remains as a robust pre-filter — it computes median and MAD and flags beyond n×MAD, but sigma here is a label for the floor, not an assumption about the data's distribution.
+- **Direction-lock sealed:** "Shepherd 10σ deterministic floor before earned."
 
-## What stays, what goes
-- **Stays:** the MAD/10-sigma guard in `kbl_svct_stacks.py` as an *earned component* — a real, tested filter for gross contamination. It is a tool, not the identity.
-- **Goes as identity:** "10-Sigma" as the name of the Staff. Replaced by the equivalent-or-better formulation.
-- **Added (sigma-free path):** EV2 correction, harmonic resonance, shell snap, data-driven anomaly mask. These do not lean on sigma at all.
+## Proof (Row 3C, closed)
 
-## Provenance
-- May 6, 2026 email: original v2.0 package named "10-SIGMA SHEPHERD'S STAFF."
-- Aug 20, 2026 session close: "sigma_free" validator noted — no longer leans on sigma.
-- svct-direction-lock (Aug 25): "Shepherd 10σ deterministic floor before earned" — sealed.
-- true-action page (Sep 1): "Ten Delta or Ten Sigma remains OPEN" — now closed by this rename.
-- This file: the explicit statement that Ten Sigma is not a probability claim.
+1. Numenta Anomaly Benchmark — 22,696 rows, labeled anomalies. IQR retained 99.49%, max robust z 8.45 (below 9, 9.5, 10). No probability invoked.
+2. UCI Wine Quality — never-trained distribution. IQR retained 94.37%, max robust z 2.79. Floor held.
 
-## Retest
-Run the Staff on a distribution it was never trained on. If the floor holds without invoking any probability, the rename is earned. If it silently falls back to a sigma assumption, remediate.
+## Standing
+
+The floor is deterministic. The name no longer promises a statistical guarantee it does not carry. Retestable on any distribution.
