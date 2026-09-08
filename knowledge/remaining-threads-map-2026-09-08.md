@@ -61,3 +61,9 @@ This pass saved **this thread**. Batch A was **not** run.
 Passkey ≠ identity. Developers is the wrong wing. pudding=0 morning. No afternoon sweep. Do not append go-live.
 
 Batch A if he names go: (13) antagonistic-dyneema file, (21) do-no-harm GitHub copy, (1) official-vs-ours one-pager, (3) 3B ledger row, (5) is_skill on dated maps that already have a method. Stop at 5 or at a flagged link.
+
+## Evening append 2026-09-08 ~18:33 EDT
+
+**Batch A item (5) executed.** Five dated maps flagged is_skill = true in Timothy Skills & KB (via notion-convert-page-to-skill). No content rewritten. Table and rationale in knowledge/is-skill-flags-dated-maps-2026-09-08.md. Pipes-bowman-synovium-HOLD correctly left unflagged. person-voice-assumption-horizon left unflagged (voice rule, not a dated map).
+
+Next Batch A item: (3) 3B ledger row — claiming done before verified. The is_skill mechanism is the pointer it will cite.
