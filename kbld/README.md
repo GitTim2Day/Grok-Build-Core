@@ -1,6 +1,6 @@
 # /kbld — Harmonic / Framework Layer
 
-Source files (Python) live in this folder and are mirrored on Drive:
+All five source files are **live in this repo** and tapable. Drive holds the appendable archive mirror.
 
 - kbl_d_framework.py
 - kbl_da_framework.py
@@ -10,9 +10,7 @@ Source files (Python) live in this folder and are mirrored on Drive:
 
 Drive folder (appendable): https://drive.google.com/drive/folders/1Q-MCJwaATYmV5rGDa1Ci_ALG589Tm5P4
 
-These are referenced here as the sealed domain branch. Full source is kept on Drive for size and binary safety; text extracts can be added as leaves when needed.
-
-## Tap targets (now live in-repo)
+## Tap targets (live in-repo)
 
 - `kbl_d_framework.py` — KBLD Auditor: Knowledge / Belief / Logic / Discernment scoring with provenance hash chain.
 - `kbl_da_framework.py` — KBLDA variant (no type hints), same loop.
