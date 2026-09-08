@@ -1,27 +1,47 @@
-# Skills Catalog — Unified Master Inventory
+# CATALOG.md — Unified Master Inventory
 
-**Owner:** Timothy H Norman (@Timothy01775634 / @Tnorman01775634)  
-**Sealed reference:** 2026-07-29 catalog + 2026-08-05 session audit  
-**Version Clean. Finite. Musical. No infinity. No Zero’s.**
+Domain map for Grok-Build-Core. Start at the README title, then follow the pointers.
 
-Full original catalog content is preserved in the Drive archive and in the local artifact set.  
-This file is the root pointer for the repo.
+## Root
 
-## Domain Map (this repo)
+- `README.md` — **Shepherd's Staff: A Deterministic Ten-Sigma Floor That Holds Without Probability**. The solution first.
 
-| Path | Content |
-|------|---------|
-| `/tims-tables/` | Locked ratio layer, O(1) lookup, presentation standards |
-| `/svct-core/` | Spherical / voxel backbone, discrete chart, injectivity proof |
-| `/kbld/` | Harmonic frameworks, stacks, gel, RTMP |
-| `/logs/` | Append-only error + pruned-features + calibration results |
-| `/knowledge/` | Session seals |
-| `/archives/` | Pointers to immutable zips on Drive |
+## /kbld — Harmonic / Framework Layer (live, tapable)
 
-## Binary Archives (Drive only)
+- `kbl_d_framework.py` — KBLD Auditor (K/B/L/D scoring + provenance).
+- `kbl_da_framework.py` — KBLDA variant.
+- `kbl_svct_stacks.py` — GOSUB stacks: MAD 10-sigma guard, Error→Test→Mitigate→Retest, provenance.
+- `kbld_svct_gel_stack.py` — range guard → gel interpolation → SVCT 56-cell loop.
+- `kblda_rtmp_us_east.py` — US East RTMP/OBS flow.
+- `README.md` — tap targets + Drive-only advanced sources list.
 
-- `Grok_Build_Everything_2026-07-29.zip`
-- `Grok_Build_Skills_Internal_Code_2026-07-29.zip`
-- Tim’s Tables `.xlsx` workbooks
+## /knowledge — Sealed records & proofs
 
-Drive: https://drive.google.com/drive/folders/1Q-MCJwaATYmV5rGDa1Ci_ALG589Tm5P4
+- `shepherd-10-sigma-equivalent-or-better-2026-09-08.md` — the rename + claim.
+- `kbld9-prefilter-spec.md` — KBLD-9 spec.
+- `row-3c-kbld9-nab-retest-2026-09-08.md` — Row 3C closed (NAB).
+- `row-3c-wine-quality-retest-2026-09-08.md` — Row 3C closed (Wine Quality).
+- `failure-pattern-ledger-2026-09-08.md` — the ledger (retest-and-remediate loop).
+- `bottleneck-handler-2026-09-08.md` — bottleneck skill (SVCT sayings as subroutines).
+- `is-skill-flags-dated-maps-2026-09-08.md` — five pillars validation flags.
+- Plus dated maps, Stripe pipe, navigation log, remaining-threads map.
+
+## /skills — 30+ skills
+
+`shepherds-staff`, `kbld-9`, `bottleneck-handler`, `dyneema-termination-methods`, `stripe-identity-payout-pipe`, and the rest. Each has a method, a completion check, a GitHub sibling.
+
+## /logs, /multilingual, /archives, /SVCT-core, /TIMS-tables
+
+Working logs, language adapters, session archives, core index, Tim's Tables.
+
+## Dual store
+
+- **GitHub** (this repo) — sealed Merkle-style tree.
+- **Google Drive** — appendable living source: https://drive.google.com/drive/folders/1Q-MCJwaATYmV5rGDa1Ci_ALG589Tm5P4
+- **Notion** — knowledge base page.
+
+## Five Pillars
+
+1. content  2. context  3. data  4. time  5. **validation**
+
+Unvalidated residents are refused.
