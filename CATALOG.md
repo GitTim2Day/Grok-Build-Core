@@ -13,7 +13,10 @@ Domain map for Grok-Build-Core. Start at the README title, then follow the point
 - `kbl_svct_stacks.py` — GOSUB stacks: MAD 10-sigma guard, Error→Test→Mitigate→Retest, provenance.
 - `kbld_svct_gel_stack.py` — range guard → gel interpolation → SVCT 56-cell loop.
 - `kblda_rtmp_us_east.py` — US East RTMP/OBS flow.
-- `README.md` — tap targets + Drive-only advanced sources list.
+- `kbld_gosub_primitives_MinRadius_Lp_2026-08-28.py` — sealed primitives, MinRadius = L_p.
+- `kbl_svct_stacks_MinRadius_Lp_2026-08-28.py` — rev 4c stacks, 68/68, production seams.
+- `kbld_sophisticated_hearing.py` — deterministic audio pipeline, independent processes.
+- `README.md` — tap targets + Drive archive mirror.
 
 ## /knowledge — Sealed records & proofs
 
