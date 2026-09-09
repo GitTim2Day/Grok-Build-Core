@@ -5,4 +5,5 @@ See knowledge/optimus-tendon-woven-blanket-2026-09-09.md.
 - Woven from the same 12-strand sub-braids as the capture tethers.
 - Every fourth strand: copper for resistive heat.
 - Weave provides shield-level protection, below Kevlar.
-- Open: copper gauge, weave, power density, tensile comparison, coating compatibility.
+- Shadow-side coating: warms the structure or holds it above safe temperature; also usable in habitats as heater + shield + liner.
+- Open: copper gauge, weave, power density, tensile comparison, coating compatibility, thermal gradient across the ring, bonding to structure.
