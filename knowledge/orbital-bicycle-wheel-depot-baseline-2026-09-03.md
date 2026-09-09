@@ -76,3 +76,31 @@ Appended from conversation. Still sketch, not spec.
 - Debris detection range vs. orbital closing speed — ground tracking still carries the early warning; onboard sensors are last-second only.
 - Water slosh vs. baffle design under continuous spin; noise isolation for the live-ballast pumps.
 - Status remains HOLD. Sketch, not spec.
+
+---
+
+## 2026-09-08/09 evening — capture system and Dyneema construction
+Appended from conversation. Still sketch, not spec.
+
+### Capture system (catcher's mitt)
+- The station catches the ship instead of the ship docking into a moving target.
+- Hooks at the periphery, evenly spaced at each of the eight spokes. Hooks sit flush until a ship matches rim speed, then snap out and grab it.
+- Trigger: a tether protruding from the hook or ship. Contact with the ship trips the hook automatically — no pilot timing.
+- Energy absorption: at ~10 rpm the rim moves ~9 m/s, so each hook needs a shock absorber (piston or spring) to catch and reel the ship in gently, like a fishing line. Short, stiff tethers with quick-release to limit whip.
+- Keep-out cone and mid-body grip at center of mass remain from the baseline.
+
+### Dyneema load path for the capture tethers
+- Target load: Falcon 9 class, ~5.4 MN.
+- Construction: 12-strand Dyneema per filament (sub-braid), then those sub-braids braided into the full rope. 12 outlasts 8 under cyclic load — load spreads thinner, creep and abrasion slow, fatigue life extends.
+- Fatigue estimate (working): 8-strand ~10 years; 12-strand 10 years to indefinite if covers are inspected and swapped.
+- Bundle: ~8 parallel bays (conservative 9 at 50% knockdown; 8 at ~70% braid efficiency). Each bay ~910 kg with cover and fittings; full set ~7.3 tonnes. Bundle diameter ~150–180 mm.
+- Protective layers: spray-on or embedded coatings/matrices worked separately — UV, abrasion, and micrometeorite cover. Coating fights a bury splice, so say so before splicing (see dyneema-termination-methods).
+
+### Open problems (updated)
+- Gyroscopic precession / attitude control at 10 rpm.
+- Docking dynamics on a spinning rim; hook shock-absorber design; tether mass and whip.
+- Thermal across 519 m; power budget for radar + sensors.
+- Debris range vs. closing speed — ground tracking still carries early warning.
+- Water slosh vs. baffle design; noise isolation for live-ballast pumps.
+- Dyneema: exact denier, cover material, coating chemistry, splice method under load, inspection cadence.
+- Status remains HOLD. Sketch, not spec.
