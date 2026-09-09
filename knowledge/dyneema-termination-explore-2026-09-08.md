@@ -3,7 +3,7 @@
 Append only. Not a sealed pick. No invented denier, strand count, or eyelet D/d.
 
 Skill: skills/dyneema-termination-methods.md (GOSUB TERM_DYN)
-Notion skill: https://app.notion.com/p/3d5c9bfe3aff810598cbedadae112bd3
+Notion skill: https://app.notion.com/p/3d5c9bfe-3aff-8105-98cb-edadae112bd3
 Sitting: THREAD PARENT MAP compare 2026-09-08. Cluster 17 open leaf.
 
 Earned faces already on the book:
@@ -42,7 +42,7 @@ Antagonistic pairing makes the zero-load lock mandatory. A long bury without a l
 
 Marlow D12 (SK78-class 12-strand) datasheet: spliced-eye allowance 60d; soft-eye neck <=30 deg; D/d 5 for grommets. Working stretch ~0.51% at 10% BL, ~0.89% at 20% BL. The workbook 0.8% cap is a stretch budget, not a splice recipe.
 
-S02 Ti/DLC eyelets, motors unchanged is already a distal hardware face. The OPEN is how that eye is made and the D/d of that eyelet vs the line.
+S02 Ti/DLC eyelets, motors unchanged is already a distal hardware face. The OPEN is how that eye is made and the D/d of that eyelet vs. the line.
 
 ## Map to this architecture (not a pick)
 
@@ -57,3 +57,13 @@ S02 Ti/DLC eyelets, motors unchanged is already a distal hardware face. The OPEN
 Braid count. Denier. Termination hardware drawing. Pulley / eyelet D/d. April 2025 originals. Sew length. Potting drawing.
 
 No number invented this sitting.
+
+---
+
+## 2026-09-09 — orbital capture application (appended, not a pick)
+This page is Optimus-tendon focused, but the same UHMWPE rules apply to the orbital bicycle-wheel depot capture tethers (see orbital-bicycle-wheel-depot).
+
+- 12-strand per filament, 8 parallel bays, ~910 kg/bay, ~7.3 t total for Falcon 9 class load.
+- Coating/embed layers are in progress separately; coating fights a bury splice — flag before splicing.
+- Fatigue: 8-strand ~10 yr; 12-strand 10 yr to indefinite with cover swaps.
+- Still OPEN: denier, coating chemistry, splice method, inspection cadence. No numbers sealed here.
