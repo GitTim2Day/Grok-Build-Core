@@ -33,3 +33,46 @@ Tanker cadence must be proven first. Depots layer on after the baseline path is 
 - Origin: Timothy H Norman, months of prior work; refined in session 2026-09-03.
 - Recorded: Notion Grok Build Knowledge Base & Skills (pointer 2026-09-03), this file.
 - Not a full skill yet — sketch only.
+
+---
+
+## 2026-09-08 evening refinement — vibration, balance, and radar
+Appended from conversation. Still sketch, not spec.
+
+### Scale target
+- Footprint: four American football fields (including end zones) as a circle ≈ 28,000 m².
+- Circumference ≈ 519 m (radius ≈ 82.6 m).
+
+### Spin for 0.9–1 G at the rim
+- ω = sqrt(a/r): ~9.7 rpm at 0.9 G, ~10.2 rpm at 1 G.
+- Rim tangential speed ~9 m/s. Coriolis tug is noticeable when moving radially toward the hub — design for it, don't ignore it.
+
+### Hub-mounted radar (axle)
+- Mount phased arrays top and bottom of the hub. Centrifugal force is zero there, so the array stays nearly still while the rim spins — the smartest place for a coherent beam.
+- Tradeoff: the spinning wheel itself occludes a slice of the horizon. Fill the gaps with active sensors on the periphery.
+- Peripheral sensors must be motion-compensated — the rim moves several m/s, so uncorrected readings smear.
+- Ground-scale dishes (Haystack/Goldstone class) are not needed; a phased array of thousands of small elements scales fine in orbit. The real limit is power and aperture, not box size. Miniaturization (photonic integrated circuits) shrinks the hardware, but beam physics still demands range — doubling detection distance needs 4× power or a larger aperture.
+
+### Structural rigidity
+- A station this size flexes under thermal cycling and thruster firings. A phased array needs millimeter-level antenna precision or the beam falls apart.
+- Mass on the rim damps slow drift (thermal, gradual) but not fast vibration from motors, pumps, and crew movement. Fix: active dampers, or a separate non-rotating ring for the array.
+
+### Water as live ballast
+- Plumbing is not just a utility — it's a balancing system. Pump water between rim tanks to shift the center of mass in real time, like lead weights on a tire. Same principle the ISS uses with control moment gyros.
+- Catch: moving water creates slosh, a new vibration source. Baffles in the tanks kill the slosh; without them you trade one imbalance for another.
+- Noise mitigation for the plumbing and pumps is already in progress separately.
+
+### Hub-mounted radar — axle placement (2026-09-08 evening)
+- Mount the phased arrays on top and bottom of the hub, like the axle of a car or bicycle. Centrifugal force is zero at the axle, so the radar sits nearly still while the rim spins around it — the smartest place for a coherent beam.
+- Tradeoff: the spinning wheel occludes a slice of the horizon. Fill the gaps with active sensors on the periphery.
+- Peripheral sensors must be motion-compensated — the rim moves several m/s, so uncorrected readings smear.
+- Mass on the rim damps slow drift but not fast vibration; active dampers or a non-rotating ring remain the fix for the array itself.
+
+### Open problems (still unresolved)
+- Gyroscopic precession / attitude control at 10 rpm for a structure this mass.
+- Docking dynamics: ships arriving at a spinning rim, mid-body hooks, keep-out cone.
+- Thermal management across a 519 m circumference.
+- Power budget for the phased array + peripheral sensors at full duty.
+- Debris detection range vs. orbital closing speed — ground tracking still carries the early warning; onboard sensors are last-second only.
+- Water slosh vs. baffle design under continuous spin; noise isolation for the live-ballast pumps.
+- Status remains HOLD. Sketch, not spec.
