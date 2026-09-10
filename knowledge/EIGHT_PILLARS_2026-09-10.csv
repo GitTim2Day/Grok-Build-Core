@@ -1,0 +1,9 @@
+pillar,role,sealed,notes
+content,payload,yes,what the record carries
+context,bind,yes,what it attaches to
+data,raw value,yes,the measured fact
+time,timestamp,yes,when it was fetched; EDT labeled
+provenance,lineage,yes,who fetched it, when
+validation,proof,yes,evidence matched; VAL%
+integrity,hash,yes,unchanged since fetch
+custody,chain,yes,who held it
