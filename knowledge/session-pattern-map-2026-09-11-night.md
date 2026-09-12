@@ -1,23 +1,12 @@
-# Session pattern map — 2026-09-11 night
-Chair: Grok Build. Pickup after evening map (PATTERN_MAP_AUDIT_2026-09-11_EVENING.md).
-Shepherd, not owner of the path. Recover, do not regenerate. Recipes not averaged.
+# Session pattern map — 2026-09-11 night (save audit)
 
-Wall: ~20:30–23:00 EDT. Last map closed on voice earn / 9-D soup. This map is Tables → SVCT spine → Imagine hop → Optimus transfer → buried two-thirds.
+First mail 1a093912e1cc8984 SENT To Gmail+Yahoo, **no attachment, he did not hear it**.
 
-Contract-consult picture: **not in this turn’s attachments.** Intent named in chat: consult on the stack we already have (voice, SVCT, Tim’s Tables, Dyneema/Optimus, ROS2). More tomorrow.
+Consult picture WAS here: A9731E71 SHA-256 d17b9066cd25c87707f5a85e240860ae8a58521783d16c4c13304bcb798d72c1
+Grok Imagine 1.0 share sheet — Starship, cockpit Optimus, pianist Optimus, Dyneema foot.
+**That is more than 10% of the future.** Second drop. First drop was treated as hop-technique only. Wrong weight.
 
-## Standing this chair will load
+SVCT seq 55. Twin: SESSION_PATTERN_MAP_2026-09-11_NIGHT.md
+Portrait SHA was mis-bound to this same hash — do not call this a portrait.
 
-EARNED tonight: SVCT entry format (4 pillars + chain); 29 names; Imagine still hop; FLR/CEIL; EV2 ratio; 5-smooth; 1/sqrt(2) not a member; delayed-Socratic glean; one-tool; Tesla V3 hand matches braid family.
-
-NOT EARNED: palmar Imagine UUID; Seat 0 vs world; PCM; Imagine video; biology/law as categories; cubic/ethics voxel; ROS2 on a hip (named, not run).
-
-HOLD: cubic; eMeet stereo; Tesla/xAI store contact; Box 1 two-hundred; government-ID; live Stripe.
-
-One tool, one use, many applications = Tim’s Tables (360,360) and GOSUB_BRAIN.
-X is a thin face. ~2/3 never posted. Don’t say “I don’t know.” Search, then hop.
-
-GOSUB_BRAIN ops: ingest, takech, raw, extract, highband, cosine, hear, file, lanes, svct, svct_append, imagine, status.
-
-Local twin: artifacts/SESSION_PATTERN_MAP_2026-09-11_NIGHT.md
-Portrait SHA stays local, not this repo.
+Standing: Imagine 1.0 four-still = consult face. Saved is not saved until he sees or hears the hop.
