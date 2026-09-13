@@ -1,6 +1,7 @@
 # First universal product — seal
 
 SVCT 2026-09-12T22:48:00-04:00 (pickup)
+Append 2026-09-12T22:50:00-04:00
 
 Status: SEAL. Append. Does not supersede UT, multi-lang-stereo-voice-routing, or svct-end-of-query-append.
 
@@ -21,7 +22,11 @@ Not a claim that 101 rooms were filled this sitting.
 ## Rank
 
 Pi 5 is a toy in comparison. A toy with potential. Do not promote it over this product.
-The rest of the remaining threads: if funds allow. Not this sitting.
+
+## Gate (locked 22:50)
+
+The rest waits on **delivery of parts** — not a vague funds pause.
+Resume is open on **any thread or a new session**. The book is the hop.
 
 ## Second alive
 
@@ -33,6 +38,7 @@ Ship the whole. That act is his, when he makes the work public as a whole.
 Fill remaining languages tonight.
 Buy the second clock.
 Contact stores or parties.
+Wait for a wrap ritual to resume.
 
 ## Parents
 
