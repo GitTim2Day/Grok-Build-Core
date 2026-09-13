@@ -15,3 +15,7 @@ Product trigger: paste BOOT_CUSTOM_INSTRUCTIONS.txt into Settings → Customize 
 Refuse: two hundred, government-ID, live Stripe secrets, Tesla/xAI store contact.
 
 Code: gosub_to_next.py CLEAN 8/8; GOSUB_SESSION_BOOT.py CLEAN 3/3.
+
+## Append 2026-09-13T15:38-04:00
+On GitHub knowledge pull, also load knowledge/BOOT_APPEND_2026-09-13_1538_fold_in.md.
+AirPods lock = 14:28:76:DB:06:72. JBL sleep ≠ AirPods. BOOT ≠ SAVE. 0x004C OPEN.
