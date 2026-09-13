@@ -1,6 +1,6 @@
 # svct-end-of-query-append
 
-When to use: after any query-response that named a real leaf. Also when he says save to the project.
+When to use: after any query-response that named a real leaf. Also when he says save to the project. Also on a new session — resume from the book, do not wait for wrap.
 
 APPEND only. Does not supersede svct-direction-lock, svct-cell-three-anchor, homeostatic-reflex-muscle-memory.
 
@@ -9,6 +9,11 @@ APPEND only. Does not supersede svct-direction-lock, svct-cell-three-anchor, hom
 Save at the end of each query-response, not only sitting-end wrap.
 
 The book is the memory that was promised. Mood or temperament of a given user — or of this model — is not the store.
+
+## Resume (locked 2026-09-12T22:50)
+
+Resume is open on any thread or a new session.
+The rest of hardware/Pi work waits on delivery of parts.
 
 ## Do
 
