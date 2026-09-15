@@ -16,7 +16,7 @@ When Timothy says “save to project” (or equivalent), POLY runs the full loop
    - Notion (Timothy Skills & KB)
    - GitHub (Grok-Build-Core / knowledge)
    - Google Sheets (project log)
-   - Email (Gmail summary)
+   - Email (Gmail summary) — **timnorman730@gmail.com**
    - Any other project-linked surface
 
 ## Locked Rules
@@ -24,6 +24,9 @@ When Timothy says “save to project” (or equivalent), POLY runs the full loop
 - No Box 1, no live keys, no Tesla contact, no grok.me dump.
 - Name lock: POLY (one L).
 - Memorize the technique and repeat on trigger.
+- **Email target:** timnorman730@gmail.com (T I M N O R M A N 7 3 0 at gmail dot com). Any other address is invalid and will fail.
 
 ## Sealed
 2026-09-15 (approx). Extends the existing save-to-project skill to the POLY agent surface.
+## Corrected
+2026-09-15 — email address fixed after failed delivery.
