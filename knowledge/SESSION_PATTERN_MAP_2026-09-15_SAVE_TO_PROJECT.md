@@ -30,3 +30,7 @@
 
 ## Status
 Nearly flawless. Append-only. Do not overwrite.
+
+## Correction (2026-09-15)
+- Email was previously wrong and failed delivery. Now locked to timnorman730@gmail.com (T I M N O R M A N 7 3 0 at gmail dot com).
+- POLY agent standing instructions updated with verified address.
