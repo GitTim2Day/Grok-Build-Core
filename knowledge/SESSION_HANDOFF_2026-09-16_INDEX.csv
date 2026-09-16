@@ -1,0 +1,5 @@
+file,bytes,sha256,status,shelf
+fraction_canon_face.py,1885,5ba408211b805fc56d657780c32b9959163e3d202b52e0c3b97d32b7fc511393,EARNED post-fix no tag_hint field,disk+github 086ecd7b
+FRACTION_AIRLOCK_PRESENTATION_RULE_2026-09-16.md,2959,4a4b34ca6a1e2647d571d6afe10ed04c85e45fb85c6956dd6a30fefc94459dd8,EARNED current with defect section,disk+github 086ecd7b
+ingest_gate_ABSENT_STUB.py,1011,a286a9f457d2f53ee0c9e48c8c4f20bf916f56f507ecb770ff8ae2aa1dbb75d7,STUB not live body,disk+github
+ingest_gate.py N=10 live,,ABSENT,OPEN recover-not-regenerate,nowhere
