@@ -1,0 +1,6 @@
+face,exact_num,exact_den,standing,note
+tan2,3,10,EXACT,optional column already sealed
+cot2,10,3,EXACT,reciprocal of 3/10
+sin2,3,13,EXACT,from tan2=3/10
+sin2_lab_MSbar_Z,23122,100000,DISPLAY_ONLY,PDG short 0.23122 not a table lock
+leftover_sZ_minus_3_13,4507692307692268,10000000000000000000,OPEN,scheme not column
