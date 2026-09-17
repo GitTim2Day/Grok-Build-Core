@@ -19,3 +19,9 @@ Code: gosub_to_next.py CLEAN 8/8; GOSUB_SESSION_BOOT.py CLEAN 3/3.
 ## Append 2026-09-13T15:38-04:00
 On GitHub knowledge pull, also load knowledge/BOOT_APPEND_2026-09-13_1538_fold_in.md.
 AirPods lock = 14:28:76:DB:06:72. JBL sleep ≠ AirPods. BOOT ≠ SAVE. 0x004C OPEN.
+
+## PERMANENT BOOT member — closed-system-vascular-plant (2026-09-17)
+Add to EXECUTE BOOT_SET. After BOOT_SET fetch, GATHER name then LOAD body.
+SKILL SHA-256 6db4037fe8797d99d4f124736a6a8149b116dc3e21cfddff62b12c441ef5eed6
+GitHub: knowledge/closed-system-vascular-plant/
+Forevermore until written supersession.
