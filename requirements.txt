@@ -1,0 +1,13 @@
+# Earned third-party imports from sampled top files under kbld/ and multilingual/.
+# Fail-closed: no invented exact pins. Most modules are pure stdlib.
+#
+# Earned:
+#   numpy, scipy, soundfile — kbld/kbld_sophisticated_hearing.py
+#   numpy — also optional-imported in kbld/kbld_svct_gel_stack.py (try/except)
+#
+# Not listed (not PyPI / optional local / not imported as packages):
+#   spherical_memory_pro — optional local import in kbld_svct_gel_stack.py (HAS_SVCT)
+#   Bergamot / Apertium / whisper.cpp / vosk / piper — external binaries detected via PATH in multilingual adapters, not pip imports
+numpy
+scipy
+soundfile
