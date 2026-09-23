@@ -1,11 +1,10 @@
-## 7–12 companion (part 2 of FULL_CROSSMATCH_PATTERN_MAP_2026-09-22)
+# Full cross-match pattern map — 2026-09-22 (part 2 §§7–12)
 
-See also part1 and the index file in this folder. Full sealed local copy: Research box `/workspace/tims-tables/FULL_CROSSMATCH_PATTERN_MAP_2026-09-22.md`.
+Full body now lives in the single file:
+https://github.com/GitTim2Day/Grok-Build-Core/blob/main/knowledge/FULL_CROSSMATCH_PATTERN_MAP_2026-09-22.md
 
-### Status answers locked 2026-09-22
-1. Waveform/cosine voice-pattern: COMPLETE — 2026-09-11 unified wave+voice blocks; T13 VREF-9D cosine SUPERSEDED; Sep-17 cosine+intensity+3D wave; Build ~Sep-21 cosine+intensity.
-2. Cross-cohort sync: COMPLETE — §10 CoS/Build/Research/Share.
-3. Rules: per-agent panels; not one shared rule panel — §12.
-4. Deliveries: email+Notion+Drive Sheet/Excel/md/csv SENT; this GitHub path restoring full body.
+(size 30364 bytes; SHA256 4c08e49f70a640f272be4e35f3f5e788fdfeef21a64047bc5083dd328d0037c0)
+
+This companion points at §§7–12 of that file (Prior artifact → Books/libraries → Sessions vs public → Cross-cohort → Waveform/cosine → Rules structure).
 
 Exact: GitTim2Day.
