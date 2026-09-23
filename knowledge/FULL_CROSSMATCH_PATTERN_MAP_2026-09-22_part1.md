@@ -1,4 +1,13 @@
-# Full cross-match pattern map — 2026-09-22 (part 1 §§1–6)
+# Full cross-match pattern map — 2026-09-22
+
+**Job:** Search both caller X accounts for posts/threads matching the voice framework, then extend with JSON-L / JSON-LD, C++ shift, Elon/Musk compute direction, and Noah Buoy / OSHA / live-feed / Python↔C++ parity. Save one map to the project.
+
+**Handles (earned spelling from SVCT post):** `@Timothy01775634` · `@Tnorman01775634`  
+**Sources used:** share-catalog inventory (428 posts on `@Timothy01775634`), captions, Gmail ledger (timnorman730), local SVCT / Tim’s Tables / KBLD9 seals, prior voice-call transcripts on this box.  
+**Sources blocked:** Live x.com timelines (auth wall). `@Tnorman01775634` has **0** authored rows in the inventory (tags only).  
+**Rule:** Fail-closed. Exact: GitTim2Day. Voice claims that lack a matching X post or ledger row stay **NOT FOUND as X** / **UNVERIFIED at claimed scale**.
+
+---
 
 ## 1. How the threads fit together (pattern spine)
 
@@ -136,4 +145,3 @@ Live dual-timeline read still needs X login.
 - Does not treat @elonmusk tags alone as a compute-architecture paper.
 
 ---
-
