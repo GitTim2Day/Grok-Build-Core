@@ -1,0 +1,42 @@
+EMBED PATH  preferred  2026-09-24
+Circle contact count is 8. Square contact count is 6.
+Do not average. Do not truncate the two ends. Carry them the way a timestamp is carried.
+
+GOSUB EMBED_AXIS(line of 8 positive magnitudes)
+  IF length is not 8 THEN RETURN error
+  IF any magnitude is negative THEN RETURN error
+  end0 = line[0]
+  end7 = line[7]
+  face = line[1] through line[6]
+  RETURN face, end0, end7
+
+GOSUB EMBED_GRID(cell 8 by 8)
+  FOR each row
+    GOSUB EMBED_AXIS
+    keep the 8 by 6 face
+    store column 0 and column 7
+  THEN GOSUB EMBED_AXIS on each of those 6 columns, which shortens 8 rows to 6
+    store row 0 and row 7 of the 8 by 6
+  face is 6 by 6, the middle
+  RETURN face and the four embedded lines
+
+GOSUB RESTORE(face, embed)
+  put column 0 and column 7 back
+  put row 0 and row 7 back
+  put the 6 by 6 back in the middle
+  RETURN the 8 by 8
+  IF it does not match the input, the trial failed
+
+ARCHIVED  do not call from the working path
+GOSUB AVERAGE_AXIS(line of 8)
+  sliding pair, twice, so 8 becomes 6
+  each pair is the positive mean, truncated toward zero at 8 decimal places
+  never round
+  this smears a quirk
+  keep it for a solver that wants one blended number per cell
+  only while the embed still exists
+
+LATER
+HTTP and any other type carry this same pack.
+They are not in this set.
+The face is the surface. The embed is the density. The timestamp stays a separate anchor.
