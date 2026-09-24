@@ -74,6 +74,61 @@ static void average_axis(const R in[8], R out[6]) {
     for (int i = 0; i < 6; ++i) out[i] = half_mean_trunc8(a[i], a[i + 1]);
 }
 
+static void basic_average_axis(const std::int64_t in[8], std::int64_t out[6]) {
+    std::int64_t a[7];
+    for (int i = 0; i < 7; ++i) {
+        if (in[i] < 0 || in[i + 1] < 0) throw std::runtime_error("magnitude must be positive");
+        a[i] = (in[i] + in[i + 1]) / 2;
+    }
+    for (int i = 0; i < 6; ++i) out[i] = (a[i] + a[i + 1]) / 2;
+}
+
+static int basic_integer_trial() {
+    std::int64_t grid[8][8];
+    for (int r = 0; r < 8; ++r)
+        for (int c = 0; c < 8; ++c) grid[r][c] = 1;
+    grid[3][3] = 1000;
+    std::int64_t face[6][6];
+    std::int64_t col0[8], col7[8], row0[6], row7[6];
+    std::int64_t mid[8][6];
+    for (int r = 0; r < 8; ++r) {
+        col0[r] = grid[r][0];
+        col7[r] = grid[r][7];
+        for (int c = 0; c < 6; ++c) mid[r][c] = grid[r][c + 1];
+    }
+    for (int c = 0; c < 6; ++c) {
+        row0[c] = mid[0][c];
+        row7[c] = mid[7][c];
+    }
+    for (int r = 0; r < 6; ++r)
+        for (int c = 0; c < 6; ++c) face[r][c] = mid[r + 1][c];
+    std::int64_t back[8][8];
+    for (int r = 0; r < 8; ++r) {
+        back[r][0] = col0[r];
+        back[r][7] = col7[r];
+    }
+    for (int c = 0; c < 6; ++c) {
+        back[0][c + 1] = row0[c];
+        back[7][c + 1] = row7[c];
+    }
+    for (int r = 0; r < 6; ++r)
+        for (int c = 0; c < 6; ++c) back[r + 1][c + 1] = face[r][c];
+    int mismatch = 0;
+    for (int r = 0; r < 8; ++r)
+        for (int c = 0; c < 8; ++c)
+            if (back[r][c] != grid[r][c]) ++mismatch;
+    std::int64_t blended[6];
+    basic_average_axis(grid[3], blended);
+    std::int64_t peak = blended[0];
+    for (int i = 1; i < 6; ++i) if (blended[i] > peak) peak = blended[i];
+    std::cout << "BASIC_QUIRK_ON_FACE " << face[2][2] << "\n";
+    std::cout << "BASIC_EMBED_MISMATCH " << mismatch << "\n";
+    std::cout << "BASIC_ARCHIVED_ROW_PEAK " << peak << "\n";
+    bool ok = face[2][2] == 1000 && mismatch == 0 && peak == 500;
+    std::cout << "BASIC_MATCH " << (ok ? "ALL_GREEN" : "FAIL") << "\n";
+    return ok ? 0 : 1;
+}
+
 int main() {
     const R base[8] = {
         {1, 3}, {1, 7}, {1, 9}, {5, 11}, {1, 13}, {2, 5}, {1, 17}, {3, 8},
@@ -114,6 +169,7 @@ int main() {
     std::cout << "FACE 6 6\n";
     std::cout << "ARCHIVED_SMEARED " << (smear ? "YES" : "NO") << "\n";
     if (mismatch != 0 || !quirk || !smear) failed = 1;
+    if (basic_integer_trial() != 0) failed = 1;
     std::cout << "STATUS " << (failed ? "FAIL" : "ALL_GREEN") << "\n";
     return failed;
 }
