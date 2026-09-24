@@ -84,6 +84,34 @@ def _sample():
     return grid
 
 
+def basic_average_axis(line):
+    """Same rule as BASIC backslash. Archived. Not the memory."""
+    if len(line) != 8:
+        raise ValueError("axis must be 8")
+    once = []
+    for a, b in zip(line, line[1:]):
+        if a < 0 or b < 0:
+            raise ValueError("magnitude must be positive")
+        once.append((a + b) // 2)
+    return [(a + b) // 2 for a, b in zip(once, once[1:])]
+
+
+def basic_integer_trial():
+    """The BASIC sample: ones, quirk 1000 at 1-based (4,4)."""
+    grid = [[1] * 8 for _ in range(8)]
+    grid[3][3] = 1000
+    pack = embed_grid(grid)
+    back = restore(pack)
+    mismatch = sum(back[r][c] != grid[r][c] for r in range(8) for c in range(8))
+    peak = max(basic_average_axis(grid[3]))
+    print("BASIC_QUIRK_ON_FACE", pack["face"][2][2])
+    print("BASIC_EMBED_MISMATCH", mismatch)
+    print("BASIC_ARCHIVED_ROW_PEAK", peak)
+    ok = pack["face"][2][2] == 1000 and mismatch == 0 and peak == 500
+    print("BASIC_MATCH", "ALL_GREEN" if ok else "FAIL")
+    return 0 if ok else 1
+
+
 def main():
     grid = _sample()
     pack = embed_grid(grid)
@@ -105,6 +133,8 @@ def main():
         failed = 1
         print("SIGNED_NOT_REJECTED")
     if mismatch != 0 or quirk != 1000 or max(blended) == 1000:
+        failed = 1
+    if basic_integer_trial() != 0:
         failed = 1
     print("STATUS", "ALL_GREEN" if failed == 0 else "FAIL")
     return failed
