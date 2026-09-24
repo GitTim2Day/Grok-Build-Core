@@ -55,6 +55,19 @@ def pan(items):
     return {"gold": gold, "wash": wash, "held": shaken["held"], "flash": True}
 
 
+def second_cut(items, key_a, key_b):
+    # Axis one keeps every band. Axis two recuts each band.
+    # Nothing is poured out. A close pair splits only on the second key.
+    first = escalate(items, key_a)
+    by_name = {item["name"]: item for item in items}
+    bands = []
+    for value, names in first["groups"]:
+        members = [by_name[name] for name in names]
+        second = escalate(members, key_b)
+        bands.append({"on": key_a, "value": value, "by": key_b, "groups": second["groups"], "held": second["held"]})
+    return {"bands": bands, "held": first["held"]}
+
+
 if __name__ == "__main__":
     # Demo labels only. Not measured densities.
     blocks = [
@@ -84,4 +97,9 @@ if __name__ == "__main__":
     print("SIZE", by_size)
     print("DENSITY", by_density)
     print("PAN", panned)
+    cut = second_cut(blocks, "size", "density")
+    size_two = [band for band in cut["bands"] if band["value"] == 2][0]
+    assert [group[1] for group in size_two["groups"]] == [["leaf"], ["capillary"]]
+    assert cut["held"] == ["mesentery"]
+    print("SECOND", cut)
     print("ALL_GREEN")
