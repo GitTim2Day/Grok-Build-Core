@@ -1,0 +1,27 @@
+{
+  "who": "Tim",
+  "adjustable": true,
+  "note": "One person. Not a universal list. English text is an allowed output.",
+  "whitelist": [
+    {
+      "heard": "green yard",
+      "meaning": "Grignard",
+      "spelled": "G-R-I-G-N-A-R-D",
+      "when": "organic chemistry"
+    }
+  ],
+  "blacklist": [
+    {
+      "do_not_emit": "green yard",
+      "in": ["physics", "biology", "organic chemistry"],
+      "use_instead": "Grignard"
+    }
+  ],
+  "stored_miss": [
+    {
+      "letters_heard_this_turn": "G-R-I-N-G-A-R-D",
+      "not_the_name": true,
+      "kept_spelling": "G-R-I-G-N-A-R-D"
+    }
+  ]
+}
