@@ -1,0 +1,16 @@
+# Status hex sidecar. 2026-09-24.
+# UTF-8 bytes, hex. The words are still here so they return.
+# The CSV and the Sheet were not edited. The hex does not go back into an xlsx.
+# No HEX_DECODE routine was found in the knowledge clone. This is the bytes of the words.
+
+source,section,status,utf8_hex
+csv,4_delivery_email,PENDING_THEN_SENDING,50454e44494e475f5448454e5f53454e44494e47
+csv,4_delivery_notion,PENDING_THEN_SENDING,50454e44494e475f5448454e5f53454e44494e47
+csv,4_delivery_github,PENDING_THEN_SENDING,50454e44494e475f5448454e5f53454e44494e47
+csv,4_delivery_sheets_excel,PENDING_THEN_SENDING,50454e44494e475f5448454e5f53454e44494e47
+sheet,4_delivery,SENDING,53454e44494e47
+
+# Disagreement, left visible.
+# CSV file 1byCZJhXoPtJwI57U4SsTwA_kFrQ4_UNt has four delivery rows, each PENDING_THEN_SENDING.
+# Sheet 1RLFY5PiiWRLCjEEqYFLjqsYD3PaAnUzJH7k8eLXVW_U has one delivery row, SENDING.
+# Rows 1, 2, and 3 are COMPLETE on both. They were not hexed.
