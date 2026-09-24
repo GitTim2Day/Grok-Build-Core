@@ -43,6 +43,18 @@ def escalate(items, key):
     return {"key": key, "passes": passes, "groups": groups, "held": held}
 
 
+def pan(items):
+    # A little water is truth/logic. One wash. Not a flood.
+    # The densest group stays. That flash is the scintillation.
+    # Lighter groups are carried off. No measure stays held.
+    shaken = escalate(items, "density")
+    if not shaken["groups"]:
+        return {"gold": None, "wash": [], "held": shaken["held"], "flash": False}
+    gold = shaken["groups"][-1]
+    wash = shaken["groups"][:-1]
+    return {"gold": gold, "wash": wash, "held": shaken["held"], "flash": True}
+
+
 if __name__ == "__main__":
     # Demo labels only. Not measured densities.
     blocks = [
@@ -59,6 +71,17 @@ if __name__ == "__main__":
     assert by_density["held"] == ["mesentery"]
     assert by_size["groups"][0][1] == ["leaf", "capillary"]
     assert by_density["groups"][1][1] == ["capillary", "branch"]
+    panned = pan(blocks)
+    assert panned["flash"] is True
+    assert panned["gold"][1] == ["root"]
+    assert panned["held"] == ["mesentery"]
+    assert [name for group in panned["wash"] for name in group[1]] == [
+        "leaf",
+        "capillary",
+        "branch",
+        "fruit",
+    ]
     print("SIZE", by_size)
     print("DENSITY", by_density)
+    print("PAN", panned)
     print("ALL_GREEN")
