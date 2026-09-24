@@ -1,0 +1,23 @@
+BASIC COMMANDS used by embed_8x6.bas
+REM  DIM  FOR  TO  NEXT  GOSUB  RETURN  IF  THEN  PRINT  END
+Compare: =  <>  >  <
+Join: AND  OR
+Integer divide toward zero on a positive pair: \
+
+Line targets
+400 EMBED GRID      preferred. Carries the two ends.
+600 RESTORE         puts the embed back and counts mismatches.
+900 SIGNED CHECK    a negative magnitude is rejected.
+1000 ARCHIVED TEST  calls the average. Not part of embed.
+1100 ARCHIVED AVG   sliding pair, twice, integer divide.
+
+Same steps
+BASIC 400   Python embed_grid           C++ embed_grid
+BASIC 600   Python restore              C++ restore
+BASIC 900   Python embed_axis reject    C++ embed_axis reject
+BASIC 1100  Python basic_average_axis   C++ basic_average_axis
+
+basic_average_axis is integer divide, the same rule as BASIC backslash.
+average_axis stays the fraction path, truncate at 8 places, also archived.
+
+Recovered BASIC circle or square program: still NOT FOUND.
