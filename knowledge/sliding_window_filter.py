@@ -133,3 +133,111 @@ class SlidingWindowFilter:
         self.pending.clear()
         self.stuck_flag = False
         return self.last_good
+
+
+if __name__ == "__main__":
+    import random
+    import numpy as np
+
+    f = SlidingWindowFilter(window_size=8, max_dev=3.0, value_ceiling=None)
+    for v in [100.0, 101.0, 99.5, 100.5]:
+        f.filter(v)
+
+    med = f._median()
+    mad = f._mad()
+    r200 = f.filter(200.0)
+    rnone = f.filter(None)
+    cluster_before_nan = list(f.cluster)
+    rnan = f.filter(np.float32("nan"))
+    cluster_after_nan = list(f.cluster)
+
+    f2 = SlidingWindowFilter(window_size=8, max_dev=3.0)
+    shared = f.cluster is f2.cluster
+
+    n = 10000
+
+    def run_reject_and_step(scale):
+        mu, sig, step_from, step_to, tol = 100.0 * scale, 1.0 * scale, 100.0 * scale, 120.0 * scale, 3.0 * scale
+        ok = 0
+        rates = []
+        for seed in range(20):
+            random.seed(seed)
+            fg = SlidingWindowFilter()
+            for _ in range(n):
+                fg.filter(random.gauss(mu, sig))
+            rej_pct = 100.0 * fg.outlier_count / n
+            rates.append(rej_pct)
+            if rej_pct < 2.0:
+                ok += 1
+        fs = SlidingWindowFilter()
+        for _ in range(200):
+            fs.filter(step_from)
+        reached = None
+        for i in range(1000):
+            y = fs.filter(step_to)
+            if reached is None and abs(y - step_to) <= tol:
+                reached = i + 1
+        return ok, (max(rates) if rates else None), reached
+
+    seed_ok, max_r, reached = run_reject_and_step(1.0)
+    ok_s, max_s, reached_s = run_reject_and_step(0.01)
+    ok_l, max_l, reached_l = run_reject_and_step(50.0)
+
+    ok_z = 0
+    rates_z = []
+    for seed in range(20):
+        random.seed(seed)
+        fz = SlidingWindowFilter()
+        for _ in range(n):
+            fz.filter(random.gauss(0.0, 1.0))
+        pz = 100.0 * fz.outlier_count / n
+        rates_z.append(pz)
+        if pz < 2.0:
+            ok_z += 1
+    fz2 = SlidingWindowFilter()
+    for _ in range(200):
+        fz2.filter(0.0)
+    reached_z = None
+    for i in range(1000):
+        y = fz2.filter(20.0)
+        if reached_z is None and abs(y - 20.0) <= 3.0:
+            reached_z = i + 1
+
+    fk = SlidingWindowFilter()
+    for _ in range(200):
+        fk.filter(100.0)
+    y_stuck = None
+    for i in range(8):
+        y_stuck = fk.filter(200.0)
+
+    checks = [
+        ("median", abs(med - 100.25) < 1e-12, med),
+        ("mad", abs(mad - 0.741) < 0.01, mad),
+        ("filter(200.0)", r200 == 100.5, r200),
+        ("filter(None)", rnone == 100.5, rnone),
+        ("instances isolated", not shared, not shared),
+        ("np.float32 nan returns last_good", rnan == 100.5, rnan),
+        ("np.float32 nan not in cluster", cluster_before_nan == cluster_after_nan, len(cluster_after_nan)),
+        ("N(100,1) reject < 2% on 20/20 seeds", seed_ok == 20, (seed_ok, round(max_r, 3))),
+        ("step 100->120 within 20 samples", reached is not None and reached <= 20, reached),
+        ("scale x0.01 reject < 2% 20/20", ok_s == 20, (ok_s, round(max_s, 3))),
+        ("scale x0.01 step within 20", reached_s is not None and reached_s <= 20, reached_s),
+        ("scale x50 reject < 2% 20/20", ok_l == 20, (ok_l, round(max_l, 3))),
+        ("scale x50 step within 20", reached_l is not None and reached_l <= 20, reached_l),
+        ("N(0,1) reject < 2% 20/20", ok_z == 20, (ok_z, round(max(rates_z), 3))),
+        ("step 0->20 within 20 samples", reached_z is not None and reached_z <= 20, reached_z),
+        ("stuck 200 x8 promotes", y_stuck == 200.0, y_stuck),
+        ("stuck 200 x8 sets stuck_flag", fk.stuck_flag is True, fk.stuck_flag),
+    ]
+
+    milli_miss = 0
+    for i in range(1, 100000):
+        x = i / 1000.0
+        if SlidingWindowFilter._truncate_3(x) != x:
+            milli_miss += 1
+        xn = -x
+        if SlidingWindowFilter._truncate_3(xn) != xn:
+            milli_miss += 1
+    checks.append(("truncate-3 milli grid 0.001..99.999", milli_miss == 0, milli_miss))
+    for name, ok, val in checks:
+        print(f"{'PASS' if ok else 'FAIL'} {name}: {val}")
