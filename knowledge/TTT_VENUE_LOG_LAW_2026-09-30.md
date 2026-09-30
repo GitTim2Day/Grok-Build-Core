@@ -1,1 +1,1 @@
-TTT default cheap. s-t only if input is speech. Log/archive four-pillar. Output matches input venue. No s-s without Tim's reasoned why.
+SEALED ORDER: parallel parse → translate-according → log → output. Translate ALWAYS before output. Never after. TTT default. No s-s without Tim reason. Venue match.
