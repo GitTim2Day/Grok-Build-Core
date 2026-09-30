@@ -29,7 +29,7 @@ Do not add a question we have already struck.
 - Circular slide rule. Tim named it 2026-09-30T13:35-04:00. It is this geometry. Struck. See circular-slide-rule-20260930T1335-0400.
 - Math before an agent. Apply the math first. Solve for any one factor. On a 3-4-5 the unit comes before the root. Not plus. Struck 2026-09-30T13:41-04:00.
 - Agents. A closed equation is not an agent job. Their time is for the big picture. Struck 2026-09-30T13:42-04:00.
-- The lesson sheet. Google Sheet 1Onj2l3GVu6JWLaDaEF0oLx9FwG9wTyXFj1Ugf8xJ30I. Struck 2026-09-30T13:48-04:00.
+- The lesson sheet. Use 1iDLG1u4AH_Fj-LzhqEs-eBwYB-cWATKzDRm-4duNhBk. The first import 1Onj2l3GVu6JWLaDaEF0oLx9FwG9wTyXFj1Ugf8xJ30I turned 3-4-5 into a date. Struck 2026-09-30T13:54-04:00.
 
 ## Open
 - Skill Registry. This chair's search did not return Claude's database. The row was not invented. The Claude-named Notion page now holds the lesson.
