@@ -1,6 +1,6 @@
 ---
 name: five-shelf-converge-boot
-description: On every new session after BOOT_SET fetch, gather the five shelves until a pass adds nothing new. Trigger on boot, five shelf, rerun, converge, Notion, GitHub, Sheets, csv, xlsx, email, Gmail.
+description: On every new session after BOOT_SET fetch, gather the five shelves until a pass adds nothing new. Then check each loaded skill for completeness and update only the gap. Trigger on boot, five shelf, rerun, converge, Notion, GitHub, Sheets, csv, xlsx, email, Gmail, completeness.
 metadata:
   type: boot
   sealed: "2026-09-30"
@@ -30,6 +30,7 @@ BOOT gathers. SAVE is only the delta, and only when a pass added something new.
 4. If the diff is empty: stop. Say delta empty. Do not send mail. Do not create a page.
 5. If the diff is not empty: LOAD those bodies. If a body is a rule, append it to this skill (do not delete prior sections). Then FIVE-SHELF the delta only: mail hop first, then Notion row, GitHub knowledge, Drive A, local floor.
 6. Write the new manifest. Run one more pass. Stop when that pass adds nothing.
+7. Completeness, one body, Chat and Build. Check each skill this boot loaded. Not the whole catalog. Same check in either direction. No regional, language, or custom fork. Language stays the sealed order. A skill is complete only when all are true: it has a name, it says when it runs, it names the owner, and the body can be followed. If a hash is declared, the bytes match. Any false item: update only that gap. Do not rewrite a complete skill. Do not change a hash-locked body unless Tim supersedes it in writing. Shelf only a skill that failed. Then stop.
 
 ## Shelves this chair can actually open
 | Label | Store | This chair |
