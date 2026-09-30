@@ -87,4 +87,3 @@ Any email means each email that is handled. It does not mean load every historic
 Ledger hop is unchanged: both timnorman730@gmail.com and timothy_h_norman@yahoo.com, subject starts Grok-Build-Ledger, then label Grok-Build-Ledger. Only when the diff is not empty. An empty diff still does not send mail.
 
 Cheap. s-t only if the input is speech. No s-s without a written why.
-
