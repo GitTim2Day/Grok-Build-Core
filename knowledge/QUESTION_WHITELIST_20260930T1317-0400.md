@@ -38,6 +38,7 @@ Do not add a question we have already struck.
 - Skill Registry. This chair's search did not return Claude's database. The row was not invented. The Claude-named Notion page now holds the lesson.
 - The 64-cell layout. Arithmetic of 1/64 holds. Pole contact is not earned. Do not seal it.
 - Qubit box. Named as the square-token box. Not sealed as a quantum device.
+- Word index. The five words are linked both ways, hybrid in the middle. Token-only files and unopened zips are not in the chain. The tendon hybrid is not this middle.
 
 
 
