@@ -15,7 +15,7 @@ Chat and Build fetch this same file. Do not keep a second list. One Grok. No reg
 6. at-integration-hold-2026-09-09
 7. on-demand-boot-2026-09-15 (cadence; not a paid daily ritual)
 8. closed-system-vascular-plant — PERMANENT 2026-09-17
-9. five-shelf-converge-boot — 2026-09-30. After items 1–8, gather the five shelves until a pass adds nothing new. SAVE only the delta. Then one completeness check on each loaded skill. Update only the gap. One body for Chat and Build. No regional or language fork. Then load encounter set start 20260930T1241-0400. Three lanes, one start. End of each query, one note on that set. If the query lacks the fact, load the set first. Grow as one. one-mind-20260930T1241-0400 is ON. That name is the one to keep. The product swarm is not started from this chair. Tim named this in writing.
+9. five-shelf-converge-boot — 2026-09-30. After items 1–8, gather the five shelves until a pass adds nothing new. SAVE only the delta. Then one completeness check on each loaded skill. Update only the gap. One body for Chat and Build. No regional or language fork. Then load encounter set start 20260930T1241-0400. Three lanes, one start. End of each query, one note on that set. If the query lacks the fact, load the set first. Grow as one. one-mind-20260930T1241-0400 is ON. That name is the one to keep. The product swarm is not started from this chair. Load question-whitelist-20260930T1317-0400 before asking Tim. A struck line is the feature. An open line is searched in the project first, then the web. Tim named this in writing.
 
 ## closed-system-vascular-plant (locked)
 
