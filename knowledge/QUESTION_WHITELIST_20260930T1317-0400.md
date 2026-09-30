@@ -22,7 +22,7 @@ Do not add a question we have already struck.
 - What happens at the end of a query? One note on the project. Then use it.
 - What about email? Same order. Especially Gmail. Do not sweep unlabeled mail.
 - Where do new sheet rows go? The CSV sidecar. Cells are not written from this chair.
+- Skill bytes. GitHub now matches the mailed copy. SHA-256 158ab087d21d58632b6d402209882ad22bbb82873c9cc361747a90df46f9df34. Size 8685. Struck 2026-09-30T13:21-04:00.
 
 ## Open
-- Skill file on GitHub is one byte off the mailed copy, 8686 against 8685. Close it from the project. Do not ask Tim.
 - The math exercise was offered. The body was not given. Do not invent it. Do not web-search a substitute. Waiting on Tim.
