@@ -32,10 +32,13 @@ Do not add a question we have already struck.
 - The lesson sheet. Use 1iDLG1u4AH_Fj-LzhqEs-eBwYB-cWATKzDRm-4duNhBk. The first import 1Onj2l3GVu6JWLaDaEF0oLx9FwG9wTyXFj1Ugf8xJ30I turned 3-4-5 into a date. Struck 2026-09-30T13:54-04:00.
 - Disk and sphere. P is R squared. Circle is pi P at R = 5u. Sphere is 4 pi P at R = 13u. Hat-box at 12/13 is cap 1/26 and equator 6/13. Struck 2026-09-30T14:22-04:00.
 - Cubic box. 169/4 is the square face of the voxel, side 13u/2, in the 4 by 4 by 4 box. Not a degree. Struck 2026-09-30T14:40-04:00.
+- Rectangle. The legs are the sides. 3 by 4, then 5 by 12. Product, not sum. Diagonal is the radius already earned. Struck 2026-09-30T14:42-04:00.
 
 ## Open
 - Skill Registry. This chair's search did not return Claude's database. The row was not invented. The Claude-named Notion page now holds the lesson.
 - The 64-cell layout. Arithmetic of 1/64 holds. Pole contact is not earned. Do not seal it.
+- Qubit box. Named as the square-token box. Not sealed as a quantum device.
+
 
 
 
