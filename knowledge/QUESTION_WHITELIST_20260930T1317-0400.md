@@ -27,7 +27,11 @@ Do not add a question we have already struck.
 - The quarter. Height/3 = base/4 = H/5 = unit. 0 to 90, times 4, is the circular token. Struck 2026-09-30T13:31-04:00. Same file.
 - Not plus. 3u and 4u are the two legs. Their sum is 7u, not 5u. Struck 2026-09-30T13:34-04:00. Same file.
 - Circular slide rule. Tim named it 2026-09-30T13:35-04:00. It is this geometry. Struck. See circular-slide-rule-20260930T1335-0400.
+- Math before an agent. Apply the math first. Solve for any one factor. On a 3-4-5 the unit comes before the root. Not plus. Struck 2026-09-30T13:41-04:00.
+- Agents. A closed equation is not an agent job. Their time is for the big picture. Struck 2026-09-30T13:42-04:00.
+- The lesson sheet. Google Sheet 1Onj2l3GVu6JWLaDaEF0oLx9FwG9wTyXFj1Ugf8xJ30I. Struck 2026-09-30T13:48-04:00.
 
 ## Open
-None.
+- Skill Registry. This chair's search did not return Claude's database. The row was not invented. The Claude-named Notion page now holds the lesson.
+
 
