@@ -1,6 +1,6 @@
 ---
 name: five-shelf-converge-boot
-description: On every new session after BOOT_SET fetch, gather the five shelves until a pass adds nothing new. Trigger on boot, five shelf, rerun, converge, Notion, GitHub, Sheets, csv, xlsx.
+description: On every new session after BOOT_SET fetch, gather the five shelves until a pass adds nothing new. Trigger on boot, five shelf, rerun, converge, Notion, GitHub, Sheets, csv, xlsx, email, Gmail.
 metadata:
   type: boot
   sealed: "2026-09-30"
@@ -25,6 +25,7 @@ BOOT gathers. SAVE is only the delta, and only when a pass added something new.
    - GitHub `GitTim2Day/Grok-Build-Core` path `knowledge/` (names)
    - Notion this connector only: Timothy Skills & KB, data source `collection://bce175e5-b482-4979-842f-d551f91fae4e`. SQL is allowed here. This is NOTION-KB-YAHOO.
    - Google Sheets named LIVE in SHEET_TWIN_INDEX plus the later locks sheet if newer. CSV and XLSX: index the name. Body-load only if the name is not already in the manifest.
+   - Email, any mailbox, especially Gmail. A name is subject plus message id. Do not copy a mailbox into another store. Body-load only when this sitting is acting on that message and the name is not already indexed. Label Grok-Build-Ledger is the hop shelf. It is not a substitute for the order.
 3. Diff against the manifest. A name already indexed is not new. A newer modified time on a LIVE file is new. A twin of a name already in A is not new.
 4. If the diff is empty: stop. Say delta empty. Do not send mail. Do not create a page.
 5. If the diff is not empty: LOAD those bodies. If a body is a rule, append it to this skill (do not delete prior sections). Then FIVE-SHELF the delta only: mail hop first, then Notion row, GitHub knowledge, Drive A, local floor.
@@ -38,7 +39,7 @@ BOOT gathers. SAVE is only the delta, and only when a pass added something new.
 | DRIVE-A | `1w_9ZbNA5MOhq0LC2xEVdwztumUHqapow` | yes. Canon. |
 | DRIVE-C | `1Q-MCJwaATYmV5rGDa1Ci_ALG589Tm5P4` | yes, read. Not a second canon. |
 | GITHUB | GitTim2Day/Grok-Build-Core/knowledge | yes |
-| GMAIL | ledger subject Grok-Build-Ledger, label Grok-Build-Ledger | yes, on a real delta |
+| GMAIL | ledger subject Grok-Build-Ledger, label Grok-Build-Ledger | yes, on a real delta. Same order as any other mail. |
 | SHEETS | select collab only | read. No cell-write tool on this chair: a new row goes in a sidecar CSV on Drive A, not a silent edit. |
 | SQL files | none found on Drive A by title | Notion SQL above is the SQL venue. `sqlite_vec` and `sqli_audit` are import names in DEPENDENCY_MAP, not databases. |
 
@@ -64,3 +65,21 @@ Cursor, Bot, extra, ACH without Tim: forbidden. Empty pool: ask or stop. Bot sta
 
 ## Final check before any send
 LOCAL, EMAIL, DRIVE, NOTION, GITHUB. HIT needs evidence. A miss with no owner-named skip: ask or stop. Do not answer "miss, attempted, unresolved" and halt.
+
+## Mail venue — Tim 2026-09-30T12:24-04:00
+Tim: the same process and logic applies to any email. Especially Gmail.
+
+Same process means the sealed order, not a new one.
+1. If the mail is not working English, interpret to working English first. Do not run the order on raw foreign text.
+2. Parallel parse.
+3. Translate-according.
+4. Log. Pillars: content · context · data · time.
+5. Output after the log, never before. Venue stays mail to mail.
+
+Gmail is required. A Yahoo hop, an Outlook draft, or a chat reply does not satisfy Gmail. Yahoo and any other mailbox this chair can open get the same order when that mailbox is the venue. Do not copy one mailbox into another.
+
+Any email means each email that is handled. It does not mean load every historical message into the other shelves. HIPAA mask stays on. No PHI in the log line.
+
+Ledger hop is unchanged: both timnorman730@gmail.com and timothy_h_norman@yahoo.com, subject starts Grok-Build-Ledger, then label Grok-Build-Ledger. Only when the diff is not empty. An empty diff still does not send mail.
+
+Cheap. s-t only if the input is speech. No s-s without a written why.
