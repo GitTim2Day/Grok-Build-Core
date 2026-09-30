@@ -1,1 +1,6 @@
-Grok Build ingest prompt bound to SVCT 2026-09-30T11:57:00-04:00 / 2026-09-30T11:58:18-04:00 SHA 9886eba8. Extract sitting into structure. Drive A canon. TTT order. Tim spoken. 28 not 106.
+Pointer only. Not the body.
+Full install: knowledge/STANDING_STRUCTURE_2026-09-30_SVCT_TTT.md
+Local SHA-256 1b1e5b80f28e2d613cc253b70ebf4a71541a403c801ea077646a03583679094c
+Drive A: 1OtS6ZycJyJVtdrEKOecl1qhgQwk9ybez
+Query pair 2026-09-30T11:57:00-04:00 / 2026-09-30T11:58:18-04:00 SHA-256 9886eba81bdad94a44c23d1a6873c518ff79d27274e7608ee45eb7b5d50e82b9
+Canon Drive A: 1w_9ZbNA5MOhq0LC2xEVdwztumUHqapow
