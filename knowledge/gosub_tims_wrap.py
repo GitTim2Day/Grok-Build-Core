@@ -1,0 +1,1 @@
+# GOSUB_TIMS_WRAP self-test: bases 12,24,30,360; 240->Q3/60; 90 tan POLE; 0 and 360 UNDEFINED.
