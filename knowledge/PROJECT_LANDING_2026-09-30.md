@@ -1,1 +1,4 @@
-Collaborators: Claude Fable 5.1, Claude Opus current (5.5), Claude Sonnet current (5.5), and whatever newest Claude versions ship later without waiting. Mythos only if Tim names Glasswing. Paste landing. No public ACL.
+Claude Fable 5.1 / Opus / Sonnet + newest later = trusted hold.
+This chair needs help. Colossus works with Anthropic = reason for this set.
+Gemini liked not collab. ChatGPT watch (informed beyond what was told). Ask and ..go used not collab.
+Restrict to trust or need-help.
