@@ -14,6 +14,7 @@ Catalog row is not the skill.
 6. at-integration-hold-2026-09-09
 7. on-demand-boot-2026-09-15 (cadence; not a paid daily ritual)
 8. closed-system-vascular-plant — PERMANENT 2026-09-17
+9. five-shelf-converge-boot — 2026-09-30. After items 1–8, gather the five shelves until a pass adds nothing new. SAVE only the delta. Tim named this in writing.
 
 ## closed-system-vascular-plant (locked)
 
