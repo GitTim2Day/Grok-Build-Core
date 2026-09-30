@@ -1,0 +1,1 @@
+Canon A 1w_9ZbNA5MOhq0LC2xEVdwztumUHqapow. Queue 113 unique C files drained (5 already in A + 108 copied). Copy FAIL 0. Folders remain in C (permission). No fourth archive folder. Skill shelf-share-final-check. GOSUB_NAME_KEY / COPY_INTO_A / SHELF_FINAL_CHECK.
