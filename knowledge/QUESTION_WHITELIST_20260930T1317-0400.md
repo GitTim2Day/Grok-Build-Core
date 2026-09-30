@@ -25,6 +25,7 @@ Do not add a question we have already struck.
 - Skill bytes. GitHub now matches the mailed copy. SHA-256 158ab087d21d58632b6d402209882ad22bbb82873c9cc361747a90df46f9df34. Size 8685. Struck 2026-09-30T13:21-04:00.
 - The 3-4-5. Divide the known side by its ratio number. That is the unit 1. Multiply by the missing ratio. Struck 2026-09-30T13:23-04:00. See right-triangle-345-20260930T1323-0400.
 - The quarter. Height/3 = base/4 = H/5 = unit. 0 to 90, times 4, is the circular token. Struck 2026-09-30T13:31-04:00. Same file.
+- Not plus. 3u and 4u are the two legs. Their sum is 7u, not 5u. Struck 2026-09-30T13:34-04:00. Same file.
 
 ## Open
 None.
