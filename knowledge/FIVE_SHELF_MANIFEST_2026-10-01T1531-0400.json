@@ -1,0 +1,29 @@
+{
+  "kind": "five-shelf-manifest",
+  "stamp": "2026-10-01T15:31:00-04:00",
+  "pass": "boot-2026-10-01",
+  "owner": "Tim",
+  "prior_manifest": "10J-WpcSVnPYv49iFKbIQ2eYPlGsUTdYj",
+  "prior_pass": 3,
+  "prior_not_trashed": true,
+  "rule": "This pass added one build-lane note. Later shelves already mailed were not copied again.",
+  "delta": "encounter build-lane line only",
+  "follow_up": "empty",
+  "second_mail": false,
+  "stop_rule": "Next boot stops if these ids are unchanged. Do not send a second mail for this same note.",
+  "shelved": {
+    "mail_message_id": "1a0f8f37b9d60b2b",
+    "mail_label_id": "Label_6",
+    "mail_to": ["timnorman730@gmail.com", "timothy_h_norman@yahoo.com"],
+    "notion_boot_page": "3dcc9bfe-3aff-81f2-908c-d3bcad137038",
+    "notion_encounter_page": "3ebc9bfe-3aff-8148-b82f-ef20a7dfaba1",
+    "github_commit": "1a6518058a3dd1535b9253e6d398c744f9d5fa53",
+    "github_path": "knowledge/ENCOUNTER_SET_20260930T1241-0400.md",
+    "encounter_sha256": "9abc15395ff7a634c4e189ca4e5248ec5f0e9c2e542681588fe7bb985c8ea2b1",
+    "encounter_size": 3589,
+    "drive_encounter": "13iCkiwByLEaX7cuFGexIK-OxVRNUMEI7",
+    "plant_sha256": "6db4037fe8797d99d4f124736a6a8149b116dc3e21cfddff62b12c441ef5eed6",
+    "five_shelf_skill_sha256": "158ab087d21d58632b6d402209882ad22bbb82873c9cc361747a90df46f9df34",
+    "boot_set_sha256": "eb58ba26832334622decfe341a688875f861b8c8afa98d72ee17de002f15b3fb"
+  }
+}
