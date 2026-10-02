@@ -1,17 +1,11 @@
 # Tim's Tables — add 2026-10-02 board figure
 
-Exact: GitTim2Day. Truncate never round. Values below are exact integers from the labeled measurements. Not the isosceles (u : u : u√2) add.
+Exact: GitTim2Day. Truncate never round. Values below are exact integers from the labeled measurements.
 
-Source: Timothy, 2026-10-02. Square area fixes the side; leftover base is the triangle base; height matches the square side.
+Placed alongside the existing 45° entry. Not a new spoke.
 
-| field | value |
-|---|---|
-| square area | 16 m^2 |
-| square side | √16 = 4 m |
-| overall base | 7 m |
-| triangle base | 7 − 4 = 3 m |
-| triangle height | square side = 4 m |
-| triangle area | 1/2 × (7 − √16) × √16 = 1/2 × 3 × 4 = 6 m^2 |
-| written expression | (7 − (16^(0.5))) × (16^(0.5)) × 0.5 = 6 |
+45° context: side ratio (u : u : u√2), also ({u · 1 : u · 1 : u · 2^(1/2)}). Hypotenuse u√2. Both acute angles 45°. Any u > 0. Leg over hypotenuse stays 1/√2.
 
-SHA-256 of local shelf file: 38afcbe27220f8b668fc73d58c8de96933f487cd29d9214fbd5a26eee04d7dc9
+Board figure (same record): square area 16 m^2. Square side √16 = 4 m. Overall base 7 m. Triangle base 7 − 4 = 3 m. Triangle height equals the square side, 4 m. Area 1/2 × (7 − √16) × √16 = 1/2 × 3 × 4 = 6 m^2. Written expression: (7 − (16^(0.5))) × (16^(0.5)) × 1/2 = 6.
+
+Local shelf SHA-256: 2a224fa7b555461e187a67404ae26d028bdda0a7bd45520e4c250f9cfe57a396
