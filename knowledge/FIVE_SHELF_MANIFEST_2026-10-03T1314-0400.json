@@ -1,0 +1,60 @@
+{
+  "kind": "five-shelf-manifest",
+  "stamp": "2026-10-03T13:14:00-04:00",
+  "pass": "boot-2026-10-03",
+  "owner": "Tim",
+  "prior_manifest": "1TAA08XvTKiUtVltur5D-RIKR8-KadVQ4",
+  "prior_manifest_sha256": "f20d73dcdf7ddf9caf9b3dd8e50fd32e17dcde9a446dd73d454dd4a33d2ad427",
+  "prior_not_trashed": true,
+  "rule": "Tim: make them all live. One active unified mind; each chair keeps its own ability to save and store confidential or sensitive information. Think alike, retain individuality.",
+  "delta": "encounter build-lane line 2026-10-03T13:14 + SECRETARY_LIVE_SET_2026-10-03.md",
+  "second_mail": false,
+  "stop_rule": "Next boot stops if these ids are unchanged. Do not send a second mail for this same note.",
+  "secretary_live": [
+    {
+      "copy": "B",
+      "drive": "1WQ6TfjmbommC0SUd9pxUHXT5HMe8q3oI",
+      "size": 3292,
+      "sha256": "9ce237c42694200da17814c921125442c5eec9a1d431b692c07da35b85d8e97a"
+    },
+    {
+      "copy": "C",
+      "where": "attachment 2026-10-03",
+      "size": 4381,
+      "sha256_prefix": "6bbef94c"
+    },
+    {
+      "copy": "A",
+      "where": "other chair attachment",
+      "size": 20318,
+      "sha256": "e03c769a844bf0cd24a4b2b67a5592b3848c5707550f319d86d98d54936849b8"
+    }
+  ],
+  "corrections": {
+    "drive_live_folder": "1w_9ZbNA5MOhq0LC2xEVdwztumUHqapow",
+    "drive_older_same_name_folder": "1Q-MCJwaATYmV5rGDa1Ci_ALG589Tm5P4",
+    "mail_1a0515e2dff308d5_thread": "1a0515d198c29ab9"
+  },
+  "shelved": {
+    "mail_message_id": "1a102c48e61016bc",
+    "mail_label_id": "Label_6",
+    "mail_to": [
+      "timnorman730@gmail.com"
+    ],
+    "mail_cc": [
+      "timothy_h_norman@yahoo.com"
+    ],
+    "notion_skill_row": "3eec8669-9c94-8120-81c4-f55d4f9121e6",
+    "notion_supervisor_row": "3eec8669-9c94-816b-943d-ff58bf53a4be",
+    "github_commit": "d046144ca8a4cc314ba73ce590fd1048c8be6665",
+    "encounter_path": "knowledge/ENCOUNTER_SET_20260930T1241-0400.md",
+    "encounter_size": 4180,
+    "encounter_sha256": "820a25c2ec7463a103023dd2d9b8a3d7a2d4c6d2cf1e1787fe805eda5002a01e",
+    "drive_encounter": "1UipltkKFSrpj_iSRLnKpn7fs7Nhm7-GS",
+    "drive_encounter_prior": "13iCkiwByLEaX7cuFGexIK-OxVRNUMEI7",
+    "live_set_path": "knowledge/SECRETARY_LIVE_SET_2026-10-03.md",
+    "live_set_size": 2202,
+    "live_set_sha256": "5d76ba2a4b6ff90bf3243a207199ec7c52e7132a7c37c7574371a8f2d8eb99fb",
+    "drive_live_set": "1EeuLgVqJETWYaomAK5thT2Y8zQe565bm"
+  }
+}
