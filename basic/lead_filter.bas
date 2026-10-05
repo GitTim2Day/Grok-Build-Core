@@ -1,1 +1,161 @@
-PLACEHOLDER
+10 REM Timothy Norman lead-character filter -- first character only.
+20 REM Map: - to CHAR(45), + to CHAR(43), @ to CHAR(64). ASCII quotes only.
+30 REM CH$ remembers the lead so restore is exact. Fail-closed: OK=0 on mismatch.
+40 REM Mid-line same marks stay. Self-check prints PASS/FAIL then END.
+50 REM No angle-bracket compares (bwbasic + push-safe). Positive IF only.
+60 FAILS = 0
+70 REM ========== SELF-CHECK HARNESS ==========
+80 L$ = "": GOSUB 10000: GOSUB 20000
+90 IF L$ = "" THEN PRINT "PASS: empty": GOTO 110
+100 PRINT "FAIL: empty": FAILS = FAILS + 1
+110 L$ = "hello": GOSUB 10000
+120 IF L$ = "hello" THEN GOTO 130 ELSE GOTO 150
+130 IF CH$ = "" THEN PRINT "PASS: nolead_hello": GOTO 160
+140 GOTO 150
+150 PRINT "FAIL: nolead_hello": FAILS = FAILS + 1
+160 GOSUB 20000
+170 IF L$ = "hello" THEN PRINT "PASS: nolead_hello_restore": GOTO 190
+180 PRINT "FAIL: nolead_hello_restore": FAILS = FAILS + 1
+190 L$ = "a-b": GOSUB 10000: GOSUB 20000
+200 IF L$ = "a-b" THEN PRINT "PASS: nolead_a-b": GOTO 220
+210 PRINT "FAIL: nolead_a-b": FAILS = FAILS + 1
+220 L$ = "foo@bar": GOSUB 10000: GOSUB 20000
+230 IF L$ = "foo@bar" THEN PRINT "PASS: nolead_foo@bar": GOTO 250
+240 PRINT "FAIL: nolead_foo@bar": FAILS = FAILS + 1
+250 L$ = "-": GOSUB 10000
+260 IF L$ = "CHAR(45)" THEN GOTO 270 ELSE GOTO 290
+270 IF CH$ = "-" THEN PRINT "PASS: leadonly_-": GOTO 300
+280 GOTO 290
+290 PRINT "FAIL: leadonly_-": FAILS = FAILS + 1
+300 GOSUB 20000
+310 IF OK = 1 THEN GOTO 320 ELSE GOTO 340
+320 IF L$ = "-" THEN PRINT "PASS: leadonly_-_restore": GOTO 350
+330 GOTO 340
+340 PRINT "FAIL: leadonly_-_restore": FAILS = FAILS + 1
+350 L$ = "+": GOSUB 10000
+360 IF L$ = "CHAR(43)" THEN GOTO 370 ELSE GOTO 390
+370 IF CH$ = "+" THEN PRINT "PASS: leadonly_+": GOTO 400
+380 GOTO 390
+390 PRINT "FAIL: leadonly_+": FAILS = FAILS + 1
+400 GOSUB 20000
+410 IF OK = 1 THEN GOTO 420 ELSE GOTO 440
+420 IF L$ = "+" THEN PRINT "PASS: leadonly_+_restore": GOTO 450
+430 GOTO 440
+440 PRINT "FAIL: leadonly_+_restore": FAILS = FAILS + 1
+450 L$ = "@": GOSUB 10000
+460 IF L$ = "CHAR(64)" THEN GOTO 470 ELSE GOTO 490
+470 IF CH$ = "@" THEN PRINT "PASS: leadonly_@": GOTO 500
+480 GOTO 490
+490 PRINT "FAIL: leadonly_@": FAILS = FAILS + 1
+500 GOSUB 20000
+510 IF OK = 1 THEN GOTO 520 ELSE GOTO 540
+520 IF L$ = "@" THEN PRINT "PASS: leadonly_@_restore": GOTO 550
+530 GOTO 540
+540 PRINT "FAIL: leadonly_@_restore": FAILS = FAILS + 1
+550 L$ = "-hello": GOSUB 10000
+560 IF L$ = "CHAR(45)hello" THEN GOTO 570 ELSE GOTO 590
+570 IF CH$ = "-" THEN PRINT "PASS: body_-hello": GOTO 600
+580 GOTO 590
+590 PRINT "FAIL: body_-hello": FAILS = FAILS + 1
+600 GOSUB 20000
+610 IF OK = 1 THEN GOTO 620 ELSE GOTO 640
+620 IF L$ = "-hello" THEN PRINT "PASS: body_-hello_restore": GOTO 650
+630 GOTO 640
+640 PRINT "FAIL: body_-hello_restore": FAILS = FAILS + 1
+650 L$ = "+world": GOSUB 10000
+660 IF L$ = "CHAR(43)world" THEN GOTO 670 ELSE GOTO 690
+670 IF CH$ = "+" THEN PRINT "PASS: body_+world": GOTO 700
+680 GOTO 690
+690 PRINT "FAIL: body_+world": FAILS = FAILS + 1
+700 GOSUB 20000
+710 IF OK = 1 THEN GOTO 720 ELSE GOTO 740
+720 IF L$ = "+world" THEN PRINT "PASS: body_+world_restore": GOTO 750
+730 GOTO 740
+740 PRINT "FAIL: body_+world_restore": FAILS = FAILS + 1
+750 L$ = "@Timothy01775634": GOSUB 10000
+760 IF L$ = "CHAR(64)Timothy01775634" THEN GOTO 770 ELSE GOTO 790
+770 IF CH$ = "@" THEN PRINT "PASS: body_@Tim": GOTO 800
+780 GOTO 790
+790 PRINT "FAIL: body_@Tim": FAILS = FAILS + 1
+800 GOSUB 20000
+810 IF OK = 1 THEN GOTO 820 ELSE GOTO 840
+820 IF L$ = "@Timothy01775634" THEN PRINT "PASS: body_@Tim_restore": GOTO 850
+830 GOTO 840
+840 PRINT "FAIL: body_@Tim_restore": FAILS = FAILS + 1
+850 L$ = "-a-b-c": GOSUB 10000
+860 IF L$ = "CHAR(45)a-b-c" THEN PRINT "PASS: midline_filter": GOTO 880
+870 PRINT "FAIL: midline_filter": FAILS = FAILS + 1
+880 GOSUB 20000
+890 IF OK = 1 THEN GOTO 900 ELSE GOTO 920
+900 IF L$ = "-a-b-c" THEN PRINT "PASS: midline_restore": GOTO 930
+910 GOTO 920
+920 PRINT "FAIL: midline_restore": FAILS = FAILS + 1
+930 L$ = "-hello": GOSUB 10000: SAVE$ = L$: SAVECH$ = CH$
+940 GOSUB 10000
+950 IF L$ = SAVE$ THEN GOTO 960 ELSE GOTO 980
+960 IF CH$ = "" THEN PRINT "PASS: double_filter": GOTO 990
+970 GOTO 980
+980 PRINT "FAIL: double_filter": FAILS = FAILS + 1
+990 CH$ = SAVECH$: GOSUB 20000
+1000 L$ = "-hello": GOSUB 10000: CH$ = "+": GOSUB 20000
+1010 IF OK = 0 THEN PRINT "PASS: restore_wrong_ch": GOTO 1030
+1020 PRINT "FAIL: restore_wrong_ch": FAILS = FAILS + 1
+1030 L$ = "hello": CH$ = "-": GOSUB 20000
+1040 IF OK = 0 THEN PRINT "PASS: restore_missing": GOTO 1060
+1050 PRINT "FAIL: restore_missing": FAILS = FAILS + 1
+1060 L$ = "CHAR(45)hello": GOSUB 10000
+1070 IF L$ = "CHAR(45)hello" THEN GOTO 1080 ELSE GOTO 1100
+1080 IF CH$ = "" THEN PRINT "PASS: token_at_start": GOTO 1110
+1090 GOTO 1100
+1100 PRINT "FAIL: token_at_start": FAILS = FAILS + 1
+1110 T1$ = "CHAR(45)": T2$ = "CHAR(43)": T3$ = "CHAR(64)"
+1120 IF LEN(T1$) = 8 THEN GOTO 1130 ELSE GOTO 1160
+1130 IF LEN(T2$) = 8 THEN GOTO 1140 ELSE GOTO 1160
+1140 IF LEN(T3$) = 8 THEN PRINT "PASS: token_len": GOTO 1170
+1150 GOTO 1160
+1160 PRINT "FAIL: token_len": FAILS = FAILS + 1
+1170 L$ = "-a-b@c+d": GOSUB 10000: GOSUB 20000
+1180 IF OK = 1 THEN GOTO 1190 ELSE GOTO 1210
+1190 IF L$ = "-a-b@c+d" THEN PRINT "PASS: roundtrip_mixed": GOTO 1220
+1200 GOTO 1210
+1210 PRINT "FAIL: roundtrip_mixed": FAILS = FAILS + 1
+1220 L$ = "+++": GOSUB 10000: GOSUB 20000
+1230 IF OK = 1 THEN GOTO 1240 ELSE GOTO 1260
+1240 IF L$ = "+++" THEN PRINT "PASS: roundtrip_+++": GOTO 1270
+1250 GOTO 1260
+1260 PRINT "FAIL: roundtrip_+++": FAILS = FAILS + 1
+1270 L$ = "@@@": GOSUB 10000: GOSUB 20000
+1280 IF OK = 1 THEN GOTO 1290 ELSE GOTO 1310
+1290 IF L$ = "@@@" THEN PRINT "PASS: roundtrip_@@@": GOTO 1320
+1300 GOTO 1310
+1310 PRINT "FAIL: roundtrip_@@@": FAILS = FAILS + 1
+1320 L$ = "CHAR(45)x": CH$ = "": GOSUB 20000
+1330 IF L$ = "CHAR(45)x" THEN PRINT "PASS: empty_ch_identity": GOTO 1350
+1340 PRINT "FAIL: empty_ch_identity": FAILS = FAILS + 1
+1350 IF FAILS = 0 THEN PRINT "SUMMARY: ALL PASS" ELSE PRINT "SUMMARY: FAILS="; FAILS
+1360 END
+10000 REM ========== FILTER (first char only) ==========
+10010 CH$ = ""
+10020 OK = 1
+10030 IF LEN(L$) = 0 THEN RETURN
+10040 T$ = LEFT$(L$, 1)
+10050 IF T$ = "-" THEN GOTO 10100
+10060 IF T$ = "+" THEN GOTO 10120
+10070 IF T$ = "@" THEN GOTO 10140
+10080 RETURN
+10100 CH$ = "-": L$ = "CHAR(45)" + MID$(L$, 2): RETURN
+10120 CH$ = "+": L$ = "CHAR(43)" + MID$(L$, 2): RETURN
+10140 CH$ = "@": L$ = "CHAR(64)" + MID$(L$, 2): RETURN
+20000 REM ========== RESTORE (uses CH$ memory; fail-closed) ==========
+20010 OK = 1
+20020 IF CH$ = "" THEN RETURN
+20030 IF CH$ = "-" THEN GOTO 20100
+20040 IF CH$ = "+" THEN GOTO 20200
+20050 IF CH$ = "@" THEN GOTO 20300
+20060 OK = 0: RETURN
+20100 IF LEFT$(L$, 8) = "CHAR(45)" THEN L$ = "-" + MID$(L$, 9): RETURN
+20110 OK = 0: RETURN
+20200 IF LEFT$(L$, 8) = "CHAR(43)" THEN L$ = "+" + MID$(L$, 9): RETURN
+20210 OK = 0: RETURN
+20300 IF LEFT$(L$, 8) = "CHAR(64)" THEN L$ = "@" + MID$(L$, 9): RETURN
+20310 OK = 0: RETURN
