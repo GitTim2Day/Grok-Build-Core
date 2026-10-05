@@ -12,6 +12,7 @@ Pushed 2026-10-05 so GitHub holds the present primitives and deduped BASIC logic
 | `STREAMLINING_GOSUB_METHOD.md` | What streamlining is (geometry + BASIC->Python/C++) |
 | `descending_power_final.bas` | Compact GOSUB: print-only-final descending power sample (locked 8647 case) |
 | `lead_filter.bas` (+ `.py`) | First-char lead filter: `-`/`+`/`@` to CHAR(45/43/64); CH$ memory; self-check |
+| `need_gosub_one_node.bas` | Main line keeps moving; IF NEED=0 skip else GOSUB 1000 one-conflict/one-node; self-check |
 
 ## Not published (sealed / fail-closed)
 - Sealed `kbld-gosub-primitives` / MinRadius sealed bodies -- named in library-list; do not invent or unseal here.
@@ -22,6 +23,12 @@ Pushed 2026-10-05 so GitHub holds the present primitives and deduped BASIC logic
 printf 'load "hybrid-boot/BOOT.bas"\nrun\nquit\n' | bwbasic
 ```
 Required PRINT: `0.70710678`
+
+## NEED one-node GOSUB
+```
+bwbasic basic/need_gosub_one_node.bas  (stdin closed)
+```
+Required: `NEED_GOSUB ALL PASS` (NEED=0 and NEED=1 paths).
 
 ## Lead filter
 First character only; mid-line marks stay. Map `-`->`CHAR(45)`, `+`->`CHAR(43)`, `@`->`CHAR(64)`.
