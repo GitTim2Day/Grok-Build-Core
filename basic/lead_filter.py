@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Timothy Norman lead-character filter -- first character only.
+
+Maps lead '-' -> CHAR(45), '+' -> CHAR(43), '@' -> CHAR(64).
+Same mark later in the line stays. Restore uses remembered lead char.
+ASCII quotes only. Fail-closed restore returns None on mismatch.
+"""
+
+from __future__ import annotations
+
+LEAD = {"-": "CHAR(45)", "+": "CHAR(43)", "@": "CHAR(64)"}
+TOKEN_LEN = 8  # len("CHAR(nn)") for all three
+
+
+def filter_lead(line: str) -> tuple[str, str]:
+    """Replace first char with CHAR token if mapped; return (line, lead_ch)."""
+    ch = line[:1]
+    token = LEAD.get(ch)
+    if token is None:
+        return line, ""
+    return token + line[1:], ch
+
+
+def restore_lead(line: str, ch: str) -> str | None:
+    """Put lead mark back. Empty ch is identity. Wrong/missing token -> None."""
+    if not ch:
+        return line
+    token = LEAD.get(ch)
+    if token is None:
+        return None
+    if not line.startswith(token):
+        return None
+    return ch + line[len(token) :]
+
+
+def _check(name: str, cond: bool, detail: str = "") -> bool:
+    tag = "PASS" if cond else "FAIL"
+    extra = f" | {detail}" if detail else ""
+    print(f"{tag}: {name}{extra}")
+    return cond
+
+
+def run_self_check() -> int:
+    fails = 0
+
+    # Token length exactly 8 for all three
+    for ch, tok in LEAD.items():
+        if not _check(f"token_len_{ch}", len(tok) == TOKEN_LEN, f"len={len(tok)} tok={tok}"):
+            fails += 1
+
+    # Empty string
+    out, ch = filter_lead("")
+    if not _check("empty_filter", out == "" and ch == "", f"out={out!r} ch={ch!r}"):
+        fails += 1
+    back = restore_lead(out, ch)
+    if not _check("empty_restore", back == "", f"back={back!r}"):
+        fails += 1
+
+    # No lead
+    for s in ("hello", "a-b", "foo@bar"):
+        out, ch = filter_lead(s)
+        if not _check(f"nolead_filter_{s}", out == s and ch == "", f"out={out!r}"):
+            fails += 1
+        back = restore_lead(out, ch)
+        if not _check(f"nolead_restore_{s}", back == s, f"back={back!r}"):
+            fails += 1
+
+    # Lead only
+    for mark in ("-", "+", "@"):
+        out, ch = filter_lead(mark)
+        expect = LEAD[mark]
+        if not _check(f"leadonly_filter_{mark}", out == expect and ch == mark, f"out={out!r}"):
+            fails += 1
+        back = restore_lead(out, ch)
+        if not _check(f"leadonly_restore_{mark}", back == mark, f"back={back!r}"):
+            fails += 1
+
+    # Lead + body
+    cases = [("-hello", "CHAR(45)hello"), ("+world", "CHAR(43)world"), ("@Timothy01775634", "CHAR(64)Timothy01775634")]
+    for original, expect_tok in cases:
+        out, ch = filter_lead(original)
+        if not _check(f"leadbody_filter_{original}", out == expect_tok and ch == original[0], f"out={out!r}"):
+            fails += 1
+        back = restore_lead(out, ch)
+        if not _check(f"leadbody_restore_{original}", back == original, f"back={back!r}"):
+            fails += 1
+
+    # Mid-line same mark stays; round-trip identity
+    mid = "-a-b-c"
+    out, ch = filter_lead(mid)
+    if not _check("midline_filter", out == "CHAR(45)a-b-c" and ch == "-", f"out={out!r}"):
+        fails += 1
+    if not _check("midline_body_marks_stay", out[8:] == "a-b-c", f"body={out[8:]!r}"):
+        fails += 1
+    back = restore_lead(out, ch)
+    if not _check("midline_restore_identity", back == mid, f"back={back!r}"):
+        fails += 1
+
+    # Double filter without restore: second pass no-op (lead is 'C')
+    once, ch1 = filter_lead("-hello")
+    twice, ch2 = filter_lead(once)
+    if not _check("double_filter_noop", twice == once and ch2 == "", f"twice={twice!r} ch2={ch2!r}"):
+        fails += 1
+
+    # Restore with wrong ch -> None
+    out, _ = filter_lead("-hello")
+    wrong = restore_lead(out, "+")
+    if not _check("restore_wrong_ch", wrong is None, f"got={wrong!r}"):
+        fails += 1
+
+    # Restore when token missing -> None
+    missing = restore_lead("hello", "-")
+    if not _check("restore_token_missing", missing is None, f"got={missing!r}"):
+        fails += 1
+
+    # Restore unknown ch -> None
+    unk = restore_lead("CHAR(45)x", "x")
+    if not _check("restore_unknown_ch", unk is None, f"got={unk!r}"):
+        fails += 1
+
+    # Token already at start without filter: filter is no-op (lead 'C')
+    already = "CHAR(45)hello"
+    out, ch = filter_lead(already)
+    if not _check("token_at_start_nofilter", out == already and ch == "", f"out={out!r}"):
+        fails += 1
+
+    # Round-trip identity for all mapped leads with varied bodies
+    for mark in ("-", "+", "@"):
+        for body in ("", "x", "a-b@c+d", "---", "++@", "hello world"):
+            original = mark + body
+            out, ch = filter_lead(original)
+            back = restore_lead(out, ch)
+            if not _check(f"roundtrip_{original!r}", back == original, f"out={out!r} back={back!r}"):
+                fails += 1
+
+    # Unicode lookalikes (U+2212 minus, U+FF0B fullwidth plus, U+FF20 fullwidth @)
+    for lookalike in ("\u2212hello", "\uff0bworld", "\uff20user"):
+        out, ch = filter_lead(lookalike)
+        if not _check(f"unicode_lookalike_nofilter_{lookalike!r}", out == lookalike and ch == "", f"out={out!r}"):
+            fails += 1
+
+    # Empty ch restore is identity even if line starts with token
+    idn = restore_lead("CHAR(45)x", "")
+    if not _check("empty_ch_identity", idn == "CHAR(45)x", f"got={idn!r}"):
+        fails += 1
+
+    total_note = "ALL PASS" if fails == 0 else f"{fails} FAIL(S)"
+    print(f"SUMMARY: {total_note}")
+    return fails
+
+
+if __name__ == "__main__":
+    raise SystemExit(run_self_check())
