@@ -24,7 +24,7 @@ try:
     from defusedxml import DefusedXmlException
 except Exception:  # pragma: no cover
     DET = None
-    DefusedXmlException = Exception
+    DefusedXmlException = None   # FIX 2026-10-06: replaced below by XmlForbidden (was Exception, which made every XML QUARANTINE)
 try:
     from PIL import Image, ExifTags
     Image.MAX_IMAGE_PIXELS = 50_000_000   # decompression-bomb guard for pixel data
@@ -262,10 +262,25 @@ def localname(tag) -> str:
     return tag.rsplit("}", 1)[-1] if isinstance(tag, str) else str(tag)
 
 
+class XmlForbidden(ValueError):
+    """FIX 2026-10-06: DTD / entity declaration refused by the stdlib fallback parser."""
+
+
+if DefusedXmlException is None:
+    DefusedXmlException = XmlForbidden
+_DTD = re.compile(rb"<!\s*(?:DOCTYPE|ENTITY)|<\x00!\x00|\x00<\x00!", re.I)
+
+
 def xml_parse(b: bytes):
-    if DET is None:
-        raise RuntimeError("defusedxml missing")
-    return DET.fromstring(b)  # forbids entity expansion / external entities (XXE, billion laughs)
+    if DET is not None:
+        return DET.fromstring(b)  # forbids entity expansion / external entities (XXE, billion laughs)
+    # FIX 2026-10-06 (ported from edge-canvas-kit vendored copy):
+    # defusedxml absent (bare Pi) -> fail closed on ANY DTD/entity declaration, else stdlib ElementTree
+    # (with no DTD there is nothing to expand and no external entity to fetch).
+    if _DTD.search(b):
+        raise XmlForbidden("DTD/entity declaration refused (defusedxml absent; stdlib fallback)")
+    import xml.etree.ElementTree as _ET
+    return _ET.fromstring(b)
 
 
 def flatten_json(obj, path="$", depth=0, out=None, maxd=8):
@@ -355,7 +370,7 @@ def c_text(name, b, kind, limits, budget, depth):
     if kind == "XML":
         try:
             root = xml_parse(t.encode("utf-8"))
-        except DefusedXmlException as e:
+        except (DefusedXmlException, XmlForbidden) as e:   # FIX 2026-10-06: fallback refusal is QUARANTINE too
             return None, "QUARANTINE", notes + [f"node1:xml_forbidden:{type(e).__name__}"], []
         except Exception as e:
             return esc_lines(t), "PARTIAL", notes + [f"xml_parse_error:{type(e).__name__} (kept as plain text)"], []
@@ -371,7 +386,7 @@ def c_text(name, b, kind, limits, budget, depth):
                 if ch.tail and ch.tail.strip():
                     out.extend(cell_line(p + "#tail", ch.tail.strip()))
         walk(root, "")
-        return "\n".join(out), "FULL", notes + ["defusedxml"], []
+        return "\n".join(out), "FULL", notes + ["defusedxml" if DET is not None else "stdlib-xml (no DTD allowed)"], []
     if kind == "HTML":
         txt, scripts = html_to_text(t)
         return esc_lines(txt), "FULL", notes + [f"html_text_extract; script_blocks_dropped={scripts}"], []
