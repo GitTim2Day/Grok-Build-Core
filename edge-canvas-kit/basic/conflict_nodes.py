@@ -1,0 +1,108 @@
+"""conflict_nodes.py -- Python twin of conflict_nodes.bas (Timothy Norman, 2026-10-05).
+
+Correction: a conflict does not kill the main line. Detect, call, return.
+NEED codes: 0 none | 1 non-UTF-8 -> Q (quarantine) | 2 hex wrapper -> PARK (not installed)
+            3 hop -> HELD (needs Timothy turn-on, no action) | 4 mail -> HELD (same)
+            5 BOT -> hard skip. boton defaults False; no node ever sets it.
+Any other code -> UNK (fail-closed flag); main line still continues.
+Stdlib only. Run: python3 conflict_nodes.py  -> SUMMARY: ALL PASS
+"""
+from __future__ import annotations
+
+NEED_NONE, NEED_NON_UTF8, NEED_HEX, NEED_HOP, NEED_MAIL, NEED_BOT = 0, 1, 2, 3, 4, 5
+NODE_TABLE = {
+    NEED_NON_UTF8: "non-UTF-8 -> Q=1 quarantine; calls no other door",
+    NEED_HEX: "hex binary wrapper -> PARK=1; not installed",
+    NEED_HOP: "hop request -> HELD=1 HR=HOP; no action until Timothy turns it on",
+    NEED_MAIL: "mail request -> HELD=1 HR=MAIL; no action until Timothy turns it on",
+    NEED_BOT: "BOT -> hard skip unless Timothy set boton; never auto-enables",
+}
+
+
+class State:
+    def __init__(self, boton: bool = False) -> None:
+        self.boton = boton  # only Timothy (caller) sets this; nodes never write it
+        self.reset()
+
+    def reset(self) -> None:  # never touches boton
+        self.q = self.park = self.held = self.botskip = self.unk = 0
+        self.hr = ""
+        self.steps = self.nodes = 0
+
+    def flags(self) -> tuple:
+        return (self.q, self.park, self.held, self.botskip, self.unk)
+
+
+def dispatch(s: State, need) -> None:
+    """One conflict, one node, then return."""
+    s.nodes += 1
+    if type(need) is int and need == NEED_NON_UTF8:
+        s.q = 1
+    elif type(need) is int and need == NEED_HEX:
+        s.park = 1
+    elif type(need) is int and need == NEED_HOP:
+        s.held, s.hr = 1, "HOP"
+    elif type(need) is int and need == NEED_MAIL:
+        s.held, s.hr = 1, "MAIL"
+    elif type(need) is int and need == NEED_BOT:
+        if not s.boton:
+            s.botskip = 1
+    else:
+        s.unk = 1
+
+
+def main_line(s: State, need) -> None:
+    """Main line keeps moving."""
+    if not (type(need) is int and need == NEED_NONE):
+        dispatch(s, need)
+    s.steps += 1
+
+
+def _run(needs, boton=False) -> State:
+    s = State(boton)
+    for n in needs:
+        main_line(s, n)
+    return s
+
+
+def self_check() -> int:
+    cases = []
+    def t(name, ok): cases.append((name, bool(ok)))
+
+    s = _run([0]); t("need0_skip", s.flags() == (0, 0, 0, 0, 0) and s.steps == 1 and s.nodes == 0)
+    s = _run([1]); t("need1_quarantine", s.flags() == (1, 0, 0, 0, 0) and s.steps == 1 and s.nodes == 1 and s.hr == "")
+    s = _run([2]); t("need2_hex_parked", s.flags() == (0, 1, 0, 0, 0) and s.nodes == 1)
+    s = _run([3]); t("need3_hop_held", s.flags() == (0, 0, 1, 0, 0) and s.hr == "HOP")
+    s = _run([4]); t("need4_mail_held", s.flags() == (0, 0, 1, 0, 0) and s.hr == "MAIL")
+    s = _run([5]); t("need5_bot_hard_skip", s.flags() == (0, 0, 0, 1, 0) and s.boton is False)
+    s = _run([5, 5, 5]); t("bot_never_autoenables_x3", s.boton is False and s.steps == 3 and s.nodes == 3)
+    s = _run([5], boton=True); t("bot_on_only_by_timothy", s.flags() == (0, 0, 0, 0, 0) and s.boton is True)
+    s = _run([5]); t("bot_back_off_default", s.botskip == 1 and s.boton is False)
+    s = _run([3], boton=True); t("hop_held_even_if_boton", s.flags() == (0, 0, 1, 0, 0) and s.hr == "HOP")
+    s = _run([6]); t("unknown_need6_continues", s.flags() == (0, 0, 0, 0, 1) and s.steps == 1)
+    s = _run([-1]); t("unknown_need_neg1", s.flags() == (0, 0, 0, 0, 1))
+    s = _run([1.5]); t("unknown_need_1p5", s.flags() == (0, 0, 0, 0, 1))
+    s = _run([99]); t("unknown_need_99", s.flags() == (0, 0, 0, 0, 1))
+    s = _run(["1"]); t("unknown_need_str", s.flags() == (0, 0, 0, 0, 1) and s.steps == 1)
+    s = _run([True]); t("unknown_need_bool", s.flags() == (0, 0, 0, 0, 1))
+    s = _run([None]); t("unknown_need_none", s.flags() == (0, 0, 0, 0, 1) and s.steps == 1)
+    s = _run([1]); t("quarantine_calls_no_door", s.park == 0 and s.held == 0 and s.botskip == 0 and s.nodes == 1)
+    s = _run([1, 0]); t("quarantine_line_continues", s.q == 1 and s.steps == 2 and s.nodes == 1)
+    s = _run([1, 1]); t("repeat_need1_idempotent", s.flags() == (1, 0, 0, 0, 0) and s.steps == 2 and s.nodes == 2)
+    s = _run([1, 2, 3, 4, 5]); t("sequence_1_to_5", s.flags() == (1, 1, 1, 1, 0) and s.hr == "MAIL" and s.steps == 5 and s.boton is False)
+    s = _run([0, 2, 0, 6, 0]); t("mixed_with_zeros", s.flags() == (0, 1, 0, 0, 1) and s.steps == 5 and s.nodes == 2)
+    s = State(); s.q = 1; s.reset(); t("reset_keeps_boton_default", s.flags() == (0, 0, 0, 0, 0) and s.boton is False)
+    s = State(boton=True); s.reset(); t("reset_never_touches_boton", s.boton is True)
+    t("table_has_5_nodes", sorted(NODE_TABLE) == [1, 2, 3, 4, 5])
+
+    fails = 0
+    for name, ok in cases:
+        print(("PASS: " if ok else "FAIL: ") + name)
+        fails += 0 if ok else 1
+    print(f"PASS={len(cases) - fails} FAIL={fails}")
+    print("SUMMARY: ALL PASS" if fails == 0 else f"SUMMARY: FAILS={fails}")
+    return fails
+
+
+if __name__ == "__main__":
+    raise SystemExit(1 if self_check() else 0)
