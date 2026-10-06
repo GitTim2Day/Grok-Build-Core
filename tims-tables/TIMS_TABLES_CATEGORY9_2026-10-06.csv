@@ -1,0 +1,20 @@
+id,category,formula,note
+F,9,F(m)=m*a,test mass
+AF,9,a(F)=F/m,m not 0
+EK,9,E_k(m)=(1/2)*m*v*v,low-speed kinetic
+U,9,U(m)=m*g*h,
+E0,9,E_0(m)=m*c*c,
+E,9,E(m)=gamma*m*c*c,gamma=1/sqrt(1-v*v/(c*c)); v<c
+KF,9,K(f)=h*f-phi,
+AM,9,a(M)=G*M/(r*r),source mass; not a(F)
+R1,9,F/(m*a)=1,inverses
+R2,9,v*v=2*g*h,E_k set equal to U; m cancels only if m not 0
+R3,9,v_esc*v_esc=2*G*M/r,probe m cancels; source M stays
+R4,9,a/g=F/W,W=m*g
+R5,9,E/E_0=gamma,
+R6,9,E_k/E_0=v*v/(2*c*c),ratio not an equality of the two energies
+R7,9,h*f/phi=1,threshold only
+R8,9,v_esc/c=sqrt(2*G*M/(r*c*c)),weak algebraic face
+R9,9,z=G*M/(r*c*c),(v_esc/c)^2=2*z; not a new spoke
+UNSEATED,9,(1/2)*m*v*v=m*c*c,refused; would force v=c*sqrt(2)
+NOT,9,field equation,not this row
