@@ -1,0 +1,17 @@
+CAUGHT html_drop_comment ['SUMMARY: 100/102 FAIL']
+CAUGHT no_hex_park_node ['SUMMARY: 89/102 FAIL']
+CAUGHT tiff_lossy_jpeg ['SUMMARY: 96/102 FAIL']
+CAUGHT xml_drop_last_elem ['SUMMARY: 97/102 FAIL']
+CAUGHT gzip_payload_tamper ['SUMMARY: 94/102 FAIL']
+CAUGHT tar_drop_member ['SUMMARY: 100/102 FAIL']
+CAUGHT latin1_not_quarantined ['SUMMARY: 101/102 FAIL']
+CAUGHT unknown_not_flagged ['SUMMARY: 100/102 FAIL']
+CAUGHT bot_auto_on ['SUMMARY: 101/102 FAIL']
+CAUGHT stream_payload_not_reingested ['SUMMARY: 97/102 FAIL']
+CAUGHT zip_member_tamper ['SUMMARY: 100/102 FAIL']
+mutants caught 11/11
+CAUGHT no_sha_validator ['SUMMARY: 10/12 FAIL']
+CAUGHT no_status_validator ['SUMMARY: 10/12 FAIL']
+CAUGHT header_not_checked ['SUMMARY: 11/12 FAIL']
+CAUGHT carry_raw_bytes ['SUMMARY: 11/12 FAIL']
+crj mutants caught 4/4

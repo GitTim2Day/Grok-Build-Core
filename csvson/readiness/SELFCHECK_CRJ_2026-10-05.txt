@@ -1,0 +1,13 @@
+PASS  crj_no_rejects_on_clean_manifest
+PASS  crj_row_count_equals_direct
+PASS  crj_fields_equal_direct_json
+PASS  crj_envelope_meta_source_csvson
+PASS  crj_no_binary_bytes_carried
+PASS  crj_regex_agrees_with_csv_module
+PASS  neg_bad_sha_rejected
+PASS  neg_bad_status_rejected
+PASS  neg_bad_shape_rejected
+PASS  neg_run_continued_rest_ok
+PASS  neg_reject_log_fields_match_pdf
+PASS  neg_header_mismatch_fail_closed
+SUMMARY: 12/12 ALL PASS
