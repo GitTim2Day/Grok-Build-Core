@@ -42,3 +42,15 @@ Gate (Timothy via parent, 12:03 AM ET): nothing saved anywhere until error-teste
 | 1 | 138/138 | 27/27 | 39/39 (2 by crash) | OCR oversubscription hang; 2 crash paths killed main line | OMP_THREAD_LIMIT=1 + cache; non-raising SQLite node + CSV read-back |
 | 2 | 153/153 → 154/154 | 27/27 | 47/48 | malformed-record KeyError; `csv_field_limit_off` survived | record normaliser; oversize-cell isolation test |
 | 3 | 154/154 ×3 | 27/27 | 48/48 | none | — (frozen) |
+
+## Round 4 — fixes A + B ported back from the edge-canvas-kit vendored copy (2026-10-06 ≈3:28–3:39 PM ET)
+- Boot `bwbasic /workspace/hybrid-boot/BOOT.bas </dev/null` → `0.70710678`, exit 0. Old files archived in `archive_pre_port_20261006/` (to_txt.py f2fb5b36…, rcrj.py 55619f57…, selfcheck.py, mutants.py, ROUNDS_LOG.md, SHA256SUMS.txt; plus selfcheck.r4a.py).
+- **Fix A (rcrj.py):** `run()` built the context string with `rec.get(...)` before checking `isinstance(rec, dict)`, so `None` / a string / a number raised AttributeError and stopped the main line. The dict check now comes first → `bad_record` reject node → the run continues.
+- **Fix B (to_txt.py):** without defusedxml the source set `DefusedXmlException = Exception` and `xml_parse` raised, so every XML (and Office XML) went to QUARANTINE. Now: any DTD/ENTITY declaration (UTF-8 or UTF-16) → QUARANTINE; XML without a DTD → stdlib ElementTree; the stdlib refusal (`XmlForbidden`) is caught as QUARANTINE too. Unchanged when defusedxml is present.
+- New tests (8): `r4_non_dict_record_no_raise`, `r4_non_dict_records_to_bad_record`, `r4_main_line_continues_after_non_dict`, `r4_nodefused_probe_ran`, `r4_nodefused_xml_full`, `r4_nodefused_dtd_quarantine`, `r4_nodefused_broken_same_as_box` (child process with defusedxml blocked; own process group, 60 s), `r4_det_none_in_process_dtd_quarantine`.
+- New mutants (4) + 3 patterns updated to the new code: `non_dict_guard_off`, `dtd_fallback_check_off`, `fallback_exception_wide`, `fallback_refusal_uncaught`. Mutants now run serially by default (`MUTANT_WORKERS`, default 1), each in its own process group, killed as a group.
+- Runs (all under `safe_run.sh`: timeout + process cap + `KIT_SELFTEST_ACTIVE=1`): self-check **161/161 ×3** → mutants r4 **51/52** (`fallback_refusal_uncaught` survived: no test had DET=None while defusedxml is installed) → test `r4_det_none_in_process_dtd_quarantine` added → self-check **162/162 ×3** (BASIC guard 27/27 inside) → mutants r4b **52/52 ALL CAUGHT**; 0 leftover processes.
+
+| Round | Self-check | BASIC | Mutants | What failed | Fix |
+|---|---|---|---|---|---|
+| 4 | 161/161 ×3 → 162/162 ×3 | 27/27 | 51/52 → 52/52 | `fallback_refusal_uncaught` survived | DET-None in-process test |
