@@ -1,0 +1,28 @@
+# {{NAME}} -- scaffolded {{DATE}} by edge-canvas-kit agent (need_gosub pattern, Python twin)
+"""{{NAME}}: main line keeps moving; one conflict -> one node (GOSUB), then RETURN."""
+from __future__ import annotations
+
+
+def node_1000(state: dict) -> None:
+    """One conflict, one node, then RETURN."""
+    state["nodes"] = state.get("nodes", 0) + 1
+
+
+def main_line(state: dict, need: int) -> None:
+    if need != 0:          # 110 IF NEED = 0 THEN GOTO 200
+        node_1000(state)   # 120 GOSUB 1000
+    state["steps"] = state.get("steps", 0) + 1   # 200 continue
+
+
+def self_check() -> int:
+    fails = 0
+    s = {}; main_line(s, 0)
+    ok = s.get("nodes", 0) == 0 and s["steps"] == 1; print(("PASS" if ok else "FAIL") + ": need0_skip"); fails += not ok
+    s = {}; main_line(s, 1)
+    ok = s.get("nodes", 0) == 1 and s["steps"] == 1; print(("PASS" if ok else "FAIL") + ": need1_gosub"); fails += not ok
+    print("SUMMARY: ALL PASS" if fails == 0 else f"SUMMARY: FAILS={fails}")
+    return fails
+
+
+if __name__ == "__main__":
+    raise SystemExit(1 if self_check() else 0)
