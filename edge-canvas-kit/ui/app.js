@@ -269,6 +269,122 @@
   Array.prototype.forEach.call(document.querySelectorAll(".aq"), function (b) { b.addEventListener("click", function () { ask(b.dataset.q); }); });
   $("sgo").addEventListener("click", function () { ask("/scaffold " + $("stpl").value + " " + $("slang").value + " " + ($("sname").value || "my_check")); });
 
+
+  // ---------------------------------------------------------------- spectrum sweep (representation only)
+  // Server computes the samples (/api/sweep); this draws them: log10(f) axis ascending, Latin band labels,
+  // ghost = emitted, solid = observed (redshifted), one unbroken overlay line. Audio is off by default.
+  var sweep = { d: null, AX: null };
+  var sweepAudio = { ctx: null };
+  function sanitizeOverlay(t) {   // one unbroken line: control chars / line breaks become spaces
+    return String(t || "").replace(/[\u0000-\u001f\u007f\u2028\u2029]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 200);
+  }
+  function swMode() { var m = $("swmode").value; document.body.classList.remove("sw-mode-octave", "sw-mode-decay", "sw-mode-sampler"); document.body.classList.add("sw-mode-" + m); return m; }
+  $("swmode").addEventListener("change", function () { swMode(); drawSweepFromServer(); });
+  $("swzr").addEventListener("input", function () { $("swz").value = $("swzr").value; });
+  $("swzr").addEventListener("change", function () { drawSweepFromServer(); });
+  $("swkr").addEventListener("input", function () { $("swk").value = $("swkr").value; });
+  $("swkr").addEventListener("change", function () { drawSweepFromServer(); });
+  $("swaudio").addEventListener("change", function () { $("swplay").disabled = !$("swaudio").checked; });
+  function sweepQuery() {
+    var m = swMode(), p = { mode: m, fps: $("swfps").value, z: $("swz").value.trim(), overlay: sanitizeOverlay($("swover").value) };
+    if (m === "octave") { p.samples = $("swn").value; p.f_start = $("swfs").value.trim(); p.f_end = $("swfe").value.trim(); }
+    else if (m === "decay") { p.samples = $("swn").value; p.A = $("swA").value.trim(); p.B = $("swB").value.trim(); p.k = $("swk").value.trim(); p.xmax = $("swxmax").value.trim(); p.lift = $("swlift").value.trim(); }
+    else { p.m = $("swm").value.trim(); p.n = $("swsn").value.trim(); p.c = $("swc").value.trim(); p.x0 = $("swx0").value.trim(); p.dx = $("swdx").value.trim(); p.steps = $("swsteps").value.trim(); }
+    return new URLSearchParams(p).toString();
+  }
+  function loadSweep() {
+    $("swmsg").textContent = "computing...";
+    return api("GET", "/api/sweep?" + sweepQuery()).then(function (d) { sweep.d = d; $("swmsg").textContent = d.samples.length + " samples @ " + d.fps + " fps"; return d; })
+      .catch(function (e) { $("swmsg").textContent = e.message; throw e; });
+  }
+  function axisFrom(d) {   // vertical axis = log10(f / Hz); lo at the bottom, hi at the top
+    var ex = d.axis.map(function (a) { return a.exp; });
+    return { lo: Math.min.apply(null, ex), hi: Math.max.apply(null, ex), L: 134, R: 160, T: 18, B: 62 };
+  }
+  function swPy(AX, h, L) { return AX.T + (AX.hi - L) / (AX.hi - AX.lo) * (h - AX.T - AX.B); }
+  function swPx(AX, w, i, n) { return AX.L + (n > 1 ? i / (n - 1) : 0) * (w - AX.L - AX.R); }
+  var SUP = { "0": "\u2070", "1": "\u00b9", "2": "\u00b2", "3": "\u00b3", "4": "\u2074", "5": "\u2075", "6": "\u2076", "7": "\u2077", "8": "\u2078", "9": "\u2079" };
+  function sup(n) { return String(n).split("").map(function (c) { return SUP[c] || c; }).join(""); }
+  function drawSweep(d) {
+    var c = $("sweep"), ctx = c.getContext("2d"), w = c.width, h = c.height, AX = axisFrom(d), n = d.samples.length;
+    sweep.AX = AX;
+    ctx.fillStyle = "#05070a"; ctx.fillRect(0, 0, w, h);
+    var x0 = AX.L, x1 = w - AX.R;
+    d.bands.forEach(function (b, k) {   // band strips + Latin labels
+      var yTop = swPy(AX, h, Math.min(b.hi_log10, AX.hi)), yBot = swPy(AX, h, Math.max(b.lo_log10, AX.lo));
+      if (b.highlight) {
+        var g = ctx.createLinearGradient(0, yBot, 0, yTop);
+        g.addColorStop(0, "rgba(255,0,0,0.55)"); g.addColorStop(0.3, "rgba(255,200,0,0.55)"); g.addColorStop(0.5, "rgba(0,255,0,0.55)");
+        g.addColorStop(0.7, "rgba(0,160,255,0.55)"); g.addColorStop(1, "rgba(130,0,255,0.55)");
+        ctx.fillStyle = g;
+      } else ctx.fillStyle = k % 2 ? "rgba(255,255,255,0.045)" : "rgba(255,255,255,0.09)";
+      ctx.fillRect(x0, yTop, x1 - x0, yBot - yTop);
+      ctx.fillStyle = b.highlight ? "#ffffff" : "#b9c6d0"; ctx.font = (b.highlight ? "bold " : "") + "13px serif";
+      ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      ctx.fillText(b.name, x1 + 8, (yTop + yBot) / 2);
+    });
+    ctx.strokeStyle = "#3a4650"; ctx.fillStyle = "#c8d3dc"; ctx.font = "12px sans-serif"; ctx.textAlign = "right"; ctx.lineWidth = 1;
+    d.axis.forEach(function (a) {   // decade ticks, ascending upward
+      var y = swPy(AX, h, a.exp);
+      ctx.beginPath(); ctx.moveTo(x0 - 4, y); ctx.lineTo(x1, y); ctx.stroke();
+      ctx.fillText("10" + sup(a.exp) + " Hz  " + a.label, x0 - 8, y);
+    });
+    ctx.save(); ctx.translate(11, (AX.T + h - AX.B) / 2); ctx.rotate(-Math.PI / 2); ctx.textAlign = "center"; ctx.fillText("log\u2081\u2080(f / Hz)", 0, 0); ctx.restore();
+    function curve(key, style, width, dash, colored) {
+      ctx.lineWidth = width; ctx.setLineDash(dash);
+      for (var i = 1; i < n; i++) {
+        var a = d.samples[i - 1], b = d.samples[i];
+        ctx.strokeStyle = colored ? "rgb(" + b.rgb_obs.join(",") + ")" : style;
+        ctx.beginPath(); ctx.moveTo(swPx(AX, w, i - 1, n), swPy(AX, h, a[key])); ctx.lineTo(swPx(AX, w, i, n), swPy(AX, h, b[key])); ctx.stroke();
+      }
+      ctx.setLineDash([]);
+    }
+    ctx.save(); ctx.beginPath(); ctx.rect(x0, AX.T - 6, x1 - x0, h - AX.T - AX.B + 12); ctx.clip();
+    curve("log10_f_emit", "rgba(230,236,242,0.35)", 2, [6, 4], false);   // ghost: emitted
+    curve("log10_f_obs", "#fff", 3, [], true);                           // solid: observed, frame colours
+    ctx.restore();
+    ctx.fillStyle = "#93a1ad"; ctx.font = "12px sans-serif"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.fillText("x = " + d.samples[0].x + " \u2192 " + d.samples[n - 1].x + "    ghost = emitted, solid = observed (z = " + d.key_values.z + ", shift " + d.key_values.z_shift_octaves_trunc8 + " oct)", x0, h - AX.B + 18);
+    ctx.fillStyle = "#f3e9c6"; ctx.font = "italic 17px serif"; ctx.textAlign = "center";
+    ctx.fillText(sanitizeOverlay($("swover").value), (x0 + x1) / 2, h - 14);   // one unbroken line
+    $("swformula").textContent = "drawn: " + d.formula;
+    var kv = d.key_values;
+    $("swkeys").textContent = "y(100 MHz) = " + kv.y_at_100MHz_trunc8 + "   y(500 THz) = " + kv.y_at_500THz_trunc8 + "   1+z = " + kv.one_plus_z + "   shift log\u2082(1+z) = " + kv.z_shift_octaves_trunc8 + " octaves   (truncated, 8 places)";
+    $("swfinal").textContent = d.final ? "final value: y = " + d.final.y + "  (f_emit " + d.final.f_emit_hz_trunc3 + " Hz, truncated)" : "";
+  }
+  function drawSweepFromServer() { return loadSweep().then(function (d) { drawSweep(d); return d; }); }
+  function sweepToPlayer(d) {   // one solid 8x8 frame per sample, played by the existing player (built, then shown or dropped)
+    var frames = d.samples.map(function (s) { var px = "", ch = String.fromCharCode(s.rgb_obs[0], s.rgb_obs[1], s.rgb_obs[2]); for (var i = 0; i < 64; i++) px += ch; return btoa(px); });
+    var pd = { fps: d.fps, dt: d.dt, shape: [frames.length, 8, 8, 3], frames: frames, synthetic: true, source: "spectrum sweep (representation only)" };
+    player.data = pd; off.width = 8; off.height = 8;
+    return pd;
+  }
+  $("swdraw").addEventListener("click", function () { drawSweepFromServer().catch(function () {}); });
+  $("swframes").addEventListener("click", function () {
+    var go = function (d) { drawSweep(d); sweepToPlayer(d); player.run = true; player.shown = player.dropped = 0; player.next = 0; player.t0 = performance.now(); requestAnimationFrame(tick); };
+    loadSweep().then(go).catch(function () {});
+  });
+  $("swplay").addEventListener("click", function () {
+    if (!$("swaudio").checked || !sweep.d) return;
+    var AC = window.AudioContext || window.webkitAudioContext; if (!AC) { $("swmsg").textContent = "no Web Audio in this browser"; return; }
+    if (sweepAudio.ctx) { try { sweepAudio.ctx.close(); } catch (e) {} }
+    var d = sweep.d, ac = new AC(), T = d.audio.transpose_octaves, dt = 1 / d.fps, t0 = ac.currentTime + 0.05, n = d.samples.length;
+    sweepAudio.ctx = ac;
+    var merge = ac.createChannelMerger(2); merge.connect(ac.destination);
+    [["y_obs", 0], ["y_emit", 1]].forEach(function (pair) {   // left = observed, right = emitted
+      var o = ac.createOscillator(), g = ac.createGain(); o.type = "sine"; o.connect(g); g.connect(merge, 0, pair[1]);
+      d.samples.forEach(function (s, i) {
+        var f = 130.8 * Math.pow(2, s[pair[0]] - T), ok = f >= 20 && f <= 20000;   // whole-octave transpose: shape kept
+        o.frequency.setValueAtTime(Math.min(Math.max(f, 1), 22000), t0 + i * dt); g.gain.setValueAtTime(ok ? 0.12 : 0, t0 + i * dt);
+      });
+      o.start(t0); o.stop(t0 + n * dt);
+    });
+    setTimeout(function () { try { ac.close(); } catch (e) {} if (sweepAudio.ctx === ac) sweepAudio.ctx = null; }, (n * dt + 0.5) * 1000);
+    $("swmsg").textContent = "audio: transposed down " + T + " octaves (representation only); left = observed, right = emitted";
+  });
+  swMode();
+  drawSweepFromServer().catch(function () {});
+
   // ---------------------------------------------------------------- start + smoke mode (?smoke=1, used by ui_smoke.py)
   boot().catch(function () {});
   refreshStatus();
@@ -285,8 +401,18 @@
       .then(function () { return step("js_iframe", runJS("console.log(6*7)", true).then(function (r) { return (r.out || []).join("|") + "/" + r.via; })); })
       .then(function () { return step("js_sandbox", runJS("console.log(6*7)").then(function (r) { return (r.out || []).join("|") + "/" + r.via; })); })
       .then(function () { return step("js_no_network", runJS("console.log(typeof fetch)").then(function (r) { return (r.out || []).join("|"); })); })
+      .then(function () { return step("sweep_keys", drawSweepFromServer().then(function (d) { return d.key_values.y_at_100MHz_trunc8 + "/" + d.key_values.y_at_500THz_trunc8; })); })
+      .then(function () { return step("sweep_axis_up", Promise.resolve(swPy(sweep.AX, $("sweep").height, 8) > swPy(sweep.AX, $("sweep").height, 15))); })
+      .then(function () { return step("sweep_latin", Promise.resolve(sweep.d.bands.map(function (b) { return b.name; }).join("|"))); })
+      .then(function () { return step("sweep_overlay", Promise.resolve(sanitizeOverlay("Lux orta\nest") === "Lux orta est" && sanitizeOverlay($("swover").value) === sweep.d.overlay_default && sweep.d.overlay === sweep.d.overlay_default)); })
+      .then(function () { return step("sweep_vis_painted", Promise.resolve((function () { var c = $("sweep"), y = Math.round(swPy(sweep.AX, c.height, 14.75)), p = c.getContext("2d").getImageData(sweep.AX.L + 3, y, 1, 1).data; return p[0] + p[1] + p[2] > 60; })())); })
+      .then(function () { return step("sweep_frame0", Promise.resolve((function () { var d = sweepToPlayer(sweep.d); paint(buildFrame(0)); var p = off.getContext("2d").getImageData(0, 0, 1, 1).data; return [p[0], p[1], p[2]].join(",") === sweep.d.samples[0].rgb_obs.join(",") && d.shape[0] === sweep.d.samples.length; })())); })
+      .then(function () { return step("sweep_audio_off", Promise.resolve(!$("swaudio").checked && $("swplay").disabled && sweepAudio.ctx === null)); })
+      .then(function () { $("swz").value = "0.5"; $("swzr").value = "0.5"; return step("sweep_z_half", drawSweepFromServer().then(function (d) { return d.key_values.z_shift_octaves_trunc8; })); })
       .then(function () {
         var ok = res.boot === true && res.descend === "8647" && res.frames === "4x32x32x3" && res.pixel0 === "7,135,42" && res.js_ping === "pong/function" && res.js_iframe === "42/iframe" && res.files === true && res.agent === true && /^42\//.test(res.js_sandbox) && res.js_no_network === "undefined";
+        ok = ok && res.sweep_keys === "19.54420602/41.79770269" && res.sweep_axis_up === true && res.sweep_latin === "Radio|Undae minimae|Infrarubrum|Visibile (lumen)|Ultravioletum" &&
+          res.sweep_overlay === true && res.sweep_vis_painted === true && res.sweep_frame0 === true && res.sweep_audio_off === true && res.sweep_z_half === "0.58496250";
         res.verdict = ok ? "PASS" : "FAIL";
         $("smoke").textContent = "SMOKE " + JSON.stringify(res);
         document.body.setAttribute("data-smoke", res.verdict);
