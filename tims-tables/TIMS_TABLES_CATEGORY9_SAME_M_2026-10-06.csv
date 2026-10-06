@@ -1,0 +1,8 @@
+id,category,formula,note
+F,9,F(m)=m*a,inertial mass
+E0,9,E_0(m)=m*c*c,same m written as rest energy
+JOIN,9,E_0/m=c*c,the ratio that joins them; not a new equation; m not 0
+UNSEATED,9,(1/2)*m*v*v=m*c*c,still not set equal
+PHOTON,9,E=h*f=p*c,no rest mass; E/c*c is not a rest mass
+KF,9,K(f)=h*f-phi,only when h*f clears phi
+SHARE,9,K/E_0=(h*f-phi)/(m_e*c*c),m=m_e for the electron that leaves; not a second mass
