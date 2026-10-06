@@ -1,0 +1,9 @@
+id,formula,domain,fail,notes
+F_SPACE,f(x)=m*x+b,x integer; m=MN/MD; b=BN/BD,X_NOT_INT,working pair is a ratio
+F_GRAV,f(x)=m*x+b-(x*x)/lambda,lambda>0; positive flight x>0; drag off the line,X_NOT_INT LAMBDA_NONPOSITIVE OVERFLOW,perfect empty is not stored
+RATIO,gcd then sign on N and D>0,D=0 does not enter Euclid,RATIO_DEN_ZERO,2/4 becomes 1/2; 1/-2 becomes -1/2
+DISPLAY,trunc_toward_zero(ratio*10^digits),face only,,not the working value
+LAMBDA_P,lambda_p=c*t_p,one length; c=299792458 exact,,2022 faces are not a working entry
+DOMAIN,lambda_p<x<=c*t and lambda>0 and u>0,negative x and negative denominator are outside,,not yet a gate in the runner
+PACE,E=(1/2)*m*v*v and lambda=2*v_x*v_x/g,v<c; m is mass not slope,,more energy lengthens lambda; lambda_p stays
+DRAG,R=featured_drag/smooth_drag,earned on that surface,,golf dimple does not transfer onto the bow
