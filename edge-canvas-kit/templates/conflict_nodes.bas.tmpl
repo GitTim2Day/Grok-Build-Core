@@ -1,0 +1,240 @@
+1 REM {{NAME}} -- scaffolded {{DATE}} by edge-canvas-kit agent from conflict_nodes.bas
+10 REM conflict_nodes.bas -- Timothy Norman, 2026-10-05
+20 REM Correction: a conflict does not kill the main line. Detect, call, return.
+30 REM NEED codes: 0 none | 1 non-UTF-8 to Q=1 quarantine | 2 hex wrapper to PARK=1 (not installed)
+40 REM 3 hop to HELD=1 (needs Timothy turn-on, no action) | 4 mail to HELD=1 (same)
+50 REM 5 BOT to hard skip. BOTON default 0; no node ever sets BOTON. Other code to UNK=1.
+60 REM One conflict, one node, RETURN. Positive IF only; no angle-bracket compares.
+70 GOTO 5000
+100 REM ========== MAIN LINE (keeps moving) ==========
+110 IF NEED = 0 THEN GOTO 200
+120 GOSUB 1000
+200 REM continue
+210 STEPS = STEPS + 1
+220 RETURN
+900 REM ========== RESET FLAGS (harness only; never touches BOTON) ==========
+910 Q = 0: PARK = 0: HELD = 0: HR$ = "": BOTSKIP = 0: UNK = 0
+920 STEPS = 0: NODES = 0: NEED = 0
+930 RETURN
+1000 REM ========== DISPATCH: one conflict, one node, then RETURN ==========
+1010 NODES = NODES + 1
+1020 IF NEED = 1 THEN GOTO 1100
+1030 IF NEED = 2 THEN GOTO 1200
+1040 IF NEED = 3 THEN GOTO 1300
+1050 IF NEED = 4 THEN GOTO 1400
+1060 IF NEED = 5 THEN GOTO 1500
+1070 UNK = 1: RETURN
+1100 REM node 1: not UTF-8 to QUARANTINE flag; calls no other door
+1110 Q = 1: RETURN
+1200 REM node 2: hex binary wrapper to parked, not installed
+1210 PARK = 1: RETURN
+1300 REM node 3: hop request to held until Timothy turns it on; no action
+1310 HELD = 1: HR$ = "HOP": RETURN
+1400 REM node 4: mail request to held until Timothy turns it on; no action
+1410 HELD = 1: HR$ = "MAIL": RETURN
+1500 REM node 5: BOT to hard skip unless Timothy set BOTON=1; never auto-enables
+1510 IF BOTON = 1 THEN RETURN
+1520 BOTSKIP = 1: RETURN
+5000 REM ========== SELF-CHECK HARNESS ==========
+5010 FAILS = 0: PASSES = 0: BOTON = 0
+5100 REM test need0_skip
+5105 GOSUB 900: NEED = 0: GOSUB 100
+5108 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5109 IF HR$ = "MAIL" THEN HS = 2
+5110 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 0)
+5111 E1 = (STEPS = 1) AND (NODES = 0)
+5120 E = E0 AND E1
+5125 IF E THEN PRINT "PASS: need0_skip": PASSES = PASSES + 1: GOTO 5150
+5130 PRINT "FAIL: need0_skip": FAILS = FAILS + 1
+5150 REM next
+5200 REM test need1_quarantine
+5205 GOSUB 900: NEED = 1: GOSUB 100
+5208 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5209 IF HR$ = "MAIL" THEN HS = 2
+5210 E0 = (Q = 1) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 0)
+5211 E1 = (STEPS = 1) AND (NODES = 1) AND (HS = 0)
+5220 E = E0 AND E1
+5225 IF E THEN PRINT "PASS: need1_quarantine": PASSES = PASSES + 1: GOTO 5250
+5230 PRINT "FAIL: need1_quarantine": FAILS = FAILS + 1
+5250 REM next
+5300 REM test need2_hex_parked
+5305 GOSUB 900: NEED = 2: GOSUB 100
+5308 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5309 IF HR$ = "MAIL" THEN HS = 2
+5310 E0 = (Q = 0) AND (PARK = 1) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 0)
+5311 E1 = (STEPS = 1) AND (NODES = 1)
+5320 E = E0 AND E1
+5325 IF E THEN PRINT "PASS: need2_hex_parked": PASSES = PASSES + 1: GOTO 5350
+5330 PRINT "FAIL: need2_hex_parked": FAILS = FAILS + 1
+5350 REM next
+5400 REM test need3_hop_held
+5405 GOSUB 900: NEED = 3: GOSUB 100
+5408 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5409 IF HR$ = "MAIL" THEN HS = 2
+5410 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 1) AND (BOTSKIP = 0) AND (UNK = 0)
+5411 E1 = (HS = 1) AND (STEPS = 1) AND (NODES = 1)
+5420 E = E0 AND E1
+5425 IF E THEN PRINT "PASS: need3_hop_held": PASSES = PASSES + 1: GOTO 5450
+5430 PRINT "FAIL: need3_hop_held": FAILS = FAILS + 1
+5450 REM next
+5500 REM test need4_mail_held
+5505 GOSUB 900: NEED = 4: GOSUB 100
+5508 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5509 IF HR$ = "MAIL" THEN HS = 2
+5510 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 1) AND (BOTSKIP = 0) AND (UNK = 0)
+5511 E1 = (HS = 2) AND (STEPS = 1) AND (NODES = 1)
+5520 E = E0 AND E1
+5525 IF E THEN PRINT "PASS: need4_mail_held": PASSES = PASSES + 1: GOTO 5550
+5530 PRINT "FAIL: need4_mail_held": FAILS = FAILS + 1
+5550 REM next
+5600 REM test need5_bot_hard_skip
+5605 GOSUB 900: BOTON = 0: NEED = 5: GOSUB 100
+5608 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5609 IF HR$ = "MAIL" THEN HS = 2
+5610 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 1) AND (UNK = 0)
+5611 E1 = (BOTON = 0) AND (STEPS = 1) AND (NODES = 1)
+5620 E = E0 AND E1
+5625 IF E THEN PRINT "PASS: need5_bot_hard_skip": PASSES = PASSES + 1: GOTO 5650
+5630 PRINT "FAIL: need5_bot_hard_skip": FAILS = FAILS + 1
+5650 REM next
+5700 REM test bot_never_autoenables_x3
+5705 GOSUB 900: BOTON = 0: NEED = 5: GOSUB 100: NEED = 5: GOSUB 100: NEED = 5: GOSUB 100
+5708 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5709 IF HR$ = "MAIL" THEN HS = 2
+5710 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 1) AND (UNK = 0)
+5711 E1 = (BOTON = 0) AND (STEPS = 3) AND (NODES = 3)
+5720 E = E0 AND E1
+5725 IF E THEN PRINT "PASS: bot_never_autoenables_x3": PASSES = PASSES + 1: GOTO 5750
+5730 PRINT "FAIL: bot_never_autoenables_x3": FAILS = FAILS + 1
+5750 REM next
+5800 REM test bot_on_only_by_timothy
+5805 GOSUB 900: BOTON = 1: NEED = 5: GOSUB 100
+5808 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5809 IF HR$ = "MAIL" THEN HS = 2
+5810 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 0)
+5811 E1 = (BOTON = 1) AND (STEPS = 1) AND (NODES = 1)
+5820 E = E0 AND E1
+5825 IF E THEN PRINT "PASS: bot_on_only_by_timothy": PASSES = PASSES + 1: GOTO 5850
+5830 PRINT "FAIL: bot_on_only_by_timothy": FAILS = FAILS + 1
+5850 REM next
+5900 REM test bot_back_off_default
+5905 GOSUB 900: BOTON = 0: NEED = 5: GOSUB 100
+5908 HS = 0: IF HR$ = "HOP" THEN HS = 1
+5909 IF HR$ = "MAIL" THEN HS = 2
+5910 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 1) AND (UNK = 0)
+5911 E1 = (BOTON = 0)
+5920 E = E0 AND E1
+5925 IF E THEN PRINT "PASS: bot_back_off_default": PASSES = PASSES + 1: GOTO 5950
+5930 PRINT "FAIL: bot_back_off_default": FAILS = FAILS + 1
+5950 REM next
+6000 REM test hop_held_even_if_boton
+6005 GOSUB 900: BOTON = 1: NEED = 3: GOSUB 100
+6008 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6009 IF HR$ = "MAIL" THEN HS = 2
+6010 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 1) AND (BOTSKIP = 0) AND (UNK = 0)
+6011 E1 = (HS = 1) AND (BOTON = 1)
+6020 E = E0 AND E1
+6025 IF E THEN PRINT "PASS: hop_held_even_if_boton": PASSES = PASSES + 1: GOTO 6050
+6030 PRINT "FAIL: hop_held_even_if_boton": FAILS = FAILS + 1
+6050 REM next
+6100 REM test unknown_need6_continues
+6105 GOSUB 900: BOTON = 0: NEED = 6: GOSUB 100
+6108 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6109 IF HR$ = "MAIL" THEN HS = 2
+6110 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 1)
+6111 E1 = (STEPS = 1) AND (NODES = 1)
+6120 E = E0 AND E1
+6125 IF E THEN PRINT "PASS: unknown_need6_continues": PASSES = PASSES + 1: GOTO 6150
+6130 PRINT "FAIL: unknown_need6_continues": FAILS = FAILS + 1
+6150 REM next
+6200 REM test unknown_need_neg1
+6205 GOSUB 900: NEED = -1: GOSUB 100
+6208 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6209 IF HR$ = "MAIL" THEN HS = 2
+6210 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 1)
+6211 E1 = (STEPS = 1)
+6220 E = E0 AND E1
+6225 IF E THEN PRINT "PASS: unknown_need_neg1": PASSES = PASSES + 1: GOTO 6250
+6230 PRINT "FAIL: unknown_need_neg1": FAILS = FAILS + 1
+6250 REM next
+6300 REM test unknown_need_1p5
+6305 GOSUB 900: NEED = 1.5: GOSUB 100
+6308 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6309 IF HR$ = "MAIL" THEN HS = 2
+6310 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 1)
+6311 E1 = (STEPS = 1)
+6320 E = E0 AND E1
+6325 IF E THEN PRINT "PASS: unknown_need_1p5": PASSES = PASSES + 1: GOTO 6350
+6330 PRINT "FAIL: unknown_need_1p5": FAILS = FAILS + 1
+6350 REM next
+6400 REM test unknown_need_99
+6405 GOSUB 900: NEED = 99: GOSUB 100
+6408 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6409 IF HR$ = "MAIL" THEN HS = 2
+6410 E0 = (Q = 0) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 1)
+6411 E1 = (STEPS = 1)
+6420 E = E0 AND E1
+6425 IF E THEN PRINT "PASS: unknown_need_99": PASSES = PASSES + 1: GOTO 6450
+6430 PRINT "FAIL: unknown_need_99": FAILS = FAILS + 1
+6450 REM next
+6500 REM test quarantine_calls_no_door
+6505 GOSUB 900: NEED = 1: GOSUB 100
+6508 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6509 IF HR$ = "MAIL" THEN HS = 2
+6510 E0 = (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0)
+6511 E1 = (NODES = 1)
+6520 E = E0 AND E1
+6525 IF E THEN PRINT "PASS: quarantine_calls_no_door": PASSES = PASSES + 1: GOTO 6550
+6530 PRINT "FAIL: quarantine_calls_no_door": FAILS = FAILS + 1
+6550 REM next
+6600 REM test quarantine_line_continues
+6605 GOSUB 900: NEED = 1: GOSUB 100: NEED = 0: GOSUB 100
+6608 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6609 IF HR$ = "MAIL" THEN HS = 2
+6610 E0 = (Q = 1) AND (STEPS = 2) AND (NODES = 1)
+6620 E = E0
+6625 IF E THEN PRINT "PASS: quarantine_line_continues": PASSES = PASSES + 1: GOTO 6650
+6630 PRINT "FAIL: quarantine_line_continues": FAILS = FAILS + 1
+6650 REM next
+6700 REM test repeat_need1_idempotent
+6705 GOSUB 900: NEED = 1: GOSUB 100: NEED = 1: GOSUB 100
+6708 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6709 IF HR$ = "MAIL" THEN HS = 2
+6710 E0 = (Q = 1) AND (PARK = 0) AND (HELD = 0) AND (BOTSKIP = 0) AND (UNK = 0)
+6711 E1 = (STEPS = 2) AND (NODES = 2)
+6720 E = E0 AND E1
+6725 IF E THEN PRINT "PASS: repeat_need1_idempotent": PASSES = PASSES + 1: GOTO 6750
+6730 PRINT "FAIL: repeat_need1_idempotent": FAILS = FAILS + 1
+6750 REM next
+6800 REM test sequence_1_to_5
+6805 GOSUB 900: BOTON = 0: NEED = 1: GOSUB 100: NEED = 2: GOSUB 100: NEED = 3: GOSUB 100: NEED = 4: GOSUB 100: NEED = 5: GOSUB 100
+6808 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6809 IF HR$ = "MAIL" THEN HS = 2
+6810 E0 = (Q = 1) AND (PARK = 1) AND (HELD = 1) AND (BOTSKIP = 1) AND (UNK = 0)
+6811 E1 = (HS = 2) AND (STEPS = 5) AND (NODES = 5) AND (BOTON = 0)
+6820 E = E0 AND E1
+6825 IF E THEN PRINT "PASS: sequence_1_to_5": PASSES = PASSES + 1: GOTO 6850
+6830 PRINT "FAIL: sequence_1_to_5": FAILS = FAILS + 1
+6850 REM next
+6900 REM test mixed_with_zeros
+6905 GOSUB 900: BOTON = 0: NEED = 0: GOSUB 100: NEED = 2: GOSUB 100: NEED = 0: GOSUB 100: NEED = 6: GOSUB 100: NEED = 0: GOSUB 100
+6908 HS = 0: IF HR$ = "HOP" THEN HS = 1
+6909 IF HR$ = "MAIL" THEN HS = 2
+6910 E0 = (PARK = 1) AND (UNK = 1) AND (Q = 0) AND (HELD = 0) AND (BOTSKIP = 0)
+6911 E1 = (STEPS = 5) AND (NODES = 2)
+6920 E = E0 AND E1
+6925 IF E THEN PRINT "PASS: mixed_with_zeros": PASSES = PASSES + 1: GOTO 6950
+6930 PRINT "FAIL: mixed_with_zeros": FAILS = FAILS + 1
+6950 REM next
+7000 REM test need_value_untouched
+7005 GOSUB 900: NEED = 3: GOSUB 100
+7008 HS = 0: IF HR$ = "HOP" THEN HS = 1
+7009 IF HR$ = "MAIL" THEN HS = 2
+7010 E0 = (NEED = 3)
+7020 E = E0
+7025 IF E THEN PRINT "PASS: need_value_untouched": PASSES = PASSES + 1: GOTO 7050
+7030 PRINT "FAIL: need_value_untouched": FAILS = FAILS + 1
+7050 REM next
+7100 PRINT "PASS="; PASSES; " FAIL="; FAILS
+7110 IF FAILS = 0 THEN PRINT "SUMMARY: ALL PASS" ELSE PRINT "SUMMARY: FAILS="; FAILS
+7120 END
