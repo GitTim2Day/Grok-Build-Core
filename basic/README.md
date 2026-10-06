@@ -56,3 +56,18 @@ bwbasic basic/conflict_nodes.bas </dev/null
 python3 basic/conflict_nodes.py
 ```
 Required SUMMARY: `ALL PASS`
+
+## RCRJ guard nodes — text door → regex → CSV → regex → JSON (2026-10-06)
+Timothy: convert as many file types to .txt as possible, then regex → CSV → regex → JSON, with insertion prevention in the regex GOSUBs before and after CSV; records that don't fit CSV go to SQLite. Python is the real pipeline (`csvson/txt_rcrj/`). This BASIC file mirrors the guard nodes.
+| GOSUB | Node | Effect |
+|---|---|---|
+| 2000 | REGEX_GUARD_PRE | N0 (NUL) → reject; over MAXR → reject; control chars stripped (F3); formula lead = + - @ TAB CR (F1); SQL pattern (F2); prompt-injection marker (F4, never run); HTML/script (F5); over MAXF (F6) |
+| 2500 | CSV cell | `'` prefix if F1 or lead `'`; quotes doubled; QUOTE_ALL |
+| 2700 | CSV fit | blob, embedded newline, or F6 → SQLite |
+| 3000 | REGEX_GUARD_POST | quoted shape, no lone quote, no live formula, round-trip equal, else M=1 → SQLite |
+| 4000 | REJECT | reject log; main line continues |
+| 5000 | SQLITE_FALLBACK | Python does the parameterized `?` INSERT; main line continues |
+```
+bwbasic basic/rcrj_guard.bas </dev/null
+```
+Required SUMMARY: `ALL PASS` (27/27). bwbasic drops CHR$(0) from strings, so the reader passes NUL as `N0=1`.

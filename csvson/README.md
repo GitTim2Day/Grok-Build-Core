@@ -1,0 +1,6 @@
+# csvson/ — CSVSON ingest work (Timothy Norman, 2026-10-05/06)
+- `readiness/` — the 2026-10-05 readiness check for GIF/BMP/TIFF/XML/HTML/zip/gzip/xz/bzip2/tar (102/102, CRJ 12/12, BASIC manifest reader). Synthetic samples only. Drive/Gmail ids are masked in this public copy. `csvson_ingest_readiness.py` expects a private `sources/` file that is not published here.
+- `txt_rcrj/` — the text door (`to_txt.py`: many file types → UTF-8 .txt, archives recursed with bomb and traversal guards, Tesseract OCR for images and scanned PDFs) and RCRJ (`rcrj.py`: GOSUB REGEX_GUARD_PRE → CSV → GOSUB REGEX_GUARD_POST → JSON in the JCJ wrapper; SQLite fallback with parameterized queries only). Round 3: self-check 154/154, BASIC 27/27, mutants 48/48 caught. See `TXT_RCRJ_PIPELINE_2026-10-05.md` and `ROUNDS_LOG.md`.
+- BASIC guard skeleton: `../basic/rcrj_guard.bas`.
+- Regenerate samples and re-test: `cd txt_rcrj && python3 make_samples.py && python3 selfcheck.py && python3 mutants.py rN`. Binary samples and the hash-heavy output tables (TO_TXT_ITEMS.csv, sample sha256 manifest, readiness manifest CSV) are not committed; they are in the private Drive tarball. Pillow/OOXML timestamps can differ when samples are regenerated.
+- Tesseract 5.5.0 and poppler were on the build box only. Without them, OCR falls back to metadata-only (node 8) and the main line continues.
