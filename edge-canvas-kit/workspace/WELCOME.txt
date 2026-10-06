@@ -1,0 +1,3 @@
+This is your kit workspace. The Files tab, the code editor's Open/Save, the drawing pad and the
+agent's /scaffold all read and write ONLY inside this folder.
+Nothing is ever deleted: saving over a file first copies the old version to workspace/.archive/.
