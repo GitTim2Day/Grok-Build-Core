@@ -28,7 +28,7 @@ M = [  # (name, file, old, new)
     ("total_cap_off", "to_txt.py", '                budget.total += len(data)\n                if budget.total > limits["max_total"]:\n                    rej(info.filename, "bomb_total_cap"); continue', '                budget.total += len(data)'),
     ("depth_cap_off", "to_txt.py", '    if depth >= limits["max_depth"]:', '    if False:'),
     ("tar_link_guard_off", "to_txt.py", "                if m.issym() or m.islnk():", "                if False:"),
-    ("defusedxml_swapped_unsafe", "to_txt.py", "    return DET.fromstring(b)", "    import xml.etree.ElementTree as UNSAFE\n    return UNSAFE.fromstring(b)"),
+    ("defusedxml_swapped_unsafe", "to_txt.py", "        return DET.fromstring(b)  # forbids", "        import xml.etree.ElementTree as UNSAFE\n        return UNSAFE.fromstring(b)  # forbids"),
     ("mixed_encoding_off", "to_txt.py", "    if UTF8_MB.search(b):", "    if False:"),
     ("bom_utf16_off", "to_txt.py", '    if b.startswith((b"\\xff\\xfe", b"\\xfe\\xff")):\n        try:\n            return b.decode("utf-16")', '    if False:\n        try:\n            return b.decode("utf-16")'),
     ("nul_text_quarantine_off", "to_txt.py", "    elif kind in TEXT_TYPES and looks_binary(b):", "    elif False:"),
@@ -46,13 +46,18 @@ M = [  # (name, file, old, new)
     ("bas_control_off", "rcrj_guard.bas", "2070 IF SGN(32 - A) = 1 THEN KEEP = 0", "2070 REM control strip removed"),
     # round-2 additions
     ("traversal_backslash_off", "to_txt.py", 'for p in re.split(r"[\\\\/]+", name)', 'for p in name.split("/")'),
-    ("bad_record_guard_off", "rcrj.py", '        if not isinstance(rec, dict) or not isinstance(rec.get("text"), str):', '        if False:'),
+    ("bad_record_guard_off", "rcrj.py", '        if not isinstance(rec.get("text"), str):', '        if False:'),
+    # round-4 additions (ported fixes A + B, 2026-10-06)
+    ("non_dict_guard_off", "rcrj.py", "        if not isinstance(rec, dict):   # malformed record", "        if False:   # malformed record"),
+    ("dtd_fallback_check_off", "to_txt.py", "    if _DTD.search(b):\n        raise XmlForbidden", "    if False:\n        raise XmlForbidden"),
+    ("fallback_exception_wide", "to_txt.py", "    DefusedXmlException = XmlForbidden", "    DefusedXmlException = Exception"),
+    ("fallback_refusal_uncaught", "to_txt.py", "        except (DefusedXmlException, XmlForbidden) as e:", "        except DefusedXmlException as e:"),
     ("sqlite_fail_raises", "rcrj.py", '            self.errors.append(f"sqlite_error:{type(e).__name__}")\n            return None', '            raise'),
     ("csv_field_limit_off", "rcrj.py", "    csv.field_size_limit(max(csv.field_size_limit(), 4 * MAX_RECORD))\n", ""),
     ("rtf_skip_off", "to_txt.py", "                if w in RTF_SKIP:", "                if False:"),
     ("html_script_skip_off", "to_txt.py", "        if not self.skip:\n            self.out.append(d)", "        if True:\n            self.out.append(d)"),
     ("json_nest_off", "to_txt.py", '            return "\\n".join(flatten_json(obj, maxd=limits["json_flat_depth"]))', '            return "\\n".join(flatten_json(obj, maxd=10**6))'),
-    ("xxe_external_allowed", "to_txt.py", "    return DET.fromstring(b)", "    return DET.fromstring(b, forbid_entities=False, forbid_external=False)"),
+    ("xxe_external_allowed", "to_txt.py", "        return DET.fromstring(b)  # forbids", "        return DET.fromstring(b, forbid_entities=False, forbid_external=False)  # forbids"),
     ("member_count_cap_off", "to_txt.py", '        if budget.members > limits["max_members"]:', '        if False:'),
 ]
 
@@ -71,8 +76,15 @@ def run_one(label, m):
     open(os.path.join(d, fn), "w").write(src.replace(old, new))
     env = dict(os.environ, CSVSON_MOD_DIR=d, CSVSON_OUT=os.path.join(d, "out"))
     try:
-        p = subprocess.run([sys.executable, os.path.join(HERE, "selfcheck.py")], cwd=d, env=env, capture_output=True, text=True, timeout=600)
-        out = p.stdout + p.stderr
+        p = subprocess.Popen([sys.executable, os.path.join(HERE, "selfcheck.py")], cwd=d, env=env, stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, text=True, start_new_session=True)
+        try:
+            out = p.communicate(timeout=600)[0]
+        finally:
+            try:
+                os.killpg(p.pid, 9)   # whole group, never leave children behind
+            except OSError:
+                pass
     except subprocess.TimeoutExpired:
         return name, "CAUGHT", "timeout"
     open(os.path.join(d, "selfcheck_output.txt"), "w").write(out)
@@ -85,7 +97,7 @@ def run_one(label, m):
 
 def main():
     label = sys.argv[1] if len(sys.argv) > 1 else "r1"
-    with cf.ThreadPoolExecutor(4) as ex:
+    with cf.ThreadPoolExecutor(int(os.environ.get("MUTANT_WORKERS", "1"))) as ex:   # serial by default (2026-10-06)
         res = list(ex.map(lambda m: run_one(label, m), M))
     lines = [f"{st:9} {n:28} {det}" for n, st, det in res]
     caught = sum(st == "CAUGHT" for _, st, _ in res)

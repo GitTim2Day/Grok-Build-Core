@@ -197,8 +197,13 @@ def run(records: list, outdir: str, stem: str, node: str = "box", run_id: str = 
     fb = Fallback(db_path or os.path.join(outdir, stem + "_fallback.sqlite"), run_id)
     rejects, pending, fb_rows = [], [], []
     for n, rec in enumerate(records, 1):
+        # FIX 2026-10-06 (ported from edge-canvas-kit vendored copy): dict check BEFORE building ctx, so a non-dict record
+        # goes to the bad_record node and the main line continues (old order raised AttributeError).
+        if not isinstance(rec, dict):   # malformed record: reject node, continue
+            rejects.append(reject_entry("bad_record", repr(rec)[:80], "structure", f"record#{n}"))
+            continue
         ctx = f"{rec.get('source','')}:{rec.get('line_no','')}"
-        if not isinstance(rec, dict) or not isinstance(rec.get("text"), str):   # malformed record: reject node, continue
+        if not isinstance(rec.get("text"), str):   # malformed record: reject node, continue
             rejects.append(reject_entry("bad_record", repr(rec)[:80], "structure", ctx))
             continue
         try:
