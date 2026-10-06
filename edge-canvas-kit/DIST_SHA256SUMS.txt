@@ -1,2 +1,2 @@
-09c37a14d6b1234c4aa2bf624fb512a546947ec5d58699b691efca02afcd371c  edge-canvas-kit.zip  (158054 bytes)
-31f38636b0bb47ef2377f53b617054dc7074ae1403b502f1248008c0f38ba782  edge-canvas-kit.tar.gz  (135058 bytes)
+5370749fc5ec28861b19cb1a5fa00f2dc8f6d89f889e2ff7643884d63877512d  edge-canvas-kit.zip  (182373 bytes)
+a7fa45ccf70ec1ae78de81395be37cf57238d9c83e19fb803ac1d86237f43067  edge-canvas-kit.tar.gz  (159529 bytes)

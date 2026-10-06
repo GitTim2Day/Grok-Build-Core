@@ -68,3 +68,54 @@ no defusedxml, no browser) to imitate a fresh Pi without extras.
 | Bare device (no extras, `python3 -S`) | **217 PASS + 4 skip** (BASIC lane, scaffold-bas run, C++ compile, UI smoke = SKIP, never PASS) |
 | Mutants (one at a time) | **43 / 43 caught**, 0 survivors, 1 UNTESTED (`ui_sandbox_origin_check_off`); 0 leftover processes after every mutant |
 | UI smoke + screenshot | PASS (google-chrome headless, real time, default isolation); screenshot `logs/ui_smoke_final.png` (box, outside the kit) |
+
+## R8–R10 — Spectrum Sweep added to the Canvas tab (Timothy's ask 4:49 PM ET; built 4:50–5:15 PM ET)
+Boot first: `bwbasic /workspace/hybrid-boot/BOOT.bas </dev/null` → `0.70710678` (4:50 PM). Pre-sweep copies archived first to
+`archive/pre-sweep/` (box, outside the kit: server.py, selfcheck.py, mutants.py, ui_smoke.py, README.md, ROUNDS_LOG.md, agent.py,
+ui/app.js, ui/index.html, ui/style.css, knowledge/KNOWLEDGE_MANIFEST.md, the R7 dist and the box harness, with ARCHIVE_SHA256.txt).
+New: `lib/sweep.py`, `GET /api/sweep`, Canvas-tab "Spectrum sweep" (chart, modes, redshift slider, overlay, frames, audio off by default),
+`basic/sweep.bas`, `cpp/sweep.cpp`. Every run via `safe_run.sh` (timeout + process cap + KIT_SELFTEST_ACTIVE=1), one at a time; mutants via
+`run_mutants_serial.sh`; a `/tmp/kit-mutants-*` process count after every run.
+
+Key values (truncated to 8 places, never rounded; Python Decimal = BASIC = C++): **y(100 MHz) = 19.54420602**, **y(500 THz) = 41.79770269**,
+shift log2(1+z): z=1 → 1.00000000, z=3 → 2.00000000, z=0.5 → 0.58496250; sampler default (y = 42 − x/4, 90 steps) final **19.5**.
+
+| Round | Time (ET) | Self-check result | Mutants | Found → mitigated |
+|---|---|---|---|---|
+| R8 | 4:55–5:00 | quick run1 317 / **1 fail** → quick run2 **318 PASS + 4 skip** · full **335 / 335** | **60 / 60** caught (43 old + 17 new), 1 UNTESTED, 0 leftovers | (1) test bug: my 43 Hz constant was wrong (130.8·2^−1.6 = 43.1479…, not 43.157) → test now checks int(...) == 43 and the decay end value. (2) review: a zero from the Decimal path printed as `0E-8` (scientific) → `_cut` formats with "f" and never returns `-0.00000000`; new test `sweep_trunc_never_scientific`, mutant `sweep_cut_scientific`. (3) review: more than 32 query fields raised ValueError → HTTP 500 → now 400 "too many query fields"; test `query_too_many_fields_400`, mutant `server_query_fields_500`. |
+| R9 | 5:01–5:07 | full **337 / 337 ×3** · quick **320 + 4 skip** · bare device **303 + 5 skip** · cross-check ALL AGREE · UI smoke PASS | 60 caught, **1 SURVIVED** (`sweep_pow2_not_exact`), **1 NOT APPLIED** (`sweep_trunc_rounds`), 1 UNTESTED; 0 leftovers | (1) `sweep_trunc_rounds` pattern no longer matched after the R8 `_cut` change → pattern updated. (2) Survivor: with the exact power-of-two path removed, z = 0/1/3 still came out right through Decimal, so the tests could not see it. Probe: through Decimal alone, log2(16) cuts to **3.99999999 at both 50 and 70 digits** (wrong, and the stability check passes), and 2^6, 2^8, 2^−64 … differ between 50/70 (refused). So the exact path matters → tests now include z = 15 (1+z = 16 → 4.00000000) and log2 of 16, 2^6, 2^−64. |
+| R10 | 5:08–5:14 | full **338 / 338 ×3** · quick **321 PASS + 4 skip** · bare device **304 PASS + 5 skip** · cross-check ALL AGREE (Python/BASIC/C++, tolerance 1e-7) · UI smoke PASS + screenshot | **62 / 62 caught**, 0 survivors, 1 UNTESTED (`ui_sandbox_origin_check_off`, unchanged); 0 leftovers after every mutant | none (confirmation round) |
+
+New tests (89 sweep-related in the full run): endpoint + key values vs an independent Decimal reference, axis decades ascending (10^7..10^16,
+100 MHz and 1 PHz labels), visible band exactly 400–790 THz (only band highlighted, log10 14.60–14.90), Latin labels in order and no
+"Microondas" in the response or in lib/ui/server code, bands contiguous, octave sweep starts at exactly 100 MHz / crosses the visible window /
+exits in Ultravioletum, redshift: shift = log2(1+z) for z = 1, 3, 15, 0.5, 1/3, 1100 on every sample and f_obs = f_emit/(1+z) exactly,
+wavelength→RGB known points (440 blue, 490 cyan, 510 green, 580 yellow, 645 red, 380/780 edges = C++), ramps below/above visible, sample colours
+follow the rule, decay formula label and shape (24.4 → toward 19.4; k = 0 flat; lift 0 toward 43 Hz), sampler final only (19.5, f 96982340.184 Hz
+truncated), exact fractional steps (dx = 1/3), n = 2 walk = closed form, fps 32/64, overlay default Latin line + edit echo + line breaks refused,
+23 cap/refusal probes (samples, z, f, k, A, xmax, lift, steps, |y|, mode, fps, unknown/duplicate parameter, long token, nan/inf/1/0),
+main line continues after refusals, audio whole-octave transpose (36 for the default sweep) and off by default, on-screen note, precision note,
+UI single-line overlay input, examples list, screens accept both twins, BASIC and C++ cross-checks, C++ self-check 15/15, query-field cap.
+UI smoke adds: key values on the page, axis drawn upward, Latin labels, overlay sanitizer, visible band painted, sweep frame 0 colour in the
+player, audio off, z = 0.5 shift 0.58496250.
+New mutants (19): sweep_axis_order_flipped, sweep_redshift_multiply, sweep_label_microondas, sweep_decay_sign_flipped, sweep_samples_cap_off,
+sweep_z_cap_off, sweep_visible_band_800THz, sweep_trunc_rounds, sweep_overlay_newline_allowed, sweep_rgb_blue_green_swap, sweep_pow2_not_exact,
+server_sweep_unknown_params_allowed, ui_sweep_audio_on_by_default, basic_sweep_multiply_redshift, cpp_sweep_trunc_rounds, sweep_cut_scientific,
+server_query_fields_500, ui_sweep_axis_flip, ui_sweep_overlay_multiline — all caught in R10.
+
+Notes / limits (sweep):
+- Representation only: nothing is emitted or detected. Band edges other than the visible window are approximate conventional ones, for display.
+- My choices (not from Timothy's text, labelled in the UI/README): octave default end 1 PHz; decay defaults k = 1, x = 0..5 and the
+  whole-octave lift L = 21 (so the image's curve sits on the radio axis); sampler default y = 42 − x/4, 90 steps; colour ramps outside the
+  visible band; audio transposes so the top lands at or below 16 kHz (for the default 23-octave sweep only the top ~10 octaves are audible;
+  the rest is silent, not compressed).
+- `sweep_pow2_not_exact` is caught because the self-check stops on an uncaught refusal (SweepError) right after reporting the FAIL — fail closed,
+  but not a tidy FAIL line for every later test.
+- Stray count: the box-side `ps | grep /tmp/kit-mutants-` count was **1** after each pre-mutant R10 run (none in R8/R9). `ps` at 5:12 PM showed no
+  such process and the mutants phase found 0 after every mutant; the process was not identified (it was gone before I looked). Far below the 50 limit.
+- Audio and the visible-light colours were checked only headless (no speakers, no display); not run on a real Pi 5 yet.
+- Correction (5:17 PM ET), stray count identified: the 1 match during R10 was my own launcher. R10 was started as `chmod … && nohup ./run_r10.sh &`;
+  bash runs a backgrounded `&&` list in a subshell that keeps the launcher's full command text (which contained the search pattern) as its
+  command line. `mutants.py` found exactly that 1 process at the baseline sweep and killed it (`STRAYS: 1 … after baseline; killed` in
+  `logs/R10_mutants_full.txt`); `run_r10.sh` carried on and finished. R9 was started with a plain `nohup … &` and counted 0. The 1 seen after the
+  post-log quick run was the Shell command that appended this log (its text contained the pattern). No test process was left behind.

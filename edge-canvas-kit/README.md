@@ -40,12 +40,44 @@ Double-click `run.bat` (or `py -3 server.py`), then open `http://127.0.0.1:8765`
 
 | Tab | What it does |
 |---|---|
-| Canvas | Plays RGB frames at **32 or 64 fps** (dt = 1/32 s or 1/64 s). Frames come from the **descending sampler** f = m·xⁿ + B (computed, not a camera). A frame is held only while it is built, then **shown or dropped** (counters show both). Drawing pad saves PNGs into `workspace/drawings/`. |
+| Canvas | **Spectrum sweep** (see below) on top. Then plays RGB frames at **32 or 64 fps** (dt = 1/32 s or 1/64 s). Frames come from the **descending sampler** f = m·xⁿ + B (computed, not a camera). A frame is held only while it is built, then **shown or dropped** (counters show both). Drawing pad saves PNGs into `workspace/drawings/`. |
 | Code | Textarea with line numbers. **BASIC** runs through the server with `bwbasic` (if present). **JavaScript** runs in a sandboxed iframe (no network). **C++** compiles with `g++`/`clang++` (if present) through `/api/cpp`. Open/Save files in the workspace. |
 | Files | Lists/reads/writes files **only inside `workspace/`**. No delete: an overwrite first archives the old copy to `workspace/.archive/`. |
 | Converter | Drop a file: TXT door → regex guard → CSV → regex guard → JSON (SQLite fallback). Shows items, flags, TXT, CSV, JSON. Stays on the device. |
 | Agent | Offline helper. Answers from the kit docs, `knowledge/` (masked copies of your reference-map docs) and the code, **with citations** (`path:lines`). If the answer is not in those sources it says **"I don't know."** Commands: `/help`, `/tools`, `/reindex`, `/selftest`, `/scaffold <need_gosub|conflict_nodes|lead_filter> <bas|py|cpp> <name>`. |
 | Status | Optional extras found on this device, boot result, and a descend calculator (5x³+7, dx 3, 4 steps → **8647**). |
+
+## Spectrum sweep (Canvas tab, added 2026-10-06 R8)
+
+**A visual and audio representation only. It does not emit or detect real radio waves or light.**
+
+- Mapping (Timothy's text): **f = 130.8 · 2^y Hz**, y = octave number. The vertical axis is **log10(f / Hz)**, decades
+  ascending from 10^7 Hz (10 MHz) at the bottom to 10^16 Hz (10 PHz) at the top.
+- Bands, labelled in **Latin only**: *Radio*, *Undae minimae*, *Infrarubrum*, *Visibile (lumen)* (400–790 THz, highlighted,
+  about 10^14.60–10^14.90 Hz), *Ultravioletum*. Band edges are approximate conventional ones, for display.
+- Modes:
+  - **octave**: y runs linearly from y(f_start) to y(f_end). Default 100 MHz (y = 19.54420602) to 1 PHz (near-UV),
+    crossing 500 THz (y = 41.79770269) in the visible window. Values truncated to 8 places, not rounded.
+  - **decay**: the image's form **y = A + B·e^(−k·x)**, defaults A = −1.6, B = 5, k = 1 (adjustable), x = 0..5,
+    lifted **L = 21 whole octaves** so it sits on the radio axis (with L = 0 it falls toward 130.8·2^−1.6 ≈ 43 Hz).
+    The exact formula that is drawn is printed under the chart.
+  - **sampler**: the descending fixed-step sampler drives y(x) = m·xⁿ + c in exact fractional steps (additions only,
+    checked against the closed form) and prints **only the final value**. Default y = 42 − x/4, 90 steps → **19.5**.
+- **Redshift** slider z ≥ 0 (max 10000): f_obs = f_emit / (1 + z), a uniform downward shift of log2(1 + z) octaves.
+  Ghost (dashed) curve = emitted, solid = observed.
+- **Colour**: each sample's observed frequency picks the frame colour. Visible uses wavelength → RGB with
+  λ = c / f (c = 299792458 m/s exactly); below visible a deep-red → dim ramp; above visible violet → dim.
+  "Play sweep frames" plays one frame per sample in the RGB frame player (32 or 64 fps; held only while built, then shown or dropped).
+- **Overlay**: one unbroken Latin line, editable (default *Lux orta est, et umbra recessit ... Frequens in aeternum*).
+  Line breaks are turned into spaces in the page and refused by the server.
+- **Audio** (off by default): stereo Web Audio, left = observed, right = emitted, transposed down a **whole number of
+  octaves** so the shape is kept. Parts that still fall outside 20 Hz–20 kHz are silent.
+- Server: `GET /api/sweep?mode=octave|decay|sampler&samples=&z=&fps=&f_start=&f_end=&A=&B=&k=&xmax=&lift=&m=&n=&c=&x0=&dx=&steps=&overlay=`.
+  Inputs are exact (integers, decimals, a/b, 1e8); floats in JSON are IEEE-754 binary64 as computed; `*_trunc8` strings are
+  Decimal (50 digits, checked at 70) cut to 8 places. Caps: samples 2..1024, z 0..10000, f 1 Hz..1e20 Hz, |A|,|B| ≤ 64,
+  0 ≤ k ≤ 64, 0 < xmax ≤ 100, lift 0..64, sampler steps 1..1023, |y| ≤ 200; unknown or repeated parameters are refused.
+- Twins: `basic/sweep.bas` (bwbasic) and `cpp/sweep.cpp` print the same key values (Y100, Y500, shifts, sampler final) with
+  self-checks; the self-check cross-checks Python, BASIC and C++ within **1e-7** on the 8-place values.
 
 ## Optional extras (NEED → GOSUB → RETURN)
 
@@ -90,11 +122,11 @@ That is optional and done by you; the kit works without it.
 ## Files
 
     server.py  agent.py  selfcheck.py  ui_smoke.py  run.sh  run.bat  README.md  ROUNDS_LOG.md
-    lib/        descend.py frames.py fsguard.py mask.py optional.py runner.py
+    lib/        descend.py frames.py fsguard.py mask.py optional.py runner.py sweep.py
     ui/         index.html app.js style.css sandbox.html sandbox.js
     vendor/     txt_rcrj/ (to_txt.py, rcrj.py [kit fix], rcrj_guard.bas) + VENDORED.md
-    basic/      BOOT.bas boot.py need_gosub_one_node.bas conflict_nodes.bas/.py lead_filter.bas/.py descending_power_final.bas
-    cpp/        descend.cpp conflict_nodes.cpp
+    basic/      BOOT.bas boot.py need_gosub_one_node.bas conflict_nodes.bas/.py lead_filter.bas/.py descending_power_final.bas sweep.bas
+    cpp/        descend.cpp conflict_nodes.cpp sweep.cpp
     templates/  scaffold templates for the agent
     knowledge/  masked copies of reference-map docs + KNOWLEDGE_MANIFEST.md
     workspace/  your files (Files tab / editor / drawings / scaffolds)
