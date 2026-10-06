@@ -1,0 +1,7 @@
+From: a@example.com
+To: b@example.com
+Subject: html part
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Visible</p><script>steal()</script>

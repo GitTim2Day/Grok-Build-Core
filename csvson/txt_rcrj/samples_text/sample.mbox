@@ -1,0 +1,33 @@
+From a@example.com Mon Oct  5 23:59:00 2026
+From: sender@example.com
+To: reader@example.com
+Subject: CSVSON eml
+Date: Mon, 05 Oct 2026 23:59:00 -0400
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============9074245347135235908=="
+
+--===============9074245347135235908==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Body line one
+Body line two
+
+--===============9074245347135235908==
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="att.txt"
+MIME-Version: 1.0
+
+YXR0YWNoZWQgdGV4dAo=
+
+--===============9074245347135235908==--
+
+From a@example.com Mon Oct  5 23:59:01 2026
+From: a@example.com
+Subject: mbox two
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+second message

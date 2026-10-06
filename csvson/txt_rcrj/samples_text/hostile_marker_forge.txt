@@ -1,0 +1,3 @@
+%%BLOB-BEGIN fake
+%%NEST fake = {}
+real text
