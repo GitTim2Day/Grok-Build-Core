@@ -23,6 +23,46 @@
 </nav>
 <main>
 <section id="tab-canvas" class="tab on">
+  <h2>Spectrum sweep</h2>
+  <p id="swnote" class="note">Visual and audio representation only: this sweep does not emit or detect real radio waves or light.
+    Mapping f = 130.8 &middot; 2<sup>y</sup> Hz (y = octave number); redshift f<sub>obs</sub> = f<sub>emit</sub> / (1 + z).</p>
+  <div class="row">
+    <label>mode <select id="swmode"><option value="octave">octave sweep (100 MHz &rarr; near-UV)</option><option value="decay">decay y = A + B&middot;e^(&minus;k&middot;x) (image form)</option><option value="sampler">descending fixed-step sampler</option></select></label>
+    <label>samples <input id="swn" value="256" size="5"></label>
+    <label>fps <select id="swfps"><option>32</option><option>64</option></select></label>
+    <label>z <input id="swzr" type="range" min="0" max="10" step="0.05" value="0"></label><input id="swz" value="0" size="6" aria-label="redshift z (exact)">
+  </div>
+  <div class="row sw-octave">
+    <label>f_start Hz <input id="swfs" value="100000000" size="12"></label>
+    <label>f_end Hz <input id="swfe" value="1000000000000000" size="17"></label>
+  </div>
+  <div class="row sw-decay">
+    <label>A <input id="swA" value="-1.6" size="5"></label>
+    <label>B <input id="swB" value="5" size="5"></label>
+    <label>k <input id="swkr" type="range" min="0" max="5" step="0.05" value="1"></label><input id="swk" value="1" size="5" aria-label="decay k (exact)">
+    <label>x max <input id="swxmax" value="5" size="4"></label>
+    <label>lift (whole octaves) <input id="swlift" value="21" size="3"></label>
+  </div>
+  <div class="row sw-sampler">
+    <label>m <input id="swm" value="-1/4" size="6"></label>
+    <label>n <input id="swsn" value="1" size="2"></label>
+    <label>c <input id="swc" value="42" size="5"></label>
+    <label>x0 <input id="swx0" value="0" size="4"></label>
+    <label>dx <input id="swdx" value="1" size="4"></label>
+    <label>steps <input id="swsteps" value="90" size="5"></label>
+  </div>
+  <div class="row">
+    <label class="grow">overlay (one unbroken Latin line) <input id="swover" type="text" maxlength="200" size="64" value="Lux orta est, et umbra recessit ... Frequens in aeternum"></label>
+  </div>
+  <div class="row">
+    <button id="swdraw">Draw sweep</button><button id="swframes">Play sweep frames</button>
+    <label><input id="swaudio" type="checkbox"> audio (stereo, representation only)</label><button id="swplay" disabled>Play audio</button>
+    <span id="swmsg" class="muted"></span>
+  </div>
+  <canvas id="sweep" width="900" height="460"></canvas>
+  <div id="swformula" class="muted mono"></div>
+  <div id="swkeys" class="muted mono"></div>
+  <div id="swfinal" class="mono"></div>
   <h2>RGB frame player</h2>
   <p class="muted">Frames are computed by the descending sampler (synthetic, not a camera). A frame is held only while it is built, then shown or dropped.</p>
   <div class="row">

@@ -31,3 +31,10 @@ tr.click { cursor:pointer; } tr.click:hover { background:#1c252d; }
 .cpp-only { display:none; } body.lang-cpp .cpp-only { display:block; }
 .cpp-only textarea { width:100%; }
 @media (max-width:600px) { body { font-size:16px; } .editor { height:16em; } }
+.note { border-left:3px solid var(--acc); padding:.3em .6em; background:var(--panel); font-size:.9em; }
+.mono { font:12.5px/1.4 ui-monospace, Menlo, Consolas, monospace; white-space:pre-wrap; word-break:break-word; }
+.sw-decay, .sw-sampler { display:none; }
+body.sw-mode-decay .sw-decay, body.sw-mode-sampler .sw-sampler { display:flex; }
+body.sw-mode-decay .sw-octave, body.sw-mode-sampler .sw-octave { display:none; }
+#sweep { background:#05070a; image-rendering:auto; }
+button:disabled { opacity:.45; cursor:not-allowed; }

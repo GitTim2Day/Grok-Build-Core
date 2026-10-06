@@ -21,7 +21,7 @@ KIT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, KIT_DIR)
 sys.path.insert(0, os.path.join(KIT_DIR, "vendor", "txt_rcrj"))
 
-from lib import descend, frames, fsguard, optional, runner  # noqa: E402
+from lib import descend, frames, fsguard, optional, runner, sweep  # noqa: E402
 from lib.mask import mask  # noqa: E402
 import agent as agent_mod  # noqa: E402
 
@@ -194,7 +194,10 @@ class Handler(BaseHTTPRequestHandler):
             if len(self.path) > 4096:
                 raise ApiError(414, "URL too long")
             u = urllib.parse.urlsplit(self.path)
-            path, q = u.path, urllib.parse.parse_qs(u.query, max_num_fields=32)
+            try:
+                path, q = u.path, urllib.parse.parse_qs(u.query, max_num_fields=32)
+            except ValueError:
+                raise ApiError(400, "too many query fields")
             if not path.startswith("/api/"):
                 if method != "GET":
                     raise ApiError(405, "method not allowed")
@@ -210,7 +213,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(e.status, {"error": e.msg})
         except fsguard.GuardError as e:
             self._send_json(e.status, {"error": str(e)})
-        except (descend.DescendError, frames.FramesError) as e:
+        except (descend.DescendError, frames.FramesError, sweep.SweepError) as e:
             self._send_json(400, {"error": str(e)})
         except (BrokenPipeError, ConnectionResetError):
             pass
@@ -256,6 +259,18 @@ class Handler(BaseHTTPRequestHandler):
     def api_frames(self, q):
         args = {k: _qs1(q, k) for k in ("fps", "frames", "w", "h", "m", "n", "B", "x0", "dx") if _qs1(q, k) is not None}
         return frames.generate(**args)
+
+    SWEEP_KEYS = ("mode", "samples", "z", "fps", "f_start", "f_end", "A", "B", "k", "xmax", "lift", "m", "n", "c", "x0",
+                  "dx", "steps", "overlay")
+
+    def api_sweep(self, q):
+        """Spectrum Sweep samples (representation only). Unknown parameters are refused (fail closed)."""
+        unknown = sorted(set(q) - set(self.SWEEP_KEYS))
+        if unknown:
+            raise ApiError(400, f"unknown sweep parameter(s): {', '.join(unknown)[:120]}")
+        if any(len(v) != 1 for v in q.values()):
+            raise ApiError(400, "each sweep parameter at most once")
+        return sweep.generate(**{k: v[0] for k, v in q.items()})
 
     def api_files_list(self, q):
         return self.server.ws.list(_qs1(q, "path", ""))
@@ -322,6 +337,7 @@ ROUTES = {
     ("GET", "/api/boot"): Handler.api_boot,
     ("POST", "/api/descend"): Handler.api_descend,
     ("GET", "/api/frames"): Handler.api_frames,
+    ("GET", "/api/sweep"): Handler.api_sweep,
     ("GET", "/api/files"): Handler.api_files_list,
     ("GET", "/api/files/read"): Handler.api_files_read,
     ("POST", "/api/files/write"): Handler.api_files_write,
