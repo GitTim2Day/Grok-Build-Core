@@ -13,7 +13,7 @@ The geometric commands were important up front because of the geometry and trigo
 | Path | Role |
 |---|---|
 | `/workspace/SESSION_GOSUB_STREAMLINE_2026-09-17.md` | Session GOSUB streamline procedure notes |
-| Drive `audit-pattern-map-gosub-streamline.md` (id `[DRIVE-ID-MASKED]`) | Audit + pattern-map as GOSUB-driven batch skill |
+| Drive `audit-pattern-map-gosub-streamline.md` (id `1i6-uBeES6y-5bSqyay9TCfY94BKwzDqr`) | Audit + pattern-map as GOSUB-driven batch skill |
 | Notion Session Streamlining / pattern-map skills (when present) | Process locks |
 | `streamline_pipeline.py` / `test_streamline_pipeline.py` / `streamline.pyz` | **ABSENT as bytes** — sealed SHA claims only (see BUILD_FULL_LINEAGE_MAP) |
 

@@ -18,5 +18,3 @@ Not copied (restricted / personal): sitting gates report, purchase inventories, 
 | MAP_PASS_1.md | …/session-map-2026-10-04/MAP_PASS_1.md | 89536da034855c05 | c60d42bc694256db | {'EMAIL': 2} | none |
 | BASIC_STREAMLINING_GOSUB_METHOD.md | …/github-push-basic-2026-10-05/basic/STREAMLINING_GOSUB_METHOD.md | b05be8ccf51d9be9 | b05be8ccf51d9be9 | - | none |
 | BASIC_README.md | …/github-push-basic-2026-10-05/basic/README.md | da9af6b5242866ee | da9af6b5242866ee | - | none |
-
-GitHub copy (2026-10-06): Google Drive file ids masked as `[DRIVE-ID-MASKED]` in BASIC_STREAMLINING_GOSUB_METHOD.md (1 ids, copy sha256[:16] now c8f97418754d2681); CSVSON_INGEST_READINESS_2026-10-05.md (2 ids, copy sha256[:16] now a90c738cb1ad9358). The zip/tarball on Drive keep the box copy.
