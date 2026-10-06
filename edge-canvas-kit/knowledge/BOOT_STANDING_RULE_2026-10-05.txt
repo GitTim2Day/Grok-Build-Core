@@ -1,0 +1,1 @@
+STANDING: session-start bwbasic BOOT.bas -> PRINT 0.70710678. Continuity via MASTER_REFERENCE_MAP + copies/. Confirmed 2026-10-05 13:03 ET.
