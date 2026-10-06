@@ -1,0 +1,38 @@
+id,area,formula,domain,notes
+F,Newtonian,F(M)=M*A,M>0,mass is the argument
+P,Newtonian,P(M)=M*V,,
+J,Newtonian,J=F*T=delta_P,,
+K,Newtonian,K(M)=(1/2)*M*V*V,V<C,low-speed cut not the working energy
+U,Newtonian,U(M)=M*g*H,,g is the field not the constant G
+W,Newtonian,W=F*D=delta_K,,
+POW,Newtonian,POW=F*V,,
+FG,Newtonian,FG(M)=G*M*M2/R*R,R>0,
+GF,Newtonian,g(M)=G*M/R*R,,field
+FC,Newtonian,FC(M)=M*V*V/R,,
+ORB,Newtonian,V_orb*V_orb=G*M/R,,
+ESC,Newtonian,V_esc*V_esc=2*G*M/R,,
+TAU,Newtonian,TAU=R*F,,point mass perpendicular; extended I stays its own
+E0,special,E0(M)=M*C*C,C=299792458,
+E,special,E(M)=M*C*C*C/S,S=sqrt(C*C-V*V) and V<C,
+PR,special,PR(M)=M*V*C/S,,
+KX,special,K(M)=M*V*V*C*C/(S*(C+S)),,equals E(M)-E0(M)
+INV,special,E*E-(PR*C)*(PR*C)=(M*C*C)*(M*C*C),,
+FP,special,F_par(M)=M*A*C*C*C/(S*S*S),,force along V
+FT,special,F_perp(M)=M*A*C/S,,force across V
+EQ,general,F(M)/M=A,,local equivalence
+RS,general,RS(M)=2*G*M/(C*C),,
+RED,general,f_far/f_near=sqrt(1-RS/R),R>RS,linear cut is not a second law
+EF,quanta,E(f)=h*f,,
+PG,quanta,PG=h*f/C=h/lambda,,
+PE,quanta,h*f=phi+K,f>phi/h else no electron,K is KX when the speed is not small
+F0,quanta,f0=phi/h,,
+COMP,quanta,lambda2-lambda1=(h/(M*C))*(1-cos(theta)),,electron mass
+D1,equal,V*V/(g*H)=2,M<>0,K set equal to U
+D2,equal,V/C=sqrt(2),refused,K set equal to E0 is outside V<C
+D3,equal,V/C=sqrt(3)/2,gamma=2,KX set equal to E0
+D4,equal,V_esc/V_orb=sqrt(2),,
+D5,equal,KX/K=2*C*C/(S*(C+S)),,1 only at V=0
+D6,equal,F_par/F_perp=(C/S)*(C/S),,same-size accelerations
+D7,equal,f=M*C*C/h,,frequency match not a photon
+D8,equal,E/E0=sqrt(1+(PR/(M*C))*(PR/(M*C))),,
+CHK,check,V/C=3/5 gives KX/K=25/18,,integer ratio no float no log
