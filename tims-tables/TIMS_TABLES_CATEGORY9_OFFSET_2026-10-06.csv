@@ -1,0 +1,16 @@
+id,category,formula,note
+KF,9,K(f)=h*f-phi,phi is the offset; same role as b; not a new slope
+F0,9,h*f_0=phi,threshold; remainder gone
+RATIO,9,h*f/phi=1,threshold only; above threshold the ratio is greater than 1
+SHARE,9,K/(m_e*c*c)=(h*f-phi)/(m_e*c*c),same share already seated; not a second mass
+DROP,9,e*V=(1/2)*m*v*v,low-speed face; mass stays
+SPEED,9,v*v=2*e*V/m,m does not cancel; m not 0
+COLOR,9,e*V=h*f-phi,only above threshold; at threshold V=0
+PHOTON,9,E=p*c,p=h*f/c; no rest mass
+COMPTON,9,delta_lambda=(h/(m_e*c))*(1-cos(theta)),seated as stated; not re-derived; theta=0 gives 0; opposite gives 2*h/(m_e*c)
+INV,9,E*E-(p*c)*(p*c)=(m*c*c)*(m*c*c),not a second mass
+REST,9,E=m*c*c,p=0; positive root only
+LOSS,9,delta_m=E/(c*c),1905 equal opposite rays; no net momentum; same rest mass
+REFUSED,9,gamma*m as the mass,gamma stays on E; m stays the rest mass
+UNSEATED,9,(1/2)*m*v*v=m*c*c,still not set equal
+NOT,9,stored zero or a further particle,not behind this row
