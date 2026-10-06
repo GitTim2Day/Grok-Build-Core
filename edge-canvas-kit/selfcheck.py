@@ -54,7 +54,7 @@ sys.path.insert(0, os.path.join(KIT, "vendor", "txt_rcrj"))
 import server  # noqa: E402
 import agent as agent_mod  # noqa: E402
 import signal  # noqa: E402
-from lib import descend, fsguard, mask as maskmod, optional, runner  # noqa: E402
+from lib import descend, fsguard, mask as maskmod, optional, runner, sweep  # noqa: E402
 import rcrj  # noqa: E402
 
 RESULTS = []
@@ -348,6 +348,154 @@ def main(argv=None):
         st, j, _, _ = req(P, "GET", "/api/frames?" + q)
         check(f"frames_refuses {q}", st == 400, (st, j))
 
+    # ---------------------------------------------------------------- spectrum sweep (R8; representation only)
+    from decimal import Decimal as _D, localcontext as _lc, ROUND_DOWN as _RD
+    from fractions import Fraction as _F
+
+    def ref_log2_t8(q):   # independent reference: Decimal 60 digits, cut to 8 places; powers of two exact
+        q = _F(q)
+        n_, d_ = q.numerator, q.denominator
+        if n_ & (n_ - 1) == 0 and d_ & (d_ - 1) == 0:
+            return f"{(n_.bit_length() - d_.bit_length())}.00000000"
+        with _lc() as cx:
+            cx.prec = 60
+            v = (_D(n_) / _D(d_)).ln() / _D(2).ln()
+            return str(v.quantize(_D("0.00000001"), rounding=_RD))
+
+    def sw(qs=""):
+        return req(P, "GET", "/api/sweep" + ("?" + qs if qs else ""))
+
+    st, j, _, _ = sw()
+    check("sweep_default_200", st == 200 and j["mode"] == "octave" and len(j["samples"]) == 256, (st, j and j.get("error")))
+    kv = j["key_values"]
+    check("sweep_y_100MHz_trunc8", kv["y_at_100MHz_trunc8"] == "19.54420602" == ref_log2_t8(_F(10**8) / _F("130.8")), kv)
+    check("sweep_y_500THz_trunc8", kv["y_at_500THz_trunc8"] == "41.79770269" == ref_log2_t8(_F(5 * 10**14) / _F("130.8")), kv)
+    exps = [a["exp"] for a in j["axis"]]
+    check("sweep_axis_decades_ascending", exps == sorted(exps) and len(set(exps)) == len(exps) and exps[0] == 7 and exps[-1] == 16
+          and [float(a["hz"]) for a in j["axis"]] == sorted(float(a["hz"]) for a in j["axis"]), exps)
+    check("sweep_axis_labels_100MHz_1PHz", {a["exp"]: a["label"] for a in j["axis"]}.get(8) == "100 MHz" and {a["exp"]: a["label"] for a in j["axis"]}.get(15) == "1 PHz", j["axis"][:3])
+    vis = [b for b in j["bands"] if b["highlight"]]
+    check("sweep_visible_band_400_790THz", len(vis) == 1 and vis[0]["lo_hz"] == "400000000000000" and vis[0]["hi_hz"] == "790000000000000"
+          and j["visible_band_hz"] == ["400000000000000", "790000000000000"] and 14.60 < vis[0]["lo_log10"] < 14.61 and 14.89 < vis[0]["hi_log10"] < 14.90, vis)
+    names = [b["name"] for b in j["bands"]]
+    check("sweep_latin_labels", names == ["Radio", "Undae minimae", "Infrarubrum", "Visibile (lumen)", "Ultravioletum"], names)
+    spanish = [f for f in ("lib/sweep.py", "ui/app.js", "ui/index.html", "server.py") if "microondas" in open(os.path.join(KIT, f), encoding="utf-8").read().lower()]
+    check("sweep_no_microondas_anywhere", "microondas" not in json.dumps(j).lower() and not spanish, spanish)
+    lo_b = [(b["lo_log10"], b["hi_log10"]) for b in j["bands"]]
+    check("sweep_bands_ascending_contiguous", all(a[0] < a[1] for a in lo_b) and all(abs(lo_b[i][1] - lo_b[i + 1][0]) < 1e-12 for i in range(len(lo_b) - 1)), lo_b)
+    s0, sN = j["samples"][0], j["samples"][-1]
+    check("sweep_octave_starts_100MHz", s0.get("f_emit_exact_hz") == "100000000" and abs(s0["log10_f_emit"] - 8.0) < 1e-12 and abs(s0["y_emit"] - 19.544206028488178) < 1e-9, s0)
+    check("sweep_octave_exits_near_uv", sN["band_obs"] == "Ultravioletum" and abs(sN["log10_f_emit"] - 15.0) < 1e-12, sN)
+    check("sweep_octave_crosses_visible", any(x["band_obs"] == "Visibile (lumen)" for x in j["samples"])
+          and all(j["samples"][i]["y_emit"] < j["samples"][i + 1]["y_emit"] for i in range(255)), "")
+    check("sweep_z0_no_shift", kv["z_shift_octaves_trunc8"] == "0.00000000" and all(x["y_obs"] == x["y_emit"] for x in j["samples"]), kv)
+    for zz in ("1", "3", "15", "0.5", "1/3", "1100"):
+        st, j2, _, _ = sw("z=" + urllib.parse.quote(zz))
+        if st == 200:
+            shf = __import__("math").log2(float(1 + _F(zz)))
+            diffs = [x["y_emit"] - x["y_obs"] for x in j2["samples"]]
+            exact_ok = all(_F(x["f_obs_exact_hz"]) == _F(x["f_emit_exact_hz"]) / (1 + _F(zz)) for x in j2["samples"] if "f_emit_exact_hz" in x)
+            check(f"sweep_redshift_shift_log2(1+z) z={zz}", j2["key_values"]["z_shift_octaves_trunc8"] == ref_log2_t8(1 + _F(zz))
+                  and all(abs(dd - shf) < 1e-9 for dd in diffs) and exact_ok and all(x["log10_f_obs"] < x["log10_f_emit"] for x in j2["samples"]),
+                  (j2["key_values"], diffs[:2]))
+        else:
+            check(f"sweep_redshift_shift_log2(1+z) z={zz}", False, (st, j2))
+    st, j2, _, _ = sw("z=3")
+    check("sweep_redshift_divides_exact", j2["samples"][0]["f_obs_exact_hz"] == "25000000" and j2["key_values"]["one_plus_z"] == "4", j2["samples"][0])
+    for nm, want in ((440, (0, 0, 255)), (490, (0, 255, 255)), (510, (0, 255, 0)), (580, (255, 255, 0)), (645, (255, 0, 0)),
+                     (380, (97, 0, 97)), (780, (97, 0, 0))):
+        check(f"sweep_wavelength_rgb_{nm}nm", sweep.wavelength_to_rgb(nm) == want, sweep.wavelength_to_rgb(nm))
+    check("sweep_lambda_c_exact", sweep.C_LIGHT == 299792458, sweep.C_LIGHT)
+    r_lo, r_vis_edge, r_uv, r_top = (sweep.rgb_for_log10_hz(7.0), sweep.rgb_for_log10_hz(14.6), sweep.rgb_for_log10_hz(14.95), sweep.rgb_for_log10_hz(16.0))
+    check("sweep_rgb_below_visible_deep_red_to_dim", r_lo == (40, 0, 0) and r_vis_edge[1] == 0 and r_vis_edge[2] == 0 and r_vis_edge[0] > r_lo[0], (r_lo, r_vis_edge))
+    check("sweep_rgb_above_visible_violet_to_dim", r_uv[1] == 0 and r_uv[2] > r_uv[0] > 0 and r_top[2] < r_uv[2], (r_uv, r_top))
+    lam500 = sweep.rgb_for_log10_hz(__import__("math").log10(5e14))
+    check("sweep_rgb_500THz_is_orange_wavelength", lam500 == sweep.wavelength_to_rgb(299792458 / 5e14 * 1e9) and lam500[0] == 255 and 0 < lam500[1] < 255 and lam500[2] == 0, lam500)
+    st, j, _, _ = sw("samples=64&z=0.25")
+    check("sweep_samples_rgb_match_rule", st == 200 and all(tuple(x["rgb_obs"]) == sweep.rgb_for_log10_hz(x["log10_f_obs"]) for x in j["samples"]), (st, j and j.get("error")))
+    check("sweep_band_of_points", [sweep.band_of(v) for v in (8.0, 10.0, 13.0, 14.7, 15.0)] == ["Radio", "Undae minimae", "Infrarubrum", "Visibile (lumen)", "Ultravioletum"],
+          [sweep.band_of(v) for v in (8.0, 10.0, 13.0, 14.7, 15.0)])
+    st, j, _, _ = sw("mode=decay&samples=101")
+    ys = [x["y_emit"] for x in j["samples"]] if st == 200 else []
+    check("sweep_decay_formula_labeled", st == 200 and j["formula"].startswith("y = -1.6 + 5*exp(-1*x) + 21") and "A + B*exp(-k*x)" in j["formula"], j and j.get("formula"))
+    check("sweep_decay_starts_A_plus_B_plus_lift", st == 200 and j["samples"][0].get("y_emit_exact") == "24.4" and abs(ys[0] - 24.4) < 1e-12, ys[:1])
+    check("sweep_decay_falls_toward_A_plus_lift", len(ys) == 101 and all(ys[i] > ys[i + 1] for i in range(100)) and abs(ys[-1] - (19.4 + 5 * __import__("math").exp(-5))) < 1e-9, ys[-1:])
+    st, j, _, _ = sw("mode=decay&samples=5&k=0")
+    check("sweep_decay_k0_flat", st == 200 and all(abs(x["y_emit"] - 24.4) < 1e-12 for x in j["samples"]), (st, j and j.get("error")))
+    st, j, _, _ = sw("mode=decay&samples=5&A=-1.6&B=5&lift=0")
+    check("sweep_decay_lift0_falls_toward_43Hz", st == 200 and int(130.8 * 2 ** (-1.6)) == 43 and j["samples"][0].get("y_emit_exact") == "3.4"
+          and abs(j["samples"][-1]["y_emit"] - (-1.6 + 5 * __import__("math").exp(-5))) < 1e-9 and j["samples"][0].get("f_emit_exact_hz") is None, (st, j and j.get("formula")))
+    st, j, _, _ = sw("mode=sampler")
+    check("sweep_sampler_final_only_19.5", st == 200 and j["final"]["y"] == "19.5" and j["final"]["y_trunc8"] == "19.50000000"
+          and j["samples"][0]["y_emit_exact"] == "42" and j["samples"][-1]["y_emit_exact"] == "19.5" and len(j["samples"]) == 91, j and j.get("final"))
+    with _lc() as cx:
+        cx.prec = 60
+        ref_f = str((_D("130.8") * _D(2) ** _D("19.5")).quantize(_D("0.001"), rounding=_RD))
+    check("sweep_sampler_final_hz_trunc3", j["final"]["f_emit_hz_trunc3"] == ref_f == "96982340.184", (j["final"], ref_f))
+    st, j, _, _ = sw("mode=sampler&m=-1/4&dx=1/3&steps=9&z=1")
+    check("sweep_sampler_exact_fraction_steps", st == 200 and j["final"]["y"] == "41.25" and j["final"]["y_obs_trunc8"] == "40.25000000"
+          and [x["x"] for x in j["samples"]][:4] == ["0", "1/3", "2/3", "1"], j and j.get("final"))
+    st, j, _, _ = sw("mode=sampler&m=1&n=2&c=0&x0=0&dx=1/2&steps=6")
+    check("sweep_sampler_n2_walk_equals_closed_form", st == 200 and j["final"]["y"] == "9" and [x["y_emit_exact"] for x in j["samples"]] == ["0", "0.25", "1", "2.25", "4", "6.25", "9"], j and j.get("final"))
+    st, j, _, _ = sw("fps=64&samples=4")
+    check("sweep_fps_64_dt", st == 200 and j["dt"] == "1/64" and j["fps"] == 64, (st, j and j.get("dt")))
+    st, j, _, _ = sw()
+    check("sweep_overlay_default_latin_line", j["overlay"] == j["overlay_default"] == "Lux orta est, et umbra recessit ... Frequens in aeternum" and "\n" not in j["overlay"], j["overlay"])
+    st, j2, _, _ = sw("overlay=" + urllib.parse.quote("Lux orta est"))
+    check("sweep_overlay_edit_echo", st == 200 and j2["overlay"] == "Lux orta est", (st, j2 and j2.get("overlay")))
+    for nm, qs in (("lf", "overlay=" + urllib.parse.quote("Lux\nest")), ("cr", "overlay=" + urllib.parse.quote("Lux\rest")),
+                   ("u2028", "overlay=" + urllib.parse.quote("Lux\u2028est")), ("long", "overlay=" + "a" * 201)):
+        st, j2, _, _ = sw(qs)
+        check(f"sweep_overlay_single_line_refuses_{nm}", st == 400 and "error" in j2, (st, j2))
+    st, j, _, _ = sw("samples=1024")
+    check("sweep_samples_1024_ok", st == 200 and len(j["samples"]) == 1024, (st, j and j.get("error")))
+    for nm, qs in (("samples_1025", "samples=1025"), ("samples_1", "samples=1"), ("samples_junk", "samples=1e3"), ("z_neg", "z=-1"),
+                   ("z_over", "z=10001"), ("z_zero_den", "z=1/0"), ("z_nan", "z=nan"), ("z_inf", "z=inf"), ("f_start_0", "f_start=0"),
+                   ("f_end_1e21", "f_end=1e21"), ("k_neg", "mode=decay&k=-1"), ("k_over", "mode=decay&k=65"), ("lift_65", "mode=decay&lift=65"),
+                   ("A_big", "mode=decay&A=1e3"), ("xmax_0", "mode=decay&xmax=0"), ("steps_1024", "mode=sampler&steps=1024"),
+                   ("steps_0", "mode=sampler&steps=0"), ("sampler_y_cap", "mode=sampler&c=201&m=0"), ("mode_bogus", "mode=bogus"),
+                   ("fps_30", "fps=30"), ("unknown_param", "foo=1"), ("dup_param", "z=1&z=2"), ("long_token", "z=" + "1" * 65)):
+        st, j2, _, _ = sw(qs)
+        check(f"sweep_refuses_{nm}", st == 400 and "error" in (j2 or {}), (st, j2))
+    st, j, _, _ = sw()
+    check("sweep_main_line_after_refusals", st == 200 and j["key_values"]["y_at_100MHz_trunc8"] == "19.54420602", st)
+    au = j["audio"]
+    check("sweep_audio_whole_octave_transpose", isinstance(au["transpose_octaves"], int) and au["transpose_octaves"] == 36 and au["default"] == "off"
+          and max(x["y_obs"] for x in j["samples"]) - au["transpose_octaves"] <= __import__("math").log2(16000 / 130.8) + 1e-12, au)
+    check("sweep_note_representation_only", "does not emit or detect real radio waves or light" in j["note"]
+          and "does not emit or detect real radio waves or light" in open(os.path.join(KIT, "ui", "index.html"), encoding="utf-8").read(), j["note"])
+    check("sweep_precision_stated", "binary64" in j["precision"] and "truncated" in j["precision"] and "never rounded" in j["precision"], j["precision"])
+    check("sweep_trunc_never_scientific", sweep._cut(_D(0)) == "0.00000000" and sweep._cut(_D("-0.000000001")) == "0.00000000"
+          and sweep._cut(_D("1E+2")) == "100.00000000" and sweep._cut(_D("-1.6")) == "-1.60000000", (sweep._cut(_D(0)), sweep._cut(_D("1E+2"))))
+    st, j2, _, _ = sw("&".join(f"z{i}=1" for i in range(40)))
+    check("query_too_many_fields_400", st == 400 and "error" in (j2 or {}), (st, j2))
+    p2 = [sweep.log2_trunc8(q) for q in (_F(4), _F(1, 8), _F(16), _F(2) ** 6, _F(2) ** -64)]
+    check("sweep_log2_power_of_two_exact", p2 == ["2.00000000", "-3.00000000", "4.00000000", "6.00000000", "-64.00000000"], p2)
+    idx = open(os.path.join(KIT, "ui", "index.html"), encoding="utf-8").read()
+    appjs = open(os.path.join(KIT, "ui", "app.js"), encoding="utf-8").read()
+    m_ov = re.search(r'<input id="swover" type="text"[^>]*value="([^"]*)"', idx)
+    check("sweep_ui_overlay_single_line_input", m_ov is not None and m_ov.group(1) == sweep.OVERLAY_DEFAULT and "<textarea id=\"swover\"" not in idx
+          and "function sanitizeOverlay" in appjs, m_ov and m_ov.group(1))
+    m_au = re.search(r'<input id="swaudio"[^>]*>', idx)
+    check("sweep_ui_audio_off_by_default", m_au is not None and "checked" not in m_au.group(0) and 'id="swplay" disabled' in idx, m_au and m_au.group(0))
+    check("sweep_ui_uses_server_bands_and_axis", "d.bands.forEach" in appjs and "d.axis.forEach" in appjs and "Microondas" not in appjs, "")
+    st, j, _, _ = req(P, "GET", "/api/examples")
+    check("sweep_twins_listed_as_examples", "basic/sweep.bas" in j["examples"] and "cpp/sweep.cpp" in j["examples"], j)
+    check("sweep_twins_pass_screens", runner.basic_screen(open(os.path.join(KIT, "basic", "sweep.bas")).read()) == ""
+          and runner.cpp_screen(open(os.path.join(KIT, "cpp", "sweep.cpp")).read()) == "", "")
+    SWEEP_REF = {"Y100": "19.54420602", "Y500": "41.79770269", "SHIFT_Z1": "1.00000000", "SHIFT_Z3": "2.00000000",
+                 "SHIFT_ZHALF": "0.58496250", "SAMPLER_FINAL": "19.50000000"}
+    py_vals = {"Y100": sweep.key_values()["y_at_100MHz_trunc8"], "Y500": sweep.key_values()["y_at_500THz_trunc8"],
+               "SHIFT_Z1": sweep.log2_trunc8(_F(2)), "SHIFT_Z3": sweep.log2_trunc8(_F(4)), "SHIFT_ZHALF": sweep.log2_trunc8(_F(3, 2)),
+               "SAMPLER_FINAL": sweep.generate(mode="sampler")["final"]["y_trunc8"]}
+    check("sweep_python_twin_values", py_vals == SWEEP_REF, py_vals)
+
+    def twin_vals(out):
+        return {ln.split()[0]: ln.split()[1] for ln in out.splitlines() if len(ln.split()) == 2 and ln.split()[0] in SWEEP_REF}
+
+    def agree(a, b, tol=1e-7):   # stated tolerance on the 8-place values
+        return set(a) == set(b) and all(abs(float(a[k]) - float(b[k])) <= tol for k in a)
+
     # ---------------------------------------------------------------- files + traversal
     st, j, _, _ = req(P, "GET", "/api/files?path=")
     check("files_list_root", st == 200 and isinstance(j["items"], list), (st, j))
@@ -560,11 +708,16 @@ def main(argv=None):
         r = runner.run_basic('10 PRINT "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"\n20 GOTO 10\n', d1, timeout=20)
         check("basic_output_cap", r["capped"] and len(r["out"]) < runner.OUT_CAP + 200, (r["capped"], len(r["out"])))
         for fn, marker in (("conflict_nodes.bas", "ALL PASS"), ("lead_filter.bas", "SUMMARY: ALL PASS"),
-                           ("need_gosub_one_node.bas", "NEED_GOSUB ALL PASS"), ("descending_power_final.bas", "8647")):
+                           ("need_gosub_one_node.bas", "NEED_GOSUB ALL PASS"), ("descending_power_final.bas", "8647"),
+                           ("sweep.bas", "SUMMARY: ALL PASS")):
             st, j, _, _ = req(P, "POST", "/api/basic", body={"code": open(os.path.join(KIT, "basic", fn)).read()})
             check(f"basic_template_runs {fn}", st == 200 and marker in j.get("out", ""), str(j)[-200:])
+        st, j, _, _ = req(P, "POST", "/api/basic", body={"code": open(os.path.join(KIT, "basic", "sweep.bas")).read()})
+        bv = twin_vals(j.get("out", ""))
+        check("sweep_crosscheck_basic_vs_python", st == 200 and "PASS= 10 FAIL= 0" in j.get("out", "") and agree(bv, py_vals), (bv, j.get("out", "")[-200:]))
     else:
         skip("basic_lane", "bwbasic absent (optional); refusal screen still tested below")
+        skip("sweep_crosscheck_basic_vs_python", "bwbasic absent (optional)")
     check("basic_screen_unit", runner.basic_screen('10 SHELL "x"') and runner.basic_screen("10 REM SHELL in a comment\n20 PRINT 1") == "")
 
     # ---------------------------------------------------------------- C++ lane
@@ -578,7 +731,7 @@ def main(argv=None):
     for k, src in deny.items():
         check(f"cpp_screen_refuses {k}", runner.cpp_screen(src) != "", src)
     check("cpp_screen_allows_comment_words", runner.cpp_screen('// system kill fork\nint main(){ const char* s="system"; return 0; }') == "")
-    for fn in ("descend.cpp", "conflict_nodes.cpp"):
+    for fn in ("descend.cpp", "conflict_nodes.cpp", "sweep.cpp"):
         check(f"cpp_screen_allows_twin {fn}", runner.cpp_screen(open(os.path.join(KIT, "cpp", fn)).read()) == "")
     saved = optional._cache.get("cxx")
     optional._cache["cxx"] = {"feature": "cxx", "present": False}
@@ -609,6 +762,11 @@ def main(argv=None):
         st, j, _, _ = req(P, "POST", "/api/cpp", body={"code": open(os.path.join(KIT, "cpp", "conflict_nodes.cpp")).read()})
         out = j.get("out", "")
         check("cpp_conflict_nodes_all_pass", st == 200 and "PASS=22 FAIL=0" in out and "SUMMARY: ALL PASS" in out and j["ok"], out[-200:])
+        st, j, _, _ = req(P, "POST", "/api/cpp", body={"code": open(os.path.join(KIT, "cpp", "sweep.cpp")).read()})
+        out = j.get("out", "")
+        cv = twin_vals(out)
+        check("cpp_sweep_all_pass", st == 200 and "PASS=15 FAIL=0" in out and "SUMMARY: ALL PASS" in out and j["ok"], out[-300:])
+        check("sweep_crosscheck_cpp_vs_python", agree(cv, py_vals) and "RGB380 97,0,97" in out and "RGB780 97,0,0" in out, cv)
         st, j, _, _ = req(P, "POST", "/api/cpp", body={"code": "int main(){ return 0 }"})
         check("cpp_compile_error_reported", st == 200 and not j["ok"] and j["stage"] == "compile" and j["compile_rc"] != 0, j.get("stage"))
         st, j, _, _ = req(P, "POST", "/api/cpp", body={"code": '#include <iostream>\n#include <string>\nint main(){ std::string s; std::getline(std::cin, s); std::cout << "[" << s << "]"; }', "stdin": "edge"})
