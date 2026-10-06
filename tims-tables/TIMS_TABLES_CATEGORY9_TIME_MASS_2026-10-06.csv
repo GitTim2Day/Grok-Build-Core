@@ -1,0 +1,9 @@
+id,category,formula,note
+CLOCK,9,Delta_t=gamma*Delta_tau,stretches a clock; does not change rest mass
+STRETCH,9,(Delta_t-Delta_tau)/Delta_tau=gamma-1,same clock row; not Delta_m/m; Delta_tau not 0
+WEAK,9,Delta_t/Delta_tau approx 1+G*M/(r*c*c),weak face only; not the field equation; not the exact square root
+FREQ,9,f/f_0=1/gamma,same clock ratio; not a longitudinal Doppler
+MASS,9,Delta_m=Delta_E/(c*c),only when energy leaves or enters
+SHARE,9,Delta_m/m=Delta_E/(m*c*c),rest-mass row
+BIND,9,bound system lighter by Delta_E/(c*c),same row; photon rest mass stays 0; change is on the body
+REFUSED,9,gamma*m as a second mass,gamma stays on the energy and on the clock
