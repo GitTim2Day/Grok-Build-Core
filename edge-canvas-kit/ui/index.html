@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edge Canvas Kit (offline)</title>
+<link rel="stylesheet" href="/ui/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<header>
+  <h1>Edge Canvas Kit</h1>
+  <span id="badge" class="badge">offline</span>
+  <span id="bootline" class="muted">boot: checking...</span>
+</header>
+<nav id="tabs" role="tablist">
+  <button data-tab="canvas" class="on">Canvas</button>
+  <button data-tab="editor">Code</button>
+  <button data-tab="files">Files</button>
+  <button data-tab="convert">Converter</button>
+  <button data-tab="agent">Agent</button>
+  <button data-tab="status">Status</button>
+</nav>
+<main>
+<section id="tab-canvas" class="tab on">
+  <h2>RGB frame player</h2>
+  <p class="muted">Frames are computed by the descending sampler (synthetic, not a camera). A frame is held only while it is built, then shown or dropped.</p>
+  <div class="row">
+    <label>fps <select id="fps"><option>32</option><option>64</option></select></label>
+    <label>frames <input id="nframes" type="number" value="16" min="1" max="64"></label>
+    <label>size <select id="fsize"><option>32</option><option>64</option><option>16</option></select></label>
+    <label>m <input id="pm" value="5" size="5"></label>
+    <label>n <input id="pn" value="3" size="2"></label>
+    <label>B <input id="pB" value="7" size="5"></label>
+    <label>x0 <input id="px0" value="0" size="5"></label>
+    <label>dx <input id="pdx" value="3" size="5"></label>
+    <label><input id="loop" type="checkbox" checked> loop</label>
+  </div>
+  <div class="row">
+    <button id="fload">Load frames</button><button id="fplay">Play</button><button id="fstop">Stop</button>
+    <span id="fstats" class="muted"></span>
+  </div>
+  <canvas id="player" width="256" height="256"></canvas>
+  <h2>Drawing pad</h2>
+  <div class="row">
+    <label>color <input id="pcolor" type="color" value="#e04040"></label>
+    <label>size <input id="psize" type="range" min="1" max="24" value="4"></label>
+    <button id="pclear">Clear</button><button id="psave">Save PNG to workspace</button>
+    <span id="pmsg" class="muted"></span>
+  </div>
+  <canvas id="pad" width="480" height="300"></canvas>
+</section>
+
+<section id="tab-editor" class="tab">
+  <div class="row">
+    <label>language <select id="lang"><option value="basic">BASIC (bwbasic on the server)</option><option value="js">JavaScript (sandboxed iframe)</option><option value="cpp">C++ (g++/clang++ on the server)</option></select></label>
+    <label>example <select id="example"><option value="">(choose)</option></select></label>
+    <button id="run">Run</button>
+  </div>
+  <div class="row">
+    <label>workspace file <input id="epath" placeholder="hello.bas" size="24"></label>
+    <button id="eopen">Open</button><button id="esave">Save</button>
+    <span id="emsg" class="muted"></span>
+  </div>
+  <div class="editor"><pre id="gutter" aria-hidden="true">1</pre><textarea id="code" spellcheck="false" wrap="off">10 PRINT "HELLO FROM THE EDGE"
+20 END
+</textarea></div>
+  <label class="cpp-only">stdin for C++ <textarea id="cstdin" rows="2"></textarea></label>
+  <h3>Output</h3>
+  <pre id="out" class="out"></pre>
+  <iframe id="jsbox" sandbox="allow-scripts" src="/ui/sandbox.html" title="JS sandbox" hidden></iframe>
+</section>
+
+<section id="tab-files" class="tab">
+  <div class="row"><span>workspace/</span><span id="crumbs"></span><button id="fup">Up</button><button id="frefresh">Refresh</button></div>
+  <div class="row"><input id="newname" placeholder="notes/new.txt"><button id="fnew">New file</button>
+  <span class="muted">No delete: overwrites archive the old copy into workspace/.archive/</span></div>
+  <table id="flist"><thead><tr><th>name</th><th>type</th><th>size</th></tr></thead><tbody></tbody></table>
+  <pre id="fview" class="out"></pre>
+</section>
+
+<section id="tab-convert" class="tab">
+  <div id="drop" class="drop" tabindex="0">Drop a file here or <label class="link">choose one<input id="cfile" type="file" hidden></label>
+    <div class="muted">TXT door -> regex guard -> CSV -> regex guard -> JSON (SQLite fallback). Stays on this device.</div></div>
+  <div id="cmsg" class="muted"></div>
+  <h3>Items</h3><table id="citems"><thead><tr><th>#</th><th>name</th><th>type</th><th>status</th><th>notes</th></tr></thead><tbody></tbody></table>
+  <h3>Flags</h3><pre id="cflags" class="out small"></pre>
+  <div class="grid3">
+    <div><h3>TXT</h3><pre id="ctxt" class="out"></pre></div>
+    <div><h3>CSV</h3><pre id="ccsv" class="out"></pre></div>
+    <div><h3>JSON</h3><pre id="cjson" class="out"></pre></div>
+  </div>
+</section>
+
+<section id="tab-agent" class="tab">
+  <div class="row">
+    <label>mode <select id="amode"><option value="rules">rules (offline, cited)</option><option value="local-model">local model if Ollama is on this device</option></select></label>
+    <button data-q="/help" class="aq">/help</button><button data-q="/tools" class="aq">/tools</button><button data-q="/selftest" class="aq">/selftest</button>
+  </div>
+  <div id="chat" class="chat"></div>
+  <div class="row"><input id="ask" placeholder="Ask about the kit, your rules, or the code..." class="grow"><button id="send">Send</button></div>
+  <div class="row"><span>scaffold</span>
+    <select id="stpl"><option>need_gosub</option><option>conflict_nodes</option><option>lead_filter</option></select>
+    <select id="slang"><option>bas</option><option>py</option><option>cpp</option></select>
+    <input id="sname" placeholder="my_check" size="14"><button id="sgo">Create in workspace</button></div>
+</section>
+
+<section id="tab-status" class="tab">
+  <button id="sref">Refresh</button>
+  <pre id="stat" class="out"></pre>
+  <h3>Descend check</h3>
+  <div class="row"><label>m <input id="dm" value="5" size="4"></label><label>n <input id="dn" value="3" size="2"></label><label>B <input id="dB" value="7" size="4"></label><label>x0 <input id="dx0" value="0" size="4"></label><label>dx <input id="ddx" value="3" size="5"></label><label>steps <input id="dsteps" value="4" size="4"></label><button id="dgo">Final value</button><b id="dres"></b></div>
+</section>
+</main>
+<pre id="smoke" hidden></pre>
+<script src="/ui/app.js"></script>
+</body>
+</html>
