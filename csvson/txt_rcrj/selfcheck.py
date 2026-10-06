@@ -324,6 +324,66 @@ def main():
         t("basic_guard_skeleton_all_pass", summ and "ALL PASS" in summ[-1], summ[-1] if summ else p.stdout[-200:])
     else:
         t("basic_guard_skeleton_all_pass", False, "rcrj_guard.bas missing")
+    # ================= 9. R4 (2026-10-06): fixes A + B ported back from the edge-canvas-kit vendored copy
+    nd = [None, "plain string", 5, ["x"],
+          {"line_no": 1, "kind": "line", "text": "after non-dict", "source": "nondict", "type": "TXT", "src_sha256": ""}]
+    nd_out = os.path.join(OUT, "r4_nondict")
+    nd_db = os.path.join(nd_out, "R4_NONDICT_fallback.sqlite")
+    if os.path.exists(nd_db):
+        os.replace(nd_db, nd_db + f".prev_{time.strftime('%Y%m%d-%H%M%S')}")
+    try:
+        env_nd, err = rcrj.run(nd, nd_out, "R4_NONDICT", node="box", db_path=nd_db), ""
+    except Exception as e:
+        env_nd, err = None, f"{type(e).__name__}: {e}"
+    t("r4_non_dict_record_no_raise", env_nd is not None, err)
+    rl = env_nd["meta"]["reject_log"] if env_nd else []
+    t("r4_non_dict_records_to_bad_record", sum(1 for x in rl if x["reason"] == "bad_record") == 4, str(rl)[:200])
+    t("r4_main_line_continues_after_non_dict", bool(env_nd) and any(d["text"] == "after non-dict" for d in env_nd["data"]))
+    # fix B: XML on a device WITHOUT defusedxml (child process with defusedxml blocked; own process group, timeout)
+    probe = r"""
+import sys, json
+sys.modules["defusedxml"] = None
+sys.modules["defusedxml.ElementTree"] = None
+sys.path.insert(0, sys.argv[1])
+import to_txt
+res = {"det_absent": to_txt.DET is None}
+items = [("ok.xml", open(sys.argv[2], "rb").read()), ("bomb.xml", open(sys.argv[3], "rb").read()),
+         ("u16.xml", '<?xml version="1.0" encoding="UTF-16"?><!DOCTYPE r [<!ENTITY a "x">]><r>&a;</r>'.encode("utf-16")),
+         ("broken.xml", b"<root><a></root>")]
+for n, b in items:
+    r = to_txt.convert(n, b)[0]
+    res[n] = [r["status"], "; ".join(r.get("notes", [])), (r.get("text") or "")[:300]]
+print(json.dumps(res))
+"""
+    kw = {"start_new_session": True} if os.name == "posix" else {}
+    pp = subprocess.Popen([sys.executable, "-c", probe, MOD, os.path.join(S, "sample.xml"), os.path.join(H, "billion_laughs.xml")],
+                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, text=True, **kw)
+    try:
+        pout = pp.communicate(timeout=60)[0]
+    except subprocess.TimeoutExpired:
+        pout = ""
+    finally:
+        try:
+            os.killpg(pp.pid, 9) if os.name == "posix" else pp.kill()
+        except Exception:
+            pass
+    try:
+        pr = json.loads(pout.strip().splitlines()[-1])
+    except Exception:
+        pr = {}
+    box_broken = to_txt.convert("broken.xml", b"<root><a></root>")[0]["status"]
+    t("r4_nodefused_probe_ran", pr.get("det_absent") is True, pout[-200:])
+    t("r4_nodefused_xml_full", pr.get("ok.xml", [""])[0] == "FULL" and "/root/item@id = 7" in pr.get("ok.xml", ["", "", ""])[2], str(pr.get("ok.xml"))[:200])
+    t("r4_nodefused_dtd_quarantine", pr.get("bomb.xml", [""])[0] == "QUARANTINE" and pr.get("u16.xml", [""])[0] == "QUARANTINE", (pr.get("bomb.xml"), pr.get("u16.xml")))
+    saved_det = to_txt.DET
+    try:   # defusedxml installed but its parser unavailable (DET None): the stdlib refusal must still be QUARANTINE
+        to_txt.DET = None
+        bl = top(H, "billion_laughs.xml", fresh=True)
+        okx = top(S, "sample.xml", fresh=True)
+    finally:
+        to_txt.DET = saved_det
+    t("r4_det_none_in_process_dtd_quarantine", bl["status"] == "QUARANTINE" and okx["status"] == "FULL", (bl["status"], notes(bl), okx["status"]))
+    t("r4_nodefused_broken_same_as_box", pr.get("broken.xml", [""])[0] == box_broken != "QUARANTINE", (pr.get("broken.xml"), box_broken))
     # ================= report
     out = [f"{'PASS' if ok else 'FAIL'}  {n}" + (f"  | {d}" if (d and not ok) else "") for n, ok, d in CASES]
     npass = sum(ok for _, ok, _ in CASES)
