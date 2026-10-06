@@ -60,6 +60,26 @@ MUTANTS = [
     ("ui_frame_channel_swap", "ui/app.js", "px[i * 4] = bin.charCodeAt(j); px[i * 4 + 1] = bin.charCodeAt(j + 1);", "px[i * 4] = bin.charCodeAt(j + 1); px[i * 4 + 1] = bin.charCodeAt(j);", UI),
     ("ui_sandbox_fetch_left_on", "ui/sandbox.js", "self.fetch=undefined;", "", UI),
     ("ui_sandbox_origin_check_off", "ui/app.js", "    if (ev.source !== $(\"jsbox\").contentWindow) return;   // only our sandbox\n", "", None),
+    # ---- R8: Spectrum Sweep
+    ("sweep_axis_order_flipped", "lib/sweep.py", "AXIS_EXPS = tuple(range(7, 17))", "AXIS_EXPS = tuple(range(16, 6, -1))", Q),
+    ("sweep_redshift_multiply", "lib/sweep.py", "    return f_emit / one_plus_z", "    return f_emit * one_plus_z", Q),
+    ("sweep_label_microondas", "lib/sweep.py", "(\"Undae minimae\", 10**9", "(\"Microondas\", 10**9", Q),
+    ("sweep_decay_sign_flipped", "lib/sweep.py", "e = math.exp(-kf * xf)", "e = math.exp(kf * xf)", Q),
+    ("sweep_samples_cap_off", "lib/sweep.py", "    if N > MAX_SAMPLES:\n        raise SweepError", "    if False:\n        raise SweepError", Q),
+    ("sweep_z_cap_off", "lib/sweep.py", "if Z < 0 or Z > MAX_Z:", "if Z < 0:", Q),
+    ("sweep_visible_band_800THz", "lib/sweep.py", "VIS_HI_HZ = 790 * 10**12", "VIS_HI_HZ = 800 * 10**12", Q),
+    ("sweep_trunc_rounds", "lib/sweep.py", "t = format(d.quantize(Decimal(1).scaleb(-places), rounding=ROUND_DOWN), \"f\")", "t = format(d.quantize(Decimal(1).scaleb(-places), rounding=\"ROUND_HALF_UP\"), \"f\")", Q),
+    ("sweep_overlay_newline_allowed", "lib/sweep.py", "    if _CTRL.search(text):", "    if False:", Q),
+    ("sweep_rgb_blue_green_swap", "lib/sweep.py", "r, g, b = 0.0, (lam - 440) / (490 - 440), 1.0", "r, g, b = 0.0, 1.0, (lam - 440) / (490 - 440)", Q),
+    ("sweep_pow2_not_exact", "lib/sweep.py", "    if k is not None:\n        return f\"{k}.00000000\"", "    if False:\n        return f\"{k}.00000000\"", Q),
+    ("server_sweep_unknown_params_allowed", "server.py", "        if unknown:\n            raise ApiError(400, f\"unknown sweep", "        if False:\n            raise ApiError(400, f\"unknown sweep", Q),
+    ("ui_sweep_audio_on_by_default", "ui/index.html", "<input id=\"swaudio\" type=\"checkbox\">", "<input id=\"swaudio\" type=\"checkbox\" checked>", Q),
+    ("basic_sweep_multiply_redshift", "basic/sweep.bas", "390 FO = 500000000000000 / (1 + 1)", "390 FO = 500000000000000 * (1 + 1)", Q),
+    ("cpp_sweep_trunc_rounds", "cpp/sweep.cpp", "long long fp = (long long)std::floor((v - (long double)ip) * 100000000.0L);", "long long fp = (long long)std::round((v - (long double)ip) * 100000000.0L);", FULL),
+    ("sweep_cut_scientific", "lib/sweep.py", "rounding=ROUND_DOWN), \"f\")", "rounding=ROUND_DOWN), \"\")", Q),
+    ("server_query_fields_500", "server.py", "            except ValueError:\n                raise ApiError(400, \"too many query fields\")", "            except KeyError:\n                raise ApiError(400, \"too many query fields\")", Q),
+    ("ui_sweep_axis_flip", "ui/app.js", "return AX.T + (AX.hi - L) / (AX.hi - AX.lo)", "return AX.T + (L - AX.lo) / (AX.hi - AX.lo)", UI),
+    ("ui_sweep_overlay_multiline", "ui/app.js", ".replace(/[\\u0000-\\u001f\\u007f\\u2028\\u2029]+/g, \" \").replace(/\\s+/g, \" \")", "", UI),
 ]
 
 
