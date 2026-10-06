@@ -1,0 +1,95 @@
+// {{NAME}} -- scaffolded {{DATE}} by edge-canvas-kit agent from cpp/conflict_nodes.cpp
+// conflict_nodes.cpp -- C++ twin of basic/conflict_nodes.bas + conflict_nodes.py (Timothy's correction).
+// A conflict does not kill the main line: detect, call ONE node, return.
+// NEED codes: 0 none | 1 non-UTF-8 -> Q (quarantine) | 2 hex wrapper -> PARK (not installed)
+//             3 hop -> HELD, HR=HOP | 4 mail -> HELD, HR=MAIL (no action until Timothy turns it on)
+//             5 BOT -> hard skip unless Timothy set boton; no node ever sets boton.
+// Anything else (other ints, or a non-integer need) -> UNK flag; main line still continues.
+// Build: g++ -std=c++17 -O1 -o conflict_nodes conflict_nodes.cpp   Run: ./conflict_nodes
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+
+struct Need {                 // is_int=false models a non-integer input (str, float, None, bool in the Python twin)
+    bool is_int;
+    long long v;
+};
+static Need N(long long v) { return Need{true, v}; }
+static Need OTHER() { return Need{false, 0}; }
+
+struct State {
+    bool boton;               // only Timothy (the caller) sets this; nodes never write it
+    int q = 0, park = 0, held = 0, botskip = 0, unk = 0, steps = 0, nodes = 0;
+    std::string hr;
+    explicit State(bool on = false) : boton(on) {}
+    void reset() { q = park = held = botskip = unk = steps = nodes = 0; hr.clear(); }   // never touches boton
+    bool flags(int a, int b, int c, int d, int e) const { return q == a && park == b && held == c && botskip == d && unk == e; }
+};
+
+static const std::map<int, std::string> NODE_TABLE = {
+    {1, "non-UTF-8 -> Q=1 quarantine; calls no other door"},
+    {2, "hex binary wrapper -> PARK=1; not installed"},
+    {3, "hop request -> HELD=1 HR=HOP; no action until Timothy turns it on"},
+    {4, "mail request -> HELD=1 HR=MAIL; no action until Timothy turns it on"},
+    {5, "BOT -> hard skip unless Timothy set boton; never auto-enables"},
+};
+
+// 1000 DISPATCH: one conflict, one node, then RETURN
+static void dispatch(State& s, Need need) {
+    s.nodes += 1;
+    if (!need.is_int) { s.unk = 1; return; }
+    switch (need.v) {
+        case 1: s.q = 1; return;
+        case 2: s.park = 1; return;
+        case 3: s.held = 1; s.hr = "HOP"; return;
+        case 4: s.held = 1; s.hr = "MAIL"; return;
+        case 5: if (!s.boton) s.botskip = 1; return;
+        default: s.unk = 1; return;
+    }
+}
+
+// 100 MAIN LINE keeps moving
+static void main_line(State& s, Need need) {
+    if (!(need.is_int && need.v == 0)) dispatch(s, need);
+    s.steps += 1;
+}
+
+static State run(const std::vector<Need>& needs, bool boton = false) {
+    State s(boton);
+    for (const Need& n : needs) main_line(s, n);
+    return s;
+}
+
+int main() {
+    int pass = 0, fail = 0;
+    auto t = [&](const std::string& name, bool ok) { std::cout << (ok ? "PASS: " : "FAIL: ") << name << "\n"; ok ? ++pass : ++fail; };
+    State s;
+    s = run({N(0)}); t("need0_skip", s.flags(0, 0, 0, 0, 0) && s.steps == 1 && s.nodes == 0);
+    s = run({N(1)}); t("need1_quarantine", s.flags(1, 0, 0, 0, 0) && s.steps == 1 && s.nodes == 1 && s.hr.empty());
+    s = run({N(2)}); t("need2_hex_parked", s.flags(0, 1, 0, 0, 0) && s.nodes == 1);
+    s = run({N(3)}); t("need3_hop_held", s.flags(0, 0, 1, 0, 0) && s.hr == "HOP");
+    s = run({N(4)}); t("need4_mail_held", s.flags(0, 0, 1, 0, 0) && s.hr == "MAIL");
+    s = run({N(5)}); t("need5_bot_hard_skip", s.flags(0, 0, 0, 1, 0) && !s.boton);
+    s = run({N(5), N(5), N(5)}); t("bot_never_autoenables_x3", !s.boton && s.steps == 3 && s.nodes == 3);
+    s = run({N(5)}, true); t("bot_on_only_by_timothy", s.flags(0, 0, 0, 0, 0) && s.boton);
+    s = run({N(5)}); t("bot_back_off_default", s.botskip == 1 && !s.boton);
+    s = run({N(3)}, true); t("hop_held_even_if_boton", s.flags(0, 0, 1, 0, 0) && s.hr == "HOP");
+    s = run({N(6)}); t("unknown_need6_continues", s.flags(0, 0, 0, 0, 1) && s.steps == 1);
+    s = run({N(-1)}); t("unknown_need_neg1", s.flags(0, 0, 0, 0, 1));
+    s = run({OTHER()}); t("unknown_need_non_integer", s.flags(0, 0, 0, 0, 1) && s.steps == 1);
+    s = run({N(99)}); t("unknown_need_99", s.flags(0, 0, 0, 0, 1));
+    s = run({N(1)}); t("quarantine_calls_no_door", s.park == 0 && s.held == 0 && s.botskip == 0 && s.nodes == 1);
+    s = run({N(1), N(0)}); t("quarantine_line_continues", s.q == 1 && s.steps == 2 && s.nodes == 1);
+    s = run({N(1), N(1)}); t("repeat_need1_idempotent", s.flags(1, 0, 0, 0, 0) && s.steps == 2 && s.nodes == 2);
+    s = run({N(1), N(2), N(3), N(4), N(5)}); t("sequence_1_to_5", s.flags(1, 1, 1, 1, 0) && s.hr == "MAIL" && s.steps == 5 && !s.boton);
+    s = run({N(0), N(2), N(0), N(6), N(0)}); t("mixed_with_zeros", s.flags(0, 1, 0, 0, 1) && s.steps == 5 && s.nodes == 2);
+    s = State(); s.q = 1; s.reset(); t("reset_keeps_boton_default", s.flags(0, 0, 0, 0, 0) && !s.boton);
+    s = State(true); s.reset(); t("reset_never_touches_boton", s.boton);
+    bool five = NODE_TABLE.size() == 5;
+    for (int k = 1; k <= 5; ++k) five = five && NODE_TABLE.count(k) == 1;
+    t("table_has_5_nodes", five);
+    std::cout << "PASS=" << pass << " FAIL=" << fail << "\n";
+    std::cout << (fail == 0 ? "SUMMARY: ALL PASS" : "SUMMARY: FAILS") << "\n";
+    return fail == 0 ? 0 : 1;
+}
