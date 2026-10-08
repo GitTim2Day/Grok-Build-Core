@@ -80,5 +80,4 @@ Second and third runs, after install on this seat (`cv2` 5.0.0, Pillow 12.3.0): 
 ## Shelves
 
 Hop first. Notion Timothy Skills & KB. GitHub GitTim2Day/Grok-Build-Core/knowledge. Drive Grok_Build_Archives_2026. Local pointer after the hop message_id.
-Ledger 1a11c4db08df1156.
 BOOT ≠ SAVE.
