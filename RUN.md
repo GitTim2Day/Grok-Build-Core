@@ -76,3 +76,10 @@ python edge-canvas-kit/selfcheck.py      # 2 fails left, both 2.20-specific expe
 
 Use 3.20b, not 3.00 (3.00 breaks every IF on lines 1000+). 3.20b rounds `\` by default; `OPTION ROUND TRUNCATE` restores truncation.
 New 8-place cut to Timothy's rules: `basic/cut8_2026-10-08.*` (BASIC, C++, Python key). Record: `knowledge/BWBASIC_VETTING_2026-10-08.md`.
+
+## Append 2026-10-09 — boot notes (Claude seat)
+
+`csvson/txt_rcrj/selfcheck.py` needs its samples generated first: `cd csvson/txt_rcrj && python3 make_samples.py && python3 selfcheck.py` → 162/162.
+Boot 2026-10-09 08:50 ET (x86_64, Python 3.13.16, bwbasic 3.20b): all green except the three known items —
+`kbl_svct_stacks_MinRadius_Lp_2026-08-28.py` NameError (the half-shelf; restored D2 leaf passes 75/75) and the edge kit's 3 recorded fails.
+Today's additions also pass: vcf_to_jsonl 15/15, base-360 21/21, UDN 11/11, R3 28/28, R2 28/28.
