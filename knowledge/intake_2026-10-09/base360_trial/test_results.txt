@@ -1,0 +1,16 @@
+test_common_fractions_exact_one_digit (test_base360.Tests.test_common_fractions_exact_one_digit) ... ok
+test_declared_accuracy_stops (test_base360.Tests.test_declared_accuracy_stops) ... ok
+test_error_identity_and_bound_many_ratios (test_base360.Tests.test_error_identity_and_bound_many_ratios) ... ok
+test_finite_classifier (test_base360.Tests.test_finite_classifier) ... ok
+test_guard_removes_token_not_character (test_base360.Tests.test_guard_removes_token_not_character) ... ok
+test_integer_no_fractional_digits (test_base360.Tests.test_integer_no_fractional_digits) ... ok
+test_invalid_parameters (test_base360.Tests.test_invalid_parameters) ... ok
+test_positive_and_negative_symmetry (test_base360.Tests.test_positive_and_negative_symmetry) ... ok
+test_seven_does_not_terminate (test_base360.Tests.test_seven_does_not_terminate) ... ok
+test_two_digits (test_base360.Tests.test_two_digits) ... ok
+test_unmet_accuracy_explicit (test_base360.Tests.test_unmet_accuracy_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.187s
+
+OK

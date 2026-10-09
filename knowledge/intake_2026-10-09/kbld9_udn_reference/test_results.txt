@@ -1,0 +1,16 @@
+test_authorized_external_is_blocked (test_reference.MilestoneTests.test_authorized_external_is_blocked) ... ok
+test_deterministic_bytes (test_reference.MilestoneTests.test_deterministic_bytes) ... ok
+test_exact_result_and_denied_contributor (test_reference.MilestoneTests.test_exact_result_and_denied_contributor) ... ok
+test_identity_required (test_reference.MilestoneTests.test_identity_required) ... ok
+test_invalid_exact_inputs (test_reference.MilestoneTests.test_invalid_exact_inputs) ... ok
+test_missing_or_duplicate_parents (test_reference.MilestoneTests.test_missing_or_duplicate_parents) ... ok
+test_root_and_time_cannot_be_replaced (test_reference.MilestoneTests.test_root_and_time_cannot_be_replaced) ... ok
+test_scope_and_expiry (test_reference.MilestoneTests.test_scope_and_expiry) ... ok
+test_snapshots_cannot_mutate_history (test_reference.MilestoneTests.test_snapshots_cannot_mutate_history) ... ok
+test_tamper_and_chain_attacks (test_reference.MilestoneTests.test_tamper_and_chain_attacks) ... ok
+test_wrong_key (test_reference.MilestoneTests.test_wrong_key) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.008s
+
+OK

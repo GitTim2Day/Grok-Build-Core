@@ -1,0 +1,11 @@
+Assessment row,After this run
+64-cell round trip open,Earned for this integer 8×8 kernel only
+28 boundary must survive a 6×6 split,Earned here. 28 + 36 rebuilds to 64
+Python/C++ parity for the whole system,Earned for this kernel’s stdout only
+64-node parallel open,"Earned as 64 threads and 64 processes in one machine, this formula only"
+UDN discovery unverified,One need string runs. Any other string is refused. Discovery is still open
+Cell privacy,Interior can be hidden. Reversible restore from the mask alone is not earned
+"Toolbox: algebra, geometry, calculus, sampling",Not in this kernel
+Planck-time propagation,Still blank. No rule was added
+"Face recognition, energy benchmark",Not run
+"KBLD9 preprocessing, older GOSUB files","Not in this run. Those claims stay the other writer’s, untested here"

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "test_methods": 11,
+  "events": 9,
+  "exact_result": [
+    5,
+    4
+  ],
+  "trusted_tip": "20a1ee98af56eed27ce1aab04563a50bb0b926b924c100d7e6a41339b2c8f268",
+  "python_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "cpp_parity": "NOT_EXECUTED",
+  "device_tests": "NOT_EXECUTED",
+  "identity": "SIMULATED",
+  "persistent_append_only": "UNIMPLEMENTED"
+}

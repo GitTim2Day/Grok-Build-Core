@@ -1,0 +1,622 @@
+{
+  "fractions": [
+    {
+      "ratio": [
+        1,
+        2
+      ],
+      "minimum_exact_digits": {
+        "2": 1,
+        "10": 1,
+        "12": 1,
+        "100": 1,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          180
+        ],
+        "source_ratio": [
+          1,
+          2
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          720
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.180"
+    },
+    {
+      "ratio": [
+        1,
+        3
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": 1,
+        "100": null,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          120
+        ],
+        "source_ratio": [
+          1,
+          3
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          1080
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.120"
+    },
+    {
+      "ratio": [
+        1,
+        4
+      ],
+      "minimum_exact_digits": {
+        "2": 2,
+        "10": 2,
+        "12": 1,
+        "100": 1,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          90
+        ],
+        "source_ratio": [
+          1,
+          4
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          1440
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.090"
+    },
+    {
+      "ratio": [
+        1,
+        5
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": 1,
+        "12": null,
+        "100": 1,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          72
+        ],
+        "source_ratio": [
+          1,
+          5
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          1800
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.072"
+    },
+    {
+      "ratio": [
+        1,
+        6
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": 1,
+        "100": null,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          60
+        ],
+        "source_ratio": [
+          1,
+          6
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          2160
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.060"
+    },
+    {
+      "ratio": [
+        1,
+        7
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": null,
+        "100": null,
+        "360": null
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          51,
+          154,
+          102,
+          308,
+          205,
+          257
+        ],
+        "source_ratio": [
+          1,
+          7
+        ],
+        "exact": false,
+        "absolute_error": [
+          1,
+          15237476352000000
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.051:154:102:308:205:257"
+    },
+    {
+      "ratio": [
+        1,
+        8
+      ],
+      "minimum_exact_digits": {
+        "2": 3,
+        "10": 3,
+        "12": 2,
+        "100": 2,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          45
+        ],
+        "source_ratio": [
+          1,
+          8
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          2880
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.045"
+    },
+    {
+      "ratio": [
+        1,
+        9
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": 2,
+        "100": null,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          40
+        ],
+        "source_ratio": [
+          1,
+          9
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          3240
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.040"
+    },
+    {
+      "ratio": [
+        1,
+        10
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": 1,
+        "12": null,
+        "100": 1,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          36
+        ],
+        "source_ratio": [
+          1,
+          10
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          3600
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.036"
+    },
+    {
+      "ratio": [
+        1,
+        11
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": null,
+        "100": null,
+        "360": null
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          32,
+          261,
+          294,
+          196,
+          130,
+          327
+        ],
+        "source_ratio": [
+          1,
+          11
+        ],
+        "exact": false,
+        "absolute_error": [
+          3,
+          23944605696000000
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.032:261:294:196:130:327"
+    },
+    {
+      "ratio": [
+        1,
+        12
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": 1,
+        "100": null,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          30
+        ],
+        "source_ratio": [
+          1,
+          12
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          4320
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.030"
+    },
+    {
+      "ratio": [
+        1,
+        16
+      ],
+      "minimum_exact_digits": {
+        "2": 4,
+        "10": 4,
+        "12": 2,
+        "100": 2,
+        "360": 2
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          22,
+          180
+        ],
+        "source_ratio": [
+          1,
+          16
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          2073600
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.022:180"
+    },
+    {
+      "ratio": [
+        1,
+        25
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": 2,
+        "12": null,
+        "100": 1,
+        "360": 2
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          14,
+          144
+        ],
+        "source_ratio": [
+          1,
+          25
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          3240000
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.014:144"
+    },
+    {
+      "ratio": [
+        1,
+        27
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": 3,
+        "100": null,
+        "360": 2
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          13,
+          120
+        ],
+        "source_ratio": [
+          1,
+          27
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          3499200
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.013:120"
+    },
+    {
+      "ratio": [
+        1,
+        64
+      ],
+      "minimum_exact_digits": {
+        "2": 6,
+        "10": 6,
+        "12": 3,
+        "100": 3,
+        "360": 2
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          5,
+          225
+        ],
+        "source_ratio": [
+          1,
+          64
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          8294400
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.005:225"
+    },
+    {
+      "ratio": [
+        1,
+        81
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": 4,
+        "100": null,
+        "360": 2
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          4,
+          160
+        ],
+        "source_ratio": [
+          1,
+          81
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          10497600
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.004:160"
+    },
+    {
+      "ratio": [
+        1,
+        125
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": 3,
+        "12": null,
+        "100": 2,
+        "360": 3
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          2,
+          316,
+          288
+        ],
+        "source_ratio": [
+          1,
+          125
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          5832000000
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.002:316:288"
+    },
+    {
+      "ratio": [
+        1,
+        360
+      ],
+      "minimum_exact_digits": {
+        "2": null,
+        "10": null,
+        "12": null,
+        "100": null,
+        "360": 1
+      },
+      "base360": {
+        "base": 360,
+        "sign": 1,
+        "whole": 0,
+        "digits": [
+          1
+        ],
+        "source_ratio": [
+          1,
+          360
+        ],
+        "exact": true,
+        "absolute_error": [
+          0,
+          129600
+        ],
+        "accuracy_met": null
+      },
+      "display": "0.001"
+    }
+  ],
+  "accuracy_stop_example": {
+    "base": 360,
+    "sign": 1,
+    "whole": 0,
+    "digits": [
+      51,
+      154,
+      102
+    ],
+    "source_ratio": [
+      1,
+      7
+    ],
+    "exact": false,
+    "absolute_error": [
+      6,
+      326592000
+    ],
+    "accuracy_met": true
+  },
+  "tests": {
+    "passed": 11,
+    "total": 11
+  },
+  "integer_only": true
+}

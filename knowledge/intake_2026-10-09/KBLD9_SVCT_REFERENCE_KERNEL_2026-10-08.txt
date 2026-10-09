@@ -1,0 +1,127 @@
+Copy the block below as-is. The validated kernel files were not edited. The extra checks are after it.
+KBLD9/SVCT REFERENCE KERNEL
+Date: 2026-10-08
+Degree: one 64-cell integer kernel. Not the whole prior body of work.
+
+GENUINELY ACCOMPLISHED
+- 8x8 address round trip, 64 cells.
+- 36 interior and 28 boundary, both recoverable.
+- Forward then inverse returns the same 64 integers.
+- Python threads and C++ threads match that serial result.
+- Same stdout in Python and C++.
+- UDN accepts one need string and refuses any other string.
+- SHA-256 of that stdout:
+  f68ae592c397c1bc9442bc5e458dff9a94e1237472a33f620723edbf75b00580
+
+NOT ACCOMPLISHED
+- Calculus, geometry generators, sampling, or a Planck propagation rule.
+- Face recognition. Energy benchmark.
+- Autonomous discovery of operations.
+- Reversible privacy from a masked record alone.
+- Parity across every older file.
+
+SAFE TO IMPROVE LATER, WITHOUT EDITING THE TWO KERNEL FILES
+- Store a reversible mask outside the shown cells.
+- Add a propagation rule only when one is written down.
+- Keep new tests in a separate file.
+
+TEST REPORT, BOTH LANGUAGES, EXIT 0
+CELLS 64
+INTERIOR 36
+BOUNDARY 28
+ADDRESS PASS
+ROUNDTRIP PASS
+PARALLEL PASS
+UDN PASS
+KERNEL PASS
+RECORD -40 -23 -6 11 28 45 62 79 96 113 130 147 164 181 198 215 232 249 266 283 300 317 334 351 368 385 402 419 436 453 470 487 504 521 538 555 572 589 606 623 640 657 674 691 708 725 742 759 776 793 810 827 844 861 878 895 912 929 946 963 980 997 1014 1031
+
+ROUND TRIP, THE ACTUAL LINES
+value(i) = i * 17 - 40
+boundary mark = +i
+interior mark = -i
+forward = value + mark
+inverse = forward - mark
+readback = inverse(forward(value))
+pass means readback == value for all 64
+
+PYTHON
+"""64-cell reference kernel. Exact integers only. No floats."""
+from concurrent.futures import ThreadPoolExecutor
+
+N = 64
+SIDE = 8
+
+def index(row, col):
+    return row * SIDE + col
+
+def place(i):
+    return divmod(i, SIDE)
+
+def is_boundary(i):
+    row, col = place(i)
+    return row == 0 or row == SIDE - 1 or col == 0 or col == SIDE - 1
+
+def cell_value(i):
+    return i * 17 - 40
+
+def forward(i, value):
+    mark = i if is_boundary(i) else -i
+    return value + mark
+
+def inverse(i, value):
+    mark = i if is_boundary(i) else -i
+    return value - mark
+
+def serial_roundtrip(src):
+    mid = [forward(i, src[i]) for i in range(N)]
+    back = [inverse(i, mid[i]) for i in range(N)]
+    return back
+
+def parallel_roundtrip(src):
+    def one(i):
+        return inverse(i, forward(i, src[i]))
+    out = [None] * N
+    with ThreadPoolExecutor(max_workers=N) as pool:
+        for i, value in enumerate(pool.map(one, range(N))):
+            out[i] = value
+    return out
+
+def udn(need, src):
+    if need != "roundtrip+parallel+readback":
+        return None
+    serial = serial_roundtrip(src)
+    parallel = parallel_roundtrip(src)
+    if serial != src or parallel != src or serial != parallel:
+        return None
+    return serial
+
+C++
+int index_of(int row, int col) { return row * SIDE + col; }
+bool is_boundary(int i) {
+    int row = i / SIDE;
+    int col = i % SIDE;
+    return row == 0 || row == SIDE - 1 || col == 0 || col == SIDE - 1;
+}
+std::int64_t cell_value(int i) { return static_cast(i) * 17 - 40; }
+std::int64_t forward(int i, std::int64_t value) {
+    std::int64_t mark = is_boundary(i) ? i : -i;
+    return value + mark;
+}
+std::int64_t inverse(int i, std::int64_t value) {
+    std::int64_t mark = is_boundary(i) ? i : -i;
+    return value - mark;
+}
+serial: for i in 0..63, back[i] = inverse(i, forward(i, src[i]))
+parallel: 64 threads, same formula, then join
+UDN runs only when need == "roundtrip+parallel+readback"
+pass when serial == src and parallel == src
+Remaining checks ran from a new file, remain_check.py. The kernel files were not changed. All exited 0.
+REFUSE PASS
+SPLIT 28+36 PASS
+MASK PASS
+PROCESSES 64 PASS
+PARITY PASS
+REPEAT PASS
+REMAIN PASS
+MASK means the 36 interior cells were hidden and the 28 boundary cells stayed. Putting the interior back used the original source, so a reversible mask is still not earned.
