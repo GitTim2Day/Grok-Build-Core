@@ -1,0 +1,568 @@
+edge-canvas-kit selfcheck  data-root=/tmp/kit-selfcheck-hhwbw6qa  quick=False
+PASS: socket_guard_blocks_outbound
+[23:32:44] GET /api/boot 200
+PASS: boot_ok_0.70710678
+PASS: boot_via_bwbasic_or_twin
+PASS: boot_twin_when_bwbasic_absent
+PASS: basic_missing_bwbasic_clean
+[23:32:44] GET /api/status 403
+PASS: gate_requires_x_kit_client
+[23:32:44] POST /api/nope 404
+PASS: error_closes_connection
+[23:32:44] GET /api/status 403
+PASS: gate_host_rebinding_refused
+[23:32:44] GET /api/status 403
+PASS: gate_cross_origin_refused
+[23:32:44] GET /api/status 403
+PASS: gate_null_origin_refused
+[23:32:44] GET /api/status 200
+PASS: gate_same_origin_ok
+PASS: status_reports_outbound_off
+[23:32:44] GET /api/status 200
+PASS: gate_localhost_host_ok
+[23:32:44] GET /api/nope 404
+PASS: unknown_endpoint_404
+[23:32:44] POST /api/status 405
+PASS: wrong_method_405
+[23:32:44] DELETE /api/files 405
+PASS: no_delete_verb_405
+[23:32:44] GET / 200
+PASS: static_index_200
+PASS: csp_main_self_only
+PASS: nosniff_and_frame_deny
+PASS: server_header_no_python_version
+[23:32:44] GET /ui/sandbox.html 200
+PASS: csp_sandbox_no_network
+[23:32:44] GET /ui/../server.py 404
+PASS: static_refuses /ui/../server.py
+[23:32:44] GET /ui/server.py 404
+PASS: static_refuses /ui/server.py
+[23:32:44] GET /server.py 404
+PASS: static_refuses /server.py
+[23:32:44] GET /ui/%2e%2e/server.py 404
+PASS: static_refuses /ui/%2e%2e/server.py
+[23:32:44] GET /ui/ 404
+PASS: static_refuses /ui/
+[23:32:44] GET /api/status 401
+PASS: lan_no_token_401
+[23:32:44] GET /api/status 401
+PASS: lan_wrong_token_401
+[23:32:44] GET /api/status 401
+PASS: lan_query_token_not_accepted
+[23:32:44] GET /api/status 200
+PASS: lan_right_token_200
+[23:32:44] POST /api/basic 403
+PASS: lan_code_runs_off_by_default
+[23:32:44] POST /api/cpp 403
+PASS: lan_cpp_off_by_default
+[23:32:44] POST /api/agent 403
+PASS: lan_selftest_off_by_default
+[23:32:44] GET / 200
+PASS: lan_static_ui_loads
+[23:32:44] POST /api/basic 200
+PASS: lan_allow_remote_run_works
+PASS: lan_addresses_no_network
+PASS: cli_lan_prints_token_url
+PASS: lan_random_token_generated
+usage: selfcheck.py [-h] [--port PORT] [--lan] [--bind BIND] [--token TOKEN]
+                    [--allow-remote-run] [--data-dir DATA_DIR]
+selfcheck.py: error: binding beyond localhost needs --lan (which turns the token on)
+PASS: bind_beyond_localhost_needs_lan
+[23:32:44] POST /api/descend 413
+PASS: cap_json_413
+[23:32:44] POST /api/convert 413
+PASS: cap_convert_413
+[23:32:44] POST /api/files/write 413
+PASS: cap_file_write_413
+[23:32:44] POST /api/descend 411
+PASS: missing_content_length_411
+[23:32:44] POST /api/descend 411
+PASS: chunked_refused_411
+[23:32:44] GET /api/status 414
+PASS: long_url_414
+[23:32:44] POST /api/descend 400
+PASS: bad_json_400
+[23:32:44] POST /api/descend 400
+PASS: json_array_400
+[23:32:44] POST /api/descend 200
+PASS: descend_8647
+[23:32:44] POST /api/descend 200
+PASS: descend_default_is_locked_case
+[23:32:44] POST /api/descend 200
+[23:32:44] POST /api/descend 200
+[23:32:44] POST /api/descend 200
+[23:32:44] POST /api/descend 200
+[23:32:44] POST /api/descend 200
+PASS: descend_sequence_7_142_1087_3652_8647
+[23:32:44] POST /api/descend 200
+PASS: descend_hundredths_exact
+[23:32:44] POST /api/descend 200
+PASS: descend_fraction_string
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_float
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_exponent
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_bool
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_n_33
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_steps_big
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_neg_steps
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_junk
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_work_cap
+[23:32:44] POST /api/descend 400
+PASS: descend_refuses_zero_den
+PASS: descend_walk_matches_closed_form_neg
+[23:32:44] GET /api/frames 200
+PASS: frames_shape_32fps
+PASS: frames_dt_1/32_synthetic
+PASS: frames_pixel0_rgb_7_135_42
+[23:32:44] GET /api/frames 200
+PASS: frames_64fps_dt_1/64
+[23:32:44] GET /api/frames 200
+PASS: frames_end_value_ties_to_8647
+[23:32:44] GET /api/frames 200
+PASS: frames_rational_dx_exact
+[23:32:44] GET /api/frames 400
+PASS: frames_refuses fps=30
+[23:32:44] GET /api/frames 400
+PASS: frames_refuses fps=32&frames=65
+[23:32:44] GET /api/frames 400
+PASS: frames_refuses fps=32&w=65
+[23:32:44] GET /api/frames 400
+PASS: frames_refuses fps=32&frames=64&w=64&h=64
+[23:32:44] GET /api/frames 400
+PASS: frames_refuses fps=32&n=abc
+[23:32:44] GET /api/frames 400
+PASS: frames_refuses fps=32&dx=0.5e1
+[23:32:44] GET /api/sweep 200
+PASS: sweep_default_200
+PASS: sweep_y_100MHz_trunc8
+PASS: sweep_y_500THz_trunc8
+PASS: sweep_axis_decades_ascending
+PASS: sweep_axis_labels_100MHz_1PHz
+PASS: sweep_visible_band_400_790THz
+PASS: sweep_latin_labels
+PASS: sweep_no_microondas_anywhere
+PASS: sweep_bands_ascending_contiguous
+PASS: sweep_octave_starts_100MHz
+PASS: sweep_octave_exits_near_uv
+PASS: sweep_octave_crosses_visible
+PASS: sweep_z0_no_shift
+[23:32:44] GET /api/sweep 200
+PASS: sweep_redshift_shift_log2(1+z) z=1
+[23:32:44] GET /api/sweep 200
+PASS: sweep_redshift_shift_log2(1+z) z=3
+[23:32:44] GET /api/sweep 200
+PASS: sweep_redshift_shift_log2(1+z) z=15
+[23:32:44] GET /api/sweep 200
+PASS: sweep_redshift_shift_log2(1+z) z=0.5
+[23:32:44] GET /api/sweep 200
+PASS: sweep_redshift_shift_log2(1+z) z=1/3
+[23:32:44] GET /api/sweep 200
+PASS: sweep_redshift_shift_log2(1+z) z=1100
+[23:32:44] GET /api/sweep 200
+PASS: sweep_redshift_divides_exact
+PASS: sweep_wavelength_rgb_440nm
+PASS: sweep_wavelength_rgb_490nm
+PASS: sweep_wavelength_rgb_510nm
+PASS: sweep_wavelength_rgb_580nm
+PASS: sweep_wavelength_rgb_645nm
+PASS: sweep_wavelength_rgb_380nm
+PASS: sweep_wavelength_rgb_780nm
+PASS: sweep_lambda_c_exact
+PASS: sweep_rgb_below_visible_deep_red_to_dim
+PASS: sweep_rgb_above_visible_violet_to_dim
+PASS: sweep_rgb_500THz_is_orange_wavelength
+[23:32:44] GET /api/sweep 200
+PASS: sweep_samples_rgb_match_rule
+PASS: sweep_band_of_points
+[23:32:44] GET /api/sweep 200
+PASS: sweep_decay_formula_labeled
+PASS: sweep_decay_starts_A_plus_B_plus_lift
+PASS: sweep_decay_falls_toward_A_plus_lift
+[23:32:44] GET /api/sweep 200
+PASS: sweep_decay_k0_flat
+[23:32:44] GET /api/sweep 200
+PASS: sweep_decay_lift0_falls_toward_43Hz
+[23:32:44] GET /api/sweep 200
+PASS: sweep_sampler_final_only_19.5
+PASS: sweep_sampler_final_hz_trunc3
+[23:32:44] GET /api/sweep 200
+PASS: sweep_sampler_exact_fraction_steps
+[23:32:44] GET /api/sweep 200
+PASS: sweep_sampler_n2_walk_equals_closed_form
+[23:32:44] GET /api/sweep 200
+PASS: sweep_fps_64_dt
+[23:32:44] GET /api/sweep 200
+PASS: sweep_overlay_default_latin_line
+[23:32:44] GET /api/sweep 200
+PASS: sweep_overlay_edit_echo
+[23:32:44] GET /api/sweep 400
+PASS: sweep_overlay_single_line_refuses_lf
+[23:32:44] GET /api/sweep 400
+PASS: sweep_overlay_single_line_refuses_cr
+[23:32:44] GET /api/sweep 400
+PASS: sweep_overlay_single_line_refuses_u2028
+[23:32:44] GET /api/sweep 400
+PASS: sweep_overlay_single_line_refuses_long
+[23:32:44] GET /api/sweep 200
+PASS: sweep_samples_1024_ok
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_samples_1025
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_samples_1
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_samples_junk
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_z_neg
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_z_over
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_z_zero_den
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_z_nan
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_z_inf
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_f_start_0
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_f_end_1e21
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_k_neg
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_k_over
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_lift_65
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_A_big
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_xmax_0
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_steps_1024
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_steps_0
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_sampler_y_cap
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_mode_bogus
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_fps_30
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_unknown_param
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_dup_param
+[23:32:44] GET /api/sweep 400
+PASS: sweep_refuses_long_token
+[23:32:44] GET /api/sweep 200
+PASS: sweep_main_line_after_refusals
+PASS: sweep_audio_whole_octave_transpose
+PASS: sweep_note_representation_only
+PASS: sweep_precision_stated
+PASS: sweep_trunc_never_scientific
+[23:32:44] GET /api/sweep 400
+PASS: query_too_many_fields_400
+PASS: sweep_log2_power_of_two_exact
+PASS: sweep_ui_overlay_single_line_input
+PASS: sweep_ui_audio_off_by_default
+PASS: sweep_ui_uses_server_bands_and_axis
+[23:32:44] GET /api/examples 200
+PASS: sweep_twins_listed_as_examples
+PASS: sweep_twins_pass_screens
+PASS: sweep_python_twin_values
+[23:32:44] GET /api/files 200
+PASS: files_list_root
+[23:32:44] POST /api/files/write 200
+PASS: files_write
+[23:32:44] GET /api/files/read 200
+PASS: files_read_roundtrip
+[23:32:44] POST /api/files/write 200
+PASS: files_overwrite_archives_old
+[23:32:44] GET /api/files/read 200
+PASS: files_archive_keeps_old_bytes
+[23:32:44] POST /api/files/write 200
+PASS: files_same_content_unchanged
+[23:32:44] POST /api/files/write 403
+PASS: files_archive_not_writable
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused '../x'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused '../x'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused 'a/../../x'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused 'a/../../x'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused '/etc/passwd'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused '/etc/passwd'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused '~/x'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused '~/x'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused 'C:\\x'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused 'C:\\x'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused 'a\\..\\b'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused 'a\\..\\b'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused 'notes/\x00a'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused 'notes/\x00a'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused '.hidden'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused '.hidden'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused 'notes/..'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused 'notes/..'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused '%2e%2e/x'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused '%2e%2e/x'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused '..%2fx'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused '..%2fx'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused '....'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused '....'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused 'notes/../notes/a.txt'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused 'notes/../notes/a.txt'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_read_refused './../x'
+[23:32:44] POST /api/files/write 403
+PASS: traversal_write_refused './../x'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_reason_is_traversal 'notes/../notes/a.txt'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_reason_is_traversal 'a/../../x'
+[23:32:44] GET /api/files/read 403
+PASS: traversal_reason_is_traversal 'notes/..'
+PASS: traversal_nothing_written_outside
+[23:32:44] GET /api/files/read 403
+PASS: symlink_file_escape_refused
+[23:32:44] GET /api/files 403
+PASS: symlink_dir_escape_refused
+[23:32:44] POST /api/files/write 403
+PASS: symlink_dir_write_refused
+[23:32:44] POST /api/files/write 403
+PASS: symlink_file_write_refused
+[23:32:44] GET /api/files 200
+PASS: listing_marks_outside_links
+[23:32:44] GET /api/files/read 200
+PASS: files_non_utf8_as_base64
+[23:32:44] GET /api/files/read 404
+PASS: files_missing_404
+[23:32:44] POST /api/files/write 200
+PASS: files_write_base64
+[23:32:44] POST /api/files/write 400
+PASS: files_bad_base64_400
+[23:32:44] POST /api/files/write 400
+PASS: files_bad_encoding_400
+[23:32:44] POST /api/files/write 409
+PASS: files_dir_name_conflict_409
+[23:32:44] GET /api/examples 200
+PASS: examples_list
+[23:32:44] GET /api/examples/read 404
+PASS: examples_refuses server.py
+[23:32:44] GET /api/examples/read 404
+PASS: examples_refuses ../server.py
+[23:32:44] GET /api/examples/read 404
+PASS: examples_refuses basic/../server.py
+[23:32:44] GET /api/examples/read 404
+PASS: examples_refuses /etc/passwd
+[23:32:45] POST /api/convert 200
+PASS: convert_csv_200
+PASS: convert_flags_formula_and_prompt
+PASS: convert_csv_formula_prefixed
+PASS: convert_json_roundtrip_equal
+PASS: convert_order_recorded
+PASS: convert_run_dir_inside_data
+[23:32:45] POST /api/convert 200
+PASS: convert_zip_children
+[23:32:45] POST /api/convert 200
+PASS: convert_zip_traversal_rejected
+[23:32:45] POST /api/convert 200
+PASS: convert_non_utf8_quarantine
+[23:32:45] POST /api/convert 200
+PASS: convert_xml
+[23:32:45] POST /api/convert 200
+PASS: convert_xml_entity_bomb_quarantined
+PASS: xml_without_defusedxml_parses_stdlib
+PASS: xml_without_defusedxml_dtd_quarantined
+PASS: xml_without_defusedxml_utf16_dtd_quarantined
+PASS: docx_without_defusedxml_text
+[23:32:45] POST /api/convert 200
+PASS: convert_filename_sanitized
+[23:32:45] POST /api/convert 200
+PASS: convert_html_script_dropped
+[23:32:45] POST /api/convert 429
+PASS: convert_busy_429
+PASS: rcrj_non_dict_record_to_bad_record
+PASS: rcrj_bad_text_and_line_no_continue
+PASS: vendored_sha_recorded to_txt.py
+PASS: vendored_sha_recorded rcrj.py
+PASS: vendored_sha_recorded rcrj_guard.bas
+[23:32:45] POST /api/agent 200
+PASS: agent_cites_knowledge
+PASS: agent_citation_lines_real
+[23:32:45] POST /api/agent 200
+PASS: agent_cites_readme_for_pi
+[23:32:45] POST /api/agent 200
+PASS: agent_cites_code
+[23:32:45] POST /api/agent 200
+PASS: agent_dont_know 'What is the capital of F'
+[23:32:45] POST /api/agent 200
+PASS: agent_dont_know 'zxqv plorb wumble'
+[23:32:45] POST /api/agent 200
+PASS: agent_dont_know 'Who won the 1987 World S'
+[23:32:45] POST /api/agent 200
+PASS: agent_dont_know ''
+[23:32:45] POST /api/agent 400
+PASS: agent_query_cap_400
+[23:32:45] POST /api/agent 200
+PASS: agent_help
+[23:32:45] POST /api/agent 200
+PASS: agent_scaffold_bas
+PASS: scaffold_bas_runs_all_pass
+[23:32:45] POST /api/agent 200
+PASS: scaffold_need_gosub_py_selfcheck
+[23:32:45] POST /api/agent 200
+PASS: scaffold_conflict_nodes_py_selfcheck
+[23:32:45] POST /api/agent 200
+PASS: scaffold_lead_filter_py_selfcheck
+[23:32:45] POST /api/agent 200
+PASS: agent_scaffold_refuses 'need_gosub bas ../evil'
+[23:32:45] POST /api/agent 200
+PASS: agent_scaffold_refuses 'rm_rf bas x'
+[23:32:45] POST /api/agent 200
+PASS: agent_scaffold_refuses 'need_gosub exe x'
+[23:32:45] POST /api/agent 200
+PASS: agent_scaffold_refuses 'need_gosub bas'
+[23:32:45] POST /api/agent 200
+PASS: agent_scaffold_again_ok
+[23:32:46] POST /api/agent 200
+PASS: agent_local_model_falls_back_or_local
+PASS: agent_local_model_only_localhost
+[23:32:46] POST /api/agent 200
+PASS: agent_local_model_dont_know_without_call
+PASS: mask_rules
+PASS: knowledge_masked_no_residue
+PASS: knowledge_excludes_restricted
+[23:32:46] POST /api/basic 200
+PASS: basic_run_print
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses SHELL
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses OPEN
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses KILL
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses PRINT
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses SYSTEM
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses X=1:
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses CHAIN
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses ENVIRON
+[23:32:46] POST /api/basic 200
+PASS: basic_refuses PRINT
+FAIL: basic_timeout | {'ok': True, 'out': '\nERROR in line 10: Syntax error\n\nSTACK TRACE:\n10:GOTO 10\n', 'rc': 0, 'timed_out': False, 'capped': False, 'secs': 0.009, 'run_dir': 'runs/basic/20261008-233246-8407d6'}
+PASS: basic_output_cap
+[23:32:46] POST /api/basic 200
+PASS: basic_template_runs conflict_nodes.bas
+[23:32:46] POST /api/basic 200
+PASS: basic_template_runs lead_filter.bas
+[23:32:46] POST /api/basic 200
+PASS: basic_template_runs need_gosub_one_node.bas
+[23:32:46] POST /api/basic 200
+PASS: basic_template_runs descending_power_final.bas
+[23:32:46] POST /api/basic 200
+FAIL: basic_template_runs sweep.bas | 005.E+7\nFAIL check 3 \nFAIL check 4 \nFAIL check 7 \nPASS= 7  FAIL= 3 \nSUMMARY: FAILS\n', 'rc': 0, 'timed_out': False, 'capped': False, 'secs': 0.008, 'run_dir': 'runs/basic/20261008-233246-1503e7'}
+[23:32:46] POST /api/basic 200
+FAIL: sweep_crosscheck_basic_vs_python | ({'Y100': '19.5.44206E+7', 'Y500': '41.7.97703E+7', 'SHIFT_Z1': '1.00000000', 'SHIFT_Z3': '2.00000000', 'SHIFT_ZHALF': '0.5.84962E+7', 'SAMPLER_FINAL': '19.0005.E+7'}, ' 19.5.44206E+7\nY500 41.7.97703E+7\nSHIFT_Z1 1.00000000\nSHIFT_Z3 2.00000000\nSHIFT_ZHALF 0.5.84962E+7\nSAMPLER_FINAL 19.0005.E+7\n
+PASS: basic_screen_unit
+PASS: cpp_screen_refuses system
+PASS: cpp_screen_refuses fopen
+PASS: cpp_screen_refuses define
+PASS: cpp_screen_refuses raw
+PASS: cpp_screen_refuses extern
+PASS: cpp_screen_refuses builtin
+PASS: cpp_screen_refuses fstream
+PASS: cpp_screen_refuses cstdlib
+PASS: cpp_screen_refuses splice
+PASS: cpp_screen_refuses digraph
+PASS: cpp_screen_refuses asm
+PASS: cpp_screen_refuses include_quote
+PASS: cpp_screen_refuses pragma
+PASS: cpp_screen_refuses fork
+PASS: cpp_screen_refuses thread
+PASS: cpp_screen_refuses exec_family
+PASS: cpp_screen_refuses unterminated_comment
+PASS: cpp_screen_refuses unterminated_string
+PASS: cpp_screen_allows_comment_words
+PASS: cpp_screen_allows_twin descend.cpp
+PASS: cpp_screen_allows_twin conflict_nodes.cpp
+PASS: cpp_screen_allows_twin sweep.cpp
+PASS: cpp_missing_compiler_clean
+[23:32:46] POST /api/cpp 200
+PASS: cpp_api_missing_compiler_200_clean
+[23:32:46] POST /api/descend 200
+PASS: main_line_continues_after_missing_cxx
+[23:32:47] POST /api/cpp 200
+PASS: cpp_hello
+PASS: cpp_run_dir_inside_data
+[23:32:47] POST /api/cpp 200
+PASS: cpp_descend_8647_first_line
+PASS: cpp_descend_selfcheck_all_pass
+[23:32:48] POST /api/cpp 200
+PASS: cpp_conflict_nodes_all_pass
+[23:32:48] POST /api/cpp 200
+PASS: cpp_sweep_all_pass
+PASS: sweep_crosscheck_cpp_vs_python
+[23:32:48] POST /api/cpp 200
+PASS: cpp_compile_error_reported
+[23:32:49] POST /api/cpp 200
+PASS: cpp_stdin_passthrough
+PASS: cpp_run_timeout
+PASS: cpp_output_cap
+[23:32:51] POST /api/cpp 200
+PASS: cpp_api_refuses_system
+[23:32:51] POST /api/cpp 200
+PASS: cpp_std_allow_list
+[23:32:51] POST /api/cpp 200
+PASS: cpp_next_run_ok_main_line
+PASS: python_twin_conflict_nodes.py
+PASS: python_twin_lead_filter.py
+PASS: no_external_urls_in_kit_code
+PASS: ui_no_cdn_or_remote_assets
+PASS: no_shell_true
+PASS: optional_ollama_url_localhost_only
+PASS: ui_headless_smoke
+PASS: selftest_flag_set_in_harness
+PASS: agent_selftest_refuses_when_active
+[23:32:54] POST /api/agent 200
+PASS: api_selftest_refuses_when_active
+PASS: agent_selftest_child_gets_flag
+PASS: agent_selftest_child_own_group
+PASS: agent_selftest_child_is_quick
+PASS: selftest_flag_restored
+PASS: full_selftest_calls_only_refused_paths
+PASS: no_outbound_sockets_during_run
+TOTAL pass=335 fail=3 skip=0  secs=11.2
+SUMMARY: FAILS=3
+exit=1
