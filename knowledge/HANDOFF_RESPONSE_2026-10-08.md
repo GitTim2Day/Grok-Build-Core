@@ -74,3 +74,15 @@ bypass list. NOT EXECUTED on a Pi or in non-headless kiosk mode.
 - Nothing has run on the Pi 5, R1, A15 or Orin from this seat.
 - JCJ proper and the KBLD9 core are not in the repo; nothing here claims either ran.
 - The Agent ladder with permission-gated dial-out sits on branch `wip/agent-ladder-2026-10-08` (8319387); its last test edit is unrun.
+
+## Append 2026-10-09T00:00-04:00 — answers received (body above unchanged)
+
+1. "BIS" = `.bis`, a file format. Five formats share the extension; closest to our work is Kst-plot BIS. Timothy's decision: PARKED,
+   reopen on first contact with a real file. Record: `knowledge/PARKED_BIS_FORMAT_2026-10-09.md`.
+2. EV2 stopping criterion, in Timothy's words: "The measurement of anything in its corresponding units for any Planck constant that can be
+   measured or derived at the limits of the measuring device, published or recalibrated."
+   Working reading (stated back to him, open to correction): stop when a result is resolved to the measuring device's limit for that
+   quantity, in its own units, where the limit is the device's published accuracy or its recalibrated value; the Planck-scale value for
+   that quantity is the absolute floor wherever it can be measured or derived (as MinRadius = L_p). Nothing finer is claimed; no
+   invented tolerance.
+3. and 4. (live MinRadius_Lp leaf; kiosk dead-proxy flags) still open.
