@@ -41,3 +41,12 @@ It proves the bookkeeping, not that 28 + 36 holds information. The other seat sa
 ## Not done
 
 C++ for base-360 and UDN; any Pi run; vision and face work (private archive, source photos not here); the 64-cell exact mapping.
+
+## Correction 2026-10-09T08:40-04:00 (body above unchanged)
+
+The two zips added in 59356ed broke this repo's README rules: "Binary archives (zips, xlsx) live on Drive and are
+referenced here" and "One unique copy of every artifact" (their members were already here, unpacked).
+Removed from the tree in the next commit; history keeps them. Unpacked members stay, byte-identical to the zip members.
+Zip copies now live in the private archive (2026-10-09_intake/zips/) until Timothy places them on Drive.
+Base360_Exact_Ratio_Trial.zip SHA-256 a4141e90a911b05cde3a2ed6da55b5137f8ae8fe599979556f13cf481d533ddc (6,422 B).
+KBLD9_SVCT_UDN_reference_v0_1.zip SHA-256 3af718d1a1512eb7ac9481a8d87e9bcec42ab71f8f1a38c98bcba8ada2caa5ed (9,548 B).
