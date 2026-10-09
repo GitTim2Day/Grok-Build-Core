@@ -1,0 +1,5 @@
+[
+  {"name": "my_search", "kind": "web", "url": "https://YOUR-SEARCH-SITE.example/search?q={q}", "pre_approved": false},
+  {"name": "my_claude", "kind": "anthropic", "url": "https://api.anthropic.com/v1/messages", "model": "YOUR-MODEL-NAME", "key_env": "ANTHROPIC_API_KEY", "pre_approved": false},
+  {"name": "my_grok", "kind": "openai", "url": "https://YOUR-OPENAI-COMPATIBLE-ENDPOINT.example/v1/chat/completions", "model": "YOUR-MODEL-NAME", "key_env": "XAI_API_KEY", "pre_approved": false}
+]

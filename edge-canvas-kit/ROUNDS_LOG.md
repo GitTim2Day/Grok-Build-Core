@@ -119,3 +119,24 @@ Notes / limits (sweep):
   command line. `mutants.py` found exactly that 1 process at the baseline sweep and killed it (`STRAYS: 1 … after baseline; killed` in
   `logs/R10_mutants_full.txt`); `run_r10.sh` carried on and finished. R9 was started with a plain `nohup … &` and counted 0. The 1 seen after the
   post-log quick run was the Shell command that appended this log (its text contained the pattern). No test process was left behind.
+
+## R11 — 2026-10-08 (Claude seat): Agent exhaust ladder + permission-gated dial-out
+
+Timothy (2026-10-08 23:09, 23:12 ET): don't come back with "I don't know" until every resource has been tried; run offline as now, and when
+more is needed dial out **with his permission**, even to an API he subscribes to, then come back and finish on the device (Pi 5, R1, A15, Orin);
+Ollama is available offline.
+
+Miss shown first: "what does the converter do with a formula cell" -> "I don't know", though the answer is in knowledge/. Cause: the rules
+gate checked only the top hit (a README chunk, cover 1/3) while hits 2-3 (RCRJ guard docs, cover 2/3, score > 0.10) passed; no word forms.
+
+Change (agent.py): rung 2 widened match (every top-10 hit through the same MIN_SCORE / MIN_COVER gates; cover counts word forms);
+rung 3 Ollama own-knowledge (labelled unverified); rung 4 need raised + permission asked (/needs, /approve, /deny); providers in
+workspace/providers.json (https only, kinds web/anthropic/openai, keys only in env vars, pre_approved off by default); needs log append-only.
+Restored in the same round: answer_local_model had been cut by my block replacement (caught by selfcheck 500 + KeyError); every method of the
+pre-edit file checked present after the fix.
+
+Tests: selfcheck gains 13 ladder checks (offline; socket guard shows no outbound). Off-box answer key (scratch, mocks for Ollama, an https web
+search, Anthropic-format and OpenAI-format APIs): phase A 15/15 offline, phase B 21/21; masked question verified at the receiving end
+(0 rows carried the raw e-mail); keys never written to the log. Mutants: 6 new ladder mutants + the 6 existing agent mutants = 12/12 caught
+(first run 11/12: ladder_widened_cover_gate_off survived; killed by the new check ladder_rung2_cover_gate_holds).
+Not tested: a real search site or a real API (this box's egress refuses them); R1 as a client is untested (no R1 here).

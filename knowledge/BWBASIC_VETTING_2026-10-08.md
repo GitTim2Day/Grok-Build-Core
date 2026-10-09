@@ -73,3 +73,7 @@ Where this fixed a live failure: `edge-canvas-kit/basic/sweep.bas` cut its 8 pla
 1. Point the kit at `sweep_cut8_2026-10-08.bas` (or re-seal sweep.bas), and whether to update the two 2.20-specific expectations in `edge-canvas-kit/selfcheck.py`.
 2. Whether the house BASIC default should carry `OPTION ROUND TRUNCATE` (a `profile.bas` in the run folder). The kit screen refuses OPTION inside a program.
 3. 2.20 pl2 itself is still not in hand; fetch on the A15 or Pi 5 (Debian/Raspberry Pi OS: `apt source bwbasic`) and record its hash if a byte-exact match to the old box is wanted.
+
+## Correction 2026-10-08T23:25-04:00 (appended; body above unchanged)
+
+"JCJ pipeline" in the request was carried out with the repo's **TXT → RCRJ guard** (`csvson/txt_rcrj/to_txt.py` + `rcrj.py`, regex → CSV → regex → JSON). The JCJ pipeline proper (`building_databases_logically.py` / `curation_dispatch_bundle.py`) is **not in this repo** and was **not run**. No KBLD9 core ran either (RUN.md lists `kbld9_core_r4` ABSENT). Every scan result above is an RCRJ-guard result.

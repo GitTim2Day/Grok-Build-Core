@@ -150,3 +150,21 @@ starting another self-check, and `--quick` never calls `/selftest` (added after 
 - Not yet run on real Raspberry Pi 5 hardware or a real phone (tested on the build box, x86_64, with headless Chrome).
 - 64 fps is a named rate, not a measured one; most screens refresh at 60 Hz, so some 64 fps frames are expected to be dropped (the counter shows it).
 - The C++/BASIC guards are deny-lists, not an OS sandbox.
+
+## Agent: exhaust ladder and dial-out with permission (added 2026-10-08)
+
+Timothy's rule: no "I don't know" until every resource has been tried. The Agent climbs, in order:
+
+1. exact local match (the kit's docs, knowledge/, code), 2. widened local match (every passing hit, word forms),
+3. your Ollama on this device answering from its own knowledge (labelled unverified; nothing leaves the device),
+4. **asks you before dialling out**: it shows the masked question (personal data masked first, DM-5) and your providers, and waits.
+
+Reply `/approve <id> <provider>` or `/deny <id>`; `/needs` lists open ones. The answer comes back to the device that asked and is labelled with
+the provider and "unverified". Every need is appended to `workspace/needs/agent_needs.jsonl` (never overwritten; answers stored as a hash).
+"I don't know" is said only after a dial-out actually ran and found nothing. Offline stays the default (DM-2): with no providers set up,
+nothing ever leaves the device.
+
+**Providers** live in `workspace/providers.json` (copy `providers.example.json`, edit in the Files tab). Kinds: `web` (an https URL with `{q}`),
+`anthropic` (Messages API format), `openai` (OpenAI-compatible chat format, e.g. xAI). `https://` only. **API keys are never in the file**:
+put the key in the environment variable named by `key_env` on the device. `pre_approved: true` lets that one provider dial without asking
+(off by default). The example file holds placeholders only; which search site or API to use is your choice (policy: "Which API: UNDEF").

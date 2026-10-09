@@ -681,6 +681,58 @@ def main(argv=None):
         check(f"agent_scaffold_refuses {bad[10:]!r}", st == 200 and not j.get("ok") and not os.path.exists(os.path.join(d1, "evil.bas")), j)
     st, j, _, _ = req(P, "POST", "/api/agent", body={"q": "/scaffold need_gosub bas my_check"})
     check("agent_scaffold_again_ok", j.get("ok"), j)
+    # ---------------------------------------------------------------- agent exhaust ladder (Timothy 2026-10-08)
+    # No "I don't know" before every resource is tried; dial-out only with Timothy's permission. All offline here.
+    before_ladder = list(VIOLATIONS)
+    st, j, _, _ = req(P, "POST", "/api/agent", body={"q": "what does the converter do with a formula cell"})
+    check("ladder_answers_converter_formula", st == 200 and j["known"]
+          and any("formula" in c["snippet"].lower() for c in j["citations"]), (j.get("mode"), j.get("ladder")))
+    # rung 2 on a fixed fixture (independent of how the kit's own docs weigh words): rung 1 must miss, rung 2 must find
+    fx = tempfile.mkdtemp(prefix="kit-ladder-fx-")
+    os.makedirs(os.path.join(fx, "knowledge"))
+    open(os.path.join(fx, "README.md"), "w").write("# Overview\nThe converter converter converter tab overview screen layout.\n")
+    open(os.path.join(fx, "knowledge", "guard.md"), "w").write("# Guard\nIn the converter, formulas in cells are neutralised with a quote prefix.\n")
+    for i, w in enumerate(["canvas frames player", "sweep octave colour", "boot math continuity", "files archive overwrite"]):
+        open(os.path.join(fx, "knowledge", f"f{i}.md"), "w").write(f"# Note {i}\n{w} details here.\n")
+    fa = agent_mod.Agent(fx)
+    r1, rr = fa.answer_rules("converter formula cell"), fa.ask("converter formula cell")
+    check("ladder_rung2_word_forms_fixture", not r1["known"] and rr["known"] and "widened" in rr["mode"]
+          and [c["path"] for c in rr["citations"]] == ["knowledge/guard.md"], (r1.get("why"), rr.get("ladder")))
+    st, j, _, _ = req(P, "POST", "/api/agent", body={"q": "What is the tallest mountain on Mars? write me at tim.n@example.com"})
+    nid = (j.get("need") or {}).get("id", "")
+    check("ladder_offtopic_asks_permission", st == 200 and not j["known"] and not j["citations"]
+          and j.get("mode") == "permission needed" and f"/approve {nid}" in j["answer"], (j.get("mode"), j.get("answer", "")[-160:]))
+    check("ladder_no_dont_know_before_dialout", "I don't know" not in j.get("answer", ""), j.get("answer", "")[:160])
+    # words that each exist in the sources but never share one passage: only rung 2's own cover gate refuses this
+    st, j3, _, _ = req(P, "POST", "/api/agent", body={"q": "stdexcept conceptual twice"})
+    check("ladder_rung2_cover_gate_holds", st == 200 and not j3["known"] and not j3["citations"]
+          and any(x.startswith("2 widened") and "no hit passed both gates" in x for x in j3.get("ladder", [])), j3.get("ladder"))
+    check("ladder_lists_rungs_1_to_4", [x[0] for x in j.get("ladder", [])] == ["1", "2", "3", "4"], j.get("ladder"))
+    npath = os.path.join(ws_root, "needs", "agent_needs.jsonl")
+    nrows = [json.loads(x) for x in open(npath, encoding="utf-8")] if os.path.exists(npath) else []
+    mine = [x for x in nrows if x.get("id") == nid]
+    check("ladder_need_logged_masked", len(mine) == 1 and mine[0]["status"] == "WAITING_PERMISSION"
+          and "example.com" not in mine[0]["masked_query"] and "MASKED" in mine[0]["masked_query"], mine)
+    st, j, _, _ = req(P, "POST", "/api/agent", body={"q": f"/approve {nid} nosuch"})
+    check("ladder_approve_unknown_provider_refused", st == 200 and not j["known"] and "No provider" in j["answer"], j)
+    open(os.path.join(ws_root, "providers.json"), "w", encoding="utf-8").write(json.dumps([
+        {"name": "ok_web", "kind": "web", "url": "https://search.example.invalid/?q={q}", "pre_approved": False},
+        {"name": "plain_http", "kind": "web", "url": "http://search.example.invalid/?q={q}"},
+        {"name": "no_q", "kind": "web", "url": "https://search.example.invalid/"},
+        {"name": "bad kind", "kind": "shell", "url": "https://x/{q}"}]))
+    names = [pv["name"] for pv in agent_mod.Agent(KIT, workspace=fsguard.Workspace(ws_root)).providers()]
+    check("ladder_providers_filter_unsafe", names == ["ok_web"], names)
+    st, j, _, _ = req(P, "POST", "/api/agent", body={"q": "What is the tallest mountain on Venus?"})
+    n2 = (j.get("need") or {}).get("id", "")
+    check("ladder_no_dialout_without_permission", j.get("mode") == "permission needed" and "ok_web" in j.get("answer", ""), j.get("mode"))
+    st, j, _, _ = req(P, "POST", "/api/agent", body={"q": f"/deny {n2}"})
+    nrows = [json.loads(x) for x in open(npath, encoding="utf-8")]
+    check("ladder_deny_appends_not_overwrites", [x["status"] for x in nrows if x["id"] == n2] == ["WAITING_PERMISSION", "DENIED"]
+          and any(x["id"] == nid for x in nrows), [x["status"] for x in nrows])
+    st, j, _, _ = req(P, "POST", "/api/agent", body={"q": "/needs"})
+    check("ladder_needs_lists_open_only", nid in j["answer"] and n2 not in j["answer"], j["answer"][:200])
+    check("ladder_no_outbound", VIOLATIONS == before_ladder, VIOLATIONS[len(before_ladder):])
+    os.remove(os.path.join(ws_root, "providers.json"))
     before = list(VIOLATIONS)
     st, j, _, _ = req(P, "POST", "/api/agent", body={"q": "How is personal data masked under DM-5?", "mode": "local-model"})
     check("agent_local_model_falls_back_or_local", st == 200 and j["known"] and ("rules" in j["mode"] or "local-model" in j["mode"]), j.get("mode"))
