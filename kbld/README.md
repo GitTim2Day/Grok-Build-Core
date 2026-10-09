@@ -31,3 +31,7 @@ The pre-filter used for Row 3C (KBLD-9) is the MAD sigma guard inside `kbl_svct_
 Appendable living source (binaries + older snapshots): https://drive.google.com/drive/folders/1Q-MCJwaATYmV5rGDa1Ci_ALG589Tm5P4
 
 Ported 2026-09-08. The three formerly Drive-only advanced sources now open from this folder.
+
+## Append 2026-10-08 — correction
+
+The "68/68" lines above are superseded, not erased. The git copy of `kbl_svct_stacks_MinRadius_Lp_2026-08-28.py` fails (NameError at T3). The exact Drive bytes run **75/75**: `kbl_svct_stacks_MinRadius_Lp_2026-08-28_DRIVE_D2_restored_2026-10-08.py`. Primitives sibling restored the same way: `kbld_gosub_primitives_MinRadius_Lp_2026-08-28_DRIVE_D3_restored_2026-10-08.py`. Record: `../knowledge/CORRECTION_2026-10-08_MINRADIUS_LP_HALF_SHELF.md`.

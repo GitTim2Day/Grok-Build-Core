@@ -49,3 +49,18 @@ Discipline: truncate not round; earned vs asserted; do not overwrite sealed path
 2. `kbld_svct_gel_stack.py` optional `spherical_memory_pro` — local/ABSENT as PyPI; gel path degrades when HAS_SVCT is false.
 3. Multilingual adapters call external binaries (whisper.cpp, vosk, piper, bergamot, apertium) via PATH detection — not installed by this requirements.txt.
 4. Drive-only binaries/archives are out of this Git tree.
+
+## Append 2026-10-08 — MinRadius_Lp correction (Claude seat, Timothy's request)
+
+`kbld/kbl_svct_stacks_MinRadius_Lp_2026-08-28.py` (git) FAILS: NameError at T3. Its "68/68" is ASSERTED.
+`kbld/kbld_gosub_primitives_MinRadius_Lp_2026-08-28.py` (git) runs, but is a condensed port, not the sealed file.
+Exact Drive bytes now live beside them as new leaves:
+
+```bash
+python kbld/kbl_svct_stacks_MinRadius_Lp_2026-08-28_DRIVE_D2_restored_2026-10-08.py   # 75 passed, 0 failed
+python kbld/kbld_gosub_primitives_MinRadius_Lp_2026-08-28_DRIVE_D3_restored_2026-10-08.py   # ALL GREEN
+```
+
+CSVSON readiness needs `PYTHONPATH=basic` (script hard-codes `/workspace/conflict-nodes-build`); then 102/102 and CRJ 12/12.
+TXT-RCRJ: run `make_samples.py` first; the selfcheck then needs `bwbasic` on PATH.
+Record: `knowledge/CORRECTION_2026-10-08_MINRADIUS_LP_HALF_SHELF.md`. Which copy is live: Timothy decides.
