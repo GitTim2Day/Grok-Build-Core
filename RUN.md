@@ -64,3 +64,15 @@ python kbld/kbld_gosub_primitives_MinRadius_Lp_2026-08-28_DRIVE_D3_restored_2026
 CSVSON readiness needs `PYTHONPATH=basic` (script hard-codes `/workspace/conflict-nodes-build`); then 102/102 and CRJ 12/12.
 TXT-RCRJ: run `make_samples.py` first; the selfcheck then needs `bwbasic` on PATH.
 Record: `knowledge/CORRECTION_2026-10-08_MINRADIUS_LP_HALF_SHELF.md`. Which copy is live: Timothy decides.
+
+## Append 2026-10-08 (late) — BASIC interpreter for the self-checks
+
+```bash
+sh scripts/build_bwbasic_3.20b_2026-10-08.sh /some/empty/dir   # pinned, hash-checked, gnu89 build
+export PATH=/some/empty/dir/bin:$PATH
+python csvson/txt_rcrj/selfcheck.py      # 162/162 with bwbasic present
+python edge-canvas-kit/selfcheck.py      # 2 fails left, both 2.20-specific expected text (see record)
+```
+
+Use 3.20b, not 3.00 (3.00 breaks every IF on lines 1000+). 3.20b rounds `\` by default; `OPTION ROUND TRUNCATE` restores truncation.
+New 8-place cut to Timothy's rules: `basic/cut8_2026-10-08.*` (BASIC, C++, Python key). Record: `knowledge/BWBASIC_VETTING_2026-10-08.md`.
