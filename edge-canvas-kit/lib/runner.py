@@ -60,8 +60,6 @@ def run_capped(argv, cwd, timeout=10, cap=OUT_CAP, stdin_text=None, cpu=10, mem=
     except OSError as e:
         return {"rc": None, "out": f"[runner] could not start: {type(e).__name__}", "timed_out": False, "capped": False,
                 "secs": 0.0}
-    buf = bytearray()
-    state = {"capped": False}
 
     def kill():
         try:
@@ -72,45 +70,172 @@ def run_capped(argv, cwd, timeout=10, cap=OUT_CAP, stdin_text=None, cpu=10, mem=
         except Exception:
             pass
 
+    stdin_bytes = stdin_text.encode("utf-8")[:STDIN_CAP] if stdin_text is not None else None
+    if os.name == "posix":
+        st = _read_posix(p, cap, timeout, t0, stdin_bytes, kill)
+    else:
+        st = _read_thread(p, cap, timeout, stdin_bytes, kill)
+    try:
+        p.wait(timeout=5)   # child has exited or was killed; bounded either way
+    except Exception:
+        pass
+    out = st["buf"].decode("utf-8", "replace")
+    if st["capped"]:
+        out += f"\n[runner] output cap {cap} bytes hit; process stopped"
+    if st["timed_out"]:
+        out += f"\n[runner] timeout {timeout}s; process stopped"
+    if st["held"]:
+        out += "\n[runner] output pipe still held by a process outside the run; stopped reading"
+    return {"rc": p.returncode, "out": out, "timed_out": st["timed_out"], "capped": st["capped"],
+            "secs": round(time.time() - t0, 3), "held": st["held"]}
+
+
+SLICE = 0.05   # fallback wake only when the kernel cannot report child exit (no pidfd)
+
+
+def _read_posix(p, cap, timeout, t0, stdin_bytes, kill) -> dict:
+    """RUNNER_READ spec v2: wake on need (pipe readable, stdin writable, child exited).
+    No thread, no sleep loop. One entry, one exit; every handle closed on the way out."""
+    import selectors
+    st = {"buf": bytearray(), "capped": False, "timed_out": False, "held": False, "out_done": False}
+    out_fd = p.stdout.fileno()
+    os.set_blocking(out_fd, False)
+    sel = selectors.DefaultSelector()
+    sel.register(out_fd, selectors.EVENT_READ, "out")
+    in_fd, pos = None, 0
+    if stdin_bytes is not None:
+        if stdin_bytes:
+            in_fd = p.stdin.fileno()
+            os.set_blocking(in_fd, False)
+            sel.register(in_fd, selectors.EVENT_WRITE, "in")
+        else:
+            p.stdin.close()
+    pidfd = None
+    try:
+        pidfd = os.pidfd_open(p.pid)
+        sel.register(pidfd, selectors.EVENT_READ, "exit")
+    except (AttributeError, OSError):
+        pidfd = None
+
+    def read_chunk():
+        try:
+            chunk = os.read(out_fd, 4096)
+        except BlockingIOError:
+            return "empty"
+        except OSError:
+            return "eof"
+        if not chunk:
+            return "eof"
+        room = cap - len(st["buf"])
+        if room > 0:
+            st["buf"].extend(chunk[:room])
+        if len(chunk) > room:
+            st["capped"] = True
+            kill()
+            return "cap"
+        return "data"
+
+    def drain():
+        r = "data"
+        while r == "data":
+            r = read_chunk()
+        if r == "eof":
+            st["out_done"] = True
+        elif r == "empty":
+            st["held"] = True
+
+    deadline = t0 + timeout
+    child_done = False
+    try:
+        while True:
+            remaining = deadline - time.time()
+            if remaining <= 0:
+                st["timed_out"] = True
+                kill()
+                if not st["out_done"]:
+                    drain()
+                break
+            events = sel.select(remaining if pidfd is not None else min(remaining, SLICE))
+            for key, _ in events:
+                if key.data == "out":
+                    r = read_chunk()
+                    if r == "eof":
+                        st["out_done"] = True
+                        sel.unregister(out_fd)
+                    elif r == "cap":
+                        break
+                elif key.data == "in":
+                    try:
+                        pos += os.write(in_fd, stdin_bytes[pos:pos + 65536])
+                    except BlockingIOError:
+                        pass
+                    except OSError:
+                        pos = len(stdin_bytes)
+                    if pos >= len(stdin_bytes):
+                        sel.unregister(in_fd)
+                        try:
+                            p.stdin.close()
+                        except OSError:
+                            pass
+                        in_fd = None
+                else:
+                    child_done = True
+            if st["capped"]:
+                break
+            if not child_done and p.poll() is not None:
+                child_done = True
+            if child_done:
+                if not st["out_done"]:
+                    drain()
+                break
+    finally:
+        if in_fd is not None:
+            try:
+                p.stdin.close()
+            except OSError:
+                pass
+        sel.close()
+        if pidfd is not None:
+            os.close(pidfd)
+        p.stdout.close()
+    return st
+
+
+def _read_thread(p, cap, timeout, stdin_bytes, kill) -> dict:
+    """Windows: pipes cannot be waited on, so a reader thread stays; an alive thread after
+    its bounded join is reported as held instead of being left silent."""
+    st = {"buf": bytearray(), "capped": False, "timed_out": False, "held": False}
+
     def reader():
         while True:
             chunk = p.stdout.read(4096)
             if not chunk:
                 break
-            room = cap - len(buf)
+            room = cap - len(st["buf"])
             if room > 0:
-                buf.extend(chunk[:room])
+                st["buf"].extend(chunk[:room])
             if len(chunk) > room:
-                state["capped"] = True
+                st["capped"] = True
                 kill()
                 break
 
     th = threading.Thread(target=reader, daemon=True)
     th.start()
-    if stdin_text is not None:
+    if stdin_bytes is not None:
         try:
-            p.stdin.write(stdin_text.encode("utf-8")[:STDIN_CAP])
+            p.stdin.write(stdin_bytes)
             p.stdin.close()
         except Exception:
             pass
-    timed_out = False
     try:
         p.wait(timeout=timeout)
     except subprocess.TimeoutExpired:
-        timed_out = True
+        st["timed_out"] = True
         kill()
-        try:
-            p.wait(timeout=5)
-        except Exception:
-            pass
     th.join(timeout=5)
-    out = buf.decode("utf-8", "replace")
-    if state["capped"]:
-        out += f"\n[runner] output cap {cap} bytes hit; process stopped"
-    if timed_out:
-        out += f"\n[runner] timeout {timeout}s; process stopped"
-    return {"rc": p.returncode, "out": out, "timed_out": timed_out, "capped": state["capped"],
-            "secs": round(time.time() - t0, 3)}
+    if th.is_alive():
+        st["held"] = True
+    return st
 
 
 def new_run_dir(data_dir: str, lane: str) -> str:

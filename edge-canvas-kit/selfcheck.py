@@ -718,6 +718,13 @@ def main(argv=None):
     else:
         skip("basic_lane", "bwbasic absent (optional); refusal screen still tested below")
         skip("sweep_crosscheck_basic_vs_python", "bwbasic absent (optional)")
+    # RUNNER_READ spec v2 (2026-10-10): need-driven reader, no leaked threads or fds.
+    if os.name == "posix":
+        rl = run_grp([sys.executable, os.path.join(KIT, "runner_leak_test.py")], timeout=120)
+        check("runner_read_v2_leak_tests", rl.returncode == 0 and "SUMMARY: ALL PASS" in rl.stdout,
+              (rl.stdout or "")[-400:])
+    else:
+        skip("runner_read_v2_leak_tests", "POSIX only (Windows keeps the reported thread reader)")
     check("basic_screen_unit", runner.basic_screen('10 SHELL "x"') and runner.basic_screen("10 REM SHELL in a comment\n20 PRINT 1") == "")
 
     # ---------------------------------------------------------------- C++ lane
