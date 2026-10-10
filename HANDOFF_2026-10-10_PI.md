@@ -26,11 +26,15 @@ fresh clone. Run the steps in order; each is one line. Report outputs back to Ti
 7. Daemon census (one line, writes ~/work/daemon_census.txt):
    { echo "== running"; systemctl list-units --type=service --state=running --no-pager --no-legend; echo "== enabled at boot"; systemctl list-unit-files --type=service --state=enabled --no-pager --no-legend; echo "== timers"; systemctl list-timers --all --no-pager --no-legend; echo "== user"; systemctl --user list-units --type=service --state=running --no-pager --no-legend; echo "== cron"; crontab -l; ls /etc/cron.d; echo "== ports"; sudo ss -tulpn; echo "== my processes"; ps -u $USER -o pid,etimes,rss,cmd --sort=-rss | head -25; } > ~/work/daemon_census.txt 2>&1; wc -l ~/work/daemon_census.txt
 
+8. Add the boot rule to the Pi's CLAUDE.md (append, do not rewrite):
+   printf '\n## Phase 0 (Tim 2026-10-10)\nFirst thing in any new chat or process: if the daily BOLO scheduled task has not run today after 07:49 ET, or any task failed with a usage limit in the last 8 days, run it once before anything else. Fetch URLs directly; never ask Tim to paste them. Read the newest HANDOFF_*.md in ~/work/Grok-Build-Core.\n' >> ~/work/CLAUDE.md && tail -4 ~/work/CLAUDE.md && sha256sum ~/work/CLAUDE.md
+
 ## What to report
 - Step 4: seconds, the three output sizes and SHA-256 lines, first 3 address rows.
 - Step 5: the printed lines (HTTP code per source) and the TSV path.
 - Step 6: TOTAL line and MUTANTS line.
 - Step 7: the census file.
+- Step 8: the last 4 lines and new SHA-256 of CLAUDE.md.
 
 ## Open decisions for Tim
 - Address finder Q1-Q3 (PO boxes, non-US, street-only rows into the book).
