@@ -1,0 +1,3 @@
+blocks=3 nodes=8 ways=6 relations=1
+kept_addresses=5 kept_roads=3 road_nodes=5
+missing_refs=2
