@@ -1,0 +1,4 @@
+# known_names.txt -- real names the mask replaces with placeholders (mask.py v2).
+# One name per line, exactly as it appears (case-sensitive, whole words).
+# Put the longer form too when both occur (e.g. "Jane Smith" and "Smith").
+# Placeholders (John Q. Public, Jane Doe, Richard Roe, Mary Major) are never masked.

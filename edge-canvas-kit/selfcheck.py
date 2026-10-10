@@ -690,6 +690,24 @@ def main(argv=None):
     m, _cnt = maskmod.mask("mail a.b@example.com call 555-123-4567 boot 0.70710678 sha 1f1b6595ab INV 132627395 @Tim0123")
     check("mask_rules", "@example" not in m and "555-123" not in m and "0.70710678" in m and "1f1b6595ab" in m
           and "132627395" not in m and "@Tim0123" not in m, m)
+    # mask v2 (2026-10-10): known names -> bogus placeholders, one pass, first-appearance order
+    m2, c2 = maskmod.mask("Jane Smith met Bob Lee; Jane Smith left. Smith stayed.", names=["Smith", "Jane Smith", "Bob Lee"])
+    check("mask_names_placeholders", m2 == "John Q. Public met Jane Doe; John Q. Public left. Richard Roe stayed."
+          and c2.get("NAME") == 4, (m2, c2))
+    m3, _ = maskmod.mask("Tim and John", names=["Tim", "John"])
+    check("mask_names_no_cascade", m3 == "John Q. Public and Jane Doe", m3)
+    m4, c4 = maskmod.mask("Jane Doe filed for John Q. Public", names=["Doe", "Public"])
+    check("mask_placeholders_protected", m4 == "Jane Doe filed for John Q. Public" and "NAME" not in c4, (m4, c4))
+    m5, _ = maskmod.mask("A1 B2 C3 D4 E5 A1", names=["A1", "B2", "C3", "D4", "E5"])
+    check("mask_names_fifth_is_person5", m5 == "John Q. Public Jane Doe Richard Roe Mary Major Person 5 John Q. Public", m5)
+    m6, _ = maskmod.mask("Bobby met Bob; McLee met Lee", names=["Bob", "Lee"])
+    check("mask_names_whole_word", m6 == "Bobby met John Q. Public; McLee met Jane Doe", m6)
+    m8, _ = maskmod.mask("Bob Lee and Bob", names=["Bob", "Bob Lee"])
+    check("mask_names_longest_first", m8 == "John Q. Public and Jane Doe", m8)
+    m7, c7 = maskmod.mask("Timothy Norman wrote this", names=[])
+    check("mask_author_name_kept", m7 == "Timothy Norman wrote this" and not c7, (m7, c7))
+    check("mask_residue_names", maskmod.residue("Bob Lee was here", names=["Bob Lee"]) == ["NAME"]
+          and maskmod.residue("Jane Doe was here", names=["Doe"]) == [], "")
     kdir = os.path.join(KIT, "knowledge")
     res_ = {f: maskmod.residue(open(os.path.join(kdir, f), encoding="utf-8").read()) for f in os.listdir(kdir) if f.endswith((".md", ".txt"))}
     check("knowledge_masked_no_residue", all(not v for v in res_.values()) and len(res_) >= 10, {k: v for k, v in res_.items() if v})

@@ -1,6 +1,6 @@
 # RUNNER_READ spec v2 (2026-10-10, supersedes the thread reader in lib/runner.py)
 
-Author: Timothy (sole author). Claude = tool/validator.
+Author: Timothy Norman (sole author). Claude = tool/validator.
 Defect D1 (demonstrated 2026-10-10): a child that hands its stdout to a process outside
 the run's group leaves the reader thread blocked forever. Result: one leaked thread per
 run, a 5 s stall, and the child's own output lost (`out=''`).
