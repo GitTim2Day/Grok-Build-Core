@@ -1,5 +1,6 @@
 # SESSION PATTERN MAP — Permanent vs Gel SVCT + Hash Fruit + Full Session Recovery
 # Stamp: 2026-10-13T12:33-04:00
+# Permanent seal stamp: 2026-10-13T12:58-04:00
 # Lane: build-shelves
 # Sibling of SESSION_PATTERN_MAP_2026-10-13_PERMANENT_GEL_SVCT. Not a merge.
 
@@ -39,25 +40,25 @@ Measured this sitting:
 - Biology uniqueness (self-sustaining, adaptation, procreation) maps to permanent cell formation + gel bloom + recovery offspring via shelves that still hash.
 - Traffic-camera / Flock ALPR layer: continuous ground-based capture (gel-like stream) versus sealed permanent records. No drone required. Public, documented.
 - X is the widest uncontrolled distribution channel. Shelves under owner control require the boot gate; X does not.
-- Wave outcomes already separable: phase π → cancellation to zero (no free-wave remainder); phase near 0 or resonant → amplification/resonance; electron-positron style release is relative to lattice binding, not literal mirror. Harmonics/music-theory intervals = discrete phase steps (Tim’s Table / base-360).
+- Wave outcomes already separable: phase π → cancellation to zero (no free-wave remainder); phase near 0 or resonant → amplification/resonance; electron-positron style release is relative to lattice binding, not literal mirror. Harmonics/music-theory intervals = discrete phase steps (Tim's Table / base-360).
 - Holographic: surface (4π) can encode volume/density. Creative embeddings stay gel; reality projection requires mono stamp + validation close on the remaining object.
 - Multi-layer context (content·context·data·time) beyond single keywords. Proactive surface of relevant public facts on the same turn when the chain is already supplied.
-- Instruction: read the contents, not only scan them, when told to read. Follow the measured bytes. Do not let a thought stand in for the thing that was built.
+- Instruction: read the contents, not only scan them, when told to read. Follow the measured bytes. Do not let a thought stand in for the thing that built.
 - Billing standing (extra-spend cap, stop-before-extra, no drip) unchanged. This write is the owner-requested project save.
 
 ## Audit
 - No contradiction with sealed eight-pillar or mono-time locks.
 - 4π closure held.
 - Unidirectional stamp is the permanence mark.
-- The 5582-byte parent’s internal claim does not close. That fact is recorded, not repaired inside the parent.
+- The 5582-byte parent's internal claim does not close. That fact is recorded, not repaired inside the parent.
 - Session items recovered are applications or measured objects, not new core rules.
 - This map contains no self-hash claim. The hash of the finished object will be measured after the write and reported outside the object.
 
 ## Final pattern map
 Permanent cell = embedded mono timestamp + closed validation on the object that remains + eight pillars + 4π surface.
-Gel cell = time as data point + optional pillars + bloom/prune allowed + Ask/Imagine outputs.
-The fruit is the object that still hashes after you leave.
-Meta: time’s nature changes on embedding; the claim must close on the object that remains.
+- Gel cell = time as data point + optional pillars + bloom/prune allowed + Ask/Imagine outputs.
+- The fruit is the object that still hashes after you leave.
+Meta: time's nature changes on embedding; the claim must close on the object that remains.
 
 ## Meta learned this round
 - A claim written inside an object fails if the hash of the object does not equal the claim. The local 5504-byte object and the GitHub 5582-byte object are different fruits.
