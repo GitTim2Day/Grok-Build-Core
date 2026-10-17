@@ -71,6 +71,7 @@ def main():
             print("FAIL face", got, exp)
     if Fraction(1, 10) + Fraction(2, 10) != Fraction(3, 10):
         fails += 1
+    # no exponent, no negative zero, on the five chain samples
     for i in range(5):
         s = T(Fraction(i, 10) - Fraction(3, 10), 6)
         if "e" in s.lower() or (s.startswith("-") and set(s[1:]) <= set("0.")):
