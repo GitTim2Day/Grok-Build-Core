@@ -10,3 +10,15 @@
 - 12:37 PM EDT logging order: artifacts/bwbasic_iteration_log.jsonl, append-only. The ts on each row comes from a fresh `timecap.sh open` with a private stamp at /tmp/bwbasic-restore-timecap.json. The first row landed at 2026-10-18T12:38:39.336-04:00. Rows for iterations 1–3 are backfilled:true.
 - 12:38:57 PM EDT iteration 4 (live): restore_bwbasic.sh check exited 0. All 4 seals MATCH, and BOOT printed 0.70710678 (output 64830efb… MATCH).
 - Iteration 4 recopy_resave: SHA256SUMS regenerated. Copy synced to reference-map and verified. One master-map row appended under flock. See the report for the final hashes.
+- 12:40 PM EDT saves approved by Timothy through the parent (his 12:28 ET order), done in order:
+  - a) Email sent with user-Gmail send_message to timnorman730@gmail.com and timothy_h_norman@yahoo.com. Id/thread 1a14fe31ba575d27. No attachments.
+  - b) Notion pointer page (private, workspace level): https://app.notion.com/p/3fdc86699c9481f1a5ccc0370d75c3db
+  - c) GitHub GitTim2Day/Grok-Build-Core main, ledger/bwbasic-restore-2026-10-18/, two pushes of 4 files each:
+    - 64a77289f3c85560a01d1ee650720eab0ee8d187: REPORT, SKILL_DRAFT, restore_bwbasic.sh, SHA256SUMS
+    - ab1d0a953ae24a370b134568cd4d93b7ae022acd: JOURNAL, S320_INPUTS, iteration log, build_repro
+    - The raw files at ab1d0a95 match the local hashes 8/8.
+  - d) Drive (timnorman730, My Drive root):
+    - bwbasic-restore-2026-10-18_COMBINED.md, id 1hP7dmxEM3H6VRzE-zSqIM0IVwrRMst4K (sha 23667333a3468bd72537d38d236438234a82e0759ddf1c05bd14f8b36a93d0fa)
+    - bwbasic-restore-2026-10-18_SHA256SUMS, id 11sYx2xuhiT2TEvgpCSkOHbRnpRAZxhHL
+    - Both were downloaded back and are byte-identical.
+  - The GitHub and Drive copies carry the SHA256SUMS of 12:39 PM EDT (bbca9c7a…) and an older JOURNAL. The box and reference-map copies are newer.
