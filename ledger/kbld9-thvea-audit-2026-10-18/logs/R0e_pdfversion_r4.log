@@ -1,0 +1,5 @@
+  File "/workspace/kbld9/probe_suite_3_CORRUPT_backup.py", line 59
+    check("T2 fused == reference on 30 randomized trials", diffs == 0, f"mismatched trials={diffs
+                                                                                            ^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+exit=1

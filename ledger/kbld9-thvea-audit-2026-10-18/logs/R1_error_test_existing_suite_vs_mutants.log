@@ -1,0 +1,119 @@
+### kbld9_core_r7 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_core_r7: 4/4 pass. Failures: []
+VERDICT kbld9_core_r7 BASELINE rc=0
+### kbld9_mut_m01 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m01: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m01 SURVIVED rc=0
+### kbld9_mut_m02 exit=2
+[FAIL] T1 fence holds across bin-width sweep  -- worst sigma 9.5000 at bin_width=(1e-07, 1e-06)
+[FAIL] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths  -- mismatched trials=25
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m02: 2/4 pass. Failures: ['T1 fence holds across bin-width sweep', 'T2 fused == reference on 40 trials x 3 tiers x 7 bin widths']
+VERDICT kbld9_mut_m02 KILLED rc=2
+### kbld9_mut_m03 exit=2
+[FAIL] T1 fence holds across bin-width sweep  -- worst sigma 27.3923 at bin_width=(99999.0, 1e-15)
+[FAIL] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths  -- mismatched trials=11
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m03: 2/4 pass. Failures: ['T1 fence holds across bin-width sweep', 'T2 fused == reference on 40 trials x 3 tiers x 7 bin widths']
+VERDICT kbld9_mut_m03 KILLED rc=2
+### kbld9_mut_m04 exit=1
+[PASS] T1 fence holds across bin-width sweep
+[FAIL] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths  -- mismatched trials=12
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m04: 3/4 pass. Failures: ['T2 fused == reference on 40 trials x 3 tiers x 7 bin widths']
+VERDICT kbld9_mut_m04 KILLED rc=1
+### kbld9_mut_m05 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m05: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m05 SURVIVED rc=0
+### kbld9_mut_m06 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m06: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m06 SURVIVED rc=0
+### kbld9_mut_m07 exit=1
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[FAIL] T3 mixed int/float zero-dispersion snaps to median  -- values=[7.0, 123456.789]
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m07: 3/4 pass. Failures: ['T3 mixed int/float zero-dispersion snaps to median']
+VERDICT kbld9_mut_m07 KILLED rc=1
+### kbld9_mut_m08 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m08: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m08 SURVIVED rc=0
+### kbld9_mut_m09 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m09: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m09 SURVIVED rc=0
+### kbld9_mut_m10 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m10: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m10 SURVIVED rc=0
+### kbld9_mut_m11 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m11: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m11 SURVIVED rc=0
+### kbld9_mut_m12 exit=1
+[PASS] T1 fence holds across bin-width sweep
+[FAIL] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths  -- mismatched trials=8
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m12: 3/4 pass. Failures: ['T2 fused == reference on 40 trials x 3 tiers x 7 bin widths']
+VERDICT kbld9_mut_m12 KILLED rc=1
+### kbld9_mut_m13 exit=1
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[FAIL] T4 100k median under 300 ms (5 runs)  -- median 589.5 ms
+== kbld9_mut_m13: 3/4 pass. Failures: ['T4 100k median under 300 ms (5 runs)']
+VERDICT kbld9_mut_m13 KILLED rc=1
+### kbld9_mut_m14 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m14: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m14 SURVIVED rc=0
+### kbld9_mut_m15 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m15: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m15 SURVIVED rc=0
+### kbld9_mut_m16 exit=0
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+== kbld9_mut_m16: 4/4 pass. Failures: []
+VERDICT kbld9_mut_m16 SURVIVED rc=0
