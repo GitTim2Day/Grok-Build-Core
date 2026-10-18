@@ -1,0 +1,147 @@
+{
+ "generated": "2026-10-18 ~12:10 ET",
+ "labels": [
+  "VERIFIED",
+  "TIMOTHY-STATED",
+  "UNVERIFIED"
+ ],
+ "findings": {
+  "1_wired_or_parked": {
+   "platform": "Grok Bot runs on Cursor's platform (VERIFIED E2,E10,E7)",
+   "workflow_tool": "PARKED/excluded (VERIFIED E1,E13,E14; no cron/routine found E7)",
+   "open_item": "Google alert 2026-10-03 22:08 ET Cursor allowed access (E15) - cause UNVERIFIED",
+   "timothy_stated": [
+    "Cursor: voluntary no",
+    "Linear: parked",
+    "Grok Bot OFF unless Timothy turns it on from X @Timothy01775634",
+    "no Bot / Cursor-through-Bot / unattended Bot from this chair"
+   ]
+  },
+  "2_bottlenecks": [
+   "drift: anti-drift boot feedback 2026-09-18 (E8,E2)",
+   "background charge $246 + ~50 min refused 2026-10-06 (E12)",
+   "unattended overnight 2026-09-23 01:43-05:00 ET (TIMOTHY-STATED, E3)",
+   "tool limits: cursor MCP unavailable (E4), Cursor GH app tag (E5)",
+   "support duplicate-closing T-G14417 (E3,E10)"
+  ],
+  "3_alongside_bot": "Grok Bot built/supported by Cursor team (E10); Cursor billing separate track (E11)",
+  "4_spacex_8k": {
+   "found": true,
+   "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm",
+   "quote": "the merger of Merger Sub with and into Cursor, with Cursor surviving the merger as a wholly owned subsidiary of the Company (the “Merger”)",
+   "value_quote": "based on an implied equity value of Cursor of $60.0 billion",
+   "under_spacexai_in_8k": false
+  },
+  "5_charges": [
+   {
+    "date": "~2026-09-22",
+    "amounts": [
+     "$5.00",
+     "$80.37",
+     "$60.01",
+     "$40.28"
+    ],
+    "src": "E11"
+   },
+   {
+    "date": "2026-09-22 posted",
+    "amounts": [
+     "$20.00",
+     "$20.41"
+    ],
+    "src": "E11"
+   },
+   {
+    "date": "2026-09-25",
+    "amounts": [
+     "-$100.28"
+    ],
+    "src": "E11, gmail 1a0d8a725a1ff6ca"
+   },
+   {
+    "date": "2026-10-06",
+    "amounts": [
+     "$246"
+    ],
+    "status": "refused by Timothy",
+    "src": "gmail 1a11410fc1c8d6bd"
+   }
+  ],
+  "payment_by_us": "none"
+ },
+ "evidence": {
+  "E1": {
+   "path": "reference-map/MASTER_REFERENCE_MAP.md",
+   "sha256_pre_row": "7be2f63172d5307b81a4e18ae4c94a759aed6f607f67bd6b11c87fd7adf29425"
+  },
+  "E2": {
+   "path": "/workspace/cursor-audit-2026-09-24/CURSOR_ACTIVITY_AUDIT.md",
+   "sha256": "82d30958aaccf555705356f9c9aa71acab1c3c3124e9e36f019a18ba2c7452d4"
+  },
+  "E3": {
+   "path": "/workspace/sweep-2026-09-24/SWEEP_2026-09-21_to_24.md",
+   "sha256": "9b4e040894b33e42fb30c3cc18d0356f011d1aff69540883e73982150db36865"
+  },
+  "E4": {
+   "path": "/workspace/dyneema-pack-chunks/DELIVERY_RECEIPT_EXECUTOR_FAILED_2026-09-22.md",
+   "sha256": "53e4e8d39a725764d3d0865e9d3c7147d175568f87b5057abeb4497b49dcf07b"
+  },
+  "E5": {
+   "path": "/workspace/cos-agent-sync/COS_AGENT_SYNC_FINAL_2026-09-23.md",
+   "sha256": "f3ffc27654b11e00b7811fb1805222b3fef177345180bb4e75881b43febeed43"
+  },
+  "E6": {
+   "path": "/workspace/unauthorized-use-record-2026-10-18/UNAUTHORIZED_USE_CURSOR_2017-PRESENT.md",
+   "sha256": "7be0e7b97f8ceda5c82c8ca972f008b3c2a485f463349d8bc90b0db5484e388b"
+  },
+  "E7": {
+   "path": "/workspace/sources-of-truth-2026-10-18/SOURCES_OF_TRUTH_2026-10-18.md",
+   "sha256": "c51e56dc3f2f623a437bf9d8439faaa11ab2f7b8ffbdb4bc10d690329f203bdb"
+  },
+  "E8": {
+   "path": "/workspace/AUGMENTED_ASSISTANT_FILTER_SPEC_2026-09-18.md",
+   "sha256": "30f027c4b198d44fb0f6378b8b723af2e60bfc34e6d300cddcac3f693e57f01f"
+  },
+  "E9": {
+   "path": "/workspace/session-scan-2026-10-05/shares_raw/b85163a322414eeeb0cb717283c83ca7.json",
+   "sha256": "a1c0de9bd18461581f16cf159edd9f5b34081b890ce0c50f4fdbdc7e95c44ccb"
+  },
+  "E10": {
+   "gmail": [
+    "1a0d8a725a1ff6ca",
+    "1a0d89d8fd422377",
+    "1a0cc052a1fd8fcd",
+    "1a0d8a94e9ba5bc6",
+    "1a0d89da34d2d2af",
+    "1a0d89dba99ded5e"
+   ]
+  },
+  "E11": {
+   "path": "/workspace/boa-ledger/CURSOR_GROKBOT_TRACK_2026-09-23.md",
+   "sha256": "29b52b2c158a68a9ea8968a91fcd6233666321d1a501234542aac2be6f7540c0"
+  },
+  "E12": {
+   "gmail": "1a11410fc1c8d6bd",
+   "note_sha256_stated": "2bf0d7284b09e562d57b432c35e0e8a7a6f29dc2d593588f89e083e387bb85d5"
+  },
+  "E13": {
+   "gmail": "1a11408922a607ad"
+  },
+  "E14": {
+   "gmail": "1a13d6072f7aaaad"
+  },
+  "E15": {
+   "gmail": "1a104abbbc54182f"
+  },
+  "E16": {
+   "gmail": [
+    "1a0fac77d8ceeeb2",
+    "1a0fad4c3563a4cc"
+   ]
+  },
+  "E17": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm",
+   "accession": "0001628280-26-056945"
+  }
+ }
+}
