@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/kbld9/probe_suite_3.py", line 19, in <module>
+    for prec in [m.TIER_DAILY, m.TIER_PREDICTIVE, m.TIER_COSMOLOGY]:
+                 ^^^^^^^^^^^^
+AttributeError: module 'kbld9_core_r4' has no attribute 'TIER_DAILY'
+exit=1

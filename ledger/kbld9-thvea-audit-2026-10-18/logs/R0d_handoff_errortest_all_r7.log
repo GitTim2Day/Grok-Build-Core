@@ -1,0 +1,85 @@
+[PASS] R1 NaN fails closed
+[PASS] R2 inf fails closed
+[PASS] R3 bool rejected
+[PASS] R4 snap mitigates outlier
+[PASS] R5 no float noise in snapped bins
+[PASS] R6 provenance chains across calls
+[PASS] R7 nonce unique across rapid calls
+[PASS] R8 stats untouched on failure
+[PASS] R9 empty envelope consistent, no aliasing
+[PASS] R10 read-back verification present+correct
+[PASS] R11 mad==0 path does not mask spike
+[PASS] R12 recurrence counts exposed
+[PASS] R13 process_json rejects mixed array
+[PASS] R14 envelope JSON round-trip stable
+[PASS] R15 100k points under budget
+      R15 measured: 214.3 ms / 100k points
+
+== kbld9_core_r7: 15/15 pass. Failures: []
+[PASS] S1 signed zero does not split bins
+[PASS] S2 cleaned data inside fence despite coarse bins
+[PASS] S3 mad==0 snaps exactly to median
+[PASS] S4 spine links o1->o2->o3
+[PASS] S5 empty envelope participates in chain
+[PASS] S6 ERROR neither kills instance nor breaks spine
+[PASS] S7 10**400 fails closed
+[PASS] S8 raw input hash preserves signed-zero delta
+[PASS] S9 bin_width airlock rejects 6/6 bad configs
+[PASS] S10 100k under 300 ms target
+      S10 measured: 183.1 ms / 100k points (target ~300 ms)
+
+== kbld9_core_r7: 10/10 pass. Failures: []
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+      T4 runs: ['180.6', '192.2', '198.9', '202.3', '209.3'] ms
+
+== kbld9_core_r7: 4/4 pass. Failures: []
+[PASS] W1 Welford matches fsum reference
+[PASS] W2 stable under 1e9 offset
+[PASS] W3 update raises on 6/6 garbage inputs
+[PASS] W4 NaN cannot enter or poison the spine
+[PASS] W5 failed calls leak zero elements into spine
+[PASS] W6 Chan merge == sequential ground truth
+[PASS] W7 batch/stream snapshots coherent + caveat present
+[PASS] W8 100k median under 300 ms with Welford
+      W8 runs: ['166.6', '170.1', '172.7', '180.6', '185.1'] ms
+
+== kbld9_core_r7: 8/8 pass. Failures: []
+[PASS] P1 tier constants present (1e-6 / 1e-8 / 1e-15)
+[PASS] P2 constructor accepts precision=
+[PASS] P3 _truncate is exact (Decimal ground truth, 10k cases)
+[PASS] P4 truncation never increases magnitude
+[PASS] P5 precision tier recorded in header
+[PASS] P6 tier changes quantization granularity
+[PASS] P7 precision airlock rejects 6/6 bad configs
+[PASS] P8 no float noise at declared tier
+[PASS] P9 default precision is 1e-8
+[PASS] P10 100k median still under 300 ms
+      P10 runs: ['168.0', '176.2', '180.8', '183.8', '186.9'] ms
+[PASS] P11 large magnitude x fine tier does not crash
+[PASS] P12 sub-ULP tier is a no-op (claims no unearned precision)
+[PASS] P13 pipeline OK on 1e25 at cosmology tier
+[PASS] P14 cached recurrence == uncached reference
+
+== kbld9_core_r7: 14/14 pass. Failures: []
+ERRORTEST vs kbld9_core_r7  root=/workspace/kbld9-handoff
+
+===== R1-R15 (probe_suite_r1_r15.py) =====
+===== R1-R15 exit=0 =====
+
+===== S1-S10 (probe_suite_s1_s10.py) =====
+===== S1-S10 exit=0 =====
+
+===== T1-T4 (probe_suite_t1_t4.py) =====
+===== T1-T4 exit=0 =====
+
+===== W1-W8 (probe_suite_w1_w8.py) =====
+===== W1-W8 exit=0 =====
+
+===== P1-P14 (probe_suite_p1_p14.py) =====
+===== P1-P14 exit=0 =====
+
+== ERRORTEST TOTAL failures=0 ==
+exit=0
