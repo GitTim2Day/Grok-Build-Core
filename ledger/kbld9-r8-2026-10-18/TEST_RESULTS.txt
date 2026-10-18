@@ -1,0 +1,67 @@
+KBLD9 core r8 draft -- TEST_RESULTS (2026-10-18, America/New_York). Measured only. Box only.
+Final draft: core/kbld9_core_r8a.py  sha256 16934bab2d88a3f7a63a9f16a7c986e296d13dd053c6d441eb05a028545347c6
+Base:        /workspace/kbld9/kbld9_core_r7.py sha256 465359bb0339d3acdd1b94282a0d9191fb663b734cd2b552e36baf5e75da31d8 (unchanged before/during/after)
+Harness:     thvea-v3 a656148d2022c9b02698049fee98c63c5e734af06cefb0563acbe196e14c5f38 (unchanged)
+Sealed:      probe_suite_3.py ce0e09f329599dfa511cb036aa9f0c2bbb39d0d84deb46e43c34eb31f4d0096d (unchanged)
+
+1. thvea-v3 harness
+   r8a: 14/16 PASS (R2, R3 run1, R3 run2: identical verdicts). FAIL H4a (16 of 210 boundary inputs, fused vs v3 float-division oracle);
+        FAIL H4b (16 of 420 checks, module reference vs the same oracle). H5 now PASS ([1e308,-1e308,0.0] -> OK).
+   r7 (same day, same harness): 14/16. FAIL H4a (8 of 210), FAIL H5 (ERROR "cannot convert float infinity to integer"). H4b PASS.
+   MISSING module: 0/16, all BLOCKED, exit 1 (fail-closed).
+   Target 16/16 NOT reached: H4a/H4b on r8a fail because the v3 oracle decides membership by float division; exact values disagree
+   with it on 16 inputs (exact reference vs v3 oracle: 16/210). See OPEN_GAPS R8-G1.
+
+2. sealed T1-T4 suite (ce0e09...) on r8/r8a: 4/4 PASS in every run (R1 r8; R2, R3 x2 r8a). T4 medians 173.5 / 173.8 / 171.5 / 170.0 ms.
+
+3. 210 boundary inputs vs the independent EXACT reference (tests/ref_exact.py, Decimal prec 4000 with Inexact trapped)
+   r8a fused (E1): 0/210 mismatches.  r8a module reference _snap/_classify (E2): 0/210.
+   r7 fused: 12/210.  r7 module reference: 16/210.
+   Shifted-median set (630 inputs, x-med inexact in float): r8a 0/630 fused (E4), 0/630 reference (E5); r7 21/630 and 24/630.
+   Against the v3 float-division oracle instead: r8a 16/210, r7 8/210.
+   9-sigma case t=9 a=0.37 ulp=+1: r8a cleaned 4.9 (= r7). Exact x - 9*mad = +4.44089209850062616169452667236328125E-16 (outside fence);
+   the v3 oracle's 4.937058 is the float-division rounding (R8-G1a).
+
+4. [1e308,-1e308,0.0] and other extreme valid inputs (tests/r8_extra_cases_v3.py), r8a 14/15 X-cases PASS, r7 1/15 (X11 only):
+   X1 [1e308,-1e308,0.0] tier 1e-15: OK, unchanged, CLEAN x3 ................. PASS (r7 ERROR)
+   X2 [1.5e308,-1.5e308,0.0] (float MAD overflows): OK, header mad inf ......... PASS (r7 ERROR)
+   X3 [-1.7e308]*2+[1.7e308]*2 (MAD midpoint overflows): OK, median 0.0 ...... PASS (r7 ERROR)
+   X4 outlier 1.79e308 over cluster at -1.6e308: snap -1.194698e+308 inside exact fence, key 1.79e+308 .. PASS (r7 ERROR)
+   X5 9*mad overflows with an outlier: exact fence path, snap 1.7424461999999997e+308 inside exact fence .. PASS (r7 ERROR)
+   X6 [1.7e308,1.7e308] (median midpoint overflows): median 1.7e+308 ......... PASS (r7 ERROR)
+   X7 [1.5e308]*3 (fsum overflows): welford mean 1.5e+308 ..................... PASS (r7 ERROR)
+   X8 zero dispersion with +-1.79e308 spikes: snapped to median, keys finite .. PASS (r7 ERROR)
+   X9 subnormal inputs == exact reference ...................................... PASS (r7 FAIL: all ANOMALY, data 0.0)
+   X10 [10**300,-10**300,0] and [max,-max,0.0]: OK, unchanged, CLEAN .......... PASS (r7 ERROR)
+   X11 [10**400,1.0] fails closed (ERROR) ...................................... PASS (r7 PASS; unchanged G3)
+   X12 [1,2,3,4,5,max] bin 0.7: snap inside EXACT fence ......................... FAIL (snap 23.5151 = r7 float fence hi; R8-G1b)
+   X13 tiny bin 1e-305, exact quantize, key == cut digit string '100000000.123456' .. PASS (r7 ERROR)
+   X14 fused == module reference on the extreme inputs ......................... PASS (r7 FAIL)
+   X15 overflowing non-float median midpoint -> 1.7976931348623153e+308 (toward zero) .. PASS (r7 ERROR)
+   Extra-cases total: r8a 19/20, r7 2/20.
+
+5. Regression r8a vs r7 on every suite input (sealed T1-T4 + v3 harness data; 94 non-boundary + 210 boundary)
+   Fields compared: status, error, data, tiers, recurrence_bins, header median/mad/count/bin/precision, stats, welford batch+stream,
+   input/output sha256, chain length (excluded: created_utc, timestamp, nonce, kbld9_version).
+   Non-boundary differences: 2 of 94, both the same input [1e308,-1e308,0.0] (listed under H3 and H5): r7 ERROR -> r8a OK, data unchanged.
+   Boundary differences: 12 of 210:
+     t=3 a=1.0 sgn=+-1 ulp=0; t=3 a=0.001 sgn=+-1 ulp=0 ........ tier CLEAN -> DRIFT
+     t=6 a=1.0 sgn=+-1 ulp=0; t=6 a=0.001 sgn=+-1 ulp=0 ........ tier DRIFT -> ANOMALY (stats.anomalies 0 -> 2)
+     t=9 a=0.001 sgn=+-1 ulp=0 and ulp=1 ........................ cleaned value +-0.0133434.. -> snapped 0.0 (stats.snapped, recurrence, output sha)
+   Every other suite input: r8a == r7 on all compared fields.
+   Measured, not changed: 17 suite inputs (T1 11, T2 6) have r7/r8a snapped values above the exact 9*mad fence, max excess 4.663E-15 (R8-G1b).
+
+6. Mutants (case-level: KILLED only if a case passing on baseline r8a fails on the mutant; suites = v3 16 + sealed 4 + extra 20 = 40 cases;
+   baseline r8a passes 37/40, non-pass H4a, H4b, X12)
+   22 audit mutant patterns re-applied to r8a (M01-M22): 22/22 KILLED.
+   r8-specific (R01 ROUND_DOWN->ROUND_HALF_EVEN, R02 exact trunc->round, R03 exact dev->float, R04 band 0, R05 float thresholds fallback,
+   R06 no quantize overflow path, R07 no exact fence, R09 no exact median, R10 no exact mean, R11 toward-zero->nearest,
+   R12 no exact MAD, R13 reference inf-mad->ANOMALY): 12/12 KILLED.   Total 34/34 killed, 0 survived (logs/R2_mutants_r8a.log).
+   Round 1 (r8, extra v1): 30/34; survived R02, R04, R11, R13. These were closed by new tests E4/E5/X13/X14/X15.
+   R08 (eager fence) not built: equivalent in r8a (R8-G7).
+
+7. T4 timing, BOX ONLY (x86_64, 8 CPU, Python 3.13.5; no Pi 5 number). 7 interleaved trials x 5-run median, 100k points:
+   r7  median of 7 = 178.7 ms (170.3-188.3)    r8a median of 7 = 174.7 ms (163.3-181.1)    ratio r8a/r7 = 0.978
+   v3 T4 medians on r8a: 172.9, 176.1 ms (R3); sealed T4 medians on r8a: 173.8, 171.5, 170.0 ms. All < 300 ms.
+
+8. Skill command proposal dry-run (SKILL_UPDATE_PROPOSAL.md): hash gate 4/4 OK; r8a v3 14/16, sealed 4/4, extra 19/20; r7 v3 14/16, sealed 4/4.
