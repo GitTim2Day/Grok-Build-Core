@@ -1,0 +1,12 @@
+# JOURNAL — bwbasic-restore-2026-10-18
+- 12:26–12:30 PM EDT lookup, read-only. Report at /workspace/bwbasic-locate-2026-10-18/. As found: 434 OK and 2 missing (/opt). No 2.20 binary anywhere. The walk seals (skill ea50f214, map 99c6daf0) match the Drive copies 1e5u54vp…/1vc2yScB….
+- 12:28 PM EDT change of orders (parent): restore.
+- 12:29 apt install bwbasic 2.20pl2-14. /usr/bin/bwbasic is 0334b1cc… and MATCHES the seal.
+- 12:30 BOOT.bas printed 0.70710678. Output 64830efb… matches the record. BOOT.bas is unchanged (a8a21b61…).
+- 12:31–12:32 rebuilds were bit-exact: unified 2f7e6cd7… (gcc -O2), 3.20 85627c86…, and the hybrid script bcbac335…. Installed to /opt. Hybrid sums 436/436 OK.
+- 12:32 tests: core 23/23, mutation 296/296. Incident: the sealed core_tests.json was overwritten by the test run and restored the same minute (d6829f1f…).
+- 12:34 restore_bwbasic.sh verify/restore/check: all three gave BOOT PASS.
+- External saves (email, Notion, GitHub, Drive) are held for approval.
+- 12:37 PM EDT logging order: artifacts/bwbasic_iteration_log.jsonl, append-only. The ts on each row comes from a fresh `timecap.sh open` with a private stamp at /tmp/bwbasic-restore-timecap.json. The first row landed at 2026-10-18T12:38:39.336-04:00. Rows for iterations 1–3 are backfilled:true.
+- 12:38:57 PM EDT iteration 4 (live): restore_bwbasic.sh check exited 0. All 4 seals MATCH, and BOOT printed 0.70710678 (output 64830efb… MATCH).
+- Iteration 4 recopy_resave: SHA256SUMS regenerated. Copy synced to reference-map and verified. One master-map row appended under flock. See the report for the final hashes.

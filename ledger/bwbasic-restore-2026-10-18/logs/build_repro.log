@@ -1,0 +1,13 @@
+2026-10-18 12:31-12:33 EDT  reproducible-build search (scratch /tmp/bwbasic-restore-scratch-2026-10-18), gcc (Debian 14.2.0-19) 14.2.0
+unified/src  bw*.c -lm, by flag set -> size sha256[:16]   (target 446016 2f7e6cd7579f219e)
+  -ansi -pedantic -Wall      523216 (differs)
+  -O2                        446016 2f7e6cd7579f219e  MATCH (also -O2 -Wall, -O2 -w)
+  -O2 -ansi -pedantic -Wall  441928 d6c7f37450bd9ab9
+  -Os 384744 42f8c91d41dda49a | -O1 441872 5e75d32d998a502f | -O3 486408 6fde090a84ceb280
+bwbasic320 (src/x copy, existing binary removed): gcc -o bwbasic320 -ansi -pedantic -Wall bw*.c -lm -> 85627c86a8ac51c44a67c403bd0c300dd8aa49cbfd0ed97006c1a8e37dbd5e9a MATCH
+bwbasic-hybrid: script, installed as-is from src/bwbasic-hybrid -> bcbac33583d4f26945a99356a3c5d833eb07fddda804acd4d70c676918c0753d MATCH
+2.20 source fallback (test only, not installed): orig.tar.gz + debian patches (import_diff, fix_clang, enable_debug, fix_gcc14_ftbfs) all applied;
+  gcc -ansi -O2 -w -DHAVE_RAISE=1 -DHAVE_STRING_H=1 -DHAVE_STDLIB_H=1 -DHAVE_SIGNAL=1 (18 files) -lm -> 165568 B a0b8b11002bdbfd962249401954e1ba950e48ffa2bbf168290098681841ebb67 (no-seal; Debian binary is 0334b1cc)
+  BOOT.bas on it -> output sha 64830efbd41e819d2a620887c9da86026ddb448aed4bae95a9329d9d001e4551 = byte-identical to the 2.20 record (prints 0.70710678)
+note: unified/bwbasic-unified.patch does not apply with plain `patch -p1` to CRLF orig320 (7 files reject); unified/src is the authoritative patched tree.
+incident: first run_core_tests.py run (from a copy) wrote tests/results/core_tests.json into the sealed hybrid folder because ROOT is hardcoded; restored at 12:32 EDT from the pre-run copy (sha d6829f1f91c2396f757e178821d3112aea47b02c7a0fddf42833844290c08627, mtime preserved); sha256sum -c back to 436/436 OK. Later runs used a repointed scratch copy.
