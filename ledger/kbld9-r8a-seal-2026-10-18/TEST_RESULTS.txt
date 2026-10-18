@@ -1,0 +1,45 @@
+KBLD9 core r8a under THVEA harness v4 -- TEST_RESULTS (2026-10-18, America/New_York). Measured only. Box only (x86_64, Python 3.13.5).
+Ordered by Timothy 12:56 PM ET. Runs 12:58-13:09 ET.
+
+Hashes (re-checked before and after all runs: unchanged, logs/HASHES_BEFORE.txt == logs/HASHES_AFTER_TESTS.txt)
+  r8a core   16934bab2d88a3f7a63a9f16a7c986e296d13dd053c6d441eb05a028545347c6  /workspace/kbld9-r8-2026-10-18/core/kbld9_core_r8a.py
+  r7 core    465359bb0339d3acdd1b94282a0d9191fb663b734cd2b552e36baf5e75da31d8  /workspace/kbld9/kbld9_core_r7.py (not edited)
+  v3 harness a656148d2022c9b02698049fee98c63c5e734af06cefb0563acbe196e14c5f38  archived, not edited
+  v4 harness 4c20b16f83a3dc283d0119944c360061f563217a0b4d25b464aebbb7a0e865cd  harness/probe_suite_3_thvea_v4.py (NEW file)
+  sealed suite ce0e09f329599dfa511cb036aa9f0c2bbb39d0d84deb46e43c34eb31f4d0096d  /workspace/kbld9/probe_suite_3.py (not edited)
+
+1. Harness v4 (built by harness/make_v4_from_v3.py: hash-checked v3, 4 exact anchored replacements, written with open(...,'x'))
+   The only logic change is the oracle's 3/6/9-sigma membership: v3 computed s=(x-med)/mad in float and compared a=|s| to 3/6/9;
+   v4 compares |Fraction(x) - Fraction(med)| <= t*Fraction(mad), exact on the stored binary values (== exact Decimal digit
+   strings), no division, no rounding. Snap side uses the exact sign of x-med. Other edits: HARNESS_VERSION "thvea-v4",
+   docstring note, "from fractions import Fraction". Cases, inputs, seeds, assertion minimums, gate, output format: same as v3.
+   Full diff: logs/diff_v3_v4.patch. Fail closed: a non-finite mad now raises inside the oracle -> "ORACLE UNDEFINED" FAIL
+   (v3 would have classified CLEAN via x/inf = 0); no v4 input reaches that path.
+   Oracle cross-check (harness/xcheck_v4_oracle.py): v4 oracle vs the independent exact Decimal reference
+   (r8 tests/ref_exact.py, prec 4000, Inexact trapped): 0/210 mismatches. v4 vs v3 oracle: 16/210 (the 16 listed in r8 OPEN_GAPS R8-G1).
+
+2. Runs under v4
+   r8a run1: 16/16 PASS, EARNED, VALIDATE OK, rc 0, T4 median 177.9 ms, results sha 16314c7014a0971e7b5f635b8a5e626e1f16f6773e34ab1b56caea89fb8272f3
+   r8a run2: 16/16 PASS, EARNED, VALIDATE OK, rc 0, T4 median 174.3 ms, results sha 9a0237f0d0d03b1ee865145884b7f4847729ad7105a9361c0b9efa2bdeef0473
+   r8a run3: 16/16 PASS, EARNED, VALIDATE OK, rc 0, T4 median 188.9 ms, results sha 0c7227483fecf85a56a12a7da67669499eccf0d5498fc55b5da6d53424c302c4
+     (results files differ only by the T4 timing field; all verdicts identical)
+   r7 (comparison): 13/16, BLOCKED, rc 1, results sha ca0af6ffc2eb7943b2cbffc0e02943937310c925d2d731d10f64995b102b821e
+     FAIL H4a 12/210 inputs (t=3 a=1.0 and a=0.001, t=6 a=1.0 and a=0.001, sgn +-1, ulp 0; t=9 a=0.001 sgn +-1 ulp 0 and +1)
+     FAIL H4b 16/420 checks (_classify vs exact oracle)
+     FAIL H5  [1e308,-1e308,0.0] -> ERROR "cannot convert float infinity to integer"
+     (under v3 r7 was 14/16: H4a 8/210 + H5. r7's float membership matches the old float oracle more often; that is the change.)
+   MISSING module: 0/16 all BLOCKED, rc 1 (fail closed). results sha 420f26cfd5fe6c58f289b6cc2b12c5f15b802808898ef1744805fefe54bf8039
+   Sealed T1-T4 suite on r8a: 4/4 PASS, rc 0.
+
+3. Sanity: v4 vs the 22 audit mutants (kbld9_mut_m01..m22, r7 copies, /workspace/kbld9-thvea-audit-2026-10-18/mutants)
+   a) Audit runner run_mutants_v3.py (case level, baseline r7) with v4: 21/22 KILLED, 1 SURVIVED (M17 ref _classify DRIFT 6.0->6.5).
+      Cause: under v4 the r7 baseline itself FAILS H4b (r7's _classify is float, 16 exact-boundary mismatches), so the case-level
+      rule cannot count M17's H4b failure as new. r4 REFERENCE fails H4a,H4b; MISSING FAIL_CLOSED_OK. Log: logs/S1_v4_vs_22_audit_mutants.log
+   b) Check level (harness/checklevel_mutants_v4.py + checklevel_driver_v4.py; full failing-assertion lists, baseline r7):
+      22/22 CHECK-KILLED. M17: 32 new failing H4b checks (48 total vs r7's 16). Log: logs/S3_v4_checklevel_22_audit_mutants.log
+   c) Same 22 patterns re-applied to r8a + 12 r8-specific (r8 runner, copied as harness/run_mutants_r8_v4.py with only the harness
+      path changed; baseline r8a 39/40, non-pass extra:X12): 34/34 KILLED; each of M01-M22 is killed by at least one v4 case
+      (M17 by v4 H4b). R02-R04, R06, R07, R09-R13 are killed only by the r8 extra cases, as before. Log: logs/S2_v4_vs_34_r8a_mutants.log
+      (the r8 runner labels harness cases "v3:" in its log; that label is the runner's, the harness run was v4.)
+
+4. Not changed, carried over (see OPEN_GAPS.md): r8 extra cases X12 FAIL (R8-G1b fence value), G2-G9.
