@@ -1,0 +1,105 @@
+TEST_RESULTS — time-capture-auto-2026-10-18
+Written 2026-10-18 12:21:10 EDT on host grok-bot-vm-362733398 (shared box clock, America/New_York).
+Command: python3 test_timecap.py --mutants   (exit code 0)
+
+Pass 1 (before the float-rehash case): tests 51/51, mutants 35/36 (py 18/18, sh 17/18) — SM18 (bash integer-type check removed) SURVIVED.
+Fix: added corrupt variant 'mono_as_float_rehashed' (float monotonic_ns with a VALID hash). Pass 2 below: tests 51/51, mutants 36/36.
+Test-file sha256 for pass 2: 42bf735ba8694c2f1d703586e59931b238f67b661db8871f3807c22865ed7fcd
+
+Per-case counts (each case runs on py AND sh):
+  fresh 1+1 | stale 61 s 2+2 (t_stale_61, t_boundary_61_stale) | stale 3600 s 2+2 (fake clock, real clock) | boundary 60 s fresh 1+1, 60 s+1 ns stale 1+1
+  missing 1+1 | corrupt 1+1 (15 variants each) | hash tamper 1+1 (7 variants each) | future 2+2 | mono/wall skew 4+4 (mono ahead, wall jump, 2 s boundary, skew beats stale)
+  other boot 1+1 | truncation 1+1 | first-capture format 1+1 | bad test clock 1+1 | no time args 1+1 | open/close 1+1 | external skew/ok/down 3+3 | cross-compat 1
+
+----- full output, pass 2 -----
+py    t_fresh                          PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:40
+py    t_stale_61                       PASS  Time: 12:18 PM EDT — STALE, fetched 61 s ago [TEST CLOCK]
+py    t_stale_3600                     PASS  Time: 12:18 PM EDT — STALE, fetched 3600 s ago [TEST CLOCK]
+py    t_stale_3600_real_clock          PASS  Time: 11:18 AM EDT — STALE, fetched 3600 s ago
+py    t_boundary_60_fresh              PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:40 [TEST CLOCK]
+py    t_boundary_60s_plus_1ns_stale    PASS  Time: 12:18 PM EDT — STALE, fetched 60 s ago [TEST CLOCK]
+py    t_boundary_61_stale              PASS  Time: 12:18 PM EDT — STALE, fetched 61 s ago [TEST CLOCK]
+py    t_truncate_not_round             PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:59 [TEST CLOCK]
+py    t_first_capture_format           PASS  Time (fresh fetch): 12:10 PM EDT, fetched 12:10:47 [TEST CLOCK]
+py    t_missing                        PASS  Time UNVERIFIED: no fetch available
+py    t_corrupt                        PASS  15 corrupt variants -> Time UNVERIFIED: no fetch available
+py    t_hash_tamper                    PASS  7 tamper variants -> Time UNVERIFIED: no fetch available
+py    t_future_stamp_rehashed          PASS  Time UNVERIFIED: clock skew detected
+py    t_future_small_fake              PASS  Time UNVERIFIED: clock skew detected [TEST CLOCK]
+py    t_skew_mono_ahead                PASS  Time UNVERIFIED: clock skew detected
+py    t_skew_wall_jump_fake            PASS  Time UNVERIFIED: clock skew detected [TEST CLOCK]
+py    t_skew_boundary                  PASS  2 s fresh / 2 s+1 ns skew
+py    t_skew_beats_stale               PASS  Time UNVERIFIED: clock skew detected [TEST CLOCK]
+py    t_other_boot                     PASS  Time UNVERIFIED: stamp is from a different boot (monotonic check impossible)
+py    t_bad_test_clock                 PASS  Time UNVERIFIED: no fetch available [BAD TEST CLOCK]
+py    t_fetch_takes_no_time_args       PASS  fetch rejects time args; ignores TIMECAP_TEST_NOW
+py    t_open_close_no_net              PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:43 / External check: skipped (network unavailable or disabled)
+py    t_external_skew_local            PASS  Time UNVERIFIED: external clock skew detected (-3600 s vs http://127.0.0.1:38947/ Date header)
+py    t_external_ok_local              PASS  External check: ok (+0 s vs http://127.0.0.1:44687/ Date header, limit 5 s)
+py    t_external_down_skipped          PASS  External check: skipped (network unavailable or disabled)
+sh    t_fresh                          PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:44
+sh    t_stale_61                       PASS  Time: 12:18 PM EDT — STALE, fetched 61 s ago [TEST CLOCK]
+sh    t_stale_3600                     PASS  Time: 12:18 PM EDT — STALE, fetched 3600 s ago [TEST CLOCK]
+sh    t_stale_3600_real_clock          PASS  Time: 11:18 AM EDT — STALE, fetched 3600 s ago
+sh    t_boundary_60_fresh              PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:44 [TEST CLOCK]
+sh    t_boundary_60s_plus_1ns_stale    PASS  Time: 12:18 PM EDT — STALE, fetched 60 s ago [TEST CLOCK]
+sh    t_boundary_61_stale              PASS  Time: 12:18 PM EDT — STALE, fetched 61 s ago [TEST CLOCK]
+sh    t_truncate_not_round             PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:59 [TEST CLOCK]
+sh    t_first_capture_format           PASS  Time (fresh fetch): 12:10 PM EDT, fetched 12:10:47 [TEST CLOCK]
+sh    t_missing                        PASS  Time UNVERIFIED: no fetch available
+sh    t_corrupt                        PASS  15 corrupt variants -> Time UNVERIFIED: no fetch available
+sh    t_hash_tamper                    PASS  7 tamper variants -> Time UNVERIFIED: no fetch available
+sh    t_future_stamp_rehashed          PASS  Time UNVERIFIED: clock skew detected
+sh    t_future_small_fake              PASS  Time UNVERIFIED: clock skew detected [TEST CLOCK]
+sh    t_skew_mono_ahead                PASS  Time UNVERIFIED: clock skew detected
+sh    t_skew_wall_jump_fake            PASS  Time UNVERIFIED: clock skew detected [TEST CLOCK]
+sh    t_skew_boundary                  PASS  2 s fresh / 2 s+1 ns skew
+sh    t_skew_beats_stale               PASS  Time UNVERIFIED: clock skew detected [TEST CLOCK]
+sh    t_other_boot                     PASS  Time UNVERIFIED: stamp is from a different boot (monotonic check impossible)
+sh    t_bad_test_clock                 PASS  Time UNVERIFIED: no fetch available [BAD TEST CLOCK]
+sh    t_fetch_takes_no_time_args       PASS  fetch rejects time args; ignores TIMECAP_TEST_NOW
+sh    t_open_close_no_net              PASS  Time (fresh fetch): 12:18 PM EDT, fetched 12:18:45 / External check: skipped (network unavailable or disabled)
+sh    t_external_skew_local            PASS  Time UNVERIFIED: external clock skew detected (-3600 s vs http://127.0.0.1:43309/ Date header)
+sh    t_external_ok_local              PASS  External check: ok (+0 s vs http://127.0.0.1:36655/ Date header, limit 5 s)
+sh    t_external_down_skipped          PASS  External check: skipped (network unavailable or disabled)
+py+sh t_cross_compat                   PASS  py stamp read by sh and sh stamp read by py: fresh
+TESTS: 51/51 passed (py 25/25, sh 25/25, cross 1/1)
+LIVE py open rc=0: Time (fresh fetch): 12:18 PM EDT, fetched 12:18:46 | External check: ok (+0 s vs https://www.google.com Date header, limit 5 s)
+LIVE sh open rc=0: Time (fresh fetch): 12:18 PM EDT, fetched 12:18:46 | External check: ok (+0 s vs https://www.google.com Date header, limit 5 s)
+PM01 staleness check removed                     KILLED  by t_stale_61,t_stale_3600,t_stale_3600_real_clock,t_boundary_60s_plus_1ns_stale,t_boundary_61_stale,t_truncate_not_round
+PM02 skew check removed                          KILLED  by t_future_stamp_rehashed,t_future_small_fake,t_skew_mono_ahead,t_skew_wall_jump_fake,t_skew_boundary,t_skew_beats_stale
+PM03 future (negative age) check removed         KILLED  by t_future_small_fake
+PM04 hash check removed                          KILLED  by t_hash_tamper
+PM05 boundary <= -> <                            KILLED  by t_boundary_60_fresh
+PM06 fresh limit 61 s                            KILLED  by t_stale_61,t_boundary_60s_plus_1ns_stale,t_boundary_61_stale
+PM07 stale seconds rounded                       KILLED  by t_truncate_not_round
+PM08 missing stamp prints a plausible time       KILLED  by t_missing,t_corrupt,t_hash_tamper
+PM09 skew tolerance 20 s                         KILLED  by t_skew_mono_ahead,t_skew_wall_jump_fake,t_skew_boundary
+PM10 abs() dropped from skew                     KILLED  by t_skew_mono_ahead
+PM11 boot check removed                          KILLED  by t_other_boot
+PM12 iso_local consistency check removed         KILLED  by t_hash_tamper
+PM13 display seconds rounded                     KILLED  by t_truncate_not_round,t_first_capture_format
+PM14 external skew ignored                       KILLED  by t_external_skew_local
+PM15 open honours fake clock                     KILLED  by t_open_close_no_net
+PM16 fetch accepts a time argument               KILLED  by t_fetch_takes_no_time_args
+PM17 TEST CLOCK tag dropped                      KILLED  by t_stale_61,t_stale_3600,t_boundary_61_stale,t_truncate_not_round,t_first_capture_format,t_future_small_fake,t_skew_wall_jump_fake
+PM18 type check removed                          KILLED  by t_corrupt
+SM01 staleness check removed                     KILLED  by t_stale_61,t_stale_3600,t_stale_3600_real_clock,t_boundary_60s_plus_1ns_stale,t_boundary_61_stale,t_truncate_not_round
+SM02 skew check removed                          KILLED  by t_future_stamp_rehashed,t_future_small_fake,t_skew_mono_ahead,t_skew_wall_jump_fake,t_skew_boundary,t_skew_beats_stale
+SM03 future (negative age) check removed         KILLED  by t_future_small_fake
+SM04 hash check removed                          KILLED  by t_hash_tamper
+SM05 boundary -le -> -lt                         KILLED  by t_boundary_60_fresh
+SM06 fresh limit 61 s                            KILLED  by t_stale_61,t_boundary_60s_plus_1ns_stale,t_boundary_61_stale
+SM07 stale seconds rounded                       KILLED  by t_truncate_not_round
+SM08 missing stamp prints a plausible time       KILLED  by t_missing,t_corrupt,t_hash_tamper
+SM09 skew tolerance 20 s                         KILLED  by t_skew_mono_ahead,t_skew_wall_jump_fake,t_skew_boundary
+SM10 abs dropped from skew                       KILLED  by t_skew_mono_ahead
+SM11 boot check removed                          KILLED  by t_other_boot
+SM12 iso_local consistency check removed         KILLED  by t_hash_tamper
+SM13 display seconds rounded                     KILLED  by t_fresh,t_truncate_not_round,t_first_capture_format
+SM14 external skew ignored                       KILLED  by t_external_skew_local
+SM15 open honours fake clock                     KILLED  by t_open_close_no_net
+SM16 fetch accepts a time argument               KILLED  by t_fetch_takes_no_time_args
+SM17 TEST CLOCK tag dropped                      KILLED  by t_stale_61,t_stale_3600,t_boundary_61_stale,t_truncate_not_round,t_first_capture_format,t_future_small_fake,t_skew_wall_jump_fake
+SM18 type check removed                          KILLED  by t_corrupt
+MUTANTS: 36/36 killed (py 18/18, sh 18/18)
