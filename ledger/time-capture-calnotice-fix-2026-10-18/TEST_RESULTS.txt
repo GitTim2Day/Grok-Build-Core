@@ -1,0 +1,11 @@
+  notice: TITLE: GB: SVCT timestamp|DESCRIPTION: Grok Build work block (abbreviated summary slot). Stamped Sun Oct 18 2026 7:42:16 AM EDT.
+PASS T1 fixture notice has no 7+ digit run
+PASS T2 human time = date -d @1792323736 (Sun Oct 18 2026 7:42:16 AM EDT)
+PASS T3 ns input truncated to same second, no digit run
+PASS T4 current-time notice has no 7+ digit run
+PASS T5 note with raw epoch refused (exit 4, no output)
+PASS T6 title with 10-digit run refused
+PASS T7 negative control: v1 text is caught by /[0-9]{7,}/
+PASS T8 epoch recorded in local log only
+PASS T9 malformed epoch rejected (exit 2)
+RESULT: 9 passed, 0 failed
