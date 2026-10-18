@@ -1,0 +1,9 @@
+# ROUNDS — r8 draft / error-test loop (3 of max 5 rounds used). Times ET, approximate (from log mtimes).
+
+| Round | Core | What ran | Found | Fix |
+|---|---|---|---|---|
+| R1 (12:22-12:33) | r8 `47b2921f…40f` | v3 harness, sealed T1-T4, extra cases v1 (15), boundary report, regression, 34 mutants (22 re-applied + 12 r8-specific) | v3 14/16 (H4a and H4b FAIL: the exact rule vs the float-division oracle, R8-G1). Sealed 4/4. Extra 14/15 (X12 FAIL, R8-G1b). Exact-ref boundary 0/210. Mutants 30/34: **R02, R04, R11, R13 survived** (test gaps: shifted-median boundary, tiny-bin exact truncation, overflowing median midpoint, fused-vs-reference on extremes). | Tests: extra cases v2 adds E4, E5 (630 shifted-median inputs), X13, X14, X15 |
+| R2 (12:33-12:48) | r8 -> **r8a** `16934bab…47c6` | extra v2 on r8, then r8a: v3, sealed, extra v3 (20), boundary, regression, 34 mutants | X13 on r8: recurrence key `'100000000.12345599'`. The exact path converted the cut digit string toward zero. r7's `_truncate` convention gives the float whose repr is the cut digit string (`'100000000.123456'`). | Core: r8a (`make_r8a.py`) uses r7's convention in `_quantize_exact`. Tests: extra v3 expects that convention. Result: **34/34 mutants killed** |
+| R3 (12:48-12:51) | r8a | T4 timing (7 interleaved trials r7/r8a), stability: v3 x2, sealed x2, extra v3 x2, MISSING module | identical verdicts each run. v3 14/16, sealed 4/4, extra 19/20; MISSING 0/16 BLOCKED rc=1 | stop: every mutant killed. The remaining failures (H4a, H4b, X12) are contract conflicts for Timothy (R8-G1, R8-G1b), not code defects that a new file can fix without overriding his explicit rules |
+
+Archived drafts: `archive/r8/` (r8 core), `archive/round1/` (tests v1/v2, runner v1, round-1 results and the 34 round-1 mutants), `archive/scratch/` (probes and the exact-fence clamp variant used to measure R8-G1b).
