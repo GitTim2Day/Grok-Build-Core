@@ -1,0 +1,8 @@
+[PASS] T1 fence holds across bin-width sweep
+[PASS] T2 fused == reference on 40 trials x 3 tiers x 7 bin widths
+[PASS] T3 mixed int/float zero-dispersion snaps to median
+[PASS] T4 100k median under 300 ms (5 runs)
+      T4 runs: ['171.5', '172.3', '173.4', '174.1', '180.1'] ms
+
+== kbld9_core_r7: 4/4 pass. Failures: []
+exit=0
