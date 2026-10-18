@@ -1,0 +1,12 @@
+pitch-model ideal gear-2 travel over the missing-token slot [360-360/N, 360) deg, = re-sync jump of the hold rule:
+  N=  12 gap entry 330.000000 deg: travel 2.288261048 rad = 131.107700 deg (36.418805 % of a gear-2 turn); ratio at entry 2.896308399
+  N=  24 gap entry 345.000000 deg: travel 1.384436818 rad = 79.322386 deg (22.033996 % of a gear-2 turn); ratio at entry 4.139291120
+  N=  36 gap entry 350.000000 deg: travel 0.996137877 rad = 57.074496 deg (15.854026 % of a gear-2 turn); ratio at entry 4.788482303
+  N=  72 gap entry 355.000000 deg: travel 0.542520231 rad = 31.084119 deg (8.634477 % of a gear-2 turn); ratio at entry 5.651453675
+  N= 360 gap entry 359.000000 deg: travel 0.117178792 rad = 6.713850 deg (1.864958 % of a gear-2 turn); ratio at entry 6.577159074
+  shell (gear-1 contact radius r1/a) at 0.25 deg: 1.001337593; r2/a 6.852764372
+  shell (gear-1 contact radius r1/a) at 2.25 deg: 1.012102950; r2/a 6.841999015
+  shell (gear-1 contact radius r1/a) at 23.25 deg: 1.132370309; r2/a 6.721731656
+  shell (gear-1 contact radius r1/a) at 356.5 deg: 6.727028441; r2/a 1.127073524
+  shell (gear-1 contact radius r1/a) at 359.75 deg: 6.844946212; r2/a 1.009155754
+  step spans shells r/a from 1 to 6.854101966249 (length 5.854101966249 a)
