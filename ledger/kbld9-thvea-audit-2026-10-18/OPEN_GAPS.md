@@ -1,0 +1,14 @@
+# OPEN_GAPS — needs Timothy (not fixable by new test files alone)
+
+| ID | Gap | Evidence (measured) | Why it needs Timothy |
+|---|---|---|---|
+| G1 | **Fused path != reference at exact 3/6/9-sigma boundaries** (r4 and r7). The fused path computes `(x-med)*(1/mad)`; reference `_snap`/`_classify` compute `(x-med)/mad`. These differ by 1 ulp. | H4a: 8 of 210 boundary inputs. At 9 sigma the cleaned VALUE changes: a=0.37 -> fused 4.9 vs reference 4.937058; a=1e-3 -> fused 0.013343400000000002 vs reference 0.0. At 3 and 6 sigma (a=13.1) the TIER changes (DRIFT vs CLEAN; ANOMALY vs DRIFT). Contradicts the core comment "identical semantics to _snap + _classify". | A fix is a new core revision (e.g. division in the fused path, perf cost unmeasured, or redefining the reference). R7 is Timothy's sealed line. |
+| G2 | **r7 rejects valid finite input** `[1e308, -1e308, 0.0]` | r7: ERROR "cannot convert float infinity to integer". 9*mad overflows to inf and the per-batch fence snap value is quantized eagerly. r4 returns OK with the data unchanged (no point outside the fence). | It fails closed, but by accident, and it is an availability regression vs r4. A fix is a core change. |
+| G3 | Very large int `10**400` fails closed without naming the element | ERROR "int too large to convert to float". `math.isfinite` raises inside the validator's `all()` fast path and is caught by `_guard`, not by the airlock. Recorded in H3, not gating. | Core airlock change. |
+| G4 | r4 provenance (C15) | on-disk 15924 B `e111d03d…` vs recorded seal 16314 B `a608a393…` | Only Timothy or the original Gmail attachment (19f5bc98e977c699) can settle which bytes are r4. |
+| G5 | PDF T2 line truncated (`mismatched trials={diffs`) | the PDF-text suite cannot compile | Not reconstructed (do not invent the close). |
+| G6 | Skill text stale or conflicting (C2, C16, C17) | skill says r4 missing (it is present); skill default r4 + sealed suite = crash; skill's T1/T2 counts are the PDF's, not the sealed suite's | Skills: Timothy said he handles memory and skills himself. Flag only, no edit. |
+| G7 | T4 timing is box-only (C10) | box medians 169.1-190.4 ms across runs today | Pi 5 measurement not available here. |
+| G8 | The oracle encodes my reading of the documented contract | constants and rules taken from core docstrings and comments (1.4826; inclusive `<=` bands at 3/6/9; tier digits 6/8/15; ULP guard; r4 round-12) | Timothy should confirm the oracle rules are the contract. |
+| G9 | Mutant modules are full copies of the protected core (header: "Not for public release") | `mutants/kbld9_mut_m*.py` (22 files) | Kept local only (folder + reference-map copy). Excluded from GitHub, Drive and email. |
+| G10 | `/workspace/kbld9/protected/` unaudited | not opened, by instruction | Out of scope by instruction. |
