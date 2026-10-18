@@ -1,0 +1,17 @@
+[PASS] T1 fence holds across bin-width x tier sweep (independent MAD + full oracle)
+[PASS] T2 fused == module reference AND == independent oracle, 40 trials
+[PASS] T3 mixed int/float zero-dispersion snaps exactly to median
+[PASS] T4 100k points, 5-run median < 300 ms  measured={'runs_ms': ['152.9', '157.0', '160.2', '163.1', '167.0'], 'median_ms': '160.2'}
+[PASS] H1 boundary: points at 8.999, 9.2, 9.49 sigma stay / are snapped per oracle
+[PASS] H2 degenerate OK shapes: empty, single, two-equal, -0.0/0.0, denormals
+[PASS] H3 extreme magnitude fails closed or holds fence (never raises, never escapes)
+[FAIL] H4 ULP-boundary differential: fused == module _snap/_classify == oracle at 3/6/9 sigma +-3 ulp  -- fused!=reference t=3.0 a=13.1 sgn=1 ulp=0; fused!=oracle t=3.0 a=13.1 sgn=1 ulp=0; fused!=reference t=3.0 a=13.1 sgn=-1 ulp=0 (+13 more)
+[PASS] H5 valid finite near-max input is processed, not rejected (all points inside fence)
+[PASS] N1 invalid elements -> ERROR envelope naming the element; stats + spine untouched
+[PASS] N2 invalid configuration raises ValueError
+[PASS] F1 read-back corruption -> ERROR envelope (exit airlock), stats untouched
+[PASS] F2 internal exception -> ERROR envelope (guard), never raises, stats untouched
+[PASS] F3 precision tier is honoured: instance places == tier digits
+
+== kbld9_core_r4 [thvea-v2]: 13/14 pass. EARNED=False VALIDATE=OK results=kbld9_core_r4.results_BLOCKED.json sha256=31d4230e4e37f847732be53ab78b948753ca3c8875760721b1282301788b88c9
+exit=1
