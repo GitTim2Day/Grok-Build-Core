@@ -1,0 +1,13 @@
+KILLED: gap slot N-2
+KILLED: token index rounds
+KILLED: no mod-N wrap
+KILLED: overlap upper edge 23.0
+KILLED: overlap lower edge 357.0
+KILLED: overlap open interval
+KILLED: no hold in gap (drives through)
+KILLED: resync ignores gap
+KILLED: resync ignores closure crossing
+KILLED: fail_closed never set
+KILLED: cold start holds phase 0
+KILLED: gap reports a joint value
+mutants killed 12/12
