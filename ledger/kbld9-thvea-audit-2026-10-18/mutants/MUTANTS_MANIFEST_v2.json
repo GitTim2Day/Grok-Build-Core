@@ -1,0 +1,32 @@
+[
+ {
+  "mutant": "M17_ref_classify_drift_6p5",
+  "module": "kbld9_mut_m17",
+  "sha256": "a08f640869ff7b3b857aac55daa079054a2298303188d68371522e0f6c3d822d"
+ },
+ {
+  "mutant": "M18_ref_snap_fence_9p5",
+  "module": "kbld9_mut_m18",
+  "sha256": "b90847fd62e959badc73f2fe9edeac9c336ed63df3fe12e5dcb243bbaf88ef23"
+ },
+ {
+  "mutant": "M19_mean_not_median",
+  "module": "kbld9_mut_m19",
+  "sha256": "392b603d6320a9d05f5c1a6c6e02626741bcdd95450c1be3f885d0634f86e81c"
+ },
+ {
+  "mutant": "M20_recurrence_count_dropped",
+  "module": "kbld9_mut_m20",
+  "sha256": "b3615498e7e58abfc8c22e81057b4442e82ba8a904ab5e76594f968df5fac0cb"
+ },
+ {
+  "mutant": "M21_spine_not_advanced",
+  "module": "kbld9_mut_m21",
+  "sha256": "1763713c1a6ecd724283c4de90bc5138c2717f6e18739c2eb35997dcc8780d01"
+ },
+ {
+  "mutant": "M22_chain_dropped",
+  "module": "kbld9_mut_m22",
+  "sha256": "6a9bc0ebddeeadcf578f88cb5b1f9b191486761eb8f9c487b398654f059bed9c"
+ }
+]

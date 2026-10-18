@@ -1,0 +1,82 @@
+[
+ {
+  "mutant": "M01_cleaned_fence_9p5",
+  "module": "kbld9_mut_m01",
+  "sha256": "f1aa00aea03115632a727d926deee78b9af1dbfcc2951de7ee6b99d9f339eaaa"
+ },
+ {
+  "mutant": "M02_hi_fence_9p5",
+  "module": "kbld9_mut_m02",
+  "sha256": "5b70a3012da427154d405fac1695fe0f474de915f28493eeb065d767477463de"
+ },
+ {
+  "mutant": "M03_no_clamp",
+  "module": "kbld9_mut_m03",
+  "sha256": "cb3a405aa0a7c04ed53055dbcb1f6a5e77b9ca7e568def24b37fa2d49fb5f74c"
+ },
+ {
+  "mutant": "M04_fused_clean_3p5",
+  "module": "kbld9_mut_m04",
+  "sha256": "16caac01d6940c8907db13647392055e86fcc8d2f630ba0ad08e7cad09de75fa"
+ },
+ {
+  "mutant": "M05_madk_2p0",
+  "module": "kbld9_mut_m05",
+  "sha256": "8924d910b250b372253a3987a7bb7b7a04c4fa3f5ba7b4885771b406c1e4c5ca"
+ },
+ {
+  "mutant": "M06_quantize_shared_floor",
+  "module": "kbld9_mut_m06",
+  "sha256": "d7cefd619d987eb03b996068091ca7a78617ecaba329fc48cfb190e16699493d"
+ },
+ {
+  "mutant": "M07_mad0_no_snap",
+  "module": "kbld9_mut_m07",
+  "sha256": "aae3a263257fce70635b3511b90cba3bc833834c6587ffa857b117007f7e6d1c"
+ },
+ {
+  "mutant": "M08_nan_accepted",
+  "module": "kbld9_mut_m08",
+  "sha256": "420d5e502befe0587e6f84044f0b0dfbaf14c4de3ddf3b20a6b9071ca56ea477"
+ },
+ {
+  "mutant": "M09_bool_accepted",
+  "module": "kbld9_mut_m09",
+  "sha256": "f4fd831c600b11ab950009a8d77ed1cea6e3933df65c77ddb934fbb7e90c245a"
+ },
+ {
+  "mutant": "M10_output_sha_of_input",
+  "module": "kbld9_mut_m10",
+  "sha256": "fa208c3322b723ad518b1877a458d2336faedd9fe454a4aca2310cdf0c689bc0"
+ },
+ {
+  "mutant": "M11_places_fixed_12",
+  "module": "kbld9_mut_m11",
+  "sha256": "ef8a707b918d47083970e76274195bf2bead8f8bb4c50c285937cb36eeb29c3c"
+ },
+ {
+  "mutant": "M12_tier_on_cleaned",
+  "module": "kbld9_mut_m12",
+  "sha256": "e1ef165def6e51e29bf208ec72d30f0a862b99307470b6af371c488959bd8050"
+ },
+ {
+  "mutant": "M13_slow_sleep",
+  "module": "kbld9_mut_m13",
+  "sha256": "4289890c6d84ad14513cba5e5e7650a3e00b6061551a496a4e1a7ff77f3593f9"
+ },
+ {
+  "mutant": "M14_no_readback_gate",
+  "module": "kbld9_mut_m14",
+  "sha256": "9f0217117aefe5921d41dfebecf07cf549aee52d98d1e5cf4db3db88da209997"
+ },
+ {
+  "mutant": "M15_stats_leak_on_error",
+  "module": "kbld9_mut_m15",
+  "sha256": "b3916b05b8212e8d14672569dc6217f08ae0ef8aa1fee06837e1187b80818d45"
+ },
+ {
+  "mutant": "M16_truncate_is_round",
+  "module": "kbld9_mut_m16",
+  "sha256": "4ff71ec29c6accd380dd8634036f99ccc0cf29e075476b59a56daf8ced638357"
+ }
+]
