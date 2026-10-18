@@ -1,0 +1,35 @@
+test_cold_start_in_gap_holds_entry_edge (__main__.GapFailClosed.test_cold_start_in_gap_holds_entry_edge) ... ok
+test_fail_closed_equals_in_gap_everywhere (__main__.GapFailClosed.test_fail_closed_equals_in_gap_everywhere) ... ok
+test_gap_slot_is_last_pitch (__main__.GapFailClosed.test_gap_slot_is_last_pitch) ... ok
+test_hold_inside_gap_and_flags (__main__.GapFailClosed.test_hold_inside_gap_and_flags) ... ok
+test_flag_counts_107_of_1440 (__main__.OverlapShellCompetition.test_flag_counts_107_of_1440) ... ok
+test_flag_equals_measured_depth_on_listed_poses (__main__.OverlapShellCompetition.test_flag_equals_measured_depth_on_listed_poses) ... ok
+test_overlap_with_gap_and_with_token0 (__main__.OverlapShellCompetition.test_overlap_with_gap_and_with_token0) ... ok
+test_zones_match_measured_json (__main__.OverlapShellCompetition.test_zones_match_measured_json) ... ok
+test_spiral_gear_copy_is_byte_identical (__main__.Provenance.test_spiral_gear_copy_is_byte_identical) ... ok
+test_back_out_of_gap_without_wrap_resyncs (__main__.ResyncAtWrap.test_back_out_of_gap_without_wrap_resyncs) ... ok
+test_forward_wrap_reindexes_to_phase_zero (__main__.ResyncAtWrap.test_forward_wrap_reindexes_to_phase_zero) ... ok
+test_no_resync_while_driven (__main__.ResyncAtWrap.test_no_resync_while_driven) ... ok
+test_one_resync_per_turn_over_many_turns (__main__.ResyncAtWrap.test_one_resync_per_turn_over_many_turns) ... ok
+test_resync_jump_equals_ideal_travel_over_gap (__main__.ResyncAtWrap.test_resync_jump_equals_ideal_travel_over_gap) ... ok
+test_reverse_into_gap_then_forward (__main__.ResyncAtWrap.test_reverse_into_gap_then_forward) ... ok
+test_sample_jump_across_closure_still_resyncs (__main__.ResyncAtWrap.test_sample_jump_across_closure_still_resyncs) ... ok
+test_full_set_reproduces_prior_worst (__main__.TableOutsideGap.test_full_set_reproduces_prior_worst) ... ok
+test_matches_existing_table_and_closed_form (__main__.TableOutsideGap.test_matches_existing_table_and_closed_form) ... ok
+test_360_is_0 (__main__.TokenLattice.test_360_is_0) ... ok
+test_negative_angle_wraps (__main__.TokenLattice.test_negative_angle_wraps) ... ok
+test_other_ring_sizes (__main__.TokenLattice.test_other_ring_sizes) ... ok
+test_twelve_slot_index_is_floor (__main__.TokenLattice.test_twelve_slot_index_is_floor) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.066s
+
+OK
+
+  [measured] 0.1-deg grid points in the 12-slot gap: 300 of 3599
+
+  [measured] 12-slot model: held 3.994925162 rad, re-sync jump 2.288260144 rad, ideal gear-2 travel over gap 2.288261048 rad
+
+  [measured] full 8001-sample set (gap included), existing table: 4.223e-06 rad
+
+  [measured] samples outside gap 7334, in gap 667; max |new - existing table| = 0.000e+00 rad; max |new - closed form| outside gap = 9.514e-07 rad
