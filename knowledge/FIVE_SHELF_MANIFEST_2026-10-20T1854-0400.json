@@ -1,0 +1,26 @@
+{
+  "kind": "five-shelf-manifest",
+  "stamp": "2026-10-20T18:54:00-04:00",
+  "pass": "boot-2026-10-20",
+  "owner": "Tim",
+  "prior_manifest": "knowledge/FIVE_SHELF_MANIFEST_2026-10-03T1314-0400.json",
+  "prior_manifest_sha256": "56b8e8e68b5f98f58bafde7aba9c69826fa0ede7b9625cc17c27be4a19f34b40",
+  "rule": "Next boot stops if the encounter id below is unchanged. Do not send a second mail for this same note.",
+  "delta": "build-lane line 2026-10-20T18:54. Oct 3 stop ids were unchanged before this line.",
+  "second_mail": false,
+  "drive_name_search": "FIVE_SHELF_MANIFEST_2026-10-03T1314-0400.json was not returned",
+  "score_gap": "session-pattern-map-score disk SHA be2653e74434f7f8556a7a2215d1230362fa3a47810dd7fcb8aa1217aefbb133 does not equal GitHub body 3490cf16f06c076febe22bf10b3ecc0764c8cc3a459c4990f3f6838d1fe24e64; body not rewritten",
+  "tests": {"p_equals_r2": "15/15", "octave_time": "34/34", "rt345": "8/8"},
+  "plant_sha256": "6db4037fe8797d99d4f124736a6a8149b116dc3e21cfddff62b12c441ef5eed6",
+  "audit_sha256": "9369e82d4bf56a15e1267f3742584ac63e865638ca5be8610c56ecab6589c65b",
+  "math_sha256": "505d35da60addf8ece9cc99e60b555b59fb4a5fcc93ba71d210c4f2b4bc98927",
+  "shelved": {
+    "encounter_path": "knowledge/ENCOUNTER_SET_20260930T1241-0400.md",
+    "encounter_size": 5107,
+    "encounter_sha256": "15f48fc63c532be4bfb9bdae8e138a16b8f90878d3b43faa6f37d3312bb5e968",
+    "encounter_prior_sha256": "820a25c2ec7463a103023dd2d9b8a3d7a2d4c6d2cf1e1787fe805eda5002a01e",
+    "encounter_prior_size": 4180,
+    "live_set_sha256": "5d76ba2a4b6ff90bf3243a207199ec7c52e7132a7c37c7574371a8f2d8eb99fb",
+    "live_set_size": 2202
+  }
+}
