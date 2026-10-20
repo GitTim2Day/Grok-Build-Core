@@ -41,8 +41,12 @@ The words below stay in place. They are not the rule.
 
 ## Form integrated — 2026-10-20T19:07-04:00
 
-13. go-deep-every-search-2026-10-20. Profile form. On every search, before the answer:
+13. go-deep-every-search-2026-10-20. The 19:07 gloss under this item is not the form.
+
+## Corrected — 2026-10-20T19:09-04:00
+
+13. go-deep-every-search-2026-10-20 → knowledge/go-deep-every-search-2026-10-20.md
+When: every search, before the answer.
+Form:
 
 Go deep on every search regardless. Do not default. If you default, reload, reboot, and go deep.
-
-A title, a description, or a first line is not the search. Open the body. If the answer came from the short line, reload, reboot, and go deep.
