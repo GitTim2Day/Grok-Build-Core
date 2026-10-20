@@ -40,7 +40,10 @@ Do not add a question we have already struck.
 - Qubit box. Named as the square-token box. Not sealed as a quantum device.
 - Word index. The five words are linked both ways, hybrid in the middle. Token-only files and unopened zips are not in the chain. The tendon hybrid is not this middle.
 
+## Struck by Tim — 2026-10-20T19:03-04:00
 
+Tim: strike every statement that says not to start it.
 
+The words below stay in place. They are not the rule.
 
-
+- Is the product swarm on? No. This chair does not start it. It spends.
