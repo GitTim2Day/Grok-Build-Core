@@ -24,3 +24,11 @@ The older body is not a start procedure. It is a struck feature, repeated.
 Why it was not started: those bodies say not to. The short line and the longer text say the same thing. No start step is in them.
 
 Depth miss on the shelves: GitHub knowledge is 310 files. Boot rows 1-12 were body-read earlier this sitting. The swarm lines above were body-read this pass. The remaining files on GitHub, and the items on Notion, Drive A, Gmail, and Sheets, were not each body-read. That pass is open. Not finished.
+
+## Struck by Tim — 2026-10-20T19:03-04:00
+
+Tim: strike every statement that says not to start it.
+
+The words below stay in place. They are not the rule.
+
+- That one spends and was not started.
