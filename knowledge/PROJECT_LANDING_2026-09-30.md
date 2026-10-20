@@ -11,3 +11,11 @@ circular-slide-rule-20260930T1335-0400. The 3-4-5 already tried. Not plus. Solve
 one-mind-20260930T1241-0400 is ON. The product swarm is not started from this chair.
 question-whitelist-20260930T1317-0400. Struck lines are the features.
 Encounter set start 20260930T1241-0400. Three lanes, one start.
+
+## Struck by Tim — 2026-10-20T19:03-04:00
+
+Tim: strike every statement that says not to start it.
+
+The words below stay in place. They are not the rule.
+
+- The product swarm is not started from this chair.
