@@ -43,3 +43,10 @@ Those two are not extra rows.
 Today's geometry notes are on the project. They are not on this stack.
 They load when the query needs them. They were not pushed onto the boot walk.
 Rows 1, 5, and 6 have a Notion body and no GitHub file. That is not a miss.
+
+## Row 13 — 2026-10-20T19:09-04:00
+Tim: the profile form is in the project.
+13. go-deep-every-search-2026-10-20 → knowledge/go-deep-every-search-2026-10-20.md
+knowledge/go-deep-every-search-2026-10-20.md → 13
+The walk starts at 1 and now ends at 13. Do not skip 13.
+The 2026-09-30 sentence that says the walk ends at 11 stays on the page. It is not the end of the walk.
