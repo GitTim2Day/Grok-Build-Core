@@ -31,3 +31,6 @@ IF the input is a plate THEN it is a filter, not a node.
 IF a door has no direction THEN it is not joined.
 IF the node would speak while he is away THEN stop. That token stays locked.
 IF the camera is not his THEN stop.
+## Correction — 2026-10-20T19:27:44-04:00
+The 13:16 sheet exists: SESSION_SHEET_2026-09-24_MESENTERY.md. It says it is not a claim that the 22-23 Sep anatomical find landed. Its jobs are separate, contain, sac-protect. Coat is regex.
+That sheet is not the door table. The comparison miss stays the table: node, wire, direction, token, threshold. The first line of this file that said the mesentery was missing named the wrong hole.
