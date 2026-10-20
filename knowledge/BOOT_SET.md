@@ -30,3 +30,11 @@ Drive: 131DqbFH1rDqSex83GW1ir5nnQ8fGuoVq and 1iewKlK2sBPMRlcU_pyVll2dNrCgtzyXT
 Forevermore until Timothy supersedes in writing.
 
 BOOT ≠ SAVE. SAVE hop FIRST (Gmail+Yahoo), then Notion, GitHub, Drive, local.
+
+## Struck by Tim — 2026-10-20T19:03-04:00
+
+Tim: strike every statement that says not to start it.
+
+The words below stay in place. They are not the rule.
+
+- The product swarm is not started from this chair.
