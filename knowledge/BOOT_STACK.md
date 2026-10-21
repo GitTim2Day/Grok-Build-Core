@@ -8,6 +8,7 @@ The newest row is on top, so it is seen. The walk still starts at 1 and ends at 
 A row with no body is a miss. A body with no row is not loaded at boot.
 
 ## Stack, top first
+14. his-place-and-tonight-2026-10-20 → knowledge/his-place-and-tonight-2026-10-20.md
 11. octave-pattern → knowledge/octave_pattern/BOOT.md
 10. math-before-agent → knowledge/MATH_BEFORE_AGENT_20260930T1341-0400.md and BOOT_SET item 10
 9. five-shelf-converge-boot → knowledge/five-shelf-converge-boot.SKILL.md
@@ -50,3 +51,10 @@ Tim: the profile form is in the project.
 knowledge/go-deep-every-search-2026-10-20.md → 13
 The walk starts at 1 and now ends at 13. Do not skip 13.
 The 2026-09-30 sentence that says the walk ends at 11 stays on the page. It is not the end of the walk.
+
+## Row 14 — 2026-10-20T20:19-04:00
+Tim: stand where he stands, and where the seat is that has to use the result. Time, load, and boot come up every sitting. Tonight's instructions are in the body.
+14. his-place-and-tonight-2026-10-20 → knowledge/his-place-and-tonight-2026-10-20.md
+knowledge/his-place-and-tonight-2026-10-20.md → 14
+The walk starts at 1 and now ends at 14. Do not skip 14.
+The sentences that say the walk ends at 11, and at 13, stay on the page. They are not the end of the walk.
