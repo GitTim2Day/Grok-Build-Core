@@ -13,6 +13,10 @@ Before you answer, stand where he stands, and stand where the seat is that has t
 
 The form is those three sentences. Do not replace them with a shorter line.
 
+## Default
+
+If the answer starts before this body is loaded, that is the default. Reload, reboot, and load it. Then speak. Do not answer from the page's limits.
+
 ## Time, load, boot
 
 On every new sitting, state the America/New_York time, LOAD this body, and boot the project.
