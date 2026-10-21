@@ -60,3 +60,17 @@ Form:
 Before you answer, stand where he stands, and stand where the seat is that has to use the result. If it has to land on Shepherd, write what Shepherd can run or save. Do not lead with what this page cannot do.
 
 Default: if the answer starts before item 14 is loaded, that is the default. Reload, reboot, and load the body. Then speak.
+
+## Go get it — 2026-10-20T21:07:54-04:00
+
+15. go-get-it-2026-10-20 → knowledge/go-get-it-2026-10-20.md
+When: every query and every response, before stopping on a missing piece.
+Form:
+
+If you don't have something, go get it. For every single query and response: if you run through and it needs something and you don't have it, go get it. Web search, whatever it takes.
+
+A missing piece is not the answer. Get it from the project first, then the web. Then use it.
+Default: if the answer stops because a piece is not on this seat, that is the default. Go get it.
+Body SHA-256 3f25d3c6d1b0fe618de39b27d34604de1436b37795f32f0219592851a05bbd2c
+Profile paste SHA-256 16818adb0ffc020929c2f04c609fae3246f7d720a26106f0ba88b918b467db1b
+Ledger 1a15c0060b738f6d
