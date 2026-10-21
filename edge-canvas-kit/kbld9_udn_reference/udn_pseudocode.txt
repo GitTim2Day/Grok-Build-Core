@@ -1,0 +1,35 @@
+UDN contract. C++ and BASIC both follow this. Accuracy first.
+
+CANON(value)
+  JSON. Object keys sorted. No spaces.
+  null, true, false, integers, strings, arrays.
+
+DIGEST(value) = lowercase hex SHA-256 of CANON(value)
+
+APPEND(kind, actor, parents, payload, tick)
+  tick >= 0 and tick >= the previous tick
+  the actor has a key
+  parents are unique and already present
+  the first event is ROOT by OPERATOR with no parents
+  a later event is not ROOT and has parents
+  body = CANON of version, process, seq, kind, actor, sorted parents, payload, tick, previous
+  hash = SHA-256(body)
+  mac = HMAC-SHA256(key of the actor, body)
+
+EXECUTE(actor, request, parents, tick)
+  the actor is a registered participant
+  reasons, in this order, each only if it is true:
+    no identity -> IDENTITY_PENDING
+    no grant for this request hash inside the tick window -> AUTHORIZATION_ABSENT
+    destination is not LOCAL -> EXTERNAL_TRANSPORT_UNIMPLEMENTED
+    path is not EXACT or operation is not POLYNOMIAL -> ROUTINE_UNAVAILABLE
+  if any reason: REJECTION, NOT_EXECUTED, those reasons. Stop.
+  otherwise the inputs are integer pairs and n is an integer 0..64
+  result = m * x^n + b, reduced, sign on the numerator
+  a second loop must produce the same pair
+  if the inputs fail: REJECTION, INPUT_INVALID. Stop.
+  RESULT is EXECUTED, verified, [numerator, denominator]
+
+DEMO
+  (2/3) * (3/2)^2 + (-1/4) = 5/4 for the actor who holds the grant
+  the other actor on the same request is NOT_EXECUTED AUTHORIZATION_ABSENT
