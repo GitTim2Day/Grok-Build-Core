@@ -45,3 +45,7 @@ HIT: his order to write it, place it, and have time, load, and boot come up. BOO
 VAL: the form is his three sentences. Tonight's instructions are in this body, not only in chat.
 Miss: this file cannot move itself onto the Pi. He handles that.
 Open: the laptop trial, when he says run.
+
+## How to behave
+
+The paste he places is knowledge/HOW_TO_BEHAVE_2026-10-20.md. Once it is in that box, the sitting receives it before the answer, and the first act is the boot.
