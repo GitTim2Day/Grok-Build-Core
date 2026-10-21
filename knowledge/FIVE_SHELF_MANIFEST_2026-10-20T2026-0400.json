@@ -1,0 +1,26 @@
+{
+  "kind": "five-shelf-manifest",
+  "stamp": "2026-10-20T20:26-04:00",
+  "pass": "boot-2026-10-20-reload",
+  "owner": "Tim",
+  "prior_manifest": "knowledge/FIVE_SHELF_MANIFEST_2026-10-20T1854-0400.json",
+  "rule": "Next boot stops if this encounter sha is unchanged. Do not send a second mail for this same note.",
+  "delta": "Build lane reload. Rows 1-14 loaded. Tonight's files were already shelved. This note is the new line.",
+  "second_mail": false,
+  "tests": {
+    "p_equals_r2_py": "15/15",
+    "octave_time_py": "34/34",
+    "octave_time_c": "34/34",
+    "rt345": "8/8",
+    "p_equals_r2_cpp": "not run, no g++"
+  },
+  "plant_sha256": "6db4037fe8797d99d4f124736a6a8149b116dc3e21cfddff62b12c441ef5eed6",
+  "encounter_sha256": "bf2deb220ebef9c823516ef76a5d01b9577bf616e4165f122b81772f697861a0",
+  "encounter_size": 9471,
+  "already_shelved_not_in_prior_manifest": [
+    "knowledge/HOW_TO_BEHAVE_2026-10-20.md",
+    "knowledge/his-place-and-tonight-2026-10-20.md",
+    "knowledge/CHATGPT_JOURNAL_INTEGRATION_2026-10-20.md",
+    "knowledge/go-deep-every-search-2026-10-20.md"
+  ]
+}
