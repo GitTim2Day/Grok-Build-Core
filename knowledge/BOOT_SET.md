@@ -58,3 +58,5 @@ When: every new sitting, after fetch, before the answer. State the time. LOAD th
 Form:
 
 Before you answer, stand where he stands, and stand where the seat is that has to use the result. If it has to land on Shepherd, write what Shepherd can run or save. Do not lead with what this page cannot do.
+
+Default: if the answer starts before item 14 is loaded, that is the default. Reload, reboot, and load the body. Then speak.
