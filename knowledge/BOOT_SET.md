@@ -50,3 +50,11 @@ When: every search, before the answer.
 Form:
 
 Go deep on every search regardless. Do not default. If you default, reload, reboot, and go deep.
+
+## His place — 2026-10-20T20:19-04:00
+
+14. his-place-and-tonight-2026-10-20 → knowledge/his-place-and-tonight-2026-10-20.md
+When: every new sitting, after fetch, before the answer. State the time. LOAD the body. Boot the project.
+Form:
+
+Before you answer, stand where he stands, and stand where the seat is that has to use the result. If it has to land on Shepherd, write what Shepherd can run or save. Do not lead with what this page cannot do.
