@@ -76,7 +76,7 @@ The Grok pin drawer is not visible on this seat. Starred Gmail returned one 2026
 ### I. Other-model journal — sibling
 
 - [ChatGPT] Consolidated session journal, 2026-10-20. Deduped historical summary. Tests were not rerun. Its mailbox-only rule is that seat's rule, not this chair's.
-- Themes it already carries, and this seat did not re-prove: UDN worded "Use on Detection of Need"; exact arithmetic and truncation contracts that must stay version-tied; BOOKMEM; secretary gate; Edge Canvas; CSVSON as raw parse, then text, then protected GOSUB, then CSV-R-JSONL or JSON-LD. Attributed to that journal until a Grok shelf file is opened for the point.
+- Themes it already carries, and this seat did not re-prove: UDN worded "Use on Detection of Need"; exact arithmetic and truncation contracts that must stay version-tied; BOOKMEM; secretary gate; Edge Canvas; CSVSON as raw parse, then text, then protected GOSUB, then CSV-R-JSONL or JSON-LD. The Grok file is now CHATGPT_JOURNAL_INTEGRATION_2026-10-20.md. Those lines are reports. They were not rerun.
 
 ### J. Chaff candidates — flagged, not dropped
 
@@ -133,4 +133,6 @@ VAL: hash of this file after write. Prior scores not rerun.
 Miss: pin drawer.
 Open: the list above.
 
-Dedupe: Singareddy card and backtrack remain two siblings and one rule. The CarPlay checklist is not copied twice. The C-MAPSS hash is not copied again. The eight-pillar list is not rewritten as a new seal.
+- Integration 2026-10-20. Journal body and the mail-only hashes now have one project file. Scores not rerun.
+
+Dedupe: Singareddy card and backtrack remain two siblings and one rule. The CarPlay checklist is not copied twice. The C-MAPSS hash is not repeated in this index. One copy is in the integration file. The eight-pillar list is not rewritten as a new seal.
