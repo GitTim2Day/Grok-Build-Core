@@ -1,0 +1,14 @@
+field,value
+skill_name,gmail-connecter
+skill_path,knowledge/gmail-connecter.md
+skill_sha256,07ed6c5cad596a85d76ab243519e5d5b7d4b7010fc715f380f50e32f55899eaa
+skill_bytes,2120
+github_commit,0b2e4f8c
+github_blob,d7a3920f
+github_repo,Grok-Build-Core
+notion_page,gmail-connecter
+date_sealed,2026-11-06
+timezone,America/New_York
+capabilities,send,draft,search,read,labels,trash,forward,reply-all,custom-labels,send-as
+error_test_status,search 5 threads PASS; send-as primary only PASS; local tesseract gap OPEN; TESSDATA_PREFIX line emailed
+standing_rule,CSV sibling required for any xlsx/ods; applied here for uniformity per Timothy 2026-11-06
