@@ -181,3 +181,9 @@ Appended after sealed final 6227fbfb96908159; sections above unchanged.
 - Rebuild check: osm_streamline.py on the box copy started 17:03 EST into scratch/streamline_check/out_py; result not in yet at this append (pending; will be a later append).
 
 - Boot · `/home/box/agent-data/workflows/boot-summary-2026-10-24/SKILL.md` · [GEOMAP-2026-11-09] entry · pre f49a302c905d8936 → post d2ee1bb24dd9fcf6 (archives …T2215Z_pre-GEOMAP.md, …T2216Z_post-GEOMAP.md in ARCHIVE_INDEX.sha256) · 2026-11-09
+
+## 13. Addendum 2026-11-09 ~5:20 PM EST — rebuild check result [GEOMAP-2026-11-09]
+
+- `python3 -I osm_streamline.py` (box copy of mapbook/osm_streamline.py c3a0db2bd38c0526) on the box copy of georgia-latest.osm.pbf (2ac4c2ef929d4a04) → `/workspace/pi5-work-core-2026-11-09/scratch/streamline_check/out_py/`; 210 seconds.
+- addresses.txt 6a5675d153615f10 MATCH; road_nodes.txt aed91bc734fa392e MATCH; roads.txt 1687eebdb5e8410b MATCH (3/3 byte-identical to streamlined_20261010_101614). summary.txt 0c0d691e6eac2773 (extra file the Python twin writes).
+- So: the template's restore step 3 is proven for the exact pbf; the Pi's streamlined folder can be rebuilt from any exact copy.
