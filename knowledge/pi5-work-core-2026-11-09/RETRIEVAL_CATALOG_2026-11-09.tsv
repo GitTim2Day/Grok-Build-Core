@@ -41,3 +41,17 @@ C32	Pi5 shepherd	~/work/maps/georgia-latest.osm.pbf	OSM Georgia extract, deleted
 C33	box	/workspace/pi5-work-core-2026-11-09/extracted_r2/work/maps/georgia-latest.osm.pbf	georgia pbf copy (read-only)	2ac4c2ef929d4a04ff1280051c62b5791bf062f70eac16cfdabd27e9f9e4a1ce	357057388	2026-11-09	active	extracted_r2
 C34	public	https://download.geofabrik.de/north-america/us/georgia-latest.osm.pbf	Geofabrik live snapshot (newer; different sha)			2026-11-09	active	public source
 C35	Pi5 shepherd	~/work/maps/streamlined_20261010_101614/	kept on Pi			2026-11-09	active	parent relay
+C40	box	/workspace/pi5-work-core-2026-11-09/map_template/MAP_TEMPLATE_georgia_2026-11-09.md	MAP_TEMPLATE md	db9670bccf06175671e77ddca1626c7f65acbecccfc4b00ceaaa1afdb0c2281a	5302	2026-11-09	active	map_template
+C41	box	/workspace/pi5-work-core-2026-11-09/map_template/MAP_TEMPLATE_georgia_2026-11-09.txt	MAP_TEMPLATE txt	69d99ebbb0857a8604e70fec2ffd72a804ce3fd146fd3e6bd3476325ff8bc7ae	5244	2026-11-09	active	map_template
+C42	box	/workspace/pi5-work-core-2026-11-09/map_template/MAP_TEMPLATE_georgia_2026-11-09.json	MAP_TEMPLATE json	a0727e2d1b9123ede1760f384dc150acfb31c089337f4ab084ea8b51ed808acc	3914	2026-11-09	active	map_template
+C43	box	/workspace/pi5-work-core-2026-11-09/map_template/MAP_TEMPLATE_georgia_streamlined_schema_2026-11-09.tsv	streamlined schema table	6c2d4a305dac0f62f1a5090dd50df9f646040d49790c0c90a3539221d460c735	1132	2026-11-09	active	map_template
+C44	box	/workspace/pi5-work-core-2026-11-09/map_template/pbf_header.py	pure-Python PBF header reader	29b081cb6c17f4f5000ab4070569898ecfa3759512dadbe2923374e5e121b6b8	1809	2026-11-09	active	map_template
+C45	ledger queue	/workspace/boot-archive/LEDGER_QUEUE.jsonl line 22	MAP_TEMPLATE ledger email (Gmail only)			2026-11-09	held (queued; review card pending)	t783u
+C46	Notion	413c8669-9c94-810a-a91c-e8124855c29e	page Append 2 (MAP_TEMPLATE)			2026-11-09	active	Notion
+C47	GitHub	GitTim2Day/Grok-Build-Core@1f6723da9f817166886a9aaa7e55457f2e2411e2 knowledge/pi5-work-core-2026-11-09/map_template/	MAP_TEMPLATE 6 files (raw MATCH)			2026-11-09	active	GitHub
+C48	Drive	1OHED7x6IHp6qpR69r2EZPVj6AsqfndP4	MAP_TEMPLATE md (re-download MATCH)	db9670bccf06175671e77ddca1626c7f65acbecccfc4b00ceaaa1afdb0c2281a	5302	2026-11-09	active	Drive
+C49	Drive	1t6v3YxKgLJwAAb22KM3qMW_omg6RYLUM	MAP_TEMPLATE txt	69d99ebbb0857a8604e70fec2ffd72a804ce3fd146fd3e6bd3476325ff8bc7ae	5244	2026-11-09	active	Drive
+C50	Drive	1mKjkTSsbqY6ggBGJr9SqO8GNazIbPgwG	MAP_TEMPLATE json	a0727e2d1b9123ede1760f384dc150acfb31c089337f4ab084ea8b51ed808acc	3914	2026-11-09	active	Drive
+C51	Drive	1DCSha10LhaH8Z646p7e5WASjXEu4Y27y	pbf_header.py	29b081cb6c17f4f5000ab4070569898ecfa3759512dadbe2923374e5e121b6b8	1809	2026-11-09	active	Drive
+C52	Drive	1CGYqQGUv9mnWADKsUD5KXxo6oUxMSHDfjbGcYwzIti0	Google Sheet: streamlined schema (converted from C43)			2026-11-09	active	Drive
+C53	Drive	1vozmPSk9YiFN6cbhUOUEMcDz-e-uDEyy	SECRETS.md (retry ok)	c7c0c98c3cfa2837ab867d931c1d4a2015b40c7502122a2ebdab7946c4cbf43f	11275	2026-11-09	active	Drive

@@ -157,3 +157,27 @@ Full catalog: RETRIEVAL_CATALOG_2026-11-09.tsv (36 cards) and the catalog array 
 
 - boot · /home/box/agent-data/workflows/boot-summary-2026-10-24/SKILL.md · entry [WORKCORE-2026-11-09] inserted before "## Standing rules"; open item 15 extended "WORKCORE-2026-11-09 makes 21." · pre 6b92d49bbdd9ba92 (archived /workspace/boot-archive/boot-summary-2026-10-24_SKILL_archived_2026-11-09T2205Z_pre-WORKCORE.md) → post f49a302c905d8936 (archived ..._2026-11-09T2207Z_post-WORKCORE.md); both in ARCHIVE_INDEX.sha256 · 2026-11-09
 - Final versions of this map go to GitHub (same folder, later commit) and Drive (new file RETRIEVAL_MAP_2026-11-09.final.md; v1 file left in place). Their ids are recorded in STATUS_2026-11-09_append3.md, since a file cannot hold its own hash.
+
+## 12. Addendum 2026-11-09 ~5:15 PM EST — Georgia map pointer + MAP_TEMPLATE (Timothy t782u, t783u, t784u) [GEOMAP-2026-11-09]
+
+Appended after sealed final 6227fbfb96908159; sections above unchanged.
+
+- Georgia pbf pointer (restates section 10 for the follow-up): Pi ~/work/maps/georgia-latest.osm.pbf · 357057388 bytes · sha256 2ac4c2ef929d4a04ff1280051c62b5791bf062f70eac16cfdabd27e9f9e4a1ce (INVENTORY.tsv row work/maps/georgia-latest.osm.pbf) · dated 2026-10-09 19:06 EDT · deleted on the Pi ~5:00 PM EST for Tesseract 5.5.4.
+  - Requested path extracted/work/maps/georgia-latest.osm.pbf does NOT exist now: the box restart left extracted/ partial (section 11). Use /workspace/pi5-work-core-2026-11-09/extracted_r2/work/maps/georgia-latest.osm.pbf (re-hashed MATCH).
+  - Drive: full zip 1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6; pieces wc_part00..08 (ids in section 1; the member's bytes sit in wc_part02..06, all 9 needed to rejoin).
+  - Public: Geofabrik georgia-latest.osm.pbf; a re-download is a newer snapshot with a different sha.
+  - Pi zip + wc_part files: deleted on the Pi after verification. Pi keeps maps/streamlined_20261010_101614 (relayed).
+- MAP_TEMPLATE (box /workspace/pi5-work-core-2026-11-09/map_template/, read-only):
+  - MAP_TEMPLATE_georgia_2026-11-09.md · db9670bccf061756; .txt · 69d99ebbb0857a86; .json · a0727e2d1b9123ed
+  - MAP_TEMPLATE_georgia_streamlined_schema_2026-11-09.tsv · 6c2d4a305dac0f62; georgia_pbf_header.json · 9222b852ddcc871a; pbf_header.py · 29b081cb6c17f4f5
+  - Header (pure Python, no install; osmium not on box): bbox left -85.606800000 right -80.743130000 top 35.003560000 bottom 30.353650000; osmium/1.16.0; replication 2026-10-09T20:21:04Z seq 4937.
+  - Streamlined: addresses.txt 40243482 bytes / 499712 lines / 6a5675d153615f10; road_nodes.txt 334937440 / 9719197 / aed91bc734fa392e; roads.txt 159882942 / 1383997 / 1687eebdb5e8410b.
+- Saves of MAP_TEMPLATE:
+  - ledger queue · /workspace/boot-archive/LEDGER_QUEUE.jsonl line 22 · Gmail only (no Yahoo) · file 8a096dec628c827b · email NOT sent from this seat; goes out via the user's review card (pending)
+  - Notion · 413c8669-9c94-810a-a91c-e8124855c29e · "Append 2" at end
+  - GitHub · GitTim2Day/Grok-Build-Core knowledge/pi5-work-core-2026-11-09/map_template/ · commits 1d6b1f77fd891e9384863a4c4e863692641a43f4, 1f6723da9f817166886a9aaa7e55457f2e2411e2 · raw re-read 6/6 MATCH
+  - Drive folder 1_Pf8YNWB4eLhaAWVBI59evpBfKVc45TP · md 1OHED7x6IHp6qpR69r2EZPVj6AsqfndP4 (re-download MATCH) · txt 1t6v3YxKgLJwAAb22KM3qMW_omg6RYLUM · json 1mKjkTSsbqY6ggBGJr9SqO8GNazIbPgwG · pbf_header.py 1DCSha10LhaH8Z646p7e5WASjXEu4Y27y · Google Sheet (schema table) 1CGYqQGUv9mnWADKsUD5KXxo6oUxMSHDfjbGcYwzIti0
+  - Drive SECRETS.md retry (once, per t784u) · 1vozmPSk9YiFN6cbhUOUEMcDz-e-uDEyy · c7c0c98c3cfa2837
+- Rebuild check: osm_streamline.py on the box copy started 17:03 EST into scratch/streamline_check/out_py; result not in yet at this append (pending; will be a later append).
+
+- Boot · /home/box/agent-data/workflows/boot-summary-2026-10-24/SKILL.md · [GEOMAP-2026-11-09] entry · pre f49a302c905d8936 → post d2ee1bb24dd9fcf6 (archives …T2215Z_pre-GEOMAP.md, …T2216Z_post-GEOMAP.md in ARCHIVE_INDEX.sha256) · 2026-11-09
