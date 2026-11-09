@@ -1,0 +1,29 @@
+{
+ "blob_type": "OSMHeader",
+ "blobheader_bytes": 14,
+ "blob_datasize": 183,
+ "bbox_nanodeg": {
+  "left": -85606800000,
+  "right": -80743130000,
+  "top": 35003560000,
+  "bottom": 30353650000
+ },
+ "bbox_deg": {
+  "left": "-85.606800000",
+  "right": "-80.743130000",
+  "top": "35.003560000",
+  "bottom": "30.353650000"
+ },
+ "writingprogram": "osmium/1.16.0",
+ "osmosis_replication_timestamp": 1791577264,
+ "osmosis_replication_sequence_number": 4937,
+ "osmosis_replication_base_url": "https://download.geofabrik.de/north-america/us/georgia-updates",
+ "required_features": [
+  "OsmSchema-V0.6",
+  "DenseNodes"
+ ],
+ "optional_features": [
+  "Sort.Type_then_ID"
+ ],
+ "replication_timestamp_utc": "2026-10-09T20:21:04Z"
+}
