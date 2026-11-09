@@ -1,0 +1,118 @@
+# RETRIEVAL MAP — pi5 work_core 2026-11-09 (Research seat)
+
+Purpose (Timothy, t775u): map how we got it and where we left it, so a later session goes straight to it. Pointer format: shelf · id/path · short name · SHA[:16] · date. Append-only: later save locations are appended in section 9, never edited above.
+
+## 1. Provenance chain
+
+1. Pi 5 "shepherd" · ~/work/ · live working tree · — · newest file mtime 2026-10-16T21:53:28Z (UTC)
+2. Pi 5 · ~/work_core_2026-11-09.zip · zip of ~/work made by Timothy · efc3307eb84cf5a9 · 2026-11-09 (773241627 bytes, 23734 entries = 20410 files + 3324 dirs, 1639216430 bytes uncompressed)
+3. Drive · 1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6 · full zip uploaded by Timothy · efc3307eb84cf5a9 · 2026-11-09. Not downloadable here: 773241627 bytes is over the 100 MB connector download limit (STATUS 11:15 EST FETCH FAILED).
+4. Pi 5 → Drive · 9 pieces cut on the Pi with dd if=work_core_2026-11-09.zip of=wc_partNN bs=95000000 skip=N count=1 (N = 0..8), each uploaded to Drive in Firefox, then rm on the Pi:
+
+| piece | Drive id | bytes | sha256[:16] |
+|---|---|--:|---|
+| wc_part00 | 1zgsxhXQG0JML_sP8S0tsXJeamyyorsQZ | 95000000 | edaf5a9fb9880f87 |
+| wc_part01 | 1ZQaNR3zRm9L5_H_dTiGt97E2MUtjeu48 | 95000000 | 65f643f0f90edd05 |
+| wc_part02 | 1VQWIDFpN1VFWI4POuIYJAhu1qzehTdpl | 95000000 | 98a80542663e294c |
+| wc_part03 | 1uWKivdNbuuHuk2knvFN68lQyG_Ue7Lcw | 95000000 | 9cd93b14d7fe9758 |
+| wc_part04 | 1ShYQkZ0QXt6OyCgsjpt2g8vS0neKbKCA | 95000000 | d7b2f49a4dff7848 |
+| wc_part05 | 1ZvVMAAJZf9wysMhAWOuJ6_TWElVlImjr | 95000000 | cd43cbfeeedce204 |
+| wc_part06 | 1ZWCXGoe2z4Q2uKqEIrYZz9FHbeY-Uc3z | 95000000 | 66e067758cf6f726 |
+| wc_part07 | 1ubHXYpmL4YE11MLwrYmfJ8Tjk6aMf2kr | 95000000 | 2a0b55b5c899f6c0 |
+| wc_part08 | 1xFOwl6z_TxDBxgNzLpX33dNCEw-BunbE | 13241627 | b5135fca9cfcec7c |
+| total | | 773241627 | |
+
+5. box · /workspace/pi5-work-core-2026-11-09/original/parts/ · 9 pieces via cursor DownloadFile (connection user-Google-drive), each size+sha verified · 2026-11-09
+6. box · /workspace/pi5-work-core-2026-11-09/original/work_core_2026-11-09.zip · rebuilt by cat in order 00..08; sha256 MATCH, unzip -t no errors; chmod a-w · efc3307eb84cf5a9 · 2026-11-09
+7. box · /workspace/pi5-work-core-2026-11-09/extracted/work/ · unzip, then chmod -R a-w · 20410 files, 1639216430 bytes · 2026-11-09
+8. box · /workspace/pi5-work-core-2026-11-09/analysis/ · inventory and analysis (scripts in scripts/) · 2026-11-09
+
+## 2. Exact rejoin recipe (any machine with the Drive connector)
+
+
+# download the 9 Drive ids above as wc_part00 … wc_part08 (cursor DownloadFile, each < 100 MB)
+for n in 00 01 02 03 04 05 06 07 08; do test -f wc_part$n || echo MISSING $n; done
+cat wc_part00 wc_part01 wc_part02 wc_part03 wc_part04 wc_part05 wc_part06 wc_part07 wc_part08 > work_core_2026-11-09.zip
+stat -c %s work_core_2026-11-09.zip     # expect 773241627
+sha256sum work_core_2026-11-09.zip     # expect efc3307eb84cf5a98764346b0bb0b4ceeb2eff96b97409780f2622f540c20215
+unzip -t work_core_2026-11-09.zip >/dev/null && echo OK
+
+Per-piece check: compare each piece's size and sha256 with the table in section 1 before cat. Box already holds a verified copy (section 3): use it first.
+
+## 3. Where every copy is left
+
+| shelf | id/path | short name | SHA[:16] | bytes | status |
+|---|---|---|---|--:|---|
+| Pi5 shepherd | ~/work/ | live working tree (source of everything) | — |  | active (state after 2026-10-16T21:53:28Z unverified) |
+| Pi5 shepherd | ~/work_core_2026-11-09.zip | full zip of ~/work | efc3307eb84cf5a9 | 773241627 | present per Timothy; not re-verified on Pi |
+| Drive | 1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6 | full zip in Drive (over 100 MB connector download limit) | efc3307eb84cf5a9 | 773241627 | active |
+| Drive | 1zgsxhXQG0JML_sP8S0tsXJeamyyorsQZ | wc_part00 (dd piece 1 of 9) | edaf5a9fb9880f87 | 95000000 | active |
+| Drive | 1ZQaNR3zRm9L5_H_dTiGt97E2MUtjeu48 | wc_part01 (dd piece 2 of 9) | 65f643f0f90edd05 | 95000000 | active |
+| Drive | 1VQWIDFpN1VFWI4POuIYJAhu1qzehTdpl | wc_part02 (dd piece 3 of 9) | 98a80542663e294c | 95000000 | active |
+| Drive | 1uWKivdNbuuHuk2knvFN68lQyG_Ue7Lcw | wc_part03 (dd piece 4 of 9) | 9cd93b14d7fe9758 | 95000000 | active |
+| Drive | 1ShYQkZ0QXt6OyCgsjpt2g8vS0neKbKCA | wc_part04 (dd piece 5 of 9) | d7b2f49a4dff7848 | 95000000 | active |
+| Drive | 1ZvVMAAJZf9wysMhAWOuJ6_TWElVlImjr | wc_part05 (dd piece 6 of 9) | cd43cbfeeedce204 | 95000000 | active |
+| Drive | 1ZWCXGoe2z4Q2uKqEIrYZz9FHbeY-Uc3z | wc_part06 (dd piece 7 of 9) | 66e067758cf6f726 | 95000000 | active |
+| Drive | 1ubHXYpmL4YE11MLwrYmfJ8Tjk6aMf2kr | wc_part07 (dd piece 8 of 9) | 2a0b55b5c899f6c0 | 95000000 | active |
+| Drive | 1xFOwl6z_TxDBxgNzLpX33dNCEw-BunbE | wc_part08 (dd piece 9 of 9) | b5135fca9cfcec7c | 13241627 | active |
+| box | /workspace/pi5-work-core-2026-11-09/original/work_core_2026-11-09.zip | rebuilt zip (read-only) | efc3307eb84cf5a9 | 773241627 | active |
+| box | /workspace/pi5-work-core-2026-11-09/original/parts/ | 9 downloaded pieces (read-only) | — | 773241627 | active |
+| box | /workspace/pi5-work-core-2026-11-09/extracted/work/ | extracted tree, chmod -R a-w | — | 1639216430 | active |
+
+Pi-side notes (from the chat; not verified from here): pieces 00–06 were rm-ed on the Pi after each upload; Timothy was told 07 and 08 can be deleted (done or not: UNVERIFIED). The 773 MB zip itself is still on the Pi as far as known.
+
+## 4. Analysis files (box, /workspace/pi5-work-core-2026-11-09/analysis/)
+
+- box · analysis/CLAUDE_SETTINGS_SUMMARY.md · CLAUDE_SETTINGS_SUMMARY · 4e6946d07aa81211 · 2026-11-09 (13784 bytes)
+- box · analysis/COMMIT_CANDIDATES.tsv · COMMIT_CANDIDATES · c1113cbbd7a47f8b · 2026-11-09 (61909 bytes)
+- box · analysis/CONTENT_MAP.md · CONTENT_MAP · 52238c2e7bde3cc1 · 2026-11-09 (22687 bytes)
+- box · analysis/DIFF_VS_GROK_BUILD_CORE.md · DIFF_VS_GROK_BUILD_CORE · cd5ab403192b781c · 2026-11-09 (26952 bytes)
+- box · analysis/DUPLICATES.json · DUPLICATES · 1c851eb90264c1e2 · 2026-11-09 (1985815 bytes)
+- box · analysis/INVENTORY.jsonl · INVENTORY · f1d8e2703e709adb · 2026-11-09 (8411713 bytes)
+- box · analysis/INVENTORY.tsv · INVENTORY · 4a92b2c8748be5c3 · 2026-11-09 (5533985 bytes)
+- box · analysis/INVENTORY_SUMMARY.md · INVENTORY_SUMMARY · 180c1954e2df9b63 · 2026-11-09 (26471 bytes)
+- box · analysis/OEIS.md · OEIS · d41278adcae6e3ad · 2026-11-09 (17221 bytes)
+- box · analysis/RECOMMENDATIONS.md · RECOMMENDATIONS · 1b836afd93ae0569 · 2026-11-09 (8043 bytes)
+- box · analysis/SECRETS.md · SECRETS · c7c0c98c3cfa2837 · 2026-11-09 (11275 bytes)
+- box · analysis/SECRETS_HITS.tsv · SECRETS_HITS · 7081b877b2abb789 · 2026-11-09 (1638076 bytes)
+- box · analysis/SHA256SUMS · SHA256SUMS · bb0d2a4544fa52fe · 2026-11-09 (1005 bytes)
+
+Public copy set for project shelves (/workspace/pi5-work-core-2026-11-09/publish/, read-only; CLAUDE_SETTINGS_SUMMARY.public.md has 4 Bluetooth MACs redacted; INVENTORY.jsonl/.tsv, DUPLICATES.json, SECRETS_HITS.tsv kept off GitHub for size):
+- box · publish/CLAUDE_SETTINGS_SUMMARY.public.md · 32b9ee9de7c94be6 · 2026-11-09
+- box · publish/COMMIT_CANDIDATES.tsv · c1113cbbd7a47f8b · 2026-11-09
+- box · publish/CONTENT_MAP.md · 52238c2e7bde3cc1 · 2026-11-09
+- box · publish/DIFF_VS_GROK_BUILD_CORE.md · cd5ab403192b781c · 2026-11-09
+- box · publish/INVENTORY_SUMMARY.md · 180c1954e2df9b63 · 2026-11-09
+- box · publish/OEIS.md · d41278adcae6e3ad · 2026-11-09
+- box · publish/RECOMMENDATIONS.md · 1b836afd93ae0569 · 2026-11-09
+- box · publish/SECRETS.md · c7c0c98c3cfa2837 · 2026-11-09
+
+Other box items: STATUS_2026-11-09.md, STATUS_2026-11-09_append1.md (rebuild), STATUS_2026-11-09_append2.md (analysis); prep/gh_tree.json (GitHub tree 39a65bfd…); .venv/ (puremagic, detect-secrets; project-local); scratch/ (no secret values). OEIS reference data: /workspace/oeis_public/stripped.gz, names.gz.
+
+## 5. What is NOT in the zip
+
+- ~/Desktop/STORE: work/archive/DEDUPE_INDEX.tsv records 115 files under ~/work turned into symlinks into STORE (377796414 bytes per the index); those files are absent (e.g. rruff/raw/, archive/mutation_runs/ are empty).
+- ~/work/oeis_data (OEIS checkout used by oeis_earn, named in EARN_RESULTS_2026-10-16.md) and ~/work/tess_root (named in jcj/README.md): not in the zip.
+- work/maps second round, 851M as stated in the parent session (relayed; size and path not verified from the box).
+- ~/Desktop/Queries, ~/local (bwbasic, cmake, piper, stt), anything outside ~/work, and any change after 2026-10-16T21:53:28Z.
+
+## 6. Post-office idea (applied)
+
+Earned source: /workspace/post-office-2026-10-20/README.md (sha256 3b67402c63b008ed…, "Offline Post Office (prototype, 2026-10-20), Timothy Gmail mirror"): write-once cabinet files, a card catalog (catalog.tsv: id, labels, file_path, sha256, synced_at, status active|held, source), append-only CHANGES.log and SHA256SUMS; files never overwritten; missing items marked held, never deleted. Routine "Post office mail run" hourly 7–22 ET (session-map-2026-10-20 PATTERN_MAP_v2 E56).
+Applied here: RETRIEVAL_CATALOG_2026-11-09.tsv is a card catalog with one card per copy (item_id, shelf, locator, short_name, sha256, bytes, date, status, source). Copies that go missing later get status held, never removed. When the queued ledger email (section 9) is released and lands under the Gmail label Grok-Build-Ledger, the post-office sync files it as a write-once .eml in cabinet/Grok-Build-Ledger/, giving an offline retrievable copy (future; not done here).
+
+## 7. Open next steps
+
+1. Timothy: delete ~/work_core_2026-11-09.zip from the Pi (frees 773241627 bytes; 3 verified copies exist) and any leftover wc_part07/08. Your call; nothing done to the Pi.
+2. Pi read-only check: du -xsh ~/* ~/Desktop/* 2>/dev/null | sort -h | tail -20 to size STORE, oeis_data, tess_root, maps round 2.
+3. Decide commit of the 359 candidate source files (COMMIT_CANDIDATES.tsv) to Grok-Build-Core.
+4. Pi: git pull --ff-only in ~/work/Grok-Build-Core (8 files behind-changed, 236 missing).
+5. Release of the queued ledger email needs Timothy's OK.
+6. RECOMMENDATIONS.md (archive maps 892121252, venvs 273554215, rruff 143470894, OEIS-derived 128897593, third_party 104714228).
+
+## 8. Card catalog
+
+Full catalog: RETRIEVAL_CATALOG_2026-11-09.tsv (36 cards) and the catalog array in RETRIEVAL_MAP_2026-11-09.json.
+
+## 9. Save locations (appended after each save; see below)
+

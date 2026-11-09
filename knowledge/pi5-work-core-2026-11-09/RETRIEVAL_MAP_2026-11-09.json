@@ -1,0 +1,478 @@
+{
+ "title": "RETRIEVAL MAP pi5 work_core 2026-11-09",
+ "zip": {
+  "bytes": 773241627,
+  "sha256": "efc3307eb84cf5a98764346b0bb0b4ceeb2eff96b97409780f2622f540c20215",
+  "entries": 23734,
+  "files": 20410,
+  "uncompressed_bytes": 1639216430
+ },
+ "drive_full_zip": "1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6",
+ "dd": "dd if=work_core_2026-11-09.zip of=wc_partNN bs=95000000 skip=N count=1",
+ "pieces": [
+  {
+   "name": "wc_part00",
+   "drive_id": "1zgsxhXQG0JML_sP8S0tsXJeamyyorsQZ",
+   "bytes": 95000000,
+   "sha256": "edaf5a9fb9880f875f0f57bc35f8e2a3977185e0217ca1ef45faf0e31ad1b775"
+  },
+  {
+   "name": "wc_part01",
+   "drive_id": "1ZQaNR3zRm9L5_H_dTiGt97E2MUtjeu48",
+   "bytes": 95000000,
+   "sha256": "65f643f0f90edd05f7d4f53ab70cfc8b47de42bdeb2f91dc4135eed592b9a212"
+  },
+  {
+   "name": "wc_part02",
+   "drive_id": "1VQWIDFpN1VFWI4POuIYJAhu1qzehTdpl",
+   "bytes": 95000000,
+   "sha256": "98a80542663e294c1dc8c26bfb539c89764dc286ba49b361270d49e1a2273e49"
+  },
+  {
+   "name": "wc_part03",
+   "drive_id": "1uWKivdNbuuHuk2knvFN68lQyG_Ue7Lcw",
+   "bytes": 95000000,
+   "sha256": "9cd93b14d7fe97586107bcabaa465e5fdfc9718e65e5d766e7ba62e0f6452258"
+  },
+  {
+   "name": "wc_part04",
+   "drive_id": "1ShYQkZ0QXt6OyCgsjpt2g8vS0neKbKCA",
+   "bytes": 95000000,
+   "sha256": "d7b2f49a4dff7848791823035864c6782f87c1eee3856a2f40ef6e2f9492fa6c"
+  },
+  {
+   "name": "wc_part05",
+   "drive_id": "1ZvVMAAJZf9wysMhAWOuJ6_TWElVlImjr",
+   "bytes": 95000000,
+   "sha256": "cd43cbfeeedce204d556eae1ddee857e9a60323446fad6d7bf313181dd413d6b"
+  },
+  {
+   "name": "wc_part06",
+   "drive_id": "1ZWCXGoe2z4Q2uKqEIrYZz9FHbeY-Uc3z",
+   "bytes": 95000000,
+   "sha256": "66e067758cf6f726bb0dca2e64ad7fc230771c67aaac38b7a085f9331c9f47ac"
+  },
+  {
+   "name": "wc_part07",
+   "drive_id": "1ubHXYpmL4YE11MLwrYmfJ8Tjk6aMf2kr",
+   "bytes": 95000000,
+   "sha256": "2a0b55b5c899f6c0bc407fa9e3c679270d1046b310e03bb498ee0086928366ea"
+  },
+  {
+   "name": "wc_part08",
+   "drive_id": "1xFOwl6z_TxDBxgNzLpX33dNCEw-BunbE",
+   "bytes": 13241627,
+   "sha256": "b5135fca9cfcec7cbb9ed4f10917cc6c9990f7ba0dd36a8a0258bbe977e95e0c"
+  }
+ ],
+ "rejoin_order": [
+  "wc_part00",
+  "wc_part01",
+  "wc_part02",
+  "wc_part03",
+  "wc_part04",
+  "wc_part05",
+  "wc_part06",
+  "wc_part07",
+  "wc_part08"
+ ],
+ "catalog": [
+  {
+   "item_id": "C01",
+   "shelf": "Pi5 shepherd",
+   "locator": "~/work/",
+   "short_name": "live working tree (source of everything)",
+   "sha256": "",
+   "bytes": null,
+   "date": "2026-11-09",
+   "status": "active (state after 2026-10-16T21:53:28Z unverified)",
+   "source": "Pi"
+  },
+  {
+   "item_id": "C02",
+   "shelf": "Pi5 shepherd",
+   "locator": "~/work_core_2026-11-09.zip",
+   "short_name": "full zip of ~/work",
+   "sha256": "efc3307eb84cf5a98764346b0bb0b4ceeb2eff96b97409780f2622f540c20215",
+   "bytes": 773241627,
+   "date": "2026-11-09",
+   "status": "present per Timothy; not re-verified on Pi",
+   "source": "Pi (zip by Timothy)"
+  },
+  {
+   "item_id": "C03",
+   "shelf": "Drive",
+   "locator": "1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6",
+   "short_name": "full zip in Drive (over 100 MB connector download limit)",
+   "sha256": "efc3307eb84cf5a98764346b0bb0b4ceeb2eff96b97409780f2622f540c20215 (size match per Drive metadata; hash not readable remotely)",
+   "bytes": 773241627,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy"
+  },
+  {
+   "item_id": "C10",
+   "shelf": "Drive",
+   "locator": "1zgsxhXQG0JML_sP8S0tsXJeamyyorsQZ",
+   "short_name": "wc_part00 (dd piece 1 of 9)",
+   "sha256": "edaf5a9fb9880f875f0f57bc35f8e2a3977185e0217ca1ef45faf0e31ad1b775",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C11",
+   "shelf": "Drive",
+   "locator": "1ZQaNR3zRm9L5_H_dTiGt97E2MUtjeu48",
+   "short_name": "wc_part01 (dd piece 2 of 9)",
+   "sha256": "65f643f0f90edd05f7d4f53ab70cfc8b47de42bdeb2f91dc4135eed592b9a212",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C12",
+   "shelf": "Drive",
+   "locator": "1VQWIDFpN1VFWI4POuIYJAhu1qzehTdpl",
+   "short_name": "wc_part02 (dd piece 3 of 9)",
+   "sha256": "98a80542663e294c1dc8c26bfb539c89764dc286ba49b361270d49e1a2273e49",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C13",
+   "shelf": "Drive",
+   "locator": "1uWKivdNbuuHuk2knvFN68lQyG_Ue7Lcw",
+   "short_name": "wc_part03 (dd piece 4 of 9)",
+   "sha256": "9cd93b14d7fe97586107bcabaa465e5fdfc9718e65e5d766e7ba62e0f6452258",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C14",
+   "shelf": "Drive",
+   "locator": "1ShYQkZ0QXt6OyCgsjpt2g8vS0neKbKCA",
+   "short_name": "wc_part04 (dd piece 5 of 9)",
+   "sha256": "d7b2f49a4dff7848791823035864c6782f87c1eee3856a2f40ef6e2f9492fa6c",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C15",
+   "shelf": "Drive",
+   "locator": "1ZvVMAAJZf9wysMhAWOuJ6_TWElVlImjr",
+   "short_name": "wc_part05 (dd piece 6 of 9)",
+   "sha256": "cd43cbfeeedce204d556eae1ddee857e9a60323446fad6d7bf313181dd413d6b",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C16",
+   "shelf": "Drive",
+   "locator": "1ZWCXGoe2z4Q2uKqEIrYZz9FHbeY-Uc3z",
+   "short_name": "wc_part06 (dd piece 7 of 9)",
+   "sha256": "66e067758cf6f726bb0dca2e64ad7fc230771c67aaac38b7a085f9331c9f47ac",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C17",
+   "shelf": "Drive",
+   "locator": "1ubHXYpmL4YE11MLwrYmfJ8Tjk6aMf2kr",
+   "short_name": "wc_part07 (dd piece 8 of 9)",
+   "sha256": "2a0b55b5c899f6c0bc407fa9e3c679270d1046b310e03bb498ee0086928366ea",
+   "bytes": 95000000,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C18",
+   "shelf": "Drive",
+   "locator": "1xFOwl6z_TxDBxgNzLpX33dNCEw-BunbE",
+   "short_name": "wc_part08 (dd piece 9 of 9)",
+   "sha256": "b5135fca9cfcec7cbb9ed4f10917cc6c9990f7ba0dd36a8a0258bbe977e95e0c",
+   "bytes": 13241627,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "Drive upload by Timothy from Pi"
+  },
+  {
+   "item_id": "C20",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/original/work_core_2026-11-09.zip",
+   "short_name": "rebuilt zip (read-only)",
+   "sha256": "efc3307eb84cf5a98764346b0bb0b4ceeb2eff96b97409780f2622f540c20215",
+   "bytes": 773241627,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "cat of the 9 pieces"
+  },
+  {
+   "item_id": "C21",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/original/parts/",
+   "short_name": "9 downloaded pieces (read-only)",
+   "sha256": "",
+   "bytes": 773241627,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "cursor DownloadFile"
+  },
+  {
+   "item_id": "C22",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/extracted/work/",
+   "short_name": "extracted tree, chmod -R a-w",
+   "sha256": "",
+   "bytes": 1639216430,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "unzip"
+  },
+  {
+   "item_id": "ACLAUDE_SETTINGS_SUMMARY.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/CLAUDE_SETTINGS_SUMMARY.md",
+   "short_name": "CLAUDE_SETTINGS_SUMMARY.md",
+   "sha256": "4e6946d07aa81211ea3cbfb84f1405e009cf06289121fff7a8191f36fbbdb8a8",
+   "bytes": 13784,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ACOMMIT_CANDIDATES.tsv",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/COMMIT_CANDIDATES.tsv",
+   "short_name": "COMMIT_CANDIDATES.tsv",
+   "sha256": "c1113cbbd7a47f8b02748d11d116f38f45b663e292bc4a2863d631e78c7ee60e",
+   "bytes": 61909,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ACONTENT_MAP.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/CONTENT_MAP.md",
+   "short_name": "CONTENT_MAP.md",
+   "sha256": "52238c2e7bde3cc1a94251a904467289e34ff45ac5fae5be560ee35ff612259a",
+   "bytes": 22687,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ADIFF_VS_GROK_BUILD_CORE.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/DIFF_VS_GROK_BUILD_CORE.md",
+   "short_name": "DIFF_VS_GROK_BUILD_CORE.md",
+   "sha256": "cd5ab403192b781c04ec924f96398a9da349a349aea43fd00fc70a8d895d684d",
+   "bytes": 26952,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ADUPLICATES.json",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/DUPLICATES.json",
+   "short_name": "DUPLICATES.json",
+   "sha256": "1c851eb90264c1e2a7bec9718115c787b086b2c243e6fbda61166282fdff16d1",
+   "bytes": 1985815,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "AINVENTORY.jsonl",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/INVENTORY.jsonl",
+   "short_name": "INVENTORY.jsonl",
+   "sha256": "f1d8e2703e709adb6a173db4dfff871a662624a384d3e810962778d70efcbdee",
+   "bytes": 8411713,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "AINVENTORY.tsv",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/INVENTORY.tsv",
+   "short_name": "INVENTORY.tsv",
+   "sha256": "4a92b2c8748be5c3d3d2acb31596fc4be6c572595a65245fd55e08146cff60a8",
+   "bytes": 5533985,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "AINVENTORY_SUMMARY.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/INVENTORY_SUMMARY.md",
+   "short_name": "INVENTORY_SUMMARY.md",
+   "sha256": "180c1954e2df9b63cdf0c96a02c752e534a59496278c9101f652cb21cb151c42",
+   "bytes": 26471,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "AOEIS.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/OEIS.md",
+   "short_name": "OEIS.md",
+   "sha256": "d41278adcae6e3ad0d1c824f11bf0985d7f77a28203a75a029f13edcec71569f",
+   "bytes": 17221,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ARECOMMENDATIONS.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/RECOMMENDATIONS.md",
+   "short_name": "RECOMMENDATIONS.md",
+   "sha256": "1b836afd93ae0569209937d54c5a22fe91e7a48950b535de3c86fb72349c3c1c",
+   "bytes": 8043,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ASECRETS.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/SECRETS.md",
+   "short_name": "SECRETS.md",
+   "sha256": "c7c0c98c3cfa2837ab867d931c1d4a2015b40c7502122a2ebdab7946c4cbf43f",
+   "bytes": 11275,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ASECRETS_HITS.tsv",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/SECRETS_HITS.tsv",
+   "short_name": "SECRETS_HITS.tsv",
+   "sha256": "7081b877b2abb78927637099b00905620ea3adc3af8ce4afd5f7cd3697fefe1a",
+   "bytes": 1638076,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "ASHA256SUMS",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/analysis/SHA256SUMS",
+   "short_name": "SHA256SUMS",
+   "sha256": "bb0d2a4544fa52fe54b5050a8e60a0794182a7cbe9fa9d5f02f978911fa79ddd",
+   "bytes": 1005,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "analysis"
+  },
+  {
+   "item_id": "PCLAUDE_SETTINGS_SUMMARY.public.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/CLAUDE_SETTINGS_SUMMARY.public.md",
+   "short_name": "public copy: CLAUDE_SETTINGS_SUMMARY.public.md",
+   "sha256": "32b9ee9de7c94be6e7151bdac5adbfb469adc0ae6694a2c300742c886f8aa3ef",
+   "bytes": 13784,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  },
+  {
+   "item_id": "PCOMMIT_CANDIDATES.tsv",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/COMMIT_CANDIDATES.tsv",
+   "short_name": "public copy: COMMIT_CANDIDATES.tsv",
+   "sha256": "c1113cbbd7a47f8b02748d11d116f38f45b663e292bc4a2863d631e78c7ee60e",
+   "bytes": 61909,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  },
+  {
+   "item_id": "PCONTENT_MAP.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/CONTENT_MAP.md",
+   "short_name": "public copy: CONTENT_MAP.md",
+   "sha256": "52238c2e7bde3cc1a94251a904467289e34ff45ac5fae5be560ee35ff612259a",
+   "bytes": 22687,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  },
+  {
+   "item_id": "PDIFF_VS_GROK_BUILD_CORE.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/DIFF_VS_GROK_BUILD_CORE.md",
+   "short_name": "public copy: DIFF_VS_GROK_BUILD_CORE.md",
+   "sha256": "cd5ab403192b781c04ec924f96398a9da349a349aea43fd00fc70a8d895d684d",
+   "bytes": 26952,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  },
+  {
+   "item_id": "PINVENTORY_SUMMARY.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/INVENTORY_SUMMARY.md",
+   "short_name": "public copy: INVENTORY_SUMMARY.md",
+   "sha256": "180c1954e2df9b63cdf0c96a02c752e534a59496278c9101f652cb21cb151c42",
+   "bytes": 26471,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  },
+  {
+   "item_id": "POEIS.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/OEIS.md",
+   "short_name": "public copy: OEIS.md",
+   "sha256": "d41278adcae6e3ad0d1c824f11bf0985d7f77a28203a75a029f13edcec71569f",
+   "bytes": 17221,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  },
+  {
+   "item_id": "PRECOMMENDATIONS.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/RECOMMENDATIONS.md",
+   "short_name": "public copy: RECOMMENDATIONS.md",
+   "sha256": "1b836afd93ae0569209937d54c5a22fe91e7a48950b535de3c86fb72349c3c1c",
+   "bytes": 8043,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  },
+  {
+   "item_id": "PSECRETS.md",
+   "shelf": "box",
+   "locator": "/workspace/pi5-work-core-2026-11-09/publish/SECRETS.md",
+   "short_name": "public copy: SECRETS.md",
+   "sha256": "c7c0c98c3cfa2837ab867d931c1d4a2015b40c7502122a2ebdab7946c4cbf43f",
+   "bytes": 11275,
+   "date": "2026-11-09",
+   "status": "active",
+   "source": "publish (MACs redacted in CLAUDE_SETTINGS_SUMMARY.public.md)"
+  }
+ ],
+ "saves": []
+}
