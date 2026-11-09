@@ -209,3 +209,24 @@ Appended after sealed bde5cc54c46b1275; sections above unchanged. Source: Timoth
 3. Only the text leaves the device, to the box or Drive.
 4. Escalation: Jetson or A15 for full vision; live video to the iPhone only on trigger.
 5. Nothing gets installed without Timothy's OK.
+
+## 16. Append 2026-11-09 17:20 EST: photo hash for section 14 (C61 now active)
+
+The Pi Grok report photo (Tesseract 5.5.4) reached the box at 17:19 EST. It is 4716367 bytes, sha256 b73b98fadd2c8a3863a6b280d9588d1eec925bb521ed3871b50341910e3919f2. The file name e6cb9489... is not its content hash. Path: /home/box/agent-data/agents/c367039e-5264-4eb6-8b22-f6edce2f8122/attachments/e6cb9489f6fbeeacecc4596eecfb4c7a5f725696423559c9b83b28026b7a78cd.jpg
+
+## 17. Addendum 2026-11-09 17:27 EST — Pi memory reading + audit errata (Timothy t790u) [SESSIONAUDIT-2026-11-09]
+
+Appended after sealed 46806abcdb472c08 (section 16 copy in retrieval_map_versions/RETRIEVAL_MAP_2026-11-09.section16.md); sections above unchanged.
+
+### 17.1 Pi memory reading (Timothy photo of the Pi Grok report, 5:22–5:23 PM EST; relayed by the parent)
+- available 3.1Gi of total 7.9Gi; unused RAM 1.2Gi; cache reclaimable 2.0Gi; swap 1.4Gi free of 2.0Gi, 630Mi used.
+- Recorded exactly as shown. These are display values from the Pi tool (human-readable units); exact byte counts were not given and are UNVERIFIED.
+- Photo path given: `/home/box/agent-data/agents/c367039e-5264-4eb6-8b22-f6edce2f8122/attachments/9fe4aa01fde886320eb0742b118aa3f28696b0c4f60c72d6e6892069a113a049.jpg`. NOT on the box at 17:26:46 EST, so its sha256 was NOT computed (status held).
+
+### 17.2 Errata found by the session audit (corrections appended, nothing above edited)
+- E1 rounded size labels: "773 MB" (section 3 Pi-side notes) means 773241627 bytes; "357 MB" (MAP_TEMPLATE purpose line, ledger email body) means 357057388 bytes; "100 MB" is the connector's own limit text.
+- E2 catalog row C63 is malformed (8 fields; sha256 cut to 16 hex; no bytes; date in the bytes column). Corrective row C64 appended with full sha256 b73b98fadd2c8a3863a6b280d9588d1eec925bb521ed3871b50341910e3919f2 and bytes 4716367 (re-hashed on box).
+- E3 section 14 says the photo was "NOT on the box at 5:20 PM EST"; the file mtime is 17:19 EST, so that check ran before 17:19 and the "5:20" heading time is approximate. Section 16 supersedes.
+- E4 catalog row C03 carries text in the sha256 column (format deviation; value is still the zip sha).
+- E5 Drive root holds `wc_part09` id 1iKVWHnmK7990CHOnQRNvpM1qdZiS5zpE, size 0 bytes, created 2026-11-09T20:35:17Z (3:35:17 PM EST). Not part of the rejoin; NOT deleted; needs Timothy's OK to trash.
+- E6 the .txt companion did not receive section 16 when it was added to the .md; a labeled late copy was appended to the .txt after section 17.
