@@ -1,0 +1,58 @@
+{
+ "appends_to": "RETRIEVAL_MAP_2026-11-09.json (2e6d52ce533ce316, unchanged)",
+ "saves": {
+  "ledger_queue": {
+   "path": "/workspace/boot-archive/LEDGER_QUEUE.jsonl",
+   "line": 21,
+   "status": "queued, not sent"
+  },
+  "notion": {
+   "page_id": "413c8669-9c94-810a-a91c-e8124855c29e",
+   "parent": "403c8669-9c94-8117-bb27-c05770647c38"
+  },
+  "github": {
+   "repo": "GitTim2Day/Grok-Build-Core",
+   "path": "knowledge/pi5-work-core-2026-11-09/",
+   "commits": [
+    "b705171d565fbfe2494b9a6b7a942d8404b5b34f",
+    "9a314acc9552ab102457199d15117087ac0ad2a7",
+    "bab94ab4ccf7a494dccce5cedec9902cbf51a40d",
+    "8676502eaeb3e801f105b21df07fe4e77f94d80e"
+   ]
+  },
+  "drive": {
+   "folder_id": "1_Pf8YNWB4eLhaAWVBI59evpBfKVc45TP",
+   "secrets_md": "not uploaded (approval interrupted)"
+  }
+ },
+ "pi_moves": [
+  {
+   "path": "~/work_core_2026-11-09.zip and ~/wc_part00..08",
+   "action": "deleted on Pi after verification",
+   "source": "parent relay"
+  },
+  {
+   "path": "~/work/maps/georgia-latest.osm.pbf",
+   "bytes": 357057388,
+   "sha256": "2ac4c2ef929d4a04ff1280051c62b5791bf062f70eac16cfdabd27e9f9e4a1ce",
+   "mtime_utc": "2026-10-09T23:06:44Z",
+   "action": "deleted on Pi ~2026-11-09 17:00 EST for Tesseract 5.5.4 build",
+   "copies": [
+    "box extracted_r2/work/maps/georgia-latest.osm.pbf",
+    "box original zip member",
+    "Drive zip 1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6",
+    "Drive pieces wc_part02..wc_part06"
+   ],
+   "public_source": "https://download.geofabrik.de/north-america/us/georgia-latest.osm.pbf (newer snapshot, different sha)"
+  },
+  {
+   "path": "~/work/maps/streamlined_20261010_101614/",
+   "action": "kept on Pi"
+  }
+ ],
+ "box_restore": {
+  "extracted_partial_files": 14046,
+  "extracted_r2_files": 20410,
+  "extracted_r2_bytes": 1639216430
+ }
+}

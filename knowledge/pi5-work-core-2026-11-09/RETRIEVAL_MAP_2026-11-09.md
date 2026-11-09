@@ -116,3 +116,44 @@ Full catalog: `RETRIEVAL_CATALOG_2026-11-09.tsv` (36 cards) and the `catalog` ar
 
 ## 9. Save locations (appended after each save; see below)
 
+
+### 9.1 Saves made (2026-11-09 17:00 EST)
+
+- ledger queue · `/workspace/boot-archive/LEDGER_QUEUE.jsonl` · line 21 "Grok-Build-Ledger 2026-11-09 Pi5 work_core retrieval map (Research seat)", status queued, not sent · file e5b60d7d2d204258 (pre 540cd80327adab00, first 20 lines unchanged) · 2026-11-09. Email send: none. Yahoo untouched.
+- Notion · `413c8669-9c94-810a-a91c-e8124855c29e` · RETRIEVAL_MAP_2026-11-09_PI5_WORK_CORE (Research seat), parent 403c8669-9c94-8117-bb27-c05770647c38 · https://app.notion.com/p/413c86699c94810aa91ce8124855c29e · 2026-11-09
+- GitHub · GitTim2Day/Grok-Build-Core main · `knowledge/pi5-work-core-2026-11-09/` (13 files, SHA256SUMS 61a4662d36a8e714) · commits b705171d565fbfe2494b9a6b7a942d8404b5b34f (1/4 map files), 9a314acc9552ab102457199d15117087ac0ad2a7 (2/4), bab94ab4ccf7a494dccce5cedec9902cbf51a40d (3/4), 8676502eaeb3e801f105b21df07fe4e77f94d80e (4/4) · raw re-read at 8676502e: 12/12 sha OK, SHA256SUMS byte MATCH · 2026-11-09. Repo raw files are publicly readable: only the public set went up (MACs redacted; no INVENTORY/DUPLICATES/SECRETS_HITS, no zip, no extracted content, no secret values).
+- Drive · folder `1_Pf8YNWB4eLhaAWVBI59evpBfKVc45TP` "pi5-work-core-2026-11-09" under root 0AAYi34wb_WB0Uk9PVA · https://drive.google.com/drive/folders/1_Pf8YNWB4eLhaAWVBI59evpBfKVc45TP · 2026-11-09:
+  - RETRIEVAL_MAP_2026-11-09.md (v1) 1bcpYRki_KzxZ__3EWUfl3kHdEVosGeIn · f961450d22130927
+  - RETRIEVAL_MAP_2026-11-09.txt 1FSl2MEZXexqL-p2x9YZMHib2QtXmwlF6 · 29e96f0b31b66f6a
+  - RETRIEVAL_MAP_2026-11-09.json 1m_U4zhPaMxPLgB10lT__KbH0OnHH5e26 · 2e6d52ce533ce316
+  - RETRIEVAL_CATALOG_2026-11-09.tsv 1g0rFvPo4QSpkaQlMxqYpnZsR-oo5tPcM · 9d37419db09517cc
+  - CLAUDE_SETTINGS_SUMMARY.public.md 1lN0GE4rUX9y58b5pHwr6tAM0ogqofYmO
+  - COMMIT_CANDIDATES.tsv 1wxiqBqzWrrAQDabD94XRYwjM17Fy_eUE · c1113cbbd7a47f8b
+  - CONTENT_MAP.md 1anmU5pkyeXAuaNRKVEQs4ntafZqdnAQl · 52238c2e7bde3cc1
+  - DIFF_VS_GROK_BUILD_CORE.md 1HLzrFbWHxvWO7sXqOo7gXATh1Djn9uuy · cd5ab403192b781c
+  - INVENTORY_SUMMARY.md 1GsAcsL0cJvQa5WkSnOQYvpEOGcDjhX56 · 180c1954e2df9b63
+  - OEIS.md 1fnPjsoqu6aTH6k1upkrNRBu9k1D9BETs · d41278adcae6e3ad
+  - RECOMMENDATIONS.md 1I0uCQ3wYdvE4cY5dcS_piWq_d1EOl5S5 · 1b836afd93ae0569
+  - SHA256SUMS 1jHOMSccG07OoUnHNhNvjUPWGu4JrY0fc · 61a4662d36a8e714
+  - SECRETS.md: NOT uploaded (approval card interrupted before an answer; not retried). Copies: box analysis/ and GitHub.
+
+## 10. Pi-side moves on 2026-11-09 (appended; Timothy-approved, relayed by the parent session)
+
+- Pi · `~/work_core_2026-11-09.zip` and `~/wc_part00..08`: deleted on the Pi after verification (relayed; not checked from here). Copies: Drive full zip 1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6; 9 Drive pieces (section 1); box `original/` (sha efc3307eb84cf5a9 re-checked 16:59 EST).
+- Pi · `~/work/maps/georgia-latest.osm.pbf` · 357057388 bytes · sha256 2ac4c2ef929d4a04ff1280051c62b5791bf062f70eac16cfdabd27e9f9e4a1ce · mtime 2026-10-09T23:06:44Z (Oct 9 19:06 EDT) · deleted on the Pi ~2026-11-09 5:00 PM EST to make room for the Tesseract 5.5.4 build (approved by Timothy). Where it still is:
+  - box · `/workspace/pi5-work-core-2026-11-09/extracted_r2/work/maps/georgia-latest.osm.pbf` · 2ac4c2ef929d4a04 (re-hashed MATCH vs INVENTORY) · read-only
+  - box · inside `original/work_core_2026-11-09.zip` member `work/maps/georgia-latest.osm.pbf` (deflate, 356559532 compressed bytes, local header at byte 249053946)
+  - Drive · inside the zip 1l8vN9il7ng5JFCRA7TlUcAbvyZZoLqi6, and across pieces wc_part02..wc_part06 (1VQWIDFpN1VFWI4POuIYJAhu1qzehTdpl, 1uWKivdNbuuHuk2knvFN68lQyG_Ue7Lcw, 1ShYQkZ0QXt6OyCgsjpt2g8vS0neKbKCA, 1ZvVMAAJZf9wysMhAWOuJ6_TWElVlImjr, 1ZWCXGoe2z4Q2uKqEIrYZz9FHbeY-Uc3z); rejoin all 9 and unzip that member
+  - public source · Geofabrik `https://download.geofabrik.de/north-america/us/georgia-latest.osm.pbf` · a re-download is a newer snapshot with a different sha; only the copies above match 2ac4c2ef929d4a04
+- Pi keeps · `~/work/maps/streamlined_20261010_101614/` (relayed; in the zip as work/maps/streamlined_20261010_101614/addresses.txt, 40243482 bytes).
+- Rule: map it, don't store it all. Every off-device move gets a pointer entry here.
+
+## 11. Box restore note (appended)
+
+- The box restarted about 16:52 EST and /workspace was restored; `extracted/work/` came back partial (14046 files, 566398959 bytes; georgia pbf absent). Zip, 9 parts, analysis/ (SHA256SUMS OK), map, ledger queue and boot file were intact.
+- Full re-extract: `/workspace/pi5-work-core-2026-11-09/extracted_r2/work/` · 20410 files, 1639216430 bytes, every size matches INVENTORY.tsv · read-only. Use extracted_r2; the partial `extracted/` is left in place, not deleted.
+
+### 9.2 Boot file (appended)
+
+- boot · `/home/box/agent-data/workflows/boot-summary-2026-10-24/SKILL.md` · entry [WORKCORE-2026-11-09] inserted before "## Standing rules"; open item 15 extended "WORKCORE-2026-11-09 makes 21." · pre 6b92d49bbdd9ba92 (archived `/workspace/boot-archive/boot-summary-2026-10-24_SKILL_archived_2026-11-09T2205Z_pre-WORKCORE.md`) → post f49a302c905d8936 (archived `..._2026-11-09T2207Z_post-WORKCORE.md`); both in ARCHIVE_INDEX.sha256 · 2026-11-09
+- Final versions of this map go to GitHub (same folder, later commit) and Drive (new file RETRIEVAL_MAP_2026-11-09.final.md; v1 file left in place). Their ids are recorded in STATUS_2026-11-09_append3.md, since a file cannot hold its own hash.
