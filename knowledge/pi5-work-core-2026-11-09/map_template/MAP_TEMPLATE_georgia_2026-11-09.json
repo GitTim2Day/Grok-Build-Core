@@ -1,0 +1,107 @@
+{
+ "title": "MAP_TEMPLATE georgia-latest.osm.pbf (source record, 2026-11-09)",
+ "source_file": {
+  "pi_path": "~/work/maps/georgia-latest.osm.pbf (deleted on Pi ~2026-11-09 17:00 EST)",
+  "bytes": 357057388,
+  "sha256": "2ac4c2ef929d4a04ff1280051c62b5791bf062f70eac16cfdabd27e9f9e4a1ce",
+  "mtime_utc": "2026-10-09T23:06:44Z",
+  "box_copy": "/workspace/pi5-work-core-2026-11-09/extracted_r2/work/maps/georgia-latest.osm.pbf"
+ },
+ "pbf_header": {
+  "blob_type": "OSMHeader",
+  "blobheader_bytes": 14,
+  "blob_datasize": 183,
+  "bbox_nanodeg": {
+   "left": -85606800000,
+   "right": -80743130000,
+   "top": 35003560000,
+   "bottom": 30353650000
+  },
+  "bbox_deg": {
+   "left": "-85.606800000",
+   "right": "-80.743130000",
+   "top": "35.003560000",
+   "bottom": "30.353650000"
+  },
+  "writingprogram": "osmium/1.16.0",
+  "osmosis_replication_timestamp": 1791577264,
+  "osmosis_replication_sequence_number": 4937,
+  "osmosis_replication_base_url": "https://download.geofabrik.de/north-america/us/georgia-updates",
+  "required_features": [
+   "OsmSchema-V0.6",
+   "DenseNodes"
+  ],
+  "optional_features": [
+   "Sort.Type_then_ID"
+  ],
+  "replication_timestamp_utc": "2026-10-09T20:21:04Z"
+ },
+ "streamlined_folder": {
+  "path": "~/work/maps/streamlined_20261010_101614/ (kept on Pi)",
+  "files": [
+   {
+    "name": "addresses.txt",
+    "bytes": 40243482,
+    "sha256": "6a5675d153615f10d482085c4c54be1b21d1d74a3530caa774392a6c2f05b9f6",
+    "lines": 499712,
+    "columns": "KIND|ID|HOUSE|STREET|CITY|STATE|ZIP|LAT|LON|POS",
+    "head3_truncated_240_chars": [
+     "N|66493944|803|Kilkenny Road|Richmond Hill|GA|31324|N31.8066192|W81.2320722|NODE",
+     "N|66667081|10965|GA 56|Midville|GA|30441|N32.8419231|W82.2220682|NODE",
+     "N|68150985|3650|Ashford Dunwoody Road Northeast|Brookhaven|GA|30319|N33.8982580|W84.3308520|NODE"
+    ]
+   },
+   {
+    "name": "road_nodes.txt",
+    "bytes": 334937440,
+    "sha256": "aed91bc734fa392e13963443d50076c0cda2eee5db4e1f1bb8683f78ae69708d",
+    "lines": 9719197,
+    "columns": "NODEID|LAT|LON (every node a kept road uses, sorted by id)",
+    "head3_truncated_240_chars": [
+     "1481302|N34.0852695|W84.2629160",
+     "51906004|N32.0293560|W85.0756430",
+     "51907721|N32.0247070|W85.0788760"
+    ]
+   },
+   {
+    "name": "roads.txt",
+    "bytes": 159882942,
+    "sha256": "1687eebdb5e8410bb189dfa16a2452f63918390e3ebbf006ef6968ef6f9d4d45",
+    "lines": 1383997,
+    "columns": "WAYID|CLASS|NAME|NREFS|REF REF REF...",
+    "head3_truncated_240_chars": [
+     "6223052|residential| |32|51907721 51907722 51907724 51907726 51907727 51907728 51907731 51907732 51907734 51907735 51907737 51907738 51907740 51907741 51907744 51907745 51907747 51907749 51907751 51907752 51907754 51907757 51907759 51907760",
+     "6225312|residential| |4|51925803 51925804 14042249619 51925805",
+     "6225738|unclassified|Industrial Park Drive|16|51930979 51930982 10252722606 51930988 51930991 51930994 10252722604 12971322221 12971322214 51930996 51931000 51931004 51931008 51931011 51931016 51931021"
+    ]
+   }
+  ]
+ },
+ "streamline_tools": [
+  {
+   "path": "work/Grok-Build-Core/mapbook/OSM_STREAMLINE_SPEC_v1.md",
+   "bytes": 4072,
+   "sha256": "5840e520c3d9650f26dd6ca52acb3f5cfcf3cd96a8b48b356a8575330e8ce7d0"
+  },
+  {
+   "path": "work/Grok-Build-Core/mapbook/osm_streamline.py",
+   "bytes": 14533,
+   "sha256": "c3a0db2bd38c0526744631b5641a2df408bc6af6bbc9c21806d642a3d5a585e4"
+  },
+  {
+   "path": "work/Grok-Build-Core/mapbook/osm_streamline.cpp",
+   "bytes": 17012,
+   "sha256": "af236c6684e61e0439b75021977af50cd216ab6bf24f8f364baa425f6a53511e"
+  },
+  {
+   "path": "work/Grok-Build-Core/mapbook/run_pi.sh",
+   "bytes": 1539,
+   "sha256": "2536fb7a10338ac3700333bac233ce1ba144bd89a7c08475cbaf5a275fea41f8"
+  },
+  {
+   "path": "work/Grok-Build-Core/mapbook/make_osm_fixture.py",
+   "bytes": 3656,
+   "sha256": "06795e6eab0a62672deb3c03cf1fbb99d85b9f9686c60e25e8d79195065eb840"
+  }
+ ]
+}
