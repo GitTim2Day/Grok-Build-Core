@@ -187,3 +187,25 @@ Appended after sealed final 6227fbfb96908159; sections above unchanged.
 - `python3 -I osm_streamline.py` (box copy of mapbook/osm_streamline.py c3a0db2bd38c0526) on the box copy of georgia-latest.osm.pbf (2ac4c2ef929d4a04) → `/workspace/pi5-work-core-2026-11-09/scratch/streamline_check/out_py/`; 210 seconds.
 - addresses.txt 6a5675d153615f10 MATCH; road_nodes.txt aed91bc734fa392e MATCH; roads.txt 1687eebdb5e8410b MATCH (3/3 byte-identical to streamlined_20261010_101614). summary.txt 0c0d691e6eac2773 (extra file the Python twin writes).
 - So: the template's restore step 3 is proven for the exact pbf; the Pi's streamlined folder can be rebuilt from any exact copy.
+
+## 14. Addendum 2026-11-09 ~5:20 PM EST — Pi Tesseract 5.5.0 → 5.5.4 update log (Timothy t789u) [TESS554-2026-11-09]
+
+Appended after sealed bde5cc54c46b1275; sections above unchanged. Source: Timothy's photo of the Pi Grok report, 5:16 PM EST, as relayed by the parent session. Pi file hashes were NOT taken (facts live only in the photo).
+
+- Photo: parent gave path `/home/box/agent-data/agents/c367039e-5264-4eb6-8b22-f6edce2f8122/attachments/e6cb9489f6fbeeacecc4596eecfb4c7a5f725696423559c9b83b28026b7a78cd.jpg`. That file is NOT on the box at 5:20 PM EST (newest attachment there is from 16:53 EST), so its sha256 was NOT computed here. The file name looks like a content hash (e6cb9489f6fbeeac…) but that is unverified.
+- Pi · `~/work/tess_root` · Tesseract 5.5.0 → 5.5.4, built in /tmp from the official 5.5.4 tarball against the existing leptonica 1.84.1; training tools off. Build folder /tmp/tess554 deleted.
+- tessdata eng and osd unchanged · `/home/shepherd/work/tess_root/usr/share/tesseract-ocr/5/tessdata/`.
+- Libraries reported: libgif 5.2.2; libjpeg 6b (libjpeg-turbo 2.1.5); libpng 1.6.48; libtiff 4.7.0; zlib 1.3.1; libwebp 1.5.0; libopenjp2 2.5.3. Found: NEON, OpenMP 201511, libarchive 3.7.4.
+- Disk after: /dev/mmcblk0p2 29G total, 26G used, 1.7G available, 94% (as printed by df -h).
+- Kept on purpose (Timothy's choice): old libtesseract.so.5.0.5 and old training programs in usr/bin. New binary uses libtesseract.so.5.5.
+- Not updated: ~/whisper.cpp (absent). Not installed: Valhalla, OSRM, GraphHopper.
+- Georgia pbf: already removed before this build (sections 10, 12).
+- Note: the zip on the box/Drive holds tess_root? No: tess_root is NOT in the zip (section 5), so there is no off-device copy of the old 5.5.0 tree from this archive.
+
+## 15. Idea entry — camera ladder (DESIGN ONLY, NOT BUILT) (Timothy 2026-11-09 5:11–5:15 PM EST) [CAMLADDER-2026-11-09]
+
+1. Pi: motion detect (frame difference) triggers capture.
+2. On device: OCR (Tesseract) or a small vision model turns the capture into text.
+3. Only the text leaves the device, to the box or Drive.
+4. Escalation: Jetson or A15 for full vision; live video to the iPhone only on trigger.
+5. Nothing gets installed without Timothy's OK.

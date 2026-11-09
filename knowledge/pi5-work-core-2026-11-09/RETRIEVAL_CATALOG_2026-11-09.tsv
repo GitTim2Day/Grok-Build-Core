@@ -55,3 +55,6 @@ C50	Drive	1mKjkTSsbqY6ggBGJr9SqO8GNazIbPgwG	MAP_TEMPLATE json	a0727e2d1b9123ede1
 C51	Drive	1DCSha10LhaH8Z646p7e5WASjXEu4Y27y	pbf_header.py	29b081cb6c17f4f5000ab4070569898ecfa3759512dadbe2923374e5e121b6b8	1809	2026-11-09	active	Drive
 C52	Drive	1CGYqQGUv9mnWADKsUD5KXxo6oUxMSHDfjbGcYwzIti0	Google Sheet: streamlined schema (converted from C43)			2026-11-09	active	Drive
 C53	Drive	1vozmPSk9YiFN6cbhUOUEMcDz-e-uDEyy	SECRETS.md (retry ok)	c7c0c98c3cfa2837ab867d931c1d4a2015b40c7502122a2ebdab7946c4cbf43f	11275	2026-11-09	active	Drive
+C60	Pi5 shepherd	~/work/tess_root	Tesseract 5.5.4 (was 5.5.0), leptonica 1.84.1, training off			2026-11-09	active (no hash; photo report only)	Timothy photo 5:16 PM EST via parent, t789u
+C61	box	/home/box/agent-data/agents/c367039e-5264-4eb6-8b22-f6edce2f8122/attachments/e6cb9489f6fbeeacecc4596eecfb4c7a5f725696423559c9b83b28026b7a78cd.jpg	Pi Grok report photo			2026-11-09	held (not on box; sha not taken)	parent
+C62	idea	RETRIEVAL_MAP section 15	camera ladder DESIGN ONLY, NOT BUILT			2026-11-09	active	Timothy 5:11-5:15 PM EST
