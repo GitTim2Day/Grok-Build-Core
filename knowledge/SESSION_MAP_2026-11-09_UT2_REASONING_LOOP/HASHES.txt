@@ -1,0 +1,14 @@
+# Public hashes — SESSION_MAP_2026-11-09_UT2_REASONING_LOOP
+# GitHub public folder. Bodies in this folder are the public map and redacted addenda only.
+# Private local hashes are listed below without their bodies.
+
+# Files in this public folder
+d2ddbbd01fe1d8c0c811d70856b739aa9f3cee008474e5e3144b13133ddff588  PATTERN_MAP_PUBLIC.md
+12eb30a8f5af8f172ff055fe4ba76321a5dc0d95766e870773a3b59b39d1ff87  ADDENDUM_D6_2026-11-09.md
+079f2a067fe0ccb48b05b31f690308cb938a1f67882a11411d0036da7bc83d5a  ADDENDUM_MAD_GUARD_2026-11-10.md
+
+# Private local seals (hashes only; bodies not published)
+3e35fd85c7c2395d1edfbb022b044d9b1ed6ef666c31926daf4738284290d7f6  PATTERN_MAP.md
+3dc64b53131a4fcddc4ede7f6bea10105c8d54162697ff5a9f67e8770d4a0c2d  ADDENDUM_D6_2026-11-09.md (unredacted local)
+079f2a067fe0ccb48b05b31f690308cb938a1f67882a11411d0036da7bc83d5a  ADDENDUM_MAD_GUARD_2026-11-10.md (identical to public)
+904bbdd7d05e2a63c5ad011a053cd75d95932439e149f35125e0d58fab338d2a  SHA256SUMS (local folder manifest)
