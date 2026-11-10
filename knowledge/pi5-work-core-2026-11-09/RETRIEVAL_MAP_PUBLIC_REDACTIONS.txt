@@ -1,0 +1,24 @@
+Public-repo redactions for GitTim2Day/Grok-Build-Core (PUBLIC).
+Local/Drive copies keep the original bytes. These public copies mask private fields.
+Masked: email addresses, Drive connector account suffix, LAN IP, device serial, medical-device brand name.
+No secret values, key-file contents, or credentials were present in the source files.
+
+- /workspace/sensor-comms-placeholders-2026-11-09/README.md
+  original sha256 fb1d3ec09d404af89a33dae564d16733b28aac9d1391dc2e2bd96953c0c34b73
+  public   sha256 21395eabe31e45a9d78dc7de5a45c6fbabbb7c69fe95922b3876316fa18eba89
+  192.168.4.23 -> [redacted-lan-ip] (1 time(s))
+  S/N NABKX50R -> S/N [redacted-serial] (1 time(s))
+  ResMed -> [redacted-device] (1 time(s))
+
+- /workspace/sensor-comms-placeholders-2026-11-09/SENSOR_COMMS_PLACEHOLDERS_2026-11-09.tsv
+  original sha256 7c62f2c4b47d0541b3ba2a00a6a8f60970f21b793bc419c2b66c7ae9d9225900
+  public   sha256 04b3e01093f76f956fd37ad33bba6aa7f67d3fefa8a8b1b44a6d2d29241dfb0b
+  ResMed -> [redacted-device] (1 time(s))
+
+- /workspace/pi5-work-core-2026-11-09/RETRIEVAL_MAP_2026-11-09.md
+  original sha256 eb048c78fce6f977f08f598a0ef0f612353d9410ae7d9cce2e9503fbc836abd6
+  public   sha256 75d0fbcf3ae29c1baea4af8131cfcbd6f08c22a57479dc473b0eda2f61ca6192
+  timnorman730@gmail.com -> [redacted-email] (2 time(s))
+  timothyhnorman730 -> [redacted-account] (1 time(s))
+  192.168.4.23 -> [redacted-lan-ip] (1 time(s))
+

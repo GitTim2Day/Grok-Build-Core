@@ -230,3 +230,190 @@ Appended after sealed 46806abcdb472c08 (section 16 copy in retrieval_map_version
 - E4 catalog row C03 carries text in the sha256 column (format deviation; value is still the zip sha).
 - E5 Drive root holds `wc_part09` id 1iKVWHnmK7990CHOnQRNvpM1qdZiS5zpE, size 0 bytes, created 2026-11-09T20:35:17Z (3:35:17 PM EST). Not part of the rejoin; NOT deleted; needs Timothy's OK to trash.
 - E6 the .txt companion did not receive section 16 when it was added to the .md; a labeled late copy was appended to the .txt after section 17.
+
+## 18. Append 2026-11-09 17:43 EST: external drives on the Pi 5 (pointers only, nothing copied) [DRIVES-2026-11-09]
+
+Source: Timothy's photos of Pi Grok output, 5:27-5:41 PM ET. Display values exactly as shown; exact bytes UNVERIFIED. No hashes of drive contents yet.
+- sda1 NTFS "Seagate Expansion Drive" UUID 7C06E34006E2FA52, mounted read-only (udisksctl -o ro, ntfs3) at /media/shepherd/Seagate Expansion Drive. 1.9T size, 400G used (df), 1.5T avail, 22%. Previously only used on the ASUS A15 (Windows).
+  Top folders as shown: SVCT_Edge_Vault 232G; WindowsImageBackup 133G; _SVCT_POCKET_BALANCE 23G; SVCT_iPhone_Sorted 5.3G; ollama 3.7G; KBLD_SVCT_Code_Backup 1.9G; need_speech 1.9G; Start_Here_Mac.app 28M; _MAIDEN_BRAIN 4.0M; svct_spines 3.1M; SVCT_Verbal_Tests 2.0M; SVCT_TTT_BUS 1.5M; svct_packs 264K; SVCT_UT_BRIDGE 80K; System Volume Information 36K; SVCT_HIVE_TRAVEL 28K; SVCT_Liability_Hold 12K; Seagate, $RECYCLE.BIN, KBLD_microSD_clones shown as 0 (display only; not stored as zero values). Loose files include UT_GrokBuild_2026-07-31.zip, UT_GrokBuild_KB_Skills_Pathway_2026-07-31.zip, Warranty.pdf, Start_Here_Win.exe, "curl -s httpsapi.x.aiv1responses.txt".
+- sdb1 exFAT "_RADIOACTIV" USB stick, remounted read-only at /media/shepherd/_RADIOACTIV. 35G used.
+  Top folders as shown: _SVCT_POCKET_PACK 27G; ollama-models 3.8G; ollama-extract 2.2G; .Spotlight-V100 117M; svct_packs 11M; System Volume Information 3.0M; inbox 3.0M; SVCT_Liability_Hold 3.0M; .fseventsd 2.0M. Loose file ollama-linux-arm64.tar.zst 1,600,157,086 bytes, Nov 7 14:38. Also EDGE_DEVICE, nmdsdcid, .cm0013, autorun.inf/.ico.
+Retrieval: plug drive into Pi 5, `udisksctl mount -b /dev/sdX1 -o ro`. Next step proposed (awaiting Timothy): read-only file+sha256 listings of the small history folders.
+
+## 19. Append 2026-11-09 18:16 EST: drive survey zip rebuild + analysis [DRIVE-SURVEY-2026-11-09]
+
+How obtained: Pi Grok (shepherd) surveyed Seagate + _RADIOACTIV read-only, wrote `~/drive_survey_2026-11-09.zip` (10578887 bytes, sha256 `734011d832990e5b6cdb8a72bafd892be872343faf5635f4fa277d28483edab9`). Gateway capped ~750KB so Pi split into 700k parents then 179200-byte upload slices `ds_part00_00`..`ds_part14_03` (last slice 6087 bytes) + `ds_SHA256SUMS.txt` + `ds_UPLOAD_SHA256SUMS.txt` (61 Drive uploads). Box pulled via connector `user-Google-drive--[redacted-account]` (owner [redacted-email]) using Drive search (`name contains 'ds_part'` / SHA256), not hand-read photo ids. Concat name-sort order → zip; all 60 slice hashes + 15 parent hashes matched; zip sha matched. `unzip -t` OK. Nothing written to drives. No email. No Drive deletes.
+
+### 19.1 Box paths
+- zip: `/workspace/pi5-drive-survey-2026-11-09/original/drive_survey_2026-11-09.zip`
+- pieces: `/workspace/pi5-drive-survey-2026-11-09/pieces/` (60 slices + 2 sums + MANIFEST.tsv + rebuilt `ds_part00`..`ds_part14`)
+- extracted: `/workspace/pi5-drive-survey-2026-11-09/extracted/drive_survey_2026-11-09/`
+- analysis: `/workspace/pi5-drive-survey-2026-11-09/ANALYSIS.md`
+- hashes index: `/workspace/pi5-drive-survey-2026-11-09/HASHES.tsv`
+
+### 19.2 Other copies
+- Pi: `~/drive_survey_2026-11-09.zip` (source; sha above)
+- Drive: 60 `ds_partNN_MM` + `ds_SHA256SUMS.txt` id `1nOzU0vF1FLTYiUBctODP7Ud_M4EhXo3g` (1234 bytes) + `ds_UPLOAD_SHA256SUMS.txt` id `1YDAbl2BCTrtvWiCi1UW8o0c2yB1Mp7Q4` (6516 bytes). Full id list in box `pieces/MANIFEST.tsv` sha256 `1a14edd9b5f1308b`.
+
+### 19.3 Produced file sha256
+| path | bytes | sha256 |
+|---|---:|---|
+| original/drive_survey_2026-11-09.zip | 10578887 | 734011d832990e5b6cdb8a72bafd892be872343faf5635f4fa277d28483edab9 |
+| ANALYSIS.md | 85534 | 87d7994df64d1d149d5658b2b652dbe61a49afd6b39987a538654e267f6cc383 |
+| pieces/ds_SHA256SUMS.txt | 1234 | bb00e401ff406448f2104740a2e7249480ea54a478dee3117a24ff3ce44a2a47 |
+| pieces/ds_UPLOAD_SHA256SUMS.txt | 6516 | 3b570f9c4b1c52200cb4fd6156f112694c503dd9e3a966a6d4cade6c615cca4a |
+| pieces/MANIFEST.tsv | 3359 | 1a14edd9b5f1308b1e80fe08019f08b23e06c635cb08f3b6c66a7c2a3bcc2ff4 |
+| extracted/.../seagate_files.tsv | 45548996 | 58d7e9bf9bef2b63cfdbcaa08e20aacc13cc45f8adc21bb43963ec4b088f5a4c |
+| extracted/.../radioactiv_files.tsv | 3461526 | db74cf793b47c603a5d765788a7b93aeb2ec7e4743e3398c6338dc031e263757 |
+| extracted/.../small_sha256.tsv | 84825 | b15ad37224db3fb04915cec62f2932e43cc638545d33f9f257e6b93c5feb34b8 |
+| extracted/.../big_folders.tsv | 55022317 | d2a6427ddd6cca9dbea1582778e98e3675aa08f2277d6ac3ccfa437f283c1806 |
+| extracted/.../small_text_heads.txt | 523911 | c439c78ae78e03a50b99d8d54b25505d9844b6c09affd2af4177f0fdbca682d1 |
+| extracted/.../read_errors.tsv | 11 | ef14f44785d400ed9fb1df5b5ba7af7f7cdd6f31f464b5a45bbb97769e0b798a |
+
+### 19.4 Survey totals (from ANALYSIS; GiB = bytes//1024^3 truncate)
+- Seagate Expansion Drive: 226199 files, 427626405067 bytes (398G trunc). Top: SVCT_Edge_Vault 231G; WindowsImageBackup 132G (Tims-PC Backup 2018-02-07); _SVCT_POCKET_BALANCE 22G; SVCT_iPhone_Sorted 5G; ollama 3G; KBLD_SVCT_Code_Backup 1G.
+- _RADIOACTIV: 17478 files, 20134452649 bytes (18G trunc). Top: _SVCT_POCKET_PACK 11G; ollama-models 3G; ollama-extract 2G; ollama-linux-arm64.tar.zst 1G.
+- Specific sealed filenames NOT on either drive: `kbld9_ocr_enhanced_processor.py`, `test_cms1500_adversarial_v3.py`, `Tims_Tables_Base360_Full_Reference.csv`. CMS1500 path hits 0. Tims Tables family present as `tims_table*` (291 paths). Base360 only as grok meta `Base-360_Earth_Index_Update_meta.json` (87 bytes).
+- Cross-drive: 8317 same name+size pairs; 6 small sha256 groups spanning both drives (Liability_Hold + sense_voxel packs).
+- read_errors: 0. Mounts remained read-only.
+
+(Map sha256 before this append: `b0288a0df6eaabdb6bfde641ea0cd7c07caefb58a9a61b549824de863f31d031`)
+
+### 19.5 Drive file ids (from search; MANIFEST.tsv authoritative)
+
+| name | id | bytes |
+|---|---|---:|
+| `ds_part00_00` | `1mdAPvrAY39B3eVpqQI2HmgClhoVtJ9wr` | 179200 |
+| `ds_part00_01` | `1zE9COX0PznQHz56lfMj0Q_O1VxWv_xdZ` | 179200 |
+| `ds_part00_02` | `1l0tQv-7ObAd3je31qrBTydLGPYDFS8A-` | 179200 |
+| `ds_part00_03` | `1nwWOThVRPiqiIwjHcDdg9vKJ2o3yjqod` | 179200 |
+| `ds_part01_00` | `10lmWj7gWGreUMyWh5hnW6LSFWsOGsHfb` | 179200 |
+| `ds_part01_01` | `1fnodTQ2MTcuYtoMSPFWPe0kTlzhhKopx` | 179200 |
+| `ds_part01_02` | `1jj42oQ-8su5NsYJy7mmz3_OZ9nSvQWQ9` | 179200 |
+| `ds_part01_03` | `1hw5uEfjqgKJSLLiMcCf5-SX2hT7HWWFH` | 179200 |
+| `ds_part02_00` | `124TV1OU1-CWlkt1RW5eMpofZ4sdtHOfG` | 179200 |
+| `ds_part02_01` | `1KFSs8LSgZTeaU0FRtD-lmu7gLOQA9aJ6` | 179200 |
+| `ds_part02_02` | `1mN65okpd3iAHH12h9959C_VTQwK0bn8Y` | 179200 |
+| `ds_part02_03` | `1Vqgd7Qe4DZk8356WaQxg_FRsLeHKfTfg` | 179200 |
+| `ds_part03_00` | `1-RqRJBzRA34BdJ8m9M9JRsGTAV8UaJ4h` | 179200 |
+| `ds_part03_01` | `1p7vT6gU__P5NWreNK9W8IaGxOgo7vUKc` | 179200 |
+| `ds_part03_02` | `1IM6_4ir7wtOF7el1ejOhh98jvl2jP8zK` | 179200 |
+| `ds_part03_03` | `1qgLhGM6CnM0wvDXu5HmeglQLsnalu4L5` | 179200 |
+| `ds_part04_00` | `10Y7F0JPLGllnLVtBwuR0J_GZ7M5FNtpB` | 179200 |
+| `ds_part04_01` | `1qKpe0jvsIfTtWD78AyImnS0OEWslPeSR` | 179200 |
+| `ds_part04_02` | `1TP8KJ4-jUgeolOmlduntDf56UcUKoPfT` | 179200 |
+| `ds_part04_03` | `14jdQFfeIx2OQsa_VUbOWrQvQzTawARdK` | 179200 |
+| `ds_part05_00` | `12QcAZU5bzUe2Ako-Z-iMDsb3-KH0aqA9` | 179200 |
+| `ds_part05_01` | `1SRabAGHbWYZH4lgT4XFTLfZtoXtxbiQv` | 179200 |
+| `ds_part05_02` | `1aKaxZ_zpxJZlRSI76tsiDtmmcOn0-i-m` | 179200 |
+| `ds_part05_03` | `1CynF-3pQCbUzT89V05ldSwGXH7WijtQd` | 179200 |
+| `ds_part06_00` | `1kKXviPu-yNMcR-VmV7FNVOqvzCbOo63Q` | 179200 |
+| `ds_part06_01` | `1fKpBAX4eYb1lRUhdhaN_kujAyzt9jI5w` | 179200 |
+| `ds_part06_02` | `16L3_iFOlr3tvTsZiARSEHwNMcE-7_hh2` | 179200 |
+| `ds_part06_03` | `1ApDvzxM0SnouiGzhNeEITbkg8NWqUpdD` | 179200 |
+| `ds_part07_00` | `1NLw2kzwwHN_w4c6k48ZwU0MvAPmvA3PX` | 179200 |
+| `ds_part07_01` | `1l7OEQTIVu5lU7P5cLRqC24IPmIi6CwDO` | 179200 |
+| `ds_part07_02` | `1U2QmMrwWmlENHZU35yJK35pabdkMt9HG` | 179200 |
+| `ds_part07_03` | `1OxyNSuNNFJg_5v_Uai3XsVEi6L5gzlZ3` | 179200 |
+| `ds_part08_00` | `1VnxNr9TrgG18_Prm7DpIkdW6vfwBqUb7` | 179200 |
+| `ds_part08_01` | `1l2DY-AGTtFPH-cA_qBYRLxyFUOokDsno` | 179200 |
+| `ds_part08_02` | `1XnoDcAc90geW2nRfEt2spEd26Fy6Ja4q` | 179200 |
+| `ds_part08_03` | `1f0gCgtcjz1G-S4fCULMKSXErApazRIwg` | 179200 |
+| `ds_part09_00` | `1wJktsxtVEa-4ZbeNGRlAHisTr4fMg8n5` | 179200 |
+| `ds_part09_01` | `1IWOlT-ym5pA3UitU3S-5l_p1UpcVX-KV` | 179200 |
+| `ds_part09_02` | `12YVaZc5dOx8OhduvmL65CIRKV9hN_Eie` | 179200 |
+| `ds_part09_03` | `1LAEri-z20seAFafpqRlO9X-NzZc2_7Fl` | 179200 |
+| `ds_part10_00` | `10L2Xd_-pHOqmwRWMoQv7XPir5-jx-xT4` | 179200 |
+| `ds_part10_01` | `1nFMVLfL1iysyydzHJvPTrGMGOBA-5Mvm` | 179200 |
+| `ds_part10_02` | `1WwNW3WmxgpuIp_7BRErvQHsrH6LEvOE_` | 179200 |
+| `ds_part10_03` | `1kTalUUoi6i0hCZN_JiCGCmvWlEmtVzXM` | 179200 |
+| `ds_part11_00` | `199iD4PnwdJx5ESpfQSSK0qfkNhV3qkLZ` | 179200 |
+| `ds_part11_01` | `1Wm_Onevfex-noUNlueev6IiTCRuxk3LT` | 179200 |
+| `ds_part11_02` | `1VothWqB0AkgjHO5aa76KziHEtEuCxrGF` | 179200 |
+| `ds_part11_03` | `18sBpmSnqUAmZvQJQLQaDVLsaYwAr5TKG` | 179200 |
+| `ds_part12_00` | `1NOh5GGk9JPV9fLh7vemkMyn9mDxJtH5N` | 179200 |
+| `ds_part12_01` | `1oBAhctx7-Bi7t1FEpl_lJ1-89YIgzsLL` | 179200 |
+| `ds_part12_02` | `1qHIyCTDr53vA4xjFrvxoxnTMj0dsUJgF` | 179200 |
+| `ds_part12_03` | `1XHd5V5U9nJBW0Iosjh6PKAm7GLgC-uwB` | 179200 |
+| `ds_part13_00` | `1naHVtF1AWGLcLLHxvgamB1u7-ywMSIup` | 179200 |
+| `ds_part13_01` | `1Wg12WSCrb2U7pVSIQbnWP6sUw_LQrweb` | 179200 |
+| `ds_part13_02` | `1SzND6Clwmh8gmx3ABKUVjs9NeIHJtNio` | 179200 |
+| `ds_part13_03` | `1-czZzoscIKF5HRFeg-ln8RjVVuy9DrbN` | 179200 |
+| `ds_part14_00` | `1pJweXwHZvN17DiSVOCZipxcIizrw26vV` | 179200 |
+| `ds_part14_01` | `12jh_wFidQXUa57VyTmYtrTt9UeSO1wT-` | 179200 |
+| `ds_part14_02` | `1MohYJuBH0yXZA8-ZNKFjK_4BoU5P9DGj` | 179200 |
+| `ds_part14_03` | `1Z_Rc1EajBj3_qENcyQp6zbh9X8jbYkOD` | 6087 |
+| `ds_SHA256SUMS.txt` | `1nOzU0vF1FLTYiUBctODP7Ud_M4EhXo3g` | 1234 |
+| `ds_UPLOAD_SHA256SUMS.txt` | `1YDAbl2BCTrtvWiCi1UW8o0c2yB1Mp7Q4` | 6516 |
+
+### 19.6 ANALYSIS.md post-append sha (sections 12–13 added after 19.3 row)
+- ANALYSIS.md bytes=86066 sha256 `eb45ee3b474a2a719da548bc88a89b0a8ff79f18d0e1701b28f13201e14b9f01` (supersedes 87d7994d… row in 19.3 for ANALYSIS only; other 19.3 rows unchanged)
+- Map sha before this 19.6 note: `d0f0215adc54f8eefafabe720d2179e1a338a039a0161c661e10bbd50eeda9c3`
+
+## 20. Append 2026-11-09 19:57 EST: small_text_heads content digest [SMALL-TEXT-DIGEST-2026-11-09]
+
+Read-only digest of the 361 sections in `small_text_heads.txt` (first ~40 lines of small text files on Seagate / `_RADIOACTIV` from the Pi 5 drive survey).
+
+### 20.1 Box paths
+- Digest: `/workspace/pi5-drive-survey-2026-11-09/SMALL_TEXT_HEADS_DIGEST.md`
+- Source heads: `/workspace/pi5-drive-survey-2026-11-09/extracted/drive_survey_2026-11-09/small_text_heads.txt` (already extracted; 523911 bytes)
+- Companion sha file: `/workspace/pi5-drive-survey-2026-11-09/SMALL_TEXT_HEADS_DIGEST.sha256`
+
+### 20.2 Digest sha256
+- SMALL_TEXT_HEADS_DIGEST.md sha256 `7c8013a28f4159c75f2d7ad0fba872dfa4e8c3acde9787f389fd59188496fc39` ([:16]=`7c8013a28f4159c7`)
+- Sections parsed: 361 (Seagate 352, _RADIOACTIV 9)
+
+### 20.3 Theme counts (primary assignment)
+- KBLD9 / OCR / CMS1500: 7
+- Tim's Tables / Base360: 1
+- GOSUB: 8
+- Device / edge setup: 31
+- Boot / ledger / seals: 37
+- Ollama / models / TTT bus: 238
+- SVCT general: 32
+- Possible credentials (paths only): 6
+- Personal / other: 1
+
+### 20.4 Flag results (fail-closed)
+- Missing sealed targets (`kbld9_ocr_enhanced_processor`, `test_cms1500_adversarial_v3`, `Tims_Tables_Base360_Full_Reference`, sha `a45a3546` / `8d20c24a`, `446 lines` / `154 lines`): **NOT FOUND** in heads or `small_sha256.tsv`.
+- `EDGE_TRANSPORT` / matrix: **NOT FOUND**. Pi/USB/Wi-Fi notes exist (`PI5_USB_PORT_POLICY`, room-presence `Wi-Fi Up [redacted-lan-ip]` / `Pi5: PARKED_UNPLUGGED`, hive USB lifecycle) without SSID/password.
+- Seal/manifest sha lists checked (spines, flushed_hashes, pharmacy INDEX, STT seals, UT SHA256): **no** missing-file hash hit.
+- Credential-looking paths under `_MAIDEN_BRAIN/03_keys/`: listed by path only in digest; values not copied.
+
+### 20.5 Related (not the hunt targets)
+- Sealed present: `svct_spines/deploy/kbld_augmented_ollama.py` + `.SEAL.json` (sha256 `6f94daefe21dac97…`, 30993 bytes).
+- Tim's Tables CSV head only: `_MAIDEN_BRAIN/00_inbox/desktop_ops_2026-07-27/TIMsTABLeSeq,DotID,Category,Tier,UtilityGrou.txt` (seq 170+; not Base360 Full Reference).
+
+(Map sha256 before this append: `f9079177bc7d2faae41bd77b4bc66c0a840dc639f85bcd27397f6ff30579f8ae`)
+
+## 21. Append 2026-11-09 20:19:00 EST: wc_part09 trash + CMS-1500 laptop mail check + Tim's Tables Drive list [WC09-CMS-TIMS-2026-11-09]
+
+### 21.1 wc_part09 trash (Timothy approved t829u)
+- Name: `wc_part09`
+- Drive file_id: `1iKVWHnmK7990CHOnQRNvpM1qdZiS5zpE`
+- mime: application/octet-stream
+- size_bytes before trash: **0** (empty leftover from work_core_2026-11-09.zip slice upload; real pieces wc_part00–08 rebuilt sha efc3307eb84cf5a9)
+- modified_time (UTC): 2026-11-09T20:34:21.544Z (= 2026-11-09 15:34:21 EST)
+- Action: trash only via user-Google Drive-xai trash_file (recoverable ~30 days). Not permanent delete.
+- Post-trash exact_name search: **0 hits** (trashed excluded). Confirmed gone from active Drive.
+
+### 21.2 Gmail CMS-1500 laptop data (read-only, ~17:00 EST onward 2026-11-09)
+- Account: user-Gmail-xai / [redacted-email]
+- Queries: CMS1500 / CMS-1500 / "CMS 1500" / claim form after:2026/11/09; has:attachment after:2026/11/09; broader CMS/claim/laptop today
+- Result: **NOT FOUND** — no CMS-1500 / claim-form messages or attachments in the last few hours (Gmail may lag; Timothy said he will get laptop data over indirectly).
+- Download dir created empty: `/workspace/cms1500-laptop-2026-11-09/` (0 files)
+- No reply/send/label/delete performed.
+
+### 21.3 Drive Tim's Tables / Base360 / OEIS spreadsheet inventory (list only; no large downloads)
+- `Tims_Tables_Base360_Full_Reference.csv`: exact_name search **NOT FOUND**
+- Related Base360 archive present: `tims-tables-base360-derived_2026-09-19.tar.gz` id `1lp47SYL68Zi8GYYBGtasVHFBcnZ_cpR1` 45336 B gzip 2026-09-19T04:48:14.657Z
+- Spreadsheet/CSV hits (user-Google Drive-xai; duplicates across folders possible; times UTC→ report EST as needed):
+  - Google Sheets formulas: TIMS_TABLES_FORMULAS_2026-10-06 (`1CvIe7eosSckyVXz1mknT6jxZuhmkCVQkJKsbFfdesmY`, 1186 B); TIMS_TABLES_FORMULAS_NEWTON_EINSTEIN_2026-10-06 (`1Yr_gpgt7_4v-A9fGUhFaJHeEa0gHjN15v-v8nw4-lDo`, 1714 B)
+  - Category9 sheets: TIMS_TABLES_CATEGORY9_*_2026-10-06 (several; ids 1aCeYSzt…, 1tJ_BsuX…, 1sGjaHHf…, 1lVgb3kr…)
+  - xlsx: Tims_Tables_Presentation.xlsx (`1Q3L_yufsZyjnI0sQ85momXBDdGZAyaF2` / twin `1b0mdt7U…`, 6114 B); Tims_Tables_SVCT_Edge_Lookup_v1.xlsx (`1RrPpjEj…` / twin `1bHb2JIG…`, 9022 B); Tims_Tables_2_thirds_ADDED_2026-09-01.xlsx (`1E7Osq8_…` / `1A7LHcsg…`, 8319 B)
+  - csv: Tims_Tables_Master_Flat.csv, Tims_Tables_Core_Six_Ratios.csv, Tims_Tables_All_Matrix_e6_Long.csv, Tims_Tables_Presentation_e4/e6.csv, tims_tables_equal_leg.csv, TIMS_TABLES_345_UNIT_SCALE_v1.csv
+  - OEIS sheets: OEIS_SIZES_2026-10-11 (`1Y13-Vt2x…`), OEIS_THIN_ROW_2026-10-11 (`1EG9l02p…`); OEIS.md text (`1fnPjsoq…`, 17221 B, modified 2026-11-09T21:19:14.818Z)
+- create_tims_tables_xlsx.py present (builder script, not the sealed Full Reference).
+- No .ods hits in this pass.
+
+(Map sha256 before this append: `413372a58cabefb587092da1cc8db159561f9eb3f1a564ae707f89c33a9abfc0`)
