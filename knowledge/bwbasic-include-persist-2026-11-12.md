@@ -1,17 +1,18 @@
-# bwbasic-include-persist-2026-11-12
+# bwbasic-include-persist-2026-11-12 (hardened 2026-11-12)
 
-Sitting: 2026-11-12T10:55-05:00 America/New_York
+Sitting: 2026-11-12
 
-Requirement questioned: “bwbasic is not installed, so Python executes the BASIC order”. Locked: include BW BASIC so basic/brain_control.bas is run by the BASIC interpreter.
+Locked: include BW BASIC so basic/brain_control.bas runs under the interpreter.
 
-Voice standing: Treat voice like bots. Avoid until intentional brainstorm or when permanent record is not wanted, because fixes do not retain. This is STT path.
+## Locomotion placeholder
+Separate node / GOSUB for locomotion. Default ABSENT until drivetrain reported able. Branches to drone, hive member, hive, robot, humanoid, or none. Brain stays useful with only eyes/ears/voice.
 
-Install on Shepherd Pi 5:
-- apt install bwbasic if available, or from source (configure; make; make install) as previously done.
-- Verify: which bwbasic; echo 'PRINT 0.70710678' | bwbasic → exit 0.
-- Confirm the .bas executes under bwbasic.
-- Persist; archive prior non-persistent attempts.
+## Verify on Shepherd (he handles)
+which bwbasic
+echo 'PRINT 0.70710678' | bwbasic   # exit 0, output matches
+bwbasic basic/brain_control.bas     # GOSUB order runs, returns to ALERT
 
-Ledger hop: 1a1d0788c62a9dc5
+Persist. Archive misses. Pi 5 stays light.
 
-Archive-not-delete. He handles Shepherd.
+Ledger prior: 1a1d0788c62a9dc5
+Unified seal: 1a1d0aa58638d76a
