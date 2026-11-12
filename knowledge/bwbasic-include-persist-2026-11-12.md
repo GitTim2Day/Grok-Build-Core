@@ -1,21 +1,11 @@
-# bwbasic-include-persist-2026-11-12 (hardened + truncation 2026-11-12)
+# bwbasic-include-persist-2026-11-12 (string deconcatenate, identical adapters)
 
-Locked: include BW BASIC. Truncate, do not round.
+Locked: BW BASIC include. Values as strings. Deconcatenate on use. Truncate toward zero. No float64 on return path.
 
-Observation: default PRINT rounds to ~6 significant digits. Required: truncate toward zero (0.70710678 → 0.707106).
+Python and C++ adapters must code the same and produce identical results on the same input string. Same length, same truncate, same provenance. Self-check requires matching traces.
 
-Force:
-OPTION ROUND TRUNCATE
-(in profile.bas or at top of program)
-Or explicit truncate before PRINT.
+SVCT holds the string token + contract + hash.
 
-## Locomotion placeholder
-Separate GOSUB, default ABSENT until drivetrain able. Branches to any device or none. Brain useful with eyes/ears/voice only.
+Locomotion placeholder remains: separate GOSUB, default ABSENT.
 
-## Verify on Shepherd
-which bwbasic
-echo 'OPTION ROUND TRUNCATE : PRINT 0.70710678' | bwbasic
-# expect truncated 0.707106, exit 0
-bwbasic basic/brain_control.bas
-
-Persist. Archive misses.
+Verify on Shepherd still uses the string path.
