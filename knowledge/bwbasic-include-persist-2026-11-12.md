@@ -1,18 +1,21 @@
-# bwbasic-include-persist-2026-11-12 (hardened 2026-11-12)
+# bwbasic-include-persist-2026-11-12 (hardened + truncation 2026-11-12)
 
-Sitting: 2026-11-12
+Locked: include BW BASIC. Truncate, do not round.
 
-Locked: include BW BASIC so basic/brain_control.bas runs under the interpreter.
+Observation: default PRINT rounds to ~6 significant digits. Required: truncate toward zero (0.70710678 → 0.707106).
+
+Force:
+OPTION ROUND TRUNCATE
+(in profile.bas or at top of program)
+Or explicit truncate before PRINT.
 
 ## Locomotion placeholder
-Separate node / GOSUB for locomotion. Default ABSENT until drivetrain reported able. Branches to drone, hive member, hive, robot, humanoid, or none. Brain stays useful with only eyes/ears/voice.
+Separate GOSUB, default ABSENT until drivetrain able. Branches to any device or none. Brain useful with eyes/ears/voice only.
 
-## Verify on Shepherd (he handles)
+## Verify on Shepherd
 which bwbasic
-echo 'PRINT 0.70710678' | bwbasic   # exit 0, output matches
-bwbasic basic/brain_control.bas     # GOSUB order runs, returns to ALERT
+echo 'OPTION ROUND TRUNCATE : PRINT 0.70710678' | bwbasic
+# expect truncated 0.707106, exit 0
+bwbasic basic/brain_control.bas
 
-Persist. Archive misses. Pi 5 stays light.
-
-Ledger prior: 1a1d0788c62a9dc5
-Unified seal: 1a1d0aa58638d76a
+Persist. Archive misses.
