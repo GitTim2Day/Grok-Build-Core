@@ -8,13 +8,13 @@ Do No Harm first. Self-control boundary.
 import hashlib
 import json
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from typing import Any, Dict, List, Tuple
 
 
 def now_ny() -> str:
-    # Placeholder: returns UTC with 000 offset.
-    # Real NY stamp comes from system in production.
-    return datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S+00:00")
+    # America/New_York stamp. ISO format with offset.
+    return datetime.now(ZoneInfo("America/New_York")).isoformat(timespec="seconds")
 
 
 def sha256_str(s: str) -> str:
